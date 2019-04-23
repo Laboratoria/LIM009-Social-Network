@@ -163,7 +163,17 @@ Para esto utilizaras respectivamente
 [`Firebase authentication`](https://firebase.google.com/docs/auth/) y
 [`Firestore security rules`](https://firebase.google.com/docs/firestore/security/get-started)
 
-Otras:
+### CSS
+
+En este proyecto queremos que ganes confianza y experiencia con CSS profesional,
+por eso usarás [`flexbox`](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+para posicionar tus elementos y
+[`media queries`](https://developer.mozilla.org/es/docs/CSS/Media_queries) para hacer tu
+diseño responsivo.
+
+Recuerda que no puedes usar frameworks CSS, sólo *vanilla css*.
+
+### Otras:
 
 * [Modulos: Export](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export)
 * [Modulos: Import](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import)
