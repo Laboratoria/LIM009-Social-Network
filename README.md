@@ -149,6 +149,20 @@ proyecto tendrás que crear (salvar) nuevos datos, así como leer, actualizar y
 modificar datos existentes. Estos datos se podrán guardar de forma remota
 usando [Firebase](https://firebase.google.com/).
 
+### Autenticación y autorización
+
+Los proyectos anteriores han sido pensados como recursos públicos, donde todos
+los usuarios compartían un mismo rol y la misma información.
+
+En este proyecto tendrás que diferenciar la información a mostrar y modificar,
+dependiendo de la identidad del usuario.
+De la misma manera deberás crear reglar de autorización para el acceso a los
+datos.
+
+Para esto utilizaras respectivamente
+[`Firebase authentication`](https://firebase.google.com/docs/auth/) y
+[`Firestore security rules`](https://firebase.google.com/docs/firestore/security/get-started)
+
 Otras:
 
 * [Modulos: Export](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export)
