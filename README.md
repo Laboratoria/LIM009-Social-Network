@@ -100,13 +100,15 @@ El objetivo de usar Firebase, en este proyecto, es que aprendes a manejar y pers
 
 ## Historias de Usuario
 
-* Como usuario nuevo debo poder crear una cuenta con email y password para poder iniciar sesion. Si el mail o password no es válido, al momento de logearme, debo poder ver un mensaje de error. Por otro lado, necesito también tener la opción de iniciar sesión con mi cuenta de Google o Facebook. Al final debo poder ingresar a la red social y poder visualizar los datos de mi perfil creado o editarlos.
+* Como usuario nuevo debo poder crear una cuenta con email y password para poder iniciar sesion. Si el mail o password no es válido, al momento de logearme, debo poder ver un mensaje de error. Por otro lado, necesito también tener la opción de iniciar sesión con mi cuenta de Google o Facebook.
 
 * Como usuario loggeado debo poder crear, guardar, modificar en el mismo lugar (in place) y eliminar una publicación (post) privada o pública, que puede ser una frase o una imagen.
 
 * Como usuario loggeado debo poder ver todos los posts públicos y privados que he creado hasta ese momento, desde el más reciente hasta el más antiguo, así como la opción de poder cambiar la configuración de privacidad de mis post.
 
 * Yo como usuario loggeado, puedo dar like y llevar un conteo de likes en mi publicación así como poder escribir, guardar, editar o eliminar un comentario en mi publicación.
+
+* Al final debo poder ingresar a la red social y poder visualizar los datos de mi perfil creado o editarlos.
 
 
 ***
@@ -132,14 +134,7 @@ pantalla y entorno móvil.
 En proyectos anteriores nuestras aplicaciones habían estado compuestas de una
 sola _vista_ principal (una sóla _página_). En este proyecto se introduce la
 necesidad de tener que dividir nuestra interfaz en varias _vistas_ o _páginas_
-y ofrecer una manera de navegar entre estas vistas. Este problema se puede
-afrontar de muchas maneras: con archivos HTML independientes (cada uno con su
-URL) y links tradicionales, manteniendo estado en memoria y rederizando
-condicionalmente (sin refrescar la página), [manipulando el historial del
-navegador](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
-con [`window.history`](https://developer.mozilla.org/es/docs/Web/API/Window/history).
-En este proyecto te invitamos a explorar opciones y decidir una opción
-de implementación.
+y ofrecer una manera de navegar entre ellas.
 
 ### Escritura de datos
 
