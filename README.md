@@ -2,37 +2,55 @@
 
 Bienvenida a tu primer proyecto del track de Frontend en Laboratoria.
 
-En este proyecto construirás una red social,Single-Page Application (SPA), responsive con persintencia de datos, utilizando HTML5,CCS3, JavaScript(ES6+) y Firebase, cuyo temática dejaremos a tu elección.
+En este proyecto construirás una red social, cuya temáticas dejaremos a tu elección.
+
+Aquí algunas ideas para inspirarte:
+- Alimentación
+- Feminismo
+- Educación
+- Salud
+- Energías Renovables
+
+
+Las **caraterísticas técnicas** de tu aplicación serán las siguientes:
+- Debe ser una Single-Page Application [SPA](https://dzone.com/articles/how-single-page-web-applications-actually-work) ([versión traducida](https://dzone.com/articles/how-single-page-web-applications-actually-work))
+- Debe ser diseñada con un enfoque [mobile first](https://darwindigital.com/mobile-first-versus-responsive-web-design/) ([versión traducida](https://translate.google.com/translate?hl=&sl=auto&tl=es&u=https%3A%2F%2Fdarwindigital.com%2Fmobile-first-versus-responsive-web-design))
+- Debe permitir la persintencia de datos
+  
+Para implementar tu aplicación usarás *HTML5*, *CCS3*, *Vanilla JavaScript(ES6+)* y *Firebase*.
 
 ## Objetivos de Aprendizaje
 
-El objetivo de aprendizaje de este proyecto es construir una Red Social, Single-Page Application (SPA), responsive en la que podamos escribir, leer, actualizar y eliminar datos.
+El objetivo de aprendizaje de este proyecto es construir una Red Social, Single-Page Application (SPA), responsiva en la que podamos escribir, leer, actualizar y eliminar datos.
 
-En otras palabras, seguirás afianzando todo lo aprendido en el Common Core, pero adicionalmente verás :
+Para ello deberás poner en juego tu creatividad para generar ideas que lleven a una solución original y valiosa del problema, trabajando en equipo buscando feedback constante.
+
+En otras palabras, seguirás afianzando todo lo aprendido en el Common Core, pero en particular verás :
 
 ### A nivel de planificación
 
-* Utilizar el entorno de GitHub-project para gestionar la planificación de tu proyecto. Dicha planificación, será utilizada, por tus coaches, para ver el avance del equipo y dar feedback.
+* Utilizar *projects*, *issues* y *milestones* de GitHub para gestionar la planificación de tu proyecto. Estos recursos serán la fuente de organización de tu equipo y a través de estas herramientas tus coaches podrán ver el avance del proyecto y darte feedback.
 
 * Escribir, de manera colaborativa, las **Definiciones de terminado** y **Criterios de Aceptación** por cada **Historia de usuario** que te daremos para este proyecto y que se deberán ver reflejadas en tu planificación.
 
-* Priorices, en función del valor que le aporta al usuario, y ejecutes en equipo todas las historias de usuario dentro del tiempo estimado para cada sprint y que finalmente se vean reflejadas en publicaciones de partes completas y utilizables al final del spint.
+* **Priorizar** la implementación de tus funcionalidades, en función al esfuerzo que demandan en relación al valor que le aportan al usuario, y ejecutar en equipo todas las historias de usuario dentro del tiempo estimado para cada sprint y que finalmente se vean reflejadas en publicaciones completamentamente funcionales al final de cada spint.
 
-* Practicar el terminar una historia de usuario antes de pasar a la siguiente, es decir, que cumple con Definición de Terminado y Criterios de Aceptación contemplando todos los puntos que son objetivos de aprendizaje para este proyecto.
+* Adquirir la disciplina de la completitud, terminando una historia de usuario antes de pasar a la siguiente (es decir, que cumple con *Definición de Terminado* y *Criterios de Aceptación* contemplando todos los puntos que son objetivos de aprendizaje para este proyecto).
 
 ### A nivel del desarrollo frontend
 
-#### Arquitectura
+#### Arquitectura de la aplicación
 
-Como equipo, construirán una Single-Page Aplication (SPA), para ello, deberán aprender a estructurar sus carpetas y archivos para manejar la arquitectura modelo - vista - controlador.
+- Diseñar la arquitectura de tu aplicación, modularizando tu código a través de *es modules* ([`import`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import) y [`export`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export))
+
+- Familiarizarte con el patrón  modelo - vista - controlador ([MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador)).
 
 #### Tecnologías HTML5 y CSS3
 
-* Aplicar HTML5 semantico en tu proyecto.
-* Apliques y refuerces los conceptos base de CSS3 tales como: modelo de cajas, posicionamiento (float, absolute, relative, fixed, flexbox), etc.
+* Aplicar HTML5 semántico en tu proyecto.
+* Aplicar y reforzar los conceptos fundamentales de CSS3.
 * Implementar selectores de clase evitando la redundancia de estilos en CCS3.
-* Utilizar `media-queries` para lograr un diseño responsivo `mobile first`.
-* Que puedas implementar un sistema de grillas básico que te permita crear un diseño adaptativo para **mobile y desktop**
+* Utilizar `media-queries` para lograr un diseño `mobile first`, implementando un sistema de grillas básico que te permita crear un diseño adaptativo para **mobile y desktop**
 
 A continuación te proporcionamos el layout (diseño) de la vista mobile y desktop que deberás replicar visualmente y cuyo contenido, colores y fuentes de texto, dejaremos a tu elección.
 
@@ -46,42 +64,39 @@ A continuación te proporcionamos el layout (diseño) de la vista mobile y deskt
 
 #### JavaScript (ES6+)
 
-* Utilizar modulos de ES6 para poder importar y exportar nuestro código JavaScript.
+* Utilizar modulos de ES6 para poder modularizar tu código JavaScript.
 * Reforzar tu conocimiento sobre el uso de Template literals (Template strings).
 * Reforzar tu conocimiento de la manipulacion de los elementos del DOM a traves JavaScript.
-* Implementar un sistema de rutas para cambiar de una vista a otra (SPA).
-* Testear las **funciones puras** que representen la lógica en la aplicación, con Jest cuidando que el coverage pase el 70% de statements (sentencias), functions (funciones), lines (líneas), y branches (ramas).
+* Implementar un sistema de rutas para cambiar de una vista a otra de manera dinámica (SPA).
+* Testear la lógica de tu aplicación, con Jest cuidando que el coverage pase el 90% de statements (sentencias), functions (funciones), lines (líneas), y branches (ramas).
 
-### A nivel de persistencia de datos
+### A nivel de datos
 
-En los proyectos anteriores solo has consumido (leído) datos, por ejemplo, a través de un archivo json.
-En este proyecto tendrás que crear esos datos, así como leer, actualizar, modificar y eliminarlos según los requerimiento del usuario. Para llevarlo a cabo, en este proyecto utilizaremos `Firebase`.
+En los proyectos anteriores solo has consumido (leído) datos, por ejemplo, a través de un archivo `json`.
+
+En este proyecto diseñarás la estructura esos datos, la forma de consultarlos, actualizarlos, modificarlos y eliminarlos según los requerimiento del usuario. Para llevarlo a cabo utilizaras `Firebase`.
 
 #### Firebase
 
-El objetivo de usar Firebase, en este proyecto, es que aprendes a manejar y persistir datos a traves de una base de datos no relacional y puedas implementar operaciones CRUD (Creación, Lectura, Actualización y eliminación) de datos.
+El objetivo de usar Firebase, en este proyecto, es que aprendes a manejar y persistir datos a traves de una base de datos no relacional, en tiempo real y puedas implementar operaciones CRUD (Creación, Lectura, Actualización y eliminación) de datos.
 
 ## Consideraciones generales del proyecto
 
 * Este proyecto debe ser desarrollado en equipos de trabajo de 3 integrantes.
 
-* La duración del proyecto es **3 sprints**
-
-  * **Primer Sprint** : 22/04 al 26/04
-  * **Segundo Sprint** : 29/04 al 03/05
-  * **Tercer Sprint** : 06/05 al 10/05
+* La duración del proyecto es **3 sprints**, con una duración de una semana cada uno.
 
 * Te daremos las **historias de usuario** con el fin de presentarte los requerimientos y funcionalidades que desea el usuario final.
 
-* La **planificación es vital**, para ello utilizaremos el flujo de trabajo colaborativo que nos ofrece Github - project, para que puedas **escribir tus definiciones de terminado** y **criterios de aceptación** por cada historia de usuario con el objetivo que determinen, en equipo, **qué hacer** en el sprint y **cómo se realizará**. Recuerda que esta planificación será revisada por tus coaches para ver el avance del equipo y dar feedback.
+* La **planificación es vital**, para ello utilizaremos el flujo de trabajo colaborativo que nos ofrecen los projects de GitHub, para que puedas **escribir tus definiciones de terminado** y **criterios de aceptación** por cada historia de usuario con el objetivo que determinen, en equipo, **qué hacer** en el sprint y **cómo se realizará**. Recuerda que esta planificación será revisada por tus coaches para ver el avance del equipo y dar feedback.
 
 ## Restricciones Técnicas
 
-* No está permitido el uso de frameworks de CCS (bootstrap).
+* Debes utilizar `flexbox` y `media queries` para posicionar tus elementos. No está permitido el uso de frameworks de CCS (bootstrap).
 
-* Ya te damos un diseño (layout) de la vista mobile y desktop, queremos realmente que lo repliques en forma, el contenido depende de la temática que van a elegir como equipo.
+* Ya te damos un diseño (layout) de la vista mobile y desktop, queremos que lo repliques a nivel *pixel perfect*, el contenido, paleta de colores y fuentes, depende de la temática que van a elegir como equipo.
 
-* Los test son importantes, te sugerimos que pongas en práctica implementarlas desde la primera historia de usuario.
+* Los test son **fundamentrales** y deberán formar parte de tu definición de terminado, te recomendamos que comiences a implementarlos desde el comienzo.
 
 ## Historias de Usuario
 
@@ -92,3 +107,56 @@ El objetivo de usar Firebase, en este proyecto, es que aprendes a manejar y pers
 * Como usuario loggeado debo poder ver todos los posts públicos y privados que he creado hasta ese momento, desde el más reciente hasta el más antiguo, así como la opción de poder cambiar la configuración de privacidad de mis post.
 
 * Yo como usuario loggeado, puedo dar like y llevar un conteo de likes en mi publicación así como poder escribir, guardar, editar o eliminar un comentario en mi publicación.
+
+
+***
+
+## Recursos
+
+### Mobile first
+
+El concepto de [_mobile first_](https://www.mediaclick.es/blog/diseno-web-responsive-design-y-la-importancia-del-mobile-first/)
+hace referencia a un proceso de diseño y desarrollo donde partimos de cómo se ve
+y cómo funciona la aplicación en un dispositivo móvil primero, y más adelante se
+ve como adaptar la aplicación a pantallas progresivamente grandes y
+características específicas del entorno desktop. Esto es en contraposición al
+modelo tradicional, donde primero se diseñaban los websites (o webapps) para
+desktop y después se trataba de _arrugar_ el diseño para que entre en pantallas
+más chicas. La clave acá es asegurarse de que desde el principio diseñan usando
+la vista _responsive_ de las herramientas de desarrollador (developer tools) del
+navegador. De esa forma, partimos de cómo se ve y comporta la aplicación en una
+pantalla y entorno móvil.
+
+### Múltiples vistas
+
+En proyectos anteriores nuestras aplicaciones habían estado compuestas de una
+sola _vista_ principal (una sóla _página_). En este proyecto se introduce la
+necesidad de tener que dividir nuestra interfaz en varias _vistas_ o _páginas_
+y ofrecer una manera de navegar entre estas vistas. Este problema se puede
+afrontar de muchas maneras: con archivos HTML independientes (cada uno con su
+URL) y links tradicionales, manteniendo estado en memoria y rederizando
+condicionalmente (sin refrescar la página), [manipulando el historial del
+navegador](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
+con [`window.history`](https://developer.mozilla.org/es/docs/Web/API/Window/history).
+En este proyecto te invitamos a explorar opciones y decidir una opción
+de implementación.
+
+### Escritura de datos
+
+En los proyectos anteriores hemos consumido (leído) datos, pero todavía no
+habíamos escrito datos (salvar cambios, crear datos, borrar, ...). En este
+proyecto tendrás que crear (salvar) nuevos datos, así como leer, actualizar y
+modificar datos existentes. Estos datos se podrán guardar de forma remota
+usando [Firebase](https://firebase.google.com/).
+
+Otras:
+
+* [Modulos: Export](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export)
+* [Modulos: Import](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import)
+* [Diseño web, responsive design y la importancia del mobile first - Media Click](https://www.mediaclick.es/blog/diseno-web-responsive-design-y-la-importancia-del-mobile-first/)
+* [Mobile First: el enfoque actual del diseño web móvil - 1and1](https://www.1and1.es/digitalguide/paginas-web/diseno-web/mobile-first-la-nueva-tendencia-del-diseno-web/)
+* [Mobile First - desarrolloweb.com](https://desarrolloweb.com/articulos/mobile-first-responsive.html)
+* [Mobile First - ZURB](https://zurb.com/word/mobile-first)
+* [Mobile First Is NOT Mobile Only - Nielsen Norman Group](https://www.nngroup.com/articles/mobile-first-not-mobile-only/)
+
+***
