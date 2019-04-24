@@ -1,4 +1,4 @@
-// Este es el punto de entrada de tu aplicacion
+//Este es el punto de entrada de tu aplicacion
 
 /* import { myFunction } from './lib/index.js';
 myFunction(); */
@@ -118,6 +118,7 @@ function signOut() {
         })
 }
 
+
 function verify() {
     var user = firebase.auth().currentUser;
 
@@ -129,3 +130,4 @@ function verify() {
         console.log(error)
     });
 }
+
