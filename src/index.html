@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
   <link rel="stylesheet" href="css/font/flaticon.css">
   <link rel="stylesheet" href="css/style.css">
 
@@ -19,28 +20,30 @@
     <img src="assets/18984.jpg" alt="Some bg">
   </div>
   <div class="container px-5">
+
     <h2 class="px-4 title-pass">Logo page</h2>
     <h4 class="px-4 subtitle-pass" >Bienvenida!</h4>
+
     <div class="one-column">
-      <input id="email2" type="email" placeholder="Email" class="input-text" />
-      <input id="password2" type="password" placeholder="Password" class="input-text" />
-      <button onclick="loginUser()" class="button-pass"> Log in </button>
+      <input id="email-login" type="email" placeholder="Email" class="input-text" />
+      <input id="password-login" type="password" placeholder="Password" class="input-text" />
+      <button id="buttonLogInEmail" class="button-pass"> Log in </button>
     </div>
 
-    <br />
     <p>O bien ingresa con...</p>
-    <a class="devicon-google-plain gmail-color icon-size" onclick="googleLogin()" ></a>
-    <a class="devicon-facebook-plain facebook-color icon-size" onclick="authCuentaFacebook()"></a>
-    <p> ¿No tienes una cuenta?</p> <a href="#">Registrate</a>
+
+    <a class="devicon-google-plain gmail-color icon-size"id="google-login"></a>
+    <a class="devicon-facebook-plain facebook-color icon-size" id="fb-login"></a>
+    <div> ¿No tienes una cuenta? <a href="#">Registrate</a> </div> 
 
   </div>
 
   <div class="container px-5 none">
     <h4 class="px-4 subtitle-pass" >Registro de usuario </h4>
     <div class="one-column">
-      <input id="email" type="email" placeholder="email" class="input-text" />
-      <input id="password" type="password" placeholder="password" class="input-text" />
-      <button onclick="register()" class="button-pass"> Registrarme </button>
+      <input id="email-signin" type="email" placeholder="Email" class="input-text" />
+      <input id="password-signin" type="password" placeholder="Password" class="input-text" />
+      <button id="buttonRegister" class="button-pass"> Registrarme </button>
     </div>
   </div>
   <div id="content">
@@ -49,7 +52,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
-  <script src="main.js"></script>
+  <script src="registroEmail.js"></script>
   <!-- <script type="module" src="main.js"></script> -->
 </body>
 
