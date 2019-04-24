@@ -1,31 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="css/font/flaticon.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <h4>Registro de usuario </h4>
-  <input id="email" type="email" placeholder="email" />
-  <input id="password" type="password" placeholder="password" />
-  <button onclick="register()"> Registrarme </button>
+  <div class="container">
+    <img src="assets/image-1.jpg" alt="Some bg">
+  </div>
+  <div class="container px-5">
+    <h2>Logo page</h2>
+    <h4>Bienvenida!</h4>
+    <div class="one-column">
+      <input id="email2" type="email" placeholder="Email" />
+      <input id="password2" type="password" placeholder="Password" />
+      <button onclick="loginUser()"> Log in </button>
+    </div>
 
-  <h4>Ingreso de usuario</h4>
-  <input id="email2" type="email" placeholder="email" />
-  <input id="password2" type="password" placeholder="password" />
-  <button onclick="loginUser()"> Acceder </button>
-  <br />
-  <button onclick="googleLogin()">Login with Google</button>
-  <button onclick="authCuentaFacebook()">Login with Fb</button>
+    <br />
+    <p>O bien ingresa con...</p>
+    <a class="flaticon-gmail-bw" onclick="googleLogin()"></a>
+    <a class="flaticon-facebook-bw" onclick="authCuentaFacebook()"></a>
+    <p> ¿No tienes una cuenta?</p> <a href="#">Registrate</a>
 
+  </div>
+
+  <div class="container px-5">
+    <h4>Registro de usuario </h4>
+    <div class="one-column">
+      <input id="email" type="email" placeholder="email" />
+      <input id="password" type="password" placeholder="password" />
+      <button onclick="register()"> Registrarme </button>
+    </div>
+  </div>
   <div id="content">
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
   <script src="main.js"></script>
   <!-- <script type="module" src="main.js"></script> -->
 </body>
