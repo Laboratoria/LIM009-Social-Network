@@ -1,3 +1,9 @@
+//Este es el punto de entrada de tu aplicacion
+
+/* import { myFunction } from './lib/index.js';
+myFunction(); */
+
+// Initialize Firebase
 var config = {
     apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
     authDomain: "fir-basics-c204d.firebaseapp.com",
@@ -11,10 +17,14 @@ firebase.initializeApp(config);
 const buttonRegisterEmail = document.getElementById('buttonRegister')
 
 buttonRegisterEmail.addEventListener('click', () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const emailSignIn = document.getElementById('email-signin').value;
+    const passwordSignIn = document.getElementById('password-signin').value;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
+    .then((res) => {
+        verify()
+        console.log(res)
+    })
     .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -24,17 +34,18 @@ buttonRegisterEmail.addEventListener('click', () => {
         // ...
     });
 
-
 });
 
 
 const buttonLogInEmail = document.getElementById('buttonLogInEmail')
 
 buttonLogInEmail.addEventListener('click', () => {
-    const emailLogInEmail = document.getElementById('emailLogInEmail').value;
-    const passwordLogInEmail = document.getElementById('passwordLogInEmail').value;
+    const emailLogInEmail = document.getElementById('email-login').value;
+    const passwordLogInEmail = document.getElementById('password-login').value;
 
-    firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
+    .then(res => console.log(res))
+    .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -48,8 +59,8 @@ buttonLogInEmail.addEventListener('click', () => {
 
 
 
-function observador(){
-    firebase.auth().onAuthStateChanged(function(user) {
+const activeUser = () => {
+    firebase.auth().onAuthStateChanged( user => {
         if (user) {
           // User is signed in.
           console.log(" existe usuario acctivo")
@@ -62,34 +73,75 @@ function observador(){
           var isAnonymous = user.isAnonymous;
           var uid = user.uid;
           var providerData = user.providerData;
-
-          show();
+          showContent(user);
           // ...
         } else {
-        console.log("npoo existe usuario acctivo")
+        console.log("noo existe usuario acctivo")
         }
       });
 }
 
-observador();
+activeUser();
 
 
-function show(){
-    const contenido = document.getElementById("contenido");
-    contenido.innerHTML = `<h1>Bienvenido</h1>
-    <button id="buttonLogOut"></button>
-    `;
+const showContent = user => {
+    const content = document.getElementById('content')
+    if (user.emailVerified){
+    content.innerHTML = `
+    <p>Welcome</p>
+    <button id="buttonLogOut">Cerrar sesión</button>`
+    }
+    
     const buttonLogOut = document.getElementById('buttonLogOut');
     buttonLogOut.addEventListener('click',signOut);
 }
 
 
-function signOut(){
+const signOut = () => {
     firebase.auth().signOut()
-    .then(function(){
-        console.log("SALIENDO");
-    })
-    .catch(function(error){
-        console.log(error)
-    })
+        .then(() => {
+            console.log('saliendo')
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
+
+const verify = () => {
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+        console.log('enviando email')
+    }).catch(function (error) {
+        // An error happened.
+        console.log(error)
+    });
+}
+
+const googleLogin = document.getElementById('google-login')
+googleLogin.addEventListener('click', ()=>{
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+        .then(result => {
+            const user = result.user;
+            document.write('Hello' + user.displayName);
+            console.log(user)
+        })
+        .catch(err => console.log(err))
+
+});
+
+const facebookLogin = document.getElementById('fb-login')
+facebookLogin.addEventListener('click', ()=>{
+    const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(result => {
+            const user = result.user;
+            const userPhoto = `<img src=${user.photoURL}>`
+            document.write('Hello' + user.displayName + userPhoto);
+            console.log(user)
+        })
+        .catch(console.log)
+});
