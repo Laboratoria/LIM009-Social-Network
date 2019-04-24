@@ -87,9 +87,12 @@ activeUser();
 const showContent = user => {
     const content = document.getElementById('content')
     if (user.emailVerified){
-    content.innerHTML = `
+    const string = `
     <p>Welcome</p>
     <button id="buttonLogOut">Cerrar sesión</button>`
+    const div = document.createElement('div')
+    div.innerHTML = string
+    content.appendChild(div)
     }
     
     const buttonLogOut = document.getElementById('buttonLogOut');
