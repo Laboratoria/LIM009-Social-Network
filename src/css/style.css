@@ -5,6 +5,7 @@
     box-sizing: border-box;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    background-color: #f7f7f7;
 }
 
 .container {
@@ -17,9 +18,10 @@
     margin: 2%;
 }
 .px-5 {
+    padding-bottom: 5%;
     padding-top: 5%;
     padding-left: 10%;
-    padding-right: 13%;
+    padding-right: 10%;
 }
 
 .one-column {
@@ -29,7 +31,9 @@
 
 img {
     width: 100%;
-    /* height: 236px; */
+
+    object-fit: cover;
+
 }
 
 .facebook-color{
@@ -41,11 +45,13 @@ img {
     color: #f00;
 }
 
-.input-text{
+.input-text {
     border-radius: 23px;
     border-style: solid;
     border-color: #e6e6e6;
     padding-left: 14px;
+    background-color: #fff;
+    font-size: 16px;
 }
 
 .button-pass {
@@ -55,7 +61,90 @@ img {
     left: 9%;
     position: relative;
     font-size: 17px;
+    /* linear-gradient( to right, #ffd255, #f08737 ,#ef8636 ); */
+    background-image:
+    linear-gradient(
+        to right, #ffd255, #f08737 ,#ef8636 
+    );
+    color:#fff
 }
-.px-4{
+.px-4 {
     padding-bottom: 4.5%;
+    font-weight: 500;
+}
+
+
+@media (min-width: 372px) {
+    .button-pass {
+    left: 13%;}
+}
+
+
+@media (min-width: 420px) {
+    .button-pass {
+    left: 18%;}
+}
+
+
+@media (min-width: 762px) {
+    .button-pass {
+        height: 2.5em;
+        left: 32%;
+    }
+    .px-5 {
+        padding-top: 0;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+    img {
+        height: 45vh;
+    }
+
+    .input-text {
+      
+        font-size: 18px;
+        height: 46px;
+    }
+    .title-pass{
+        padding-top: 17px;
+        font-size: 29px; font-weight: 600;
+    }
+    .px-4 {
+        padding-bottom: 1.5%;
+    }
+    .subtitle-pass {
+        font-size: 22px;
+        font-weight: 300;
+        padding-bottom: 3.5%;
+    }
+
+}
+@media (min-width :1020px){
+  body  {
+        display: flex;
+    }
+
+    img {
+        height: 115vh;
+        left: 40px;
+        position: relative;
+        width: 533px;
+    }
+    .px-5 {
+        padding-top: 13%;
+        padding-left: 8%;
+        padding-right: 6%;
+    }
+    
+    .button-pass {
+        left: 23%;
+    }  .none{
+        display: none;
+    }
+
+    .icon-size {
+      
+        font-size: 26px;
+    }
+    
 }
