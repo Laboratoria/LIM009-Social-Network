@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-  <script type="module" src="main.js"></script>
+  <h4>Registro de usuario </h4>
+  <input id="email" type="email" placeholder="email" />
+  <input id="password" type="password" placeholder="password" />
+  <button onclick="register()"> Registrarme </button>
+
+  <h4>Ingreso de usuario</h4>
+  <input id="email2" type="email" placeholder="email" />
+  <input id="password2" type="password" placeholder="password" />
+  <button onclick="loginUser()"> Acceder </button>
+  <br />
+  <button onclick="googleLogin()">Login with Google</button>
+  <button onclick="authCuentaFacebook()">Login with Fb</button>
+
+  <div id="content">
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+  <script src="main.js"></script>
+  <!-- <script type="module" src="main.js"></script> -->
 </body>
+
 </html>
