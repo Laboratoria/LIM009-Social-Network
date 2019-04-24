@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-
+  <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
   <link rel="stylesheet" href="css/font/flaticon.css">
   <link rel="stylesheet" href="css/style.css">
 
 
-   
+
 
 </head>
 
@@ -19,28 +19,28 @@
     <img src="assets/image-1.jpg" alt="Some bg">
   </div>
   <div class="container px-5">
-    <h2>Logo page</h2>
-    <h4>Bienvenida!</h4>
+    <h2 class="px-4">Logo page</h2>
+    <h4 class="px-4" >Bienvenida!</h4>
     <div class="one-column">
-      <input id="email2" type="email" placeholder="Email" />
-      <input id="password2" type="password" placeholder="Password" />
-      <button onclick="loginUser()"> Log in </button>
+      <input id="email2" type="email" placeholder="Email" class="input-text" />
+      <input id="password2" type="password" placeholder="Password" class="input-text" />
+      <button onclick="loginUser()" class="button-pass"> Log in </button>
     </div>
 
     <br />
     <p>O bien ingresa con...</p>
-    <a class="flaticon-gmail-bw" onclick="googleLogin()"></a>
-    <a class="flaticon-facebook-bw" onclick="authCuentaFacebook()"></a>
-    <p> �No tienes una cuenta?</p> <a href="#">Registrate</a>
+    <a class="devicon-google-plain" onclick="googleLogin()" ></a>
+    <a class="flaticon-facebook-bw facebook-color" onclick="authCuentaFacebook()"></a>
+    <p> ¿No tienes una cuenta?</p> <a href="#">Registrate</a>
 
   </div>
 
   <div class="container px-5">
     <h4>Registro de usuario </h4>
     <div class="one-column">
-      <input id="email" type="email" placeholder="email" />
-      <input id="password" type="password" placeholder="password" />
-      <button onclick="register()"> Registrarme </button>
+      <input id="email" type="email" placeholder="email" class="input-text" />
+      <input id="password" type="password" placeholder="password" class="input-text" />
+      <button onclick="register()" class="button-pass"> Registrarme </button>
     </div>
   </div>
   <div id="content">

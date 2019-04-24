@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100i,400');
+
+
 * {
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -13,8 +17,9 @@
     margin: 2%;
 }
 .px-5 {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 13%;
 }
 
 .one-column {
@@ -24,4 +29,33 @@
 
 img {
     width: 100%;
+    height: 236px;
+}
+
+.facebook-color{
+    color: #3F51B5;
+}
+
+
+.gmail-color{
+    color: #f00;
+}
+
+.input-text{
+    border-radius: 23px;
+    border-style: solid;
+    border-color: #e6e6e6;
+    padding-left: 14px;
+}
+
+.button-pass {
+    border: none;
+    border-radius: 23px;
+    width: 192px;
+    left: 9%;
+    position: relative;
+    font-size: 17px;
+}
+.px-4{
+    padding-bottom: 4.5%;
 }
