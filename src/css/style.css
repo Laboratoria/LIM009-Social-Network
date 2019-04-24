@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    text-align: center;
+}
+
+[class~=one-column] > * {
+    height: 35px;
+    margin: 2%;
+}
+.px-5 {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.one-column {
+    display: flex;
+    flex-direction: column
+}
+
+img {
+    width: 100%;
+}

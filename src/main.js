@@ -27,7 +27,8 @@ function googleLogin() {
             document.write('Hello' + user.displayName);
             console.log(user)
         })
-        .catch(console.log)
+        .catch(err => console.log(err))
+
 }
 
 function authCuentaFacebook() {
@@ -47,6 +48,10 @@ function register() {
     const password = document.getElementById('password').value;
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((res) => {
+            verify()
+            console.log(res)
+        })
         .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -61,6 +66,7 @@ function loginUser() {
     const password2 = document.getElementById('password2').value;
 
     firebase.auth().signInWithEmailAndPassword(email2, password2)
+        .then(res => console.log(res))
         .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -75,7 +81,7 @@ function observador() {
         if (user) {
             // User is signed in.
             console.log('existe')
-            showContent()
+            showContent(user)
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -93,11 +99,13 @@ function observador() {
 }
 observador();
 
-function showContent() {
+function showContent(user) {
     const content = document.getElementById('content')
+    if (user.emailVerified){
     content.innerHTML = `
     <p>Welcome</p>
     <button onclick="signOut()">Cerrar sesión</button>`
+    }
 }
 
 function signOut() {
@@ -109,3 +117,17 @@ function signOut() {
             console.log(err)
         })
 }
+
+
+function verify() {
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+        console.log('enviando email')
+    }).catch(function (error) {
+        // An error happened.
+        console.log(error)
+    });
+}
+
