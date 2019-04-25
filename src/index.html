@@ -7,6 +7,30 @@
   <title>Document</title>
 </head>
 <body>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBGr7XcDErKCQR-5WRR4IjWiL3nr2o8GMQ",
+        authDomain: "social-network-5a022.firebaseapp.com",
+        databaseURL: "https://social-network-5a022.firebaseio.com",
+        projectId: "social-network-5a022",
+        storageBucket: "social-network-5a022.appspot.com",
+        messagingSenderId: "587244163856"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <h3>Registro de Usuarios</h3>
+    <input id ="email" type ="email" placeholder="Ingresa email">
+    <input id ="password" type ="password" placeholder="Ingresa Contraseña">
+    <button id="btn-register">Enviar</button>
+
+    <h3>Ingreso de Usuarios</h3>
+    <input id ="email2" type ="email" placeholder="Ingresa email">
+    <input id ="password2" type ="password" placeholder="Ingresa Contraseña">
+    <button id="btn-enter">Enviar</button>
+
+    <div id="content" ></div>
   <script type="module" src="main.js"></script>
 </body>
 </html>
