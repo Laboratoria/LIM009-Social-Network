@@ -24,11 +24,11 @@
     <h2 class="title-pass">WEBOOKS</h2>
     <h4 class="px-4 subtitle-pass" >Bienvenida!</h4>
 
-    <div class="one-column">
-      <input id="email-login" type="email" placeholder="Email" class="input-text" />
-      <input id="password-login" type="password" placeholder="Password" class="input-text" />
+    <form class="one-column">
+      <input id="email-login" type="email" placeholder="Email" class="input-text" autocomplete="username"/>
+      <input id="password-login" type="password" placeholder="Password" class="input-text" autocomplete="current-password" />
       <button id="buttonLogInEmail" class="button-pass"> Log in </button>
-    </div>
+    </form>
 
     <p class="fs-20 px-15">O bien ingresa con...</p>
 
@@ -40,11 +40,11 @@
 
   <div class="container px-5 none">
     <h4 class="px-4 subtitle-pass" >Registro de usuario </h4>
-    <div class="one-column">
-      <input id="email-signin" type="email" placeholder="Email" class="input-text" />
-      <input id="password-signin" type="password" placeholder="Password" class="input-text" />
+    <form class="one-column">
+      <input id="email-signin" type="email" placeholder="Email" class="input-text" autocomplete="username"/>
+      <input id="password-signin" type="password" placeholder="Password" class="input-text" autocomplete="current-password"/>
       <button id="buttonRegister" class="button-pass"> Registrarme </button>
-    </div>
+    </form>
   </div>
   <div id="content">
   </div>
@@ -52,6 +52,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="registroEmail.js"></script>
   <!-- <script type="module" src="main.js"></script> -->
 </body>
