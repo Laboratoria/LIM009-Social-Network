@@ -1,10 +1,11 @@
 //Este es el punto de entrada de tu aplicacion
 
-/* import { myFunction } from './lib/index.js';
+/* import * from './lib/index.js'
+import { myFunction } from './lib/index.js';
 myFunction(); */
 
 // Initialize Firebase
-var config = {
+const config = {
     apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
     authDomain: "fir-basics-c204d.firebaseapp.com",
     databaseURL: "https://fir-basics-c204d.firebaseio.com",
@@ -15,70 +16,66 @@ var config = {
 firebase.initializeApp(config);
 
 const buttonRegisterEmail = document.getElementById('buttonRegister')
-
-buttonRegisterEmail.addEventListener('click', () => {
+const funcRegister = () => {
     const emailSignIn = document.getElementById('email-signin').value;
     const passwordSignIn = document.getElementById('password-signin').value;
 
     firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    .then((res) => {
-        verify()
-        console.log(res)
-    })
-    .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        // ...
-    });
+        .then( res => {
+            verify()
+            console.log(res)
+        })
+        .catch( error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            swal(errorMessage, errorCode, "error");
+        });
 
-});
+}
+buttonRegisterEmail.addEventListener('click', funcRegister);
+
 
 
 const buttonLogInEmail = document.getElementById('buttonLogInEmail')
-
-buttonLogInEmail.addEventListener('click', () => {
+const funcLogin = () => {
     const emailLogInEmail = document.getElementById('email-login').value;
     const passwordLogInEmail = document.getElementById('password-login').value;
 
     firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
-    .then(res => console.log(res))
-    .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        // ...
-      });
+        .then(res => console.log(res))
+        .catch( error => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            swal(errorMessage, errorCode, "error");
+        });
 
 
-});
+}
+buttonLogInEmail.addEventListener('click', funcLogin);
 
 
 
 const activeUser = () => {
-    firebase.auth().onAuthStateChanged( user => {
+    firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          // User is signed in.
-          console.log(" existe usuario acctivo")
-          var displayName = user.displayName; 
-          var email = user.email;
-          console.log(email);
-         
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          showContent(user);
-          // ...
+            // User is signed in.
+            console.log(" existe usuario acctivo")
+            const displayName = user.displayName;
+            const email = user.email;
+            console.log(email);
+
+            const emailVerified = user.emailVerified;
+            const photoURL = user.photoURL;
+            const isAnonymous = user.isAnonymous;
+            const uid = user.uid;
+            const providerData = user.providerData;
+            showContent(user);
+            // ...
         } else {
-        console.log("noo existe usuario acctivo")
+            console.log("noo existe usuario acctivo")
         }
-      });
+    });
 }
 
 activeUser();
@@ -86,17 +83,17 @@ activeUser();
 
 const showContent = user => {
     const content = document.getElementById('content')
-    if (user.emailVerified){
-    const string = `
+    if (user.emailVerified) {
+        const string = `
     <p>Welcome</p>
     <button id="buttonLogOut">Cerrar sesión</button>`
-    const div = document.createElement('div')
-    div.innerHTML = string
-    content.appendChild(div)
+        const div = document.createElement('div')
+        div.innerHTML = string
+        content.appendChild(div)
     }
-    
+
     const buttonLogOut = document.getElementById('buttonLogOut');
-    buttonLogOut.addEventListener('click',signOut);
+    buttonLogOut.addEventListener('click', signOut);
 }
 
 
@@ -111,19 +108,19 @@ const signOut = () => {
 }
 
 const verify = () => {
-    var user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
 
-    user.sendEmailVerification().then(function () {
+    user.sendEmailVerification().then( ()=> {
         // Email sent.
         console.log('enviando email')
-    }).catch(function (error) {
+    }).catch( error => {
         // An error happened.
         console.log(error)
     });
 }
 
 const googleLogin = document.getElementById('google-login')
-googleLogin.addEventListener('click', ()=>{
+const funcGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider)
@@ -134,10 +131,11 @@ googleLogin.addEventListener('click', ()=>{
         })
         .catch(err => console.log(err))
 
-});
+}
+googleLogin.addEventListener('click', funcGoogle);
 
 const facebookLogin = document.getElementById('fb-login')
-facebookLogin.addEventListener('click', ()=>{
+const funcFacebook = () => {
     const provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(provider)
         .then(result => {
@@ -147,4 +145,7 @@ facebookLogin.addEventListener('click', ()=>{
             console.log(user)
         })
         .catch(console.log)
-});
+}
+facebookLogin.addEventListener('click', funcFacebook);
+
+console.log(`${funcFacebook()} ${funcGoogle()} ${funcLogin()} ${funcRegister()}`)

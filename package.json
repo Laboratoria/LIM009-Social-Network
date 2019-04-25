@@ -24,5 +24,8 @@
     "htmlhint": "^0.10.1",
     "jest": "^23.6.0",
     "regenerator-runtime": "^0.13.1"
+  },
+  "dependencies": {
+    "sweetalert": "^2.1.2"
   }
 }
