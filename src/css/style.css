@@ -119,7 +119,7 @@ img {
     }
 
 }
-@media (min-width :1020px){
+@media (min-width :1000px){
   body  {
         display: flex;
     }
