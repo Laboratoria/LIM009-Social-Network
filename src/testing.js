@@ -1,10 +1,19 @@
 const signinBtn = document.getElementById('signin-btn');
 
-signinBtn.addEventListener('click', () => {
+signinBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   const signinEmail = document.getElementById('signin-email').value;
   const signinPassword = document.getElementById('signin-password').value;
   console.log(signinEmail);
   console.log(signinPassword);
+  firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
+      .then(function(result){
+        alert("registro correcto");
+      })
+      .catch(function(error){
+       alert("no se realizado la autenticacion");
+      });
+
 })
 
 // MODAL - REGISTRO
@@ -39,3 +48,5 @@ signupBtn.addEventListener('click', () => {
   console.log(signupEmail);
   console.log(signupPassword);
 })
+
+
