@@ -12,28 +12,28 @@ const signOut = () => {
     // .catch(err => {
     //   console.log(err)
     // })
-}
+};
 const verify = () => {
   const user = firebase.auth().currentUser;
 
   user.sendEmailVerification()
   .then(() => console.log('enviando email'))
   .catch(error => console.log(error));
-}
+};
 
 const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
     .then(res =>{ 
       console.log(res)
       verify()})
-    .catch(error => console.log(error.message+ error.code));
-}
+    .catch(error => console.log(error.message + error.code));
+};
 
 const funcLogin = (emailLogIn, passwordLogIn) => {
   firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
     .then(res => console.log(res))
     .catch(error => console.log(error.message + error.code));
-}
+};
 
 
 const activeUser = () => {
@@ -53,7 +53,7 @@ const activeUser = () => {
       console.log("no existe usuario activo")
     }
   });
-}
+};
 
  const showContent = user => {
   const content = document.getElementById('content')
@@ -69,9 +69,7 @@ const activeUser = () => {
 
   const buttonLogOut = document.getElementById('buttonLogOut');
   buttonLogOut.addEventListener('click', signOut);
-}
-
-
+};
 
 const funcGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -84,7 +82,7 @@ const funcGoogle = () => {
     })
     .catch(console.log)
 
-}
+};
 
 const funcFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
@@ -97,4 +95,4 @@ const funcFacebook = () => {
     })
     .catch(console.log)
 }
-export {funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle}
+export {funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle} ;
