@@ -57,7 +57,7 @@ export const verify = () => {
 export const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
   firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
     .then(res => console.log(res))
-    .catch(error => console.log(error.message+ error.code));
+    .catch(error => console.log(error.message + error.code));
 }
 
 export const signOut = () => {
@@ -77,7 +77,7 @@ export const funcGoogle = () => {
     .then(result => {
       const user = result.user;
       document.write('Hello' + user.displayName);
-      console.log(user)
+      console.log(user);
     })
     .catch(console.log)
 
