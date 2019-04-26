@@ -90,7 +90,7 @@ export const funcFacebook = () => {
       const user = result.user;
       const userPhoto = `<img src=${user.photoURL}>`
       document.write('Hello' + user.displayName + userPhoto);
-      console.log(user)
+      console.log(user);
     })
     .catch(console.log)
 }
