@@ -3,23 +3,17 @@
 // export const myFunction = () => {
 //   // aqui tu codigo
 // }
-import { emailSignIn, passwordSignIn, emailLogInEmail, passwordLogInEmail} from '../main.js';
 
+const verify = () => {
+  const user = firebase.auth().currentUser;
 
-// Initialize Firebase
-
-const config = {
-  apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
-  authDomain: "fir-basics-c204d.firebaseapp.com",
-  databaseURL: "https://fir-basics-c204d.firebaseio.com",
-  projectId: "fir-basics-c204d",
-  storageBucket: "fir-basics-c204d.appspot.com",
-  messagingSenderId: "582126712915"
+  user.sendEmailVerification()
+.then(() => console.log('enviando email'))
+.catch(error => console.log(error));
 };
-firebase.initializeApp(config);
 
-const funcRegister = () => {
-  firebase.auth().createUserWithEmailAndPassword(emailSignIn.value, passwordSignIn.value)
+const funcRegister = (emailSignIn, passwordSignIn) => {
+  firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
     .then(res => { 
       console.log(res);
       verify();
@@ -61,16 +55,9 @@ const activeUser = () => {
   const buttonLogOut = document.getElementById('buttonLogOut');
   buttonLogOut.addEventListener('click', signOut);
 };
- const verify = () => {
-  const user = firebase.auth().currentUser;
 
-  user.sendEmailVerification()
-.then(() => console.log('enviando email'))
-.catch(error => console.log(error));
-};
-
- const funcLogin = () => {
-  firebase.auth().signInWithEmailAndPassword(emailLogInEmail.value, passwordLogInEmail.value)
+ const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
+  firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
     .then(res => console.log(res))
     .catch(error => console.log(error.message + error.code));
 };
