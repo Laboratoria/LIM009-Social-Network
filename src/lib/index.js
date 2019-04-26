@@ -1,10 +1,9 @@
 // aqui exportaras las funciones que necesites
 
-// export const myFunction = () => {
+// const myFunction = () => {
 //   // aqui tu codigo
 // }
-
-export const funcRegister = (emailSignIn, passwordSignIn) => {
+const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
     .then(res =>{ 
       console.log(res)
@@ -12,7 +11,7 @@ export const funcRegister = (emailSignIn, passwordSignIn) => {
     .catch(error => console.log(error.message+ error.code));
 }
 
-export const activeUser = () => {
+const activeUser = () => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       // User is signed in.
@@ -31,7 +30,7 @@ export const activeUser = () => {
   });
 }
 
-export const showContent = user => {
+ const showContent = user => {
   const content = document.getElementById('content')
   if (user.emailVerified) {
     const string = `
@@ -46,7 +45,7 @@ export const showContent = user => {
   const buttonLogOut = document.getElementById('buttonLogOut');
   buttonLogOut.addEventListener('click', signOut);
 }
-export const verify = () => {
+ const verify = () => {
   const user = firebase.auth().currentUser;
 
   user.sendEmailVerification()
@@ -54,13 +53,13 @@ export const verify = () => {
   .catch(error => console.log(error));
 }
 
-export const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
+const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
   firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
     .then(res => console.log(res))
     .catch(error => console.log(error.message + error.code));
 }
 
-export const signOut = () => {
+ const signOut = () => {
   firebase.auth().signOut()
     // .then(() => {
     //   console.log('saliendo')
@@ -70,7 +69,7 @@ export const signOut = () => {
     // })
 }
 
-export const funcGoogle = () => {
+const funcGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   firebase.auth().signInWithPopup(provider)
@@ -83,7 +82,7 @@ export const funcGoogle = () => {
 
 }
 
-export const funcFacebook = () => {
+const funcFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
   firebase.auth().signInWithPopup(provider)
     .then(result => {
@@ -94,3 +93,4 @@ export const funcFacebook = () => {
     })
     .catch(console.log)
 }
+export {funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle}

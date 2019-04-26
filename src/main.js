@@ -1,8 +1,5 @@
 //Este es el punto de entrada de tu aplicacion
 import {funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser} from './lib/index.js'
-/* import * from './lib/index.js'
-import { myFunction } from './lib/index.js';
-myFunction(); */
 
 // Initialize Firebase
 const config = {
@@ -17,18 +14,18 @@ firebase.initializeApp(config);
 
 activeUser();
 
-const buttonRegisterEmail = document.getElementById('button-register')
+const buttonRegisterEmail = document.getElementById('button-register');
 const emailSignIn = document.getElementById('email-signin').value;
 const passwordSignIn = document.getElementById('password-signin').value;
-buttonRegisterEmail.addEventListener('click', funcRegister(emailSignIn, passwordSignIn));
+buttonRegisterEmail.addEventListener('hover', funcRegister(emailSignIn, passwordSignIn));
 
-const buttonLogInEmail = document.getElementById('button-login-email')
+const buttonLogInEmail = document.getElementById('button-login-email');
 const emailLogInEmail = document.getElementById('email-login').value;
 const passwordLogInEmail = document.getElementById('password-login').value;
 buttonLogInEmail.addEventListener('click', funcLogin(emailLogInEmail, passwordLogInEmail));
 
-const googleLogin = document.getElementById('google-login')
+const googleLogin = document.getElementById('google-login');
 googleLogin.addEventListener('click', funcGoogle);
 
-const facebookLogin = document.getElementById('fb-login')
+const facebookLogin = document.getElementById('fb-login');
 facebookLogin.addEventListener('click', funcFacebook);
