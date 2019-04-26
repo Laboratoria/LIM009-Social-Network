@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="index.css">
+
   <title>Document</title>
 </head>
 <body>
@@ -27,12 +29,46 @@
         <img src="../images/facebook-logo-in-circular-button-outlined-social-symbol (1).svg" alt="Facebook" style="width:30px;">
       </figure>
       <footer>
-        <p>¿No tienes una cuenta? <a href="#">Regístrate.</a></p>
+        <p>¿No tienes una cuenta? <a id="myBtn" href="#">Regístrate.</a></p>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <input id="signup-name" type="text" placeholder="Nombre"><br>
+            <input id="signup-email" type="email" placeholder="Correo electrónico"><br>
+            <input id="signup-password" type="password" placeholder="Contraseña"><br>
+            <button id="signup-btn">Regístrarse</button>
+          </div>
+        </div>
       </footer>
     </div>
-
-
   </main>
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDhPzlMom9mAEcuyk_Dw05NY2awAH_zYAU",
+      authDomain: "red-social-58567.firebaseapp.com",
+      databaseURL: "https://red-social-58567.firebaseio.com",
+      projectId: "red-social-58567",
+      storageBucket: "red-social-58567.appspot.com",
+      messagingSenderId: "305974368757"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script type="module" src="main.js"></script>
+
+  <!-- FUNCIONALIDAD -->
+  <!-- <script>
+    const signinBtn = document.getElementById('signin-btn');
+
+    signinBtn.addEventListener('click', () => {
+      const signinEmail = document.getElementById('signin-email').value;
+      const signinPassword = document.getElementById('signin-password').value;
+      console.log(signinEmail);
+      console.log(signinPassword);
+    })
+  </script> -->
 </body>
 </html>
