@@ -4,7 +4,10 @@ global.firebase = new MockFirebase(fixtureUser)
 import { funcLogin } from "../src/lib/index";
 
 describe('funcLogin', () => {
-  it('debería ser una función', () => {
-    expect(typeof funcLogin).toBe('function');
+  it('deberi�a ser una funcion', () => {
+    return funcLogin('abc@gmail.com', '123456')
+    .then(user =>{
+      expect(user.email).toBe('abc@gmail.com')
+    });
   });
 });

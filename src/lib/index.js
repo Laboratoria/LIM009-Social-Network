@@ -3,7 +3,7 @@
 // const myFunction = () => {
 //   // aqui tu codigo
 // }
-import {leaveSesion,withPhoto} from './lib/templates.js';
+import {leaveSesion, withPhoto} from './templates.js';
 
 const signOut = () => firebase.auth().signOut()
 // const verify = () => {
@@ -11,7 +11,7 @@ const signOut = () => firebase.auth().signOut()
 // }
 
 const funcRegister = (emailSignIn, passwordSignIn) => {
-  firebaseh().aut.createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
+  firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
     // VERIFY: firebase.auth().currentUsersendEmailVerification()
   // .catch(error => console.log(error.message + error.code));
 }
@@ -44,9 +44,8 @@ const activeUser = () => {
 };
 
 const showContent = user => {
-  const content = document.getElementById('content')
   if (user) {
-    leave();
+    leaveSesion();
    }
 
   const buttonLogOut = document.getElementById('buttonLogOut');
