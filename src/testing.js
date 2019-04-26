@@ -1,11 +1,3 @@
-const signinBtn = document.getElementById('signin-btn');
-
-signinBtn.addEventListener('click', () => {
-  const signinEmail = document.getElementById('signin-email').value;
-  const signinPassword = document.getElementById('signin-password').value;
-  console.log(signinEmail);
-  console.log(signinPassword);
-})
 
 // MODAL - REGISTRO
 // Get the modal
@@ -28,14 +20,41 @@ window.addEventListener('click', (event) => {
     modal.style.display = 'none';
     }
 })
+//
+function ingreso(){
+  const email2=document.getElementById("signup-email");
+  const contraseña2=document.getElementById("signup-password")
+  firebase.auth().signInWithEmailAndPassword(email2, contraseña2).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+    console.log(errorCode);
+    console.log(errorMessage);
+  });
+}
 
-// FORM - REGISTRO
-const signupBtn = document.getElementById('signup-btn');
-signupBtn.addEventListener('click', () => {
-  const signupName = document.getElementById('signup-name').value;
-  const signupEmail = document.getElementById('signup-email').value;
-  const signupPassword = document.getElementById('signup-password').value;
-  console.log(signupName);
-  console.log(signupEmail);
-  console.log(signupPassword);
-})
+
+
+
+
+
+
+//
+
+function registrar(){
+  const email=document.getElementById("signin-email").value;
+  const contraseña=document.getElementById("signin-password").value;
+  firebase.auth().createUserWithEmailAndPassword(email, contraseña).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+    console.log(errorCode);
+    console.log(errorMessage);
+  });
+  
+}
+
+
+
