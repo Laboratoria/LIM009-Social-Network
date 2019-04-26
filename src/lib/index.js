@@ -6,17 +6,18 @@
 
 export const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    .then(res =>{ 
-      console.log(res)
-      verify()})
-    .catch(error => console.log(error.message+ error.code));
-}
+    .then(res => { 
+      console.log(res);
+      verify()
+;})
+    .catch(error => console.log(error.message + error.code));
+};
 
 export const activeUser = () => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       // User is signed in.
-      console.log("existe usuario acctivo")
+      console.log('existe usuario acctivo');
       // const displayName = user.displayName;
       // const email = user.email;
       // const emailVerified = user.emailVerified;
@@ -26,49 +27,49 @@ export const activeUser = () => {
       // const providerData = user.providerData;
       showContent(user);
     } else {
-      console.log("no existe usuario activo")
+      console.log('no existe usuario activo');
     }
   });
-}
+};
 
 export const showContent = user => {
-  const content = document.getElementById('content')
+  const content = document.getElementById('content');
   if (user.emailVerified) {
     const string = `
     <p>Welcome</p>
     <button id="buttonLogOut">Cerrar sesión</button>
-    `
-    const div = document.createElement('div')
-    div.innerHTML = string
-    content.appendChild(div)
+    `;
+    const div = document.createElement('div');
+    div.innerHTML = string;
+    content.appendChild(div);
   }
 
   const buttonLogOut = document.getElementById('buttonLogOut');
   buttonLogOut.addEventListener('click', signOut);
-}
+};
 export const verify = () => {
   const user = firebase.auth().currentUser;
 
   user.sendEmailVerification()
-  .then(() => console.log('enviando email'))
-  .catch(error => console.log(error));
-}
+    .then(() => console.log('enviando email'))
+    .catch(error => console.log(error));
+};
 
 export const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
   firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
     .then(res => console.log(res))
     .catch(error => console.log(error.message + error.code));
-}
+};
 
 export const signOut = () => {
-  firebase.auth().signOut()
-    // .then(() => {
-    //   console.log('saliendo')
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
-}
+  firebase.auth().signOut();
+  // .then(() => {
+  //   console.log('saliendo')
+  // })
+  // .catch(err => {
+  //   console.log(err)
+  // })
+};
 
 export const funcGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -79,18 +80,17 @@ export const funcGoogle = () => {
       document.write('Hello' + user.displayName);
       console.log(user);
     })
-    .catch(console.log)
-
-}
+    .catch(console.log);
+};
 
 export const funcFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
   firebase.auth().signInWithPopup(provider)
     .then(result => {
       const user = result.user;
-      const userPhoto = `<img src=${user.photoURL}>`
+      const userPhoto = `<img src=${user.photoURL}>`;
       document.write('Hello' + user.displayName + userPhoto);
       console.log(user);
     })
-    .catch(console.log)
-}
+    .catch(console.log);
+};

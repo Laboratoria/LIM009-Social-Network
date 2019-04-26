@@ -18,9 +18,9 @@ window.onload = () => {
           name: 'Contact'
         }
       ]
-    }
-  }
+    };
+  };
 
-const currentPath = window.location.hash.substr(1);
-console.log(currentPath)
-}
+  const currentPath = window.location.hash.substr(1);
+  console.log(currentPath);
+};
