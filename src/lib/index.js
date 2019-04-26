@@ -4,30 +4,19 @@
 //   // aqui tu codigo
 // }
 
-const signOut = () => {
-  firebase.auth().signOut()
-    // .then(() => {
-    //   console.log('saliendo')
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
-};
+const signOut = () => firebase.auth().signOut()
 const verify = () => {
-  const user = firebase.auth().currentUser;
-
-  user.sendEmailVerification()
-  .then(() => console.log('enviando email'))
-  .catch(error => console.log(error));
-};
+   firebase.auth().currentUsersendEmailVerification();
+ }
 
 const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    .then(res =>{ 
-      console.log(res)
-      verify()})
-    .catch(error => console.log(error.message + error.code));
-};
+    .then(user => { 
+      console.log(user);
+       verify()})
+    .catch(error => console.log(error.message+ error.code));
+}
+
 
 const funcLogin = (emailLogIn, passwordLogIn) => {
   firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)

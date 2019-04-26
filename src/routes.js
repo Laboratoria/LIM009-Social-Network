@@ -1,3 +1,4 @@
+
 window.onload = () => {
   console.log('DOM has loaded');
 
@@ -21,6 +22,7 @@ window.onload = () => {
     }
   };
 
-  const currentPath = window.location.hash.substr(1);
- console.log(currentPath);
+  const currentPath = window.location.pathname;
+  console.log(currentPath);
+
 }

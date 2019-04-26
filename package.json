@@ -26,6 +26,7 @@
     "regenerator-runtime": "^0.13.1"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "sweetalert": "^2.1.2"
   }
 }
