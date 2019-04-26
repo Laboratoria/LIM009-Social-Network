@@ -6,13 +6,14 @@ signinBtn.addEventListener('click', (e) => {
   const signinPassword = document.getElementById('signin-password').value;
   console.log(signinEmail);
   console.log(signinPassword);
-  firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword)
-  .catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-  });
+  firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
+      .then(function(result){
+        alert("registro correcto");
+      })
+      .catch(function(error){
+       alert("no se realizado la autenticacion");
+      });
+
 })
 
 // MODAL - REGISTRO
