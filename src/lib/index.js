@@ -3,13 +3,38 @@
 // const myFunction = () => {
 //   // aqui tu codigo
 // }
+const verify = () => {
+  const user = firebase.auth().currentUser;
+
+  user.sendEmailVerification()
+    .then(() => console.log('enviando email'))
+    .catch(error => console.log(error));
+}
+
+const signOut = () => {
+  firebase.auth().signOut()
+  // .then(() => {
+  //   console.log('saliendo')
+  // })
+  // .catch(err => {
+  //   console.log(err)
+  // })
+}
 const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    .then(res =>{ 
+    .then(res => {
       console.log(res)
-      verify()})
-    .catch(error => console.log(error.message+ error.code));
+      verify()
+    })
+    .catch(error => console.log(error.message + error.code));
 }
+
+const funcLogin = (emailLogIn, passwordLogIn) => {
+  firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
+    .then(res => console.log(res))
+    .catch(error => console.log(error.message + error.code));
+}
+
 
 const activeUser = () => {
   firebase.auth().onAuthStateChanged(user => {
@@ -30,9 +55,9 @@ const activeUser = () => {
   });
 }
 
- const showContent = user => {
+const showContent = user => {
   const content = document.getElementById('content')
-  if (user.emailVerified) {
+  if (user) {
     const string = `
     <p>Welcome</p>
     <button id="buttonLogOut">Cerrar sesión</button>
@@ -40,34 +65,13 @@ const activeUser = () => {
     const div = document.createElement('div')
     div.innerHTML = string
     content.appendChild(div)
+    const buttonLogOut = document.getElementById('buttonLogOut');
+    buttonLogOut.addEventListener('click', signOut);
   }
-
-  const buttonLogOut = document.getElementById('buttonLogOut');
-  buttonLogOut.addEventListener('click', signOut);
-}
- const verify = () => {
-  const user = firebase.auth().currentUser;
-
-  user.sendEmailVerification()
-  .then(() => console.log('enviando email'))
-  .catch(error => console.log(error));
 }
 
-const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
-  firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
-    .then(res => console.log(res))
-    .catch(error => console.log(error.message + error.code));
-}
 
- const signOut = () => {
-  firebase.auth().signOut()
-    // .then(() => {
-    //   console.log('saliendo')
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
-}
+
 
 const funcGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -93,4 +97,4 @@ const funcFacebook = () => {
     })
     .catch(console.log)
 }
-export {funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle}
+export { funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle }
