@@ -12,26 +12,26 @@ const config = {
 };
 firebase.initializeApp(config);
 
-activeUser();
-
 const buttonRegisterEmail = document.getElementById('button-register');
 const emailSignIn = document.getElementById('email-signin');
 const passwordSignIn = document.getElementById('password-signin');
-buttonRegisterEmail.addEventListener('click', (e) => {
-  e.preventDefault();
-  funcRegister(emailSignIn, passwordSignIn)
+buttonRegisterEmail.addEventListener('click', (event) => {
+  event.preventDefault();
+  funcRegister(emailSignIn.value, passwordSignIn.value);
 });
 
 const buttonLogInEmail = document.getElementById('button-login-email');
-const emailLogIn = document.getElementById('email-login').value;
-const passwordLogIn = document.getElementById('password-login').value;
-buttonLogInEmail.addEventListener('click', e => {
-  e.preventDefault;
-  funcLogin(emailLogIn, passwordLogIn)
+const emailLogInEmail = document.getElementById('email-login');
+const passwordLogInEmail = document.getElementById('password-login');
+buttonLogInEmail.addEventListener('click', (event) => {
+  event.preventDefault();
+  funcLogin(emailLogInEmail.value, passwordLogInEmail.value);
 });
+activeUser();
 
 const googleLogin = document.getElementById('google-login');
 googleLogin.addEventListener('click', funcGoogle);
 
 const facebookLogin = document.getElementById('fb-login');
 facebookLogin.addEventListener('click', funcFacebook);
+

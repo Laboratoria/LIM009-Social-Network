@@ -35,31 +35,30 @@ const funcLogin = (emailLogIn, passwordLogIn) => {
     .catch(error => console.log(error.message + error.code));
 }
 
-
 const activeUser = () => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       // User is signed in.
-      console.log("existe usuario acctivo")
-      // const displayName = user.displayName;
-      // const email = user.email;
-      // const emailVerified = user.emailVerified;
-      // const photoURL = user.photoURL;
-      // const isAnonymous = user.isAnonymous;
-      // const uid = user.uid;
-      // const providerData = user.providerData;
+      console.log("existe usuario acctivo");
+      const displayName = user.displayName;
+      const email = user.email;
+      const emailVerified = user.emailVerified;
+      const photoURL = user.photoURL;
+      const isAnonymous = user.isAnonymous;
+      const uid = user.uid;
+      const providerData = user.providerData;
       showContent(user);
     } else {
-      console.log("no existe usuario activo")
+      console.log("no existe usuario activo");
     }
   });
-}
+};
 
 const showContent = user => {
   const content = document.getElementById('content')
   if (user) {
     const string = `
-    <p>Welcome</p>
+    <p>Welcome </p>
     <button id="buttonLogOut">Cerrar sesión</button>
     `
     const div = document.createElement('div')
@@ -67,13 +66,16 @@ const showContent = user => {
     content.appendChild(div)
     const buttonLogOut = document.getElementById('buttonLogOut');
     buttonLogOut.addEventListener('click', signOut);
-  }
-}
+  };
+};
 
+ const funcLogin = (emailLogInEmail, passwordLogInEmail) => {
+  firebase.auth().signInWithEmailAndPassword(emailLogInEmail, passwordLogInEmail)
+    .then(res => console.log(res))
+    .catch(error => console.log(error.message + error.code));
+};
 
-
-
-const funcGoogle = () => {
+ const funcGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   firebase.auth().signInWithPopup(provider)
@@ -82,9 +84,8 @@ const funcGoogle = () => {
       document.write('Hello' + user.displayName);
       console.log(user);
     })
-    .catch(console.log)
-
-}
+    .catch(console.log);
+};
 
 const funcFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
