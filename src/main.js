@@ -15,19 +15,17 @@ const config = {
 };
 firebase.initializeApp(config);
 
+activeUser();
+
 const buttonRegisterEmail = document.getElementById('button-register')
 const emailSignIn = document.getElementById('email-signin').value;
 const passwordSignIn = document.getElementById('password-signin').value;
 buttonRegisterEmail.addEventListener('click', funcRegister(emailSignIn, passwordSignIn));
 
-
-
-
 const buttonLogInEmail = document.getElementById('button-login-email')
 const emailLogInEmail = document.getElementById('email-login').value;
 const passwordLogInEmail = document.getElementById('password-login').value;
 buttonLogInEmail.addEventListener('click', funcLogin(emailLogInEmail, passwordLogInEmail));
-activeUser();
 
 const googleLogin = document.getElementById('google-login')
 googleLogin.addEventListener('click', funcGoogle);
