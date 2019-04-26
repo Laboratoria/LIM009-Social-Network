@@ -9,6 +9,7 @@ signinBtn.addEventListener('click', (e) => {
   firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
       .then(function(result){
         alert("registro correcto");
+        location.href="home.html";
       })
       .catch(function(error){
        alert("no se realizado la autenticacion");
