@@ -1,10 +1,18 @@
 const signinBtn = document.getElementById('signin-btn');
 
-signinBtn.addEventListener('click', () => {
+signinBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   const signinEmail = document.getElementById('signin-email').value;
   const signinPassword = document.getElementById('signin-password').value;
   console.log(signinEmail);
   console.log(signinPassword);
+  firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword)
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
 })
 
 // MODAL - REGISTRO
@@ -39,3 +47,5 @@ signupBtn.addEventListener('click', () => {
   console.log(signupEmail);
   console.log(signupPassword);
 })
+
+
