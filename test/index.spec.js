@@ -1,8 +1,10 @@
+import MockFirebase from '../node_modules/mock-cloud-firestore/dist/mock-cloud-firestore';
+global.firebase = new MockFirebase(fixtureUser)
 // importamos la funcion que vamos a testear
-import { myFunction } from "../src/lib/index";
+import { funcLogin } from "../src/lib/index";
 
-describe('myFunction', () => {
+describe('funcLogin', () => {
   it('debería ser una función', () => {
-    expect(typeof myFunction).toBe('function');
+    expect(typeof funcLogin).toBe('function');
   });
 });

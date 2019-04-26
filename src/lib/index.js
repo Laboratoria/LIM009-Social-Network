@@ -10,16 +10,16 @@ const signOut = () => firebase.auth().signOut()
 // }
 
 const funcRegister = (emailSignIn, passwordSignIn) => {
-  firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    // firebase.auth().currentUsersendEmailVerification()
-  .catch(error => console.log(error.message + error.code));
+  firebaseh().aut.createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
+    // VERIFY: firebase.auth().currentUsersendEmailVerification()
+  // .catch(error => console.log(error.message + error.code));
 }
 
 
 const funcLogin = (emailLogIn, passwordLogIn) => {
   firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
-    .then(res => console.log(res))
-    .catch(error => console.log(error.message + error.code));
+    // .then(res => console.log(res))
+    // .catch(error => console.log(error.message + error.code));
 };
 
 
