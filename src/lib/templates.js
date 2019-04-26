@@ -1,3 +1,5 @@
+import {registerAfterTemplate} from '../main.js'
+
 export const leaveSesion = () => {
 
   const string = `
@@ -23,10 +25,11 @@ export const withOutPhoto = () => {
 
 const main = document.getElementById('main');
 export const screen1 = () => {
+
   const back1 = `  <div class="container container-bg">
     <img src="assets/18984.jpg" alt="Some bg">
   </div>
-  <div class="container px-5">
+  <div id='login' class="container px-5">
 
     <h2 class="title-pass">WEBOOKS</h2>
     <h4 class="px-4 subtitle-pass" >Bienvenidx!</h4>
@@ -41,19 +44,17 @@ export const screen1 = () => {
 
     <a class="devicon-google-plain gmail-color icon-size"id="google-login"></a>
     <a class="devicon-facebook-plain facebook-color icon-size" id="fb-login"></a>
-    <div class="fs-20 px-0 "> ¿No tienes una cuenta? <span id="showRegister" >Registrate</span> </div> 
+    <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a id="showRegister">Registrate</a> </div> 
 
   </div>
 `;
   main.innerHTML = back1;
-  
-  
-};
 
-const screenRegister = () => {
-    main.innerHTML=``;
-    main.innerHTML =
-    `<div id="register" class="container px-5 none">
+  const screenRegister = () => {
+    const login = document.getElementById('login')
+    login.innerHTML = '';
+    const register =
+      `<div id="register" class="container px-5 non'e">
 <h4 class="px-4 subtitle-pass" >Registro de usuario </h4>
 <div class="one-column">
   <input id="email-signin" type="email" placeholder="Email" class="input-text" />
@@ -62,6 +63,16 @@ const screenRegister = () => {
 </div>
 </div>
 `;
-const registerA = document.getElementById('showRegister');
-registerA.addEventListener('click', screenRegister)  
+    const div = document.createElement('div')
+    div.innerHTML = register;
+    login.appendChild(div);
+  };
+
+  const registerA = document.querySelector('[id="showRegister"]');
+    registerA.addEventListener('click', e => {
+      e.preventDefault();
+      screenRegister();
+      //POR VERIFICAR 
+      registerAfterTemplate()
+    })
 };

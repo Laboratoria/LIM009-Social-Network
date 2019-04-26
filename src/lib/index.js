@@ -6,16 +6,14 @@
 import {leaveSesion,withPhoto} from './lib/templates.js';
 
 const signOut = () => firebase.auth().signOut()
-const verify = () => {
-   firebase.auth().currentUsersendEmailVerification();
- }
+// const verify = () => {
+//   firebase.auth().currentUsersendEmailVerification();
+// }
 
 const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    .then(user => { 
-      console.log(user);
-       verify()})
-    .catch(error => console.log(error.message+ error.code));
+    // firebase.auth().currentUsersendEmailVerification()
+  .catch(error => console.log(error.message + error.code));
 }
 
 
@@ -45,7 +43,7 @@ const activeUser = () => {
   });
 };
 
- const showContent = user => {
+const showContent = user => {
   const content = document.getElementById('content')
   if (user) {
     leave();
@@ -79,4 +77,4 @@ const funcFacebook = () => {
     })
     .catch(console.log)
 }
-export {funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle} ;
+export { funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle };
