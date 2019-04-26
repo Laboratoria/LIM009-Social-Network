@@ -79,7 +79,7 @@ export const funcGoogle = () => {
       document.write('Hello' + user.displayName);
       console.log(user)
     })
-    .catch(err => console.log(err))
+    .catch(console.log)
 
 }
 
@@ -92,5 +92,5 @@ export const funcFacebook = () => {
       document.write('Hello' + user.displayName + userPhoto);
       console.log(user)
     })
-    .catch(err => console.log(err))
+    .catch(console.log)
 }
