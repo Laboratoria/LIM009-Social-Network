@@ -16,6 +16,10 @@ export const withPhoto = () => {
   console.log(user);
 };
 
+export const withOutPhoto = () => {
+    document.write('Hello' + user.displayName );
+    console.log(user);
+  };
 
 const main = document.getElementById('main');
 export const screen1 = () => {
@@ -42,7 +46,11 @@ export const screen1 = () => {
   </div>
 `;
   main.innerHTML = back1;
-  const screenRegister = () => {
+  
+  
+};
+
+const screenRegister = () => {
     main.innerHTML=``;
     main.innerHTML =
     `<div id="register" class="container px-5 none">
@@ -56,6 +64,4 @@ export const screen1 = () => {
 `;
 const registerA = document.getElementById('showRegister');
 registerA.addEventListener('click', screenRegister)  
-};
-  
 };
