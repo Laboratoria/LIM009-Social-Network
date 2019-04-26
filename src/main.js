@@ -1,6 +1,6 @@
 //Este es el punto de entrada de tu aplicacion
 import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from './lib/index.js';
-import {screen1} from './lib/templates.js';
+import { screen1 } from './lib/templates.js';
 // Initialize Firebase
 const config = {
   apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
@@ -12,13 +12,17 @@ const config = {
 };
 firebase.initializeApp(config);
 screen1();
-const buttonRegisterEmail = document.getElementById('button-register');
-const emailSignIn = document.getElementById('email-signin');
-const passwordSignIn = document.getElementById('password-signin');
-buttonRegisterEmail.addEventListener('click', (event) => {
-  event.preventDefault();
-  funcRegister(emailSignIn.value, passwordSignIn.value);
-});
+
+export const registerAfterTemplate = () => {
+  const buttonRegisterEmail = document.getElementById('button-register');
+  const emailSignIn = document.getElementById('email-signin');
+  const passwordSignIn = document.getElementById('password-signin');
+
+  buttonRegisterEmail.addEventListener('click', (event) => {
+    event.preventDefault();
+    funcRegister(emailSignIn.value, passwordSignIn.value);
+  });
+}
 
 const buttonLogInEmail = document.getElementById('button-login-email');
 const emailLogInEmail = document.getElementById('email-login');
