@@ -1,6 +1,6 @@
 //Este es el punto de entrada de tu aplicacion
-import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from './lib/index.js'
-
+import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from './lib/index.js';
+import {screen1} from './lib/templates.js';
 // Initialize Firebase
 const config = {
   apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
@@ -11,7 +11,7 @@ const config = {
   messagingSenderId: "582126712915"
 };
 firebase.initializeApp(config);
-
+screen1();
 const buttonRegisterEmail = document.getElementById('button-register');
 const emailSignIn = document.getElementById('email-signin');
 const passwordSignIn = document.getElementById('password-signin');

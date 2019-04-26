@@ -24,4 +24,5 @@ window.onload = () => {
 
   const currentPath = window.location.pathname;
   console.log(currentPath);
+
 }
