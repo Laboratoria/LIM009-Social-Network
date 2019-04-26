@@ -28,7 +28,7 @@ const funcRegister = () => {
         .catch( error => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            swal(errorMessage, errorCode, "error");
+            console.log(errorCode+ errorMessage)
         });
 
 }
@@ -47,7 +47,7 @@ const funcLogin = () => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            swal(errorMessage, errorCode, "error");
+            console.log(errorMessage + errorCode);
         });
 
 
@@ -129,8 +129,7 @@ const funcGoogle = () => {
             document.write('Hello' + user.displayName);
             console.log(user)
         })
-        .catch(err => console.log(err))
-
+        .catch(console.log)
 }
 googleLogin.addEventListener('click', funcGoogle);
 
@@ -148,4 +147,4 @@ const funcFacebook = () => {
 }
 facebookLogin.addEventListener('click', funcFacebook);
 
-console.log(`${funcFacebook()} ${funcGoogle()} ${funcLogin()} ${funcRegister()}`)
+// console.log(`${funcFacebook()} ${funcGoogle()} ${funcLogin()} ${funcRegister()}`)
