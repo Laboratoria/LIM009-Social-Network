@@ -18,6 +18,10 @@ export const withPhoto = () => {
   console.log(user);
 };
 
+export const withOutPhoto = () => {
+    document.write('Hello' + user.displayName );
+    console.log(user);
+  };
 
 const main = document.getElementById('main');
 export const screen1 = () => {
