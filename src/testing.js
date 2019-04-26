@@ -29,8 +29,37 @@ window.addEventListener('click', (event) => {
     }
 })
 
+class authentication {
+    createUserWithEmailAndPass (username, email, password) {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(result => {
+            result.user.updateProfile({
+                displayName: username
+            })
+            const emailVerificationSettings = {
+                url: 'http://127.0.0.1:5501/src/index.html#'
+            }
+            result.user.sendEmailVerification(emailVerificationSettings).catch(error => {
+                console.log(error);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            firebase.auth().signOut()
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    authEmailAndPass (email, password) {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+    }
+}
+
 // FORM - REGISTRO
 const signupBtn = document.getElementById('signup-btn');
+
 signupBtn.addEventListener('click', () => {
   const signupName = document.getElementById('signup-name').value;
   const signupEmail = document.getElementById('signup-email').value;
@@ -38,4 +67,6 @@ signupBtn.addEventListener('click', () => {
   console.log(signupName);
   console.log(signupEmail);
   console.log(signupPassword);
+  const auth = new authentication()
+  auth.createUserWithEmailAndPass(signupEmail, signupPassword, signupName)
 })
