@@ -11,6 +11,7 @@ const config = {
   messagingSenderId: "582126712915"
 };
 firebase.initializeApp(config);
+
 screen1();
 
 export const registerAfterTemplate = () => {
