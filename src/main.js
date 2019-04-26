@@ -1,17 +1,7 @@
 //Este es el punto de entrada de tu aplicacion
-import {
-  funcRegister,
-  funcLogin,
-  funcGoogle,
-  funcFacebook,
-  activeUser
-} from './lib/index.js';
-/* import * from './lib/index.js'
-import { myFunction } from './lib/index.js';
-myFunction(); */
+import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from './lib/index.js'
 
 // Initialize Firebase
-
 const config = {
   apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
   authDomain: "fir-basics-c204d.firebaseapp.com",
@@ -30,7 +20,6 @@ buttonRegisterEmail.addEventListener('click', (event) => {
   funcRegister(emailSignIn.value, passwordSignIn.value);
 });
 
-
 const buttonLogInEmail = document.getElementById('button-login-email');
 const emailLogInEmail = document.getElementById('email-login');
 const passwordLogInEmail = document.getElementById('password-login');
@@ -45,3 +34,4 @@ googleLogin.addEventListener('click', funcGoogle);
 
 const facebookLogin = document.getElementById('fb-login');
 facebookLogin.addEventListener('click', funcFacebook);
+
