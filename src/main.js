@@ -4,65 +4,132 @@ import { myFunction } from './lib/index.js';
 myFunction();
 
 const btnRegister = document.getElementById('btn-register');
-const btnEnter = document.getElementById('btn-enter');
+const btnEnter = document.getElementById('btn-login');
+const btnLogInWhitGoogle = document.getElementById('btn-google-signIn');
+const btnLogInWhitFacebook = document.getElementById('btn-facebook-signIn');
 
-
-btnRegister.addEventListener('click', ()=>{
+const registerUser =()=> {
  const email = document.getElementById('email').value;
  const password = document.getElementById('password').value;
 
  firebase.auth().createUserWithEmailAndPassword(email, password)
- .catch(function(error) {
+ .then(()=>{
+   verify();
+ })
+ .catch((error)=> {
     // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
+    const errorCode = error.code;
+    const errorMessage = error.message;
 
     console.log(errorCode);
     console.log(errorMessage);
     // ...
+    
   });  
-});
+};
+btnRegister.addEventListener('click', registerUser);
 
-btnEnter.addEventListener('click',()=>{
+
+const loginUser =()=>{
     const email2 = document.getElementById('email2').value;
     const password2 = document.getElementById('password2').value;
-    firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function(error) {
+
+    firebase.auth().signInWithEmailAndPassword(email2, password2).catch((error)=>{
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         // ...
         
     console.log(errorCode);
     console.log(errorMessage);
       });
-});
+}
+btnEnter.addEventListener('click', loginUser);
 
-const observador = () =>{
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            aparece();
+
+const activeUser = () =>{
+    firebase.auth().onAuthStateChanged(user=>{
+        if (user) {          
           // User is signed in.
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
+          const displayName = user.displayName;
+          const email = user.email;
+          const emailVerified = user.emailVerified;
+          const photoURL = user.photoURL;
+          const isAnonymous = user.isAnonymous;
+          const uid = user.uid;
+          const providerData = user.providerData;
+          showUser(user);
           // ...
         } else {
           // User is signed out.
-          // ...
+          console.log ('no existe usuario activo');
           
         }
       });
-      email-password.html
-      
 }
-observador();
+activeUser();
 
-const aparece =() =>{
+const showUser = user =>{
+    
     const content = document.getElementById ('content');
-    content.innerHTML ="Solo lo ve usuario activo";
+    if(user.emailVerified){
+    const string = `
+     <p> Welcome! </p>
+     <button id="sign-off">Cerrar Sesión</button>   `
+     ;
+     content.innerHTML=string;
+        
+     const btnSignOffUser =document.getElementById('sign-off');
+     btnSignOffUser.addEventListener('click',signOff);
+    }
 }
 
+const signOff =()=>{
+  firebase.auth().signOut()
+  .then (() =>{
+      console.log('saliendo.....')
+  })
+  .catch(error =>{
+    console.log(error)
+  })
+}
+
+
+const verify =()=>{
+  const user = firebase.auth().currentUser;
+
+  user.sendEmailVerification()
+  .then(()=> {
+    console.log('enviando correo')
+  }).catch((error)=> {
+    console.log(error)
+  });
+}
+
+
+const logInGoogle = () =>{
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+  .then((result)=>{
+    console.log("exitosamente con google");
+  })
+  .catch((error)=>{
+      console.log(error);
+  })
+}
+
+btnLogInWhitGoogle.addEventListener('click',logInGoogle);
+
+
+
+const logInFacebook = () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(result => {
+          console.log("exitosamente con facebook");
+        })
+        .catch((error)=>{
+          console.log(error);
+      })
+    }
+btnLogInWhitFacebook.addEventListener('click', logInFacebook);
