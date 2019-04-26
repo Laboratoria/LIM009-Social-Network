@@ -9,10 +9,6 @@
     href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
   <link rel="stylesheet" href="css/font/flaticon.css">
   <link rel="stylesheet" href="css/style.css">
-
-
-
-
 </head>
 
 <body>
@@ -27,33 +23,33 @@
     <div class="one-column">
       <input id="email-login" type="email" placeholder="Email" class="input-text" />
       <input id="password-login" type="password" placeholder="Password" class="input-text" />
-      <button id="buttonLogInEmail" class="button-pass"> Log in </button>
+      <button id="button-login-email" class="button-pass"> Log in </button>
     </div>
 
     <p class="fs-20 px-15">O bien ingresa con...</p>
 
     <a class="devicon-google-plain gmail-color icon-size"id="google-login"></a>
     <a class="devicon-facebook-plain facebook-color icon-size" id="fb-login"></a>
-    <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a href="#">Registrate</a> </div> 
+    <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a href="register">Registrate</a> </div> 
 
   </div>
 
-  <div class="container px-5 none">
+  <div id="register" class="container px-5 none">
     <h4 class="px-4 subtitle-pass" >Registro de usuario </h4>
     <div class="one-column">
       <input id="email-signin" type="email" placeholder="Email" class="input-text" />
       <input id="password-signin" type="password" placeholder="Password" class="input-text" />
-      <button id="buttonRegister" class="button-pass"> Registrarme </button>
+      <button id="button-register" class="button-pass"> Registrarme </button>
     </div>
   </div>
   <div id="content">
   </div>
 
-
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
-  <script src="registroEmail.js"></script>
-  <!-- <script type="module" src="main.js"></script> -->
+  <script src="routes.js"></script>
+  <script type="module" src="main.js"></script>
+
 </body>
 
 </html>
