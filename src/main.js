@@ -34,4 +34,4 @@ googleLogin.addEventListener('click', funcGoogle);
 
 const facebookLogin = document.getElementById('fb-login');
 facebookLogin.addEventListener('click', funcFacebook);
-
+facebookLogin.addEventListener('click', funcFacebook);
