@@ -16,6 +16,11 @@
     text-align: center;
 }
 
+input:focus{
+    outline: none;
+    border: #ef8636;
+    border-style: double;
+}
 [class~=one-column]>* {
     height: 35px;
     margin: 2%;
