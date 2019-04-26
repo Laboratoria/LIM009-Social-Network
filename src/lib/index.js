@@ -3,30 +3,22 @@
 // const myFunction = () => {
 //   // aqui tu codigo
 // }
-const verify = () => {
-  const user = firebase.auth().currentUser;
-
-  user.sendEmailVerification()
-    .then(() => console.log('enviando email'))
-    .catch(error => console.log(error));
-}
 
 const signOut = () => {
   firebase.auth().signOut()
-  // .then(() => {
-  //   console.log('saliendo')
-  // })
-  // .catch(err => {
-  //   console.log(err)
-  // })
+    // .then(() => {
+    //   console.log('saliendo')
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
 }
 const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    .then(res => {
+    .then(res =>{ 
       console.log(res)
-      verify()
-    })
-    .catch(error => console.log(error.message + error.code));
+      verify()})
+    .catch(error => console.log(error.message+ error.code));
 }
 
 const funcLogin = (emailLogIn, passwordLogIn) => {
@@ -55,9 +47,9 @@ const activeUser = () => {
   });
 }
 
-const showContent = user => {
+ const showContent = user => {
   const content = document.getElementById('content')
-  if (user) {
+  if (user.emailVerified) {
     const string = `
     <p>Welcome</p>
     <button id="buttonLogOut">Cerrar sesión</button>
@@ -65,9 +57,10 @@ const showContent = user => {
     const div = document.createElement('div')
     div.innerHTML = string
     content.appendChild(div)
-    const buttonLogOut = document.getElementById('buttonLogOut');
-    buttonLogOut.addEventListener('click', signOut);
   }
+
+  const buttonLogOut = document.getElementById('buttonLogOut');
+  buttonLogOut.addEventListener('click', signOut);
 }
 
 
@@ -97,4 +90,4 @@ const funcFacebook = () => {
     })
     .catch(console.log)
 }
-export { funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle }
+export {funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle}
