@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "firebase-admin": "^7.3.0",
+    "firebase-functions": "^2.3.0",
     "sweetalert": "^2.1.2"
   }
 }
