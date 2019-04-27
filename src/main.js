@@ -1,7 +1,11 @@
 // Este es el punto de entrada de tu aplicacion
 
-import { loginGoogle } from './lib/index.js';
+import SignInForm from './view/SignInForm.js';
 
+import {loginGoogle}  from './lib/index.js';
+
+
+SignInForm.signInForm();
 loginGoogle();
 
 const email = document.getElementById('email');
