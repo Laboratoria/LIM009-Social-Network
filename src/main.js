@@ -10,7 +10,7 @@ const config = {
   storageBucket: "fir-basics-c204d.appspot.com",
   messagingSenderId: "582126712915"
 };
-firebase.initializeApp(config);
+window.firebase.initializeApp(config);
 
 screen1();
 
