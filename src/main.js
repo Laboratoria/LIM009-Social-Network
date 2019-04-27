@@ -5,9 +5,6 @@ import SignInForm from './view/SignInForm.js';
 import {loginGoogle}  from './lib/index.js';
 
 
-SignInForm.signInForm();
-loginGoogle();
-
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const email2 = document.getElementById('email2');
@@ -17,6 +14,6 @@ const btnSubmit = document.getElementById('btn-submit');
 const btnGoogle = document.getElementById('btn-google');
 const root = document.getElementById('root');
 
-const provider = new firebase.auth.GoogleAuthProvider();
+SignInForm.signInForm();
 
-
+btnGoogle.addEventListener('click', loginGoogle);
