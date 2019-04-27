@@ -1,12 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyChCAYZuygSucN9JjS6N8XXoIjD92EIxnc",
+            authDomain: "social-network-311c3.firebaseapp.com",
+            databaseURL: "https://social-network-311c3.firebaseio.com",
+            projectId: "social-network-311c3",
+            storageBucket: "social-network-311c3.appspot.com",
+            messagingSenderId: "743185630000"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
+
 <body>
-  <script type="module" src="main.js"></script>
+    <div class="container">
+        <header class="header"><h1>< BreathLife ></h1>
+        </header>
+        <nav class="menu"><h3> Respira salud, Respira vida </h3>
+        </nav>
+        <aside class="left ancho">
+                <img src="img/day.jpg" alt="cargando imagen" class="img">
+        </aside>
+        <main class="right ancho">
+            <form action="" class="formulario registrar">
+                <input id="email" class="input redondear" type="email" placeholder="Ingrese un correo">
+                <input id="contrasena" class="input redondear" type="password" placeholder="Ingrese una contraseña ">
+                <button type="submit" onclick="registrar()">Registrar</button>
+            </form>
+            <form action="" class="formulario acceder">
+                <input id="email2" class="input redondear" type="email" placeholder="Ingrese su correo">
+                <input id="contrasena2" class="input redondear" type="password" placeholder="Ingrese su contraseña">
+                <button type="submit" class="button-acceder redondear" onclick="acceder()">Acceder</button>
+            </form>
+        </main>
+        <footer class="footer">
+            <p>O bien ingresa con... 
+            </p>
+            <div class="iconos">
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-google"></i>
+            </div>
+            <p>¿No tienes una cuenta? <span>Resgístrate</span></p>
+        </footer>
+    </div>
+
+
+    <script src="app.js"></script>
+    <!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    -->
 </body>
+
 </html>
