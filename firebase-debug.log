@@ -1,13 +1,13 @@
-[debug] [2019-04-25T14:41:39.360Z] ----------------------------------------------------------------------
-[debug] [2019-04-25T14:41:39.365Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Liz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2019-04-25T14:41:39.365Z] CLI Version:   6.7.1
-[debug] [2019-04-25T14:41:39.365Z] Platform:      win32
-[debug] [2019-04-25T14:41:39.365Z] Node Version:  v11.10.0
-[debug] [2019-04-25T14:41:39.371Z] Time:          Thu Apr 25 2019 09:41:39 GMT-0500 (GMT-05:00)
-[debug] [2019-04-25T14:41:39.371Z] ----------------------------------------------------------------------
+[debug] [2019-04-25T14:42:33.229Z] ----------------------------------------------------------------------
+[debug] [2019-04-25T14:42:33.232Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2019-04-25T14:42:33.232Z] CLI Version:   6.7.1
+[debug] [2019-04-25T14:42:33.232Z] Platform:      win32
+[debug] [2019-04-25T14:42:33.232Z] Node Version:  v10.15.1
+[debug] [2019-04-25T14:42:33.235Z] Time:          Thu Apr 25 2019 09:42:33 GMT-0500 (GMT-05:00)
+[debug] [2019-04-25T14:42:33.235Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-04-25T14:41:39.386Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-04-25T14:41:39.389Z] > authorizing via signed-in user
+[debug] [2019-04-25T14:42:33.246Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-04-25T14:42:33.246Z] > authorizing via signed-in user
 [info] 
      ######## #### ########  ######## ########     ###     ######  ########
      ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
@@ -17,25 +17,26 @@
 
 You're about to initialize a Firebase project in this directory:
 
-  C:\Users\Liz\Documents\JavaScript\Social Network\LIM009-Social-Network
+  C:\Users\HP\Desktop\LIM009-Social-Network
 
+[debug] [2019-04-25T16:00:57.635Z] ----------------------------------------------------------------------
+[debug] [2019-04-25T16:00:57.648Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2019-04-25T16:00:57.650Z] CLI Version:   6.7.1
+[debug] [2019-04-25T16:00:57.650Z] Platform:      win32
+[debug] [2019-04-25T16:00:57.650Z] Node Version:  v10.15.1
+[debug] [2019-04-25T16:00:57.657Z] Time:          Thu Apr 25 2019 11:00:57 GMT-0500 (GMT-05:00)
+[debug] [2019-04-25T16:00:57.657Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-04-25T16:00:57.683Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-04-25T16:00:57.684Z] > authorizing via signed-in user
 [info] 
-=== Project Setup
-[info] 
-[info] First, let's associate this project directory with a Firebase project.
-[info] You can create multiple project aliases by running firebase use --add, 
-[info] but for now we'll just set up a default project.
-[info] 
-[debug] [2019-04-25T14:42:00.406Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-04-25T14:42:00.406Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-04-25T14:42:00.743Z] <<< HTTP RESPONSE 200
-[debug] [2019-04-25T14:42:00.773Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?page_size=100  
- 
-[debug] [2019-04-25T14:42:02.199Z] <<< HTTP RESPONSE 200
-[info] 
-=== Database Setup
-[info] 
-[info] Firebase Realtime Database Rules allow you to define how your data should be
-[info] structured and when your data can be read from and written to.
-[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\HP\Desktop\LIM009-Social-Network
+
