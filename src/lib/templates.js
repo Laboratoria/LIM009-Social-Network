@@ -76,3 +76,5 @@ export const screen1 = () => {
       registerAfterTemplate()
     })
 };
+
+screen1();

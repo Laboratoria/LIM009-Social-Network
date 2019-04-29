@@ -10,21 +10,13 @@
 // import firebasemock from 'firebase-mock'
 // const mockauth = new firebasemock.MockFirebase(fixtureUser)
 
-import MockFirebase from 'mock-cloud-firestore';
-global.firebase = new MockFirebase(fixtureData);
+import MockFirebase from '../_mocks_/firebase-mock.js';
 
 // importamos la funcion que vamos a testear
 import { funcLogin } from "../src/lib/index";
 import { constants } from "lib";
 
-const fixtureData = {
-  __collection__: {
-    users: {
-      __doc__: {
-        user_a: {
-          email:'abc@gmail.com'
-        }}}}};
- 
+global.firebase = MockFirebase;
 
 describe('funcLogin', () => {
   it('deberia ser una funcion', () => {
