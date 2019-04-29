@@ -59,7 +59,6 @@ export const screen1 = () => {
 `
   const div = document.createElement('div')
   div.innerHTML = back1;
-
   main.appendChild(div);
 
   clickRegister()
