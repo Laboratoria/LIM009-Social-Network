@@ -1,9 +1,9 @@
 //Este es el punto de entrada de tu aplicacion
-import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from './lib/index.js';
-
+import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser, initFirebase } from './lib/index.js';
+import { printInfoUser } from './lib/templates.js';
 // Initialize Firebase
 
-
+window.onload = initFirebase();
 
 export const registerAfterTemplate = () => {
   const buttonRegisterEmail = document.getElementById('button-register');
@@ -17,17 +17,24 @@ export const registerAfterTemplate = () => {
 }
 
 
-const emailLogInEmail = document.getElementById('email-login');
-const passwordLogInEmail = document.getElementById('password-login');
-const buttonLogInEmail = document.getElementById('button-login-email');
-buttonLogInEmail.addEventListener('click', (event) => {
-  event.preventDefault();
-  funcLogin(emailLogInEmail.value, passwordLogInEmail.value);
-});
+const buttonLogin = () => {
+  const emailLogInEmail = document.getElementById('email-login');
+  const passwordLogInEmail = document.getElementById('password-login');
+  const buttonLogInEmail = document.getElementById('button-login-email');
+  buttonLogInEmail.addEventListener('click', (event) => {
+    event.preventDefault();
+    funcLogin(emailLogInEmail.value, passwordLogInEmail.value);
+  });
+}
 activeUser();
+buttonLogin();
 
 const googleLogin = document.getElementById('google-login');
-googleLogin.addEventListener('click', funcGoogle);
+googleLogin.addEventListener('click', () => {
+  funcGoogle(result => {
+    printInfoUser(result);
+  });
+});
 
 const facebookLogin = document.getElementById('fb-login');
 facebookLogin.addEventListener('click', funcFacebook);

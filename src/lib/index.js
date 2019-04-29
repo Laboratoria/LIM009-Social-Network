@@ -3,16 +3,22 @@
 // const myFunction = () => {
 //   // aqui tu codigo
 // }
-const config = {
-  apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
-  authDomain: "fir-basics-c204d.firebaseapp.com",
-  databaseURL: "https://fir-basics-c204d.firebaseio.com",
-  projectId: "fir-basics-c204d",
-  storageBucket: "fir-basics-c204d.appspot.com",
-  messagingSenderId: "582126712915"
-};
-firebase.initializeApp(config);
-import {leaveSesion, } from './templates.js';
+import {showContent, screen1} from './templates.js'
+
+const initFirebase = () => {
+  const config = {
+    apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
+    authDomain: "fir-basics-c204d.firebaseapp.com",
+    databaseURL: "https://fir-basics-c204d.firebaseio.com",
+    projectId: "fir-basics-c204d",
+    storageBucket: "fir-basics-c204d.appspot.com",
+    messagingSenderId: "582126712915"
+  };
+  firebase.initializeApp(config);
+  screen1();
+
+}
+
 
 const signOut = () => firebase.auth().signOut()
 // const verify = () => {
@@ -27,8 +33,8 @@ const funcRegister = (emailSignIn, passwordSignIn) => {
 
 
 const funcLogin = (emailLogIn, passwordLogIn) => {
-  firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
-    // .then(res => console.log(res))
+  return firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
+    // .then(resolve => console.log(resolve))
     // .catch(error => console.log(error.message + error.code));
 };
 
@@ -52,24 +58,13 @@ const activeUser = () => {
   });
 };
 
-const showContent = user => {
-  if (user) {
-    leaveSesion();
-   }
 
-  const buttonLogOut = document.getElementById('buttonLogOut');
-  buttonLogOut.addEventListener('click', signOut);
-};
 
-const funcGoogle = () => {
+const funcGoogle = (cb) => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   firebase.auth().signInWithPopup(provider)
-    .then(result => {
-      const user = result.user;
-      document.write('Hello' + user.displayName);
-      console.log(user);
-    })
+    .then(cb)
     .catch(console.log)
 
 };
@@ -78,11 +73,8 @@ const funcFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
   firebase.auth().signInWithPopup(provider)
     .then(result => {
-      const user = result.user;
-      const userPhoto = `<img src=${user.photoURL}>`
-      document.write('Hello' + user.displayName + userPhoto);
-      console.log(user);
+      printInfoUser(result)
     })
     .catch(console.log)
 }
-export { funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle };
+export { initFirebase, funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle, signOut };
