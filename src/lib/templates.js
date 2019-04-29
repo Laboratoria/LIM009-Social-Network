@@ -58,6 +58,7 @@ export const screen1 = () => {
   </div>
 `
   const div = document.createElement('div')
+  div.className = 'fluid-flex';
   div.innerHTML = back1;
   main.appendChild(div);
 
