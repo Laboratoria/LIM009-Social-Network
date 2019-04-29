@@ -1,5 +1,7 @@
-//Este es el punto de entrada de tu aplicacion
+//Manipulación de pantallas
 
+//Este es el punto de entrada de tu aplicacion
+/*
 import { myFunction } from './lib/index.js';
 myFunction();
 
@@ -132,4 +134,4 @@ const logInFacebook = () => {
           console.log(error);
       })
     }
-btnLogInWhitFacebook.addEventListener('click', logInFacebook);
+btnLogInWhitFacebook.addEventListener('click', logInFacebook);*/

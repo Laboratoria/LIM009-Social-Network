@@ -15,7 +15,7 @@ body {
     height: 80%;
     margin: auto;
     display: grid;
-    grid-template-areas: "aside aside" "header header" "nav nav" "main main" "footer footer";
+    grid-template-areas: "aside aside"  "main main" "footer footer";
     grid-template-columns: repeat(2, 6fr);
     grid-template-rows: 2fr 1fr 1fr 6fr 2fr;
     text-align: center;
