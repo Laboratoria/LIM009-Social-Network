@@ -1,32 +1,41 @@
-import {registerAfterTemplate} from '../main.js'
+import { registerAfterTemplate } from '../main.js'
+import { signOut } from './index.js';
 
-export const leaveSesion = () => {
-  const string = `
-    <p>Welcome </p>
-    <button id="buttonLogOut">Cerrar sesión</button>
-    `;
+const content = document.getElementById('content')
+const main = document.getElementById('main');
+
+const screenRegister = () => {
+  // event.preventDefault()
+  const login = document.getElementById('login')
+  login.innerHTML = '';
+  const register =
+    `<div id="register" class="container px-5 non'e">
+<h4 class="px-4 subtitle-pass" >Registro de usuario </h4>
+<div class="one-column">
+<input id="email-signin" type="email" placeholder="Email" class="input-text" />
+<input id="password-signin" type="password" placeholder="Password" class="input-text" />
+<button type="button" id="button-register" class="button-pass"> Registrarme </button>
+</div>
+</div>
+`;
   const div = document.createElement('div')
-  div.innerHTML = string;
-  const content = document.getElementById('content')
-  content.appendChild(div);
-}
-
-
-export const withPhoto = (user) => {
-  const userPhoto = `<img src=${user.photoURL}>`;
-  document.write('Hello' + user.displayName + userPhoto);
-  console.log(user);
+  div.innerHTML = register;
+  login.appendChild(div);
 };
 
-export const withOutPhoto = (user) => {
-    document.write('Hello' + user.displayName );
-    console.log(user);
-  };
+const clickRegister = () => {
+const registerA = document.querySelector('[id="showRegister"]');
+registerA.addEventListener('click', e => {
+  e.preventDefault();
+  screenRegister();
+  //POR VERIFICAR 
+  registerAfterTemplate()
+});
+}
 
-const main = document.getElementById('main');
 export const screen1 = () => {
-
-  const back1 = `  <div class="container container-bg">
+  const back1 = `  
+  <div class="container container-bg">
     <img src="assets/18984.jpg" alt="Some bg">
   </div>
   <div id='login' class="container px-5">
@@ -47,34 +56,45 @@ export const screen1 = () => {
     <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a id="showRegister">Registrate</a> </div> 
 
   </div>
-`;
-  main.innerHTML = back1;
+`
+  const div = document.createElement('div')
+  div.innerHTML = back1;
+  main.appendChild(div);
 
-  const screenRegister = () => {
-    const login = document.getElementById('login')
-    login.innerHTML = '';
-    const register =
-      `<div id="register" class="container px-5 non'e">
-<h4 class="px-4 subtitle-pass" >Registro de usuario </h4>
-<div class="one-column">
-  <input id="email-signin" type="email" placeholder="Email" class="input-text" />
-  <input id="password-signin" type="password" placeholder="Password" class="input-text" />
-  <button type="button" id="button-register" class="button-pass"> Registrarme </button>
-</div>
-</div>
-`;
-    const div = document.createElement('div')
-    div.innerHTML = register;
-    login.appendChild(div);
-  };
 
-  const registerA = document.querySelector('[id="showRegister"]');
-    registerA.addEventListener('click', e => {
-      e.preventDefault();
-      screenRegister();
-      //POR VERIFICAR 
-      registerAfterTemplate()
-    })
+  clickRegister()
 };
 
-screen1();
+
+
+export const leaveSesion = () => {
+  const string = `
+    <p>Welcome </p>
+    <button id="buttonLogOut">Cerrar sesión</button>
+    `;
+  const div = document.createElement('div')
+  div.innerHTML = string;
+  content.appendChild(div);
+}
+
+export const printInfoUser = (result) => {
+  const user = result.user;
+  const div = document.createElement('div')
+  content.appendChild(div);
+  console.log(user);
+
+  if (user.photoURL) {
+    div.innerHTML = `Hello ${user.displayName} <img src=${user.photoURL}>`;
+  } else {
+    div.innerHTML = `Hello ${user.displayName}`;
+  }
+};
+
+export const showContent = user => {
+  if (user) {
+    leaveSesion();
+   }
+
+  const buttonLogOut = document.getElementById('buttonLogOut');
+  buttonLogOut.addEventListener('click', signOut);
+};
