@@ -159,7 +159,7 @@ a:visited {
   }
 }
 @media (min-width: 1000px) {
-  main {
+  .fluid-flex {
     display: flex;
   }
 
