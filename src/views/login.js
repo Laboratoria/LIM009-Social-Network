@@ -24,7 +24,7 @@ export const screen1 = () => {
   
       <a class="devicon-google-plain gmail-color icon-size"id="google-login"></a>
       <a class="devicon-facebook-plain facebook-color icon-size" id="fb-login"></a>
-      <div class="fs-20 px-0 "> Â¿No tienes una cuenta? <a id="showRegister">Registrate</a> </div> 
+      <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a id="showRegister">Registrate</a> </div> 
   
     </div>
   `
