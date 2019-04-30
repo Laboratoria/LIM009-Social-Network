@@ -68,6 +68,7 @@ input:focus {
 }
 
 .button-pass {
+  padding-top: 0.5em;
   border: none;
   border-radius: 23px;
   width: 192px;
