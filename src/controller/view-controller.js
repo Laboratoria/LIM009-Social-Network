@@ -17,7 +17,7 @@ export const email = (email, password) => {
 };
 
 export const google = () => {
-  return signInWithFacebook().then(result => {
+  return signInWithGoogle().then(result => {
     dataBaseUser(result.user);
     //       // let imgUser = document.createElement("img");
     //       // imgUser.src = `${result.user.photoURL}`;

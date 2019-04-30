@@ -5,9 +5,9 @@
 // }
 
 
-export const createEmailAndPassword=(email,password)=>{
-  firebase.auth().createUserWithEmailAndPassword(email,password)
- };
+// export const createEmailAndPassword=(email,password)=>{
+//   firebase.auth().createUserWithEmailAndPassword(email,password)
+//  };
 
 export const signInWithEmail = (email, password) =>
   firebase.auth().signInWithEmailAndPassword(email, password);
