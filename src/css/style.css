@@ -1,229 +1,236 @@
-@import url('https://fonts.googleapis.com/css?family=Megrim|Quattrocento+Sans');
+@import url("https://fonts.googleapis.com/css?family=Megrim|Quattrocento+Sans");
 * {
-    box-sizing: border-box;
-    margin: 0;
-    font-family: 'Quattrocento Sans', sans-serif;
-    background-color: #f7f7f7;
-    color: #444444;
-}
-.title-pass {
-    font-family: 'Megrim', cursive;
-    font-size: 45px;
-    font-weight: 600;
-}
-.container {
-    width: 100%;
-    text-align: center;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Quattrocento Sans", sans-serif;
+  background-color: #f7f7f7;
+  color: #444444;
 }
 
-[class~=one-column]>* {
-    height: 35px;
-    margin: 2%;
+.title-pass {
+  font-family: "Megrim", cursive;
+  font-size: 45px;
+  font-weight: 600;
 }
-.px-15{
-    padding-top: 15px;
+
+.container {
+  width: 100%;
+  text-align: center;
 }
+
+input:focus {
+  outline: none;
+  border: #ef8636;
+  border-style: double;
+}
+
+[class~=one-column] > * {
+  height: 35px;
+  margin: 2%;
+}
+
+.px-15 {
+  padding-top: 15px;
+}
+
 .px-5 {
-    padding-bottom: 5%;
-    padding-top: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .one-column {
-    display: flex;
-    flex-direction: column
+  display: flex;
+  flex-direction: column;
 }
 
-img {
-    width: 100%;
-
-    object-fit: cover;
-
+.someBg{
+  width: 100%;
+  object-fit: cover;
 }
 
 .facebook-color {
-    color: #3F51B5;
+  color: #3F51B5;
 }
 
-
 .gmail-color {
-    color: #f00;
+  color: #f00;
 }
 
 .input-text {
-    border-radius: 23px;
-    border-style: solid;
-    border-color: #e6e6e6;
-    padding-left: 14px;
-    background-color: #fff;
-    font-size: 16px;
+  border-radius: 23px;
+  border-style: solid;
+  border-color: #e6e6e6;
+  padding-left: 14px;
+  background-color: #fff;
+  font-size: 16px;
 }
 
 .button-pass {
-    border: none;
-    border-radius: 23px;
-    width: 192px;
-    left: 9%;
-    position: relative;
-    font-size: 17px;
-    /* linear-gradient( to right, #ffd255, #f08737 ,#ef8636 ); */
-    background-image:
-        linear-gradient(to right, #ffd255, #f08737, #ef8636);
-    color: #fff
+  padding-top: 0.5em;
+  border: none;
+  border-radius: 23px;
+  width: 192px;
+  left: 9%;
+  position: relative;
+  font-size: 17px;
+  /* linear-gradient( to right,  $orangeLight, $orangeAverage ,$orangeDark ); */
+  background-image: linear-gradient(to right, #ffd255, #f08737, #ef8636);
+  color: #fff;
 }
 
 .px-4 {
-    padding-bottom: 4.5%;
-    font-weight: 500;
+  padding-bottom: 4.5%;
+  font-weight: 500;
 }
 
 .icon-size {
-    font-size: 21px;
-    padding-right: 12px;
-    line-height: 35px;
-}
-a{
-    text-decoration: none;
-    font-weight: bolder;
-}
-a:link{
-    color: #ef8636;
-}
-a:visited{
-    color: #f08737;
+  font-size: 21px;
+  padding-right: 12px;
+  line-height: 35px;
 }
 
+a {
+  text-decoration: none;
+  font-weight: bolder;
+}
+a:link {
+  color: #ef8636;
+}
+a:visited {
+  color: #f08737;
+}
+
+.error-message {
+  border-color: #dc5f5f;
+  color: #dc5f5f;
+  height: 100%;
+}
 @media (min-width: 372px) {
-    .button-pass {
-        left: 13%;
-    }
+  .button-pass {
+    left: 13%;
+  }
 }
-
-
 @media (min-width: 420px) {
-    .button-pass {
-        left: 18%;
-    }
+  .button-pass {
+    left: 18%;
+  }
 }
-
-
 @media (min-width: 762px) {
-    .button-pass {
-        height: 2.5em;
-        left: 32%;
-    }
-    .icon-size {
-        font-size: 27px;
-        padding-right: 16px;
-        line-height: 48px;
-    }
-    .fs-20{
-        font-size: 20px;
-    }
-    .px-5 {
-        padding-top: 0;
-        padding-left: 15%;
-        padding-right: 15%;
-    }
+  .button-pass {
+    height: 2.5em;
+    left: 32%;
+  }
 
-    img {
-        height: 45vh;
-    }
+  .icon-size {
+    font-size: 27px;
+    padding-right: 16px;
+    line-height: 48px;
+  }
 
-    .input-text {
+  .fs-20 {
+    font-size: 20px;
+  }
 
-        font-size: 18px;
-        height: 46px;
-    }
+  .px-5 {
+    padding-top: 0;
+    padding-left: 15%;
+    padding-right: 15%;
+  }
 
-    .title-pass {
-        padding-top: 17px;
-        font-size: 29px;
-    
-        font-size: 60px;
-       
-    }
+  .someBg {
+    height: 45vh;
+  }
 
-    .px-4 {
-        padding-bottom: 1.5%;
-    }
+  .input-text {
+    font-size: 18px;
+    height: 46px;
+  }
 
-    .subtitle-pass {
-        font-size: 22px;
-        font-weight: 300;
-        padding-bottom: 3.5%;
-    }
+  .title-pass {
+    padding-top: 17px;
+    font-size: 29px;
+    font-size: 60px;
+  }
 
+  .px-4 {
+    padding-bottom: 1.5%;
+  }
+
+  .subtitle-pass {
+    font-size: 22px;
+    font-weight: 300;
+    padding-bottom: 3.5%;
+  }
 }
+@media (min-width: 1000px) {
+  .fluid-flex {
+    display: flex;
+  }
 
-@media (min-width :1000px) {
-    body {
-        display: flex;
-    }
-    .fs-20{
-        font-size: 15px;
-    }
+  .fs-20 {
+    font-size: 15px;
+  }
 
-    img {
-        height: 100vh;
-        left: 40px;
-        position: relative;
-        width: 557px;
-    }
+.someBg{
+    height: 100vh;
+    left: 40px;
+    position: relative;
+    width: 557px;
+  }
 
-    .px-5 {
-        padding-top: 9%;
-        padding-left: 8%;
-        padding-right: 6%;
-    }
-    
-    .button-pass {
-        left: 18%;
-        font-size: 21px;
-        height: 39px;
-    }
+  .px-5 {
+    padding-top: 9%;
+    padding-left: 8%;
+    padding-right: 6%;
+  }
 
-    .none {
-        display: none;
-    }
-    .icon-size {
-        font-size: 26px;
-        padding-right: 18px;
-        line-height: 50px;
-    }
-    .fs-20 {
-        padding-top: 13px;
-      
-    }
-    .px-0 {
-        padding-top: 0px;
-    }
+  .button-pass {
+    left: 18%;
+    font-size: 21px;
+    height: 39px;
+  }
 
+  .none {
+    display: none;
+  }
+
+  .icon-size {
+    font-size: 26px;
+    padding-right: 18px;
+    line-height: 50px;
+  }
+
+  .fs-20 {
+    padding-top: 13px;
+  }
+
+  .px-0 {
+    padding-top: 0px;
+  }
 }
-
-@media (min-width :1080px) {
-    .button-pass {
-        left: 21%;
-    }
+@media (min-width: 1080px) {
+  .button-pass {
+    left: 21%;
+  }
 }
-
-@media (min-width: 1200px){
-.button-pass {
+@media (min-width: 1200px) {
+  .button-pass {
     left: 28%;
+  }
 }
+@media (min-width: 1360px) {
+  .button-pass {
+    left: 29%;
+    font-size: 25px;
+    height: 45px;
+    margin-bottom: 18px;
+  }
+
+  .fs-20 {
+    line-height: 31px;
+    font-size: 22px;
+  }
 }
 
-@media (min-width :1360px) {
-    .button-pass {
-        left: 29%;
-        font-size: 25px;
-        height: 45px;
-        margin-bottom: 18px;
-    }
-    .fs-20 {
-        line-height: 31px;
-        font-size: 22px;
-      
-    }
-}
