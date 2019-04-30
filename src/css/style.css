@@ -14,35 +14,25 @@ body {
     max-width: 1000px;
     height: 80%;
     margin: auto;
+    padding-top:5%;
     display: grid;
-    grid-template-areas: "aside aside"  "main main" "footer footer";
+    grid-template-areas: "aside aside" "main main";
     grid-template-columns: repeat(2, 6fr);
-    grid-template-rows: 2fr 1fr 1fr 6fr 2fr;
+    grid-template-rows: 6fr 6fr;
     text-align: center;
-}
-header {
-    grid-area: header;
-}
-
-.menu {
-    grid-area: nav;
 }
 
 .left {
     grid-area: aside;
-    /*     background-image: url("img/day.jpg");
-  background-size:100% 100%; */
-}
-.img{
-    height:300px;
-    width: 100%;
-}
-.right {
-    grid-area: main;
 }
 
-footer {
-    grid-area: footer;
+.img {
+    height: 300px;
+    width: 100%;
+}
+
+.right {
+    grid-area: main;
 }
 
 .ancho {
@@ -61,7 +51,7 @@ footer {
 
 .input {
     width: 100%;
-    margin: 4% 0 ;
+    margin: 4% 0;
     border: 1px solid rgb(136, 135, 135);
     text-align: center;
 }
@@ -70,7 +60,7 @@ footer {
     display: block;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-    height: 25%;
+    height: 20%;
 }
 
 .button-acceder {
@@ -103,12 +93,11 @@ span {
     .container {
         max-width: 1000px;
         height: 80%;
-        ;
         margin: auto;
         display: grid;
-        grid-template-areas: "aside header" "aside  nav" "aside  main" "aside footer";
+        grid-template-areas: "aside main";
         grid-template-columns: repeat(2, 6fr);
-        grid-template-rows: 3fr 1fr 5fr 3fr;
+        grid-template-rows: 12fr;
         text-align: center;
     }
     header h1 {
@@ -118,5 +107,12 @@ span {
         margin-top: 10%;
         height: 90%;
         width: 100%;
+    }
+    .redondear{
+        height: 15%;
+    }
+    .formulario {
+        height: 50%;
+        padding-top:5%;
     }
 }

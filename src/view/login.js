@@ -7,7 +7,7 @@
 const print = () => {
   const dmostrar = document.getElementById("first-screen");
   const divContent = ` 
-  <div>
+  <div class="container">
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
@@ -21,8 +21,7 @@ const print = () => {
           <button type="submit" class="button-acceder redondear" onclick="acceder()">Acceder</button>
       </form>
       <div>
-          <p>O bien ingresa con...
-          </p>
+          <p>O bien ingresa con...</p>
           <div class="iconos">
               <i class="fab fa-facebook-square"></i>
               <i class="fab fa-google"></i>
