@@ -1,13 +1,11 @@
-/**
- * Crea el elemento del DOM de la cabecera
- */
-//export default () => {
-//
+import signInOnSubmit from "../controller/controller1.js";
+//export 
 
-const print = () => {
-  const dmostrar = document.getElementById("first-screen");
-  const divContent = ` 
-  <div class="container">
+//
+const dmostrar = document.createElement("div");
+dmostrar.setAttribute("class", "container");
+const print= () => {
+const divContent = ` 
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
@@ -16,9 +14,9 @@ const print = () => {
       <h1>< BreathLife></h1>
       <h3> Respira salud, Respira vida </h3>
   
-          <input id="email2" class="input redondear" type="email" placeholder="Ingrese su correo">
-          <input id="contrasena2" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-          <button type="submit" class="button-acceder redondear" onclick="acceder()">Acceder</button>
+          <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
+          <input id="password" class="input redondear" type="password" placeholder="Ingrese su contraseña">
+          <button type="submit" class="button-acceder redondear"  id="btn-sing-in">Acceder</button>
       </form>
       <div>
           <p>O bien ingresa con...</p>
@@ -28,12 +26,10 @@ const print = () => {
           </div>
           <p>¿No tienes una cuenta? <span>Resgístrate</span></p>
       </div>
-    </main>
-  </div>`;
-
-  dmostrar.innerHTML = divContent;
+    </main>`;
+    return divContent;
 };
-print();
-
-
-//};
+dmostrar.innerHTML = print();
+// seleccionado elementos del Dom
+ const btnSignIn = dmostrar.querySelector('#btn-sign-in');
+btnSignIn.addEventListener('click', signInOnSubmit); 
