@@ -21,13 +21,17 @@ const routes = {
     '/': SignInForm
     // , '/register': SignUpForm
     // , '/login': login
-    // , '/post': post
+    // , '/post': p                                                                                                     ost
   };
   
    export const router = async() => {
         const content = null || document.getElementById('page_container');
         content.innerHTML = await SignInForm.render();
+        // console.log('yo pinto');
         await SignInForm.after_render();
+
+        console.log('agrego eventos');
+        
 
         let request = Utils.parseRequestURL();
         let currentURL = (request.resource ? '/' + request.resource : '/');

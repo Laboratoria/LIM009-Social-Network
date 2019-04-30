@@ -1,6 +1,6 @@
-// form de inicio de sesión
-import {loginGoogle}  from '../lib/index.js';
+import {signInWithGoogle, signInWithFacebook} from "../lib/lib-firebase.js";
 
+// form de inicio de sesión
 let SignInForm = {
     render : async () => {
         let view = `
@@ -17,13 +17,22 @@ let SignInForm = {
             `;
         return view;
     },
-    after_render :  async () => {
-        document.getElementById('btn-google').addEventListener('click', loginGoogle);
-
+    after_render : async () => {
+        document.getElementById('btn-google').addEventListener('click', (event) => {
+            event.preventDefault();
+            signInWithGoogle();
+        })
+        document.getElementById('btn-fb').addEventListener('click', (event) => {
+            event.preventDefault();
+            signInWithFacebook();
+        })
     }
  }
 
+
 export default SignInForm;
+
+
 
 
 
