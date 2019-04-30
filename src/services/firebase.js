@@ -28,8 +28,8 @@ export const signUp = (email, password) => {
   }; */
   
 // Inicion de sesión  con solo email y contraseña
-  export const signIn = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
-  
+export const signIn = (email, password) =>
+firebase.auth().signInWithEmailAndPassword(email, password);
 /* 
   // Inicio de sesión con g-mail y contraseña de g-mail
   export const signInWhitGoogle = () => { 
