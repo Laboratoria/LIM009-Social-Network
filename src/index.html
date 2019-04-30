@@ -5,8 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCgb94pgigbqGXrUFHgHBz3VnAhY6zeovk",
+    authDomain: "social-network-a964e.firebaseapp.com",
+    databaseURL: "https://social-network-a964e.firebaseio.com",
+    projectId: "social-network-a964e",
+    storageBucket: "social-network-a964e.appspot.com",
+    messagingSenderId: "462994625297"
+  };
+  firebase.initializeApp(config);
+</script>
 </head>
 <body>
+    <h4>Registro de usuarios</h4>
+    <input id="email" type="email" placeholder="Ingresa email">
+    <input id="contraseña" type="password" placeholder="Ingresa contraseña">
+    <button onclick="registrar()">Enviar</button>
+
+    <h4>Ingreso de Usuarios</h4>
+    <input id="email2" type="email" placeholder="Ingresa email">
+    <input id="contraseña2" type="password" placeholder="Ingresa contraseña">
+    <button onclick="ingreso()">Enviar</button>
   <script type="module" src="main.js"></script>
 </body>
 </html>
