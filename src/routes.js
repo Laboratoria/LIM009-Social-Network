@@ -1,3 +1,4 @@
+
 window.onload = () => {
   console.log('DOM has loaded');
 
@@ -18,9 +19,10 @@ window.onload = () => {
           name: 'Contact'
         }
       ]
-    };
+    }
   };
 
-  const currentPath = window.location.hash.substr(1);
+  const currentPath = window.location.pathname;
   console.log(currentPath);
-};
+
+}
