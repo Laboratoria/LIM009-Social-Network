@@ -3,13 +3,6 @@
 import SignInForm from './view/SignInForm.js';
 import Utils from './services/Utils.js';
 
-// import {loginGoogle}  from './lib/index.js';
-
-// const btnGoogle = document.getElementById('btn-google');
-
-// btnGoogle.addEventListener('click', loginGoogle);
-
-
 const keyFirebase = () => {
     var config = {
         apiKey: "AIzaSyCkwXG7Zx6u0mEUPjzTL19bG6O8bLQSyZY",

@@ -1,4 +1,6 @@
 // form de inicio de sesión
+import {loginGoogle}  from '../lib/index.js';
+
 let SignInForm = {
     render : async () => {
         let view = `
@@ -9,15 +11,17 @@ let SignInForm = {
                     <input type="password" id="password2" placeholder="Escriba su contraseña">
                     <button id="btn-submit">Log in</button>
                     <button id="btn-google">Google</button>
-                    <button id="btn-fb">Google</button>
+                    <button id="btn-fb">Facebook</button>
                 </form>
             </section>
             `;
         return view;
     },
-    after_render :  async () => {}
- }
+    after_render :  async () => {
+        document.getElementById('btn-google').addEventListener('click', loginGoogle);
 
+    }
+ }
 
 export default SignInForm;
 

@@ -26,7 +26,8 @@
 
 
 export const loginGoogle = () => {
-  const provider= new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithPopup(provider);
+  let googleProvider = new firebase.auth.GoogleAuthProvider();
+  return firebase.auth().signInWithPopup(googleProvider)
+    .then((result) => console.log(result));
 };
 
