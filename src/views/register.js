@@ -13,9 +13,7 @@ const screenRegister = () => {
   </div>
   </div>
   `;
-    const div = document.createElement('div')
-    div.innerHTML = register;
-    login.appendChild(div);
+    login.innerHTML = register;
 };
 
 export const clickRegister = () => {
