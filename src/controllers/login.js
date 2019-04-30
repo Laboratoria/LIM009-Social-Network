@@ -1,6 +1,6 @@
 import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from '../lib/index.js';
 import { printInfoUser, showContent } from '../views/info-user.js';
-
+import {ShowErrorMessaggeDom} from '../views/login.js'
 
 const login = () => {
     const emailLogInEmail = document.getElementById('email-login');
@@ -8,19 +8,7 @@ const login = () => {
     const buttonLogInEmail = document.getElementById('button-login-email');
     buttonLogInEmail.addEventListener('click', (event) => {
         event.preventDefault();
-        funcLogin(emailLogInEmail.value, passwordLogInEmail.value, (error) => {
-            // if (error) {
-            document.getElementsByClassName('input-text').className += ' error-message';
-            const column = document.querySelector('.one-column');
-           const pStatic = document.getElementsByTagName('p')[0];
-            const pError = document.createElement('p');
-            column.replaceChild(pError,pStatic);
-            pError.className = 'error-message';
-            pError.innerHTML = ` ` ;
-            pError.innerHTML = `${error.message}`;
-            column.appendChild(pError);
-            // }
-        });
+        funcLogin(emailLogInEmail.value, passwordLogInEmail.value,error => ShowErrorMessaggeDom(error));
     });
 }
 // activeUser();
@@ -44,9 +32,7 @@ const getActiveUser = (user) => {
 const googleLogin = () => {
     const login = document.getElementById('google-login');
     login.addEventListener('click', () => {
-        funcGoogle(result => {
-            printInfoUser(result);
-        });
+        funcGoogle(result => printInfoUser(result));
     });
 }
 

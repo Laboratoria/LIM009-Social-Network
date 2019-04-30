@@ -6,7 +6,7 @@ const main = document.getElementById('main');
 export const screen1 = () => {
     const back1 = `  
     <div class="container container-bg">
-      <img src="assets/18984.jpg" alt="Some bg">
+      <img  class="someBg" src="assets/18984.jpg" alt="Some bg">
     </div>
     <div id='login' class="container px-5">
   
@@ -35,4 +35,18 @@ export const screen1 = () => {
     loginButtons();
     clickRegister()
   };
+
+  export const ShowErrorMessaggeDom = (error) => {
+    // if (error) {
+    document.getElementsByClassName('input-text').className += ' error-message';
+    const column = document.querySelector('.one-column');
+   const pStatic = document.getElementsByTagName('p')[0];
+    const pError = document.createElement('p');
+    column.replaceChild(pError,pStatic);
+    pError.className = 'error-message';
+    pError.innerHTML = ` ` ;
+    pError.innerHTML = `${error.message}`;
+    column.appendChild(pError);
+    // }
+}
   

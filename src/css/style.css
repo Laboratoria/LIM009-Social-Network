@@ -45,7 +45,7 @@ input:focus {
   flex-direction: column;
 }
 
-img {
+.someBg{
   width: 100%;
   object-fit: cover;
 }
@@ -138,7 +138,7 @@ a:visited {
     padding-right: 15%;
   }
 
-  img {
+  .someBg {
     height: 45vh;
   }
 
@@ -172,7 +172,7 @@ a:visited {
     font-size: 15px;
   }
 
-  img {
+.someBg{
     height: 100vh;
     left: 40px;
     position: relative;
