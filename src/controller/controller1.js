@@ -1,8 +1,9 @@
 import {signIn} from "../services/firebase.js";
 
-export default()=>{
+export const signInOnSubmit=()=>{
     const email=document.querySelector('#email').value;
     const password=document.querySelector('#password').value;
-    signIn(email,password)
-    console.log("sesion iniciada");
-}
+    const btnSignIn = document.querySelector('#btn-sign-in');
+    btnSignIn.addEventListener('click', 
+    signIn(email,password));
+};

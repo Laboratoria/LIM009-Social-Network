@@ -1,11 +1,9 @@
-import signInOnSubmit from "../controller/controller1.js";
-//export 
-
-//
-const dmostrar = document.createElement("div");
-dmostrar.setAttribute("class", "container");
-const print= () => {
-const divContent = ` 
+import { signInOnSubmit } from "../controller/controller1.js";
+//Exportando loginView
+const root=document.getElementById("root");
+export default ()=>{
+  const divElement = document.createElement("div");
+  const loginView = `
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
@@ -16,7 +14,7 @@ const divContent = `
   
           <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
           <input id="password" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-          <button type="submit" class="button-acceder redondear"  id="btn-sing-in">Acceder</button>
+          <button type="submit" class="button-acceder redondear"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
           <p>O bien ingresa con...</p>
@@ -27,9 +25,15 @@ const divContent = `
           <p>¿No tienes una cuenta? <span>Resgístrate</span></p>
       </div>
     </main>`;
-    return divContent;
+
+divElement.setAttribute("class", "container");
+divElement.innerHTML=loginView;
+
+
+root.appendChild(divElement);
+signInOnSubmit();
+
 };
-dmostrar.innerHTML = print();
-// seleccionado elementos del Dom
- const btnSignIn = dmostrar.querySelector('#btn-sign-in');
-btnSignIn.addEventListener('click', signInOnSubmit); 
+
+
+
