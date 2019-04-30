@@ -3,7 +3,10 @@
 // const myFunction = () => {
 //   // aqui tu codigo
 // }
-import {showContent, screen1} from './templates.js'
+import {
+  showContent,
+  screen1
+} from './templates.js'
 
 const initFirebase = () => {
   const config = {
@@ -27,15 +30,24 @@ const signOut = () => firebase.auth().signOut()
 
 const funcRegister = (emailSignIn, passwordSignIn) => {
   firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
-    // VERIFY: firebase.auth().currentUsersendEmailVerification()
+  // VERIFY: firebase.auth().currentUsersendEmailVerification()
   // .catch(error => console.log(error.message + error.code));
 }
 
+// const SendErrorMessage = messageOfCatch => {
+//   document.getElementsByClassName('input-text').className += ' error-message';
+//   const column = document.querySelector('.one-column');
+//   const pError = document.createElement('p');
+//   pError.className = 'error-message';
+//   pError.innerHTML = ``;
+//   pError.innerHTML = `${messageOfCatch.message}`;
+//   column.appendChild(pError);
+// }
 
-const funcLogin = (emailLogIn, passwordLogIn) => {
+const funcLogin = (emailLogIn, passwordLogIn, cb) => {
   return firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
     // .then(resolve => console.log(resolve))
-    // .catch(error => console.log(error.message + error.code));
+    .catch(cb);
 };
 
 
@@ -77,4 +89,12 @@ const funcFacebook = () => {
     })
     .catch(console.log)
 }
-export { initFirebase, funcRegister, activeUser, funcLogin, funcFacebook, funcGoogle, signOut };
+export {
+  initFirebase,
+  funcRegister,
+  activeUser,
+  funcLogin,
+  funcFacebook,
+  funcGoogle,
+  signOut
+};

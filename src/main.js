@@ -1,6 +1,15 @@
 //Este es el punto de entrada de tu aplicacion
-import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser, initFirebase } from './lib/index.js';
-import { printInfoUser } from './lib/templates.js';
+import {
+  funcRegister,
+  funcLogin,
+  funcGoogle,
+  funcFacebook,
+  activeUser,
+  initFirebase
+} from './lib/index.js';
+import {
+  printInfoUser
+} from './lib/templates.js';
 // Initialize Firebase
 
 window.onload = initFirebase();
@@ -15,17 +24,26 @@ export const registerAfterTemplate = () => {
     funcRegister(emailSignIn.value, passwordSignIn.value);
   });
 }
-
-
 const buttonLogin = () => {
   const emailLogInEmail = document.getElementById('email-login');
   const passwordLogInEmail = document.getElementById('password-login');
   const buttonLogInEmail = document.getElementById('button-login-email');
   buttonLogInEmail.addEventListener('click', (event) => {
     event.preventDefault();
-    funcLogin(emailLogInEmail.value, passwordLogInEmail.value);
+    funcLogin(emailLogInEmail.value, passwordLogInEmail.value, (messageOfCatch) => {
+      document.getElementsByClassName('input-text').className += ' error-message';
+      const column = document.querySelector('.one-column');
+      const pError = document.createElement('p');
+      pError.className = 'error-message';
+      pError.innerHTML = ``;
+      pError.innerHTML = `${messageOfCatch}`;
+      column.appendChild(pError);
+    
   });
-}
+  })
+
+};
+
 activeUser();
 buttonLogin();
 

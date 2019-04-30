@@ -66,8 +66,6 @@ export const screen1 = () => {
   clickRegister()
 };
 
-
-
 export const leaveSesion = () => {
   const string = `
     <p>Welcome </p>
@@ -99,3 +97,4 @@ export const showContent = user => {
   const buttonLogOut = document.getElementById('buttonLogOut');
   buttonLogOut.addEventListener('click', signOut);
 };
+
