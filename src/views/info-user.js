@@ -1,4 +1,5 @@
 import { signOut } from '../lib/index.js';
+
 const content = document.getElementById('content')
 
 const leaveSesion = () => {
