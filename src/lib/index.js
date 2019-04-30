@@ -1,13 +1,10 @@
-export const signOut = () => firebase.auth().signOut()
-// const verify = () => {
-//   firebase.auth().currentUsersendEmailVerification();
-// }
+export const signOut = () => firebase.auth().signOut();
+// const verify = () => firebase.auth().currentUsersendEmailVerification()
 
-export const funcRegister = (emailSignIn, passwordSignIn) => {
-  return firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn)
+export const funcRegister = (emailSignIn, passwordSignIn) => firebase.auth().createUserWithEmailAndPassword(emailSignIn, passwordSignIn);
     // VERIFY: firebase.auth().currentUsersendEmailVerification()
   // .catch(error => console.log(error.message + error.code));
-}
+
 
 export const funcLogin = (emailLogIn, passwordLogIn, cb) => {
   return firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
@@ -15,11 +12,7 @@ export const funcLogin = (emailLogIn, passwordLogIn, cb) => {
     .catch(cb);
 };
 
-export const activeUser = (cb) => {
-  return firebase.auth().onAuthStateChanged(cb)
-};
-
-
+export const activeUser = (cb) => firebase.auth().onAuthStateChanged(cb);
 
 export const funcGoogle = (cb) => {
   const provider = new firebase.auth.GoogleAuthProvider();
