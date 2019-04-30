@@ -12,9 +12,11 @@ const login = () => {
             // if (error) {
             document.getElementsByClassName('input-text').className += ' error-message';
             const column = document.querySelector('.one-column');
+           const pStatic = document.getElementsByTagName('p')[0];
             const pError = document.createElement('p');
+            column.replaceChild(pError,pStatic);
             pError.className = 'error-message';
-            pError.innerHTML = ``;
+            pError.innerHTML = ` ` ;
             pError.innerHTML = `${error.message}`;
             column.appendChild(pError);
             // }

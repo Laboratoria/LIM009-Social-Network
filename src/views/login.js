@@ -17,6 +17,7 @@ export const screen1 = () => {
         <input id="email-login" type="email" placeholder="Email" class="input-text" />
         <input id="password-login" type="password" placeholder="Password" class="input-text" />
         <button type="button" id="button-login-email" class="button-pass"> Log in </button>
+        <p></p>
       </div>
   
       <p class="fs-20 px-15">O bien ingresa con...</p>

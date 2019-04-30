@@ -103,7 +103,8 @@ a:visited {
 
 .error-message {
   border-color: #dc5f5f;
-  color: #dc5f5f
+  color: #dc5f5f;
+  height: 100%;
 }
 @media (min-width: 372px) {
   .button-pass {
