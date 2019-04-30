@@ -9,13 +9,11 @@ const screenRegister = () => {
   <div class="one-column">
   <input id="email-signin" type="email" placeholder="Email" class="input-text" />
   <input id="password-signin" type="password" placeholder="Password" class="input-text" />
-  <button type="button" id="button-register" class="button-pass"> Registrarme </button>
+  <a type="button" id="button-register" class="button-pass"> Registrarme </a>
   </div>
   </div>
   `;
-    const div = document.createElement('div')
-    div.innerHTML = register;
-    login.appendChild(div);
+    login.innerHTML = register;
 };
 
 export const clickRegister = () => {

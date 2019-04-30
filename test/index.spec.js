@@ -1,16 +1,16 @@
-// import MockFirebase from '../node_modules/mock-cloud-firestore/dist/mock-cloud-firestore';
-// var jest = require('jest');
-// jest.mock(global.firebase, () => {
-//   return mocksdk;
-// });
-// mocksdk.firestore().flush();
-// import firebasemock from 'firebase-mock'
-// const mockauth = new firebasemock.MockFirebase(fixtureUser)
+const firebasemock = require('firebase-mock');
+const mockauth = new firebasemock.MockFirebase();
+global.firebase = new firebasemock.MockFirebaseSdk(
+  // use null if your code does not use RTDB
+  path => path ? mockdatabase.child(path) : null,
+  () =>  mockauth
+)
+mockauth.autoFlush();
 
-import MockFirebase from '../_mocks_/firebase-mock.js';
+// import MockFirebase from '../_mocks_/firebase-mock.js';
+// global.firebase = MockFirebase();
+
 import { funcLogin } from "../src/lib/index";
-
-global.firebase = MockFirebase();
 
 describe('funcLogin', () => {
   it('deberia retornar el email: abc@gmail.com', () => {

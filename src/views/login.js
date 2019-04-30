@@ -6,7 +6,7 @@ const main = document.getElementById('main');
 export const screen1 = () => {
     const back1 = `  
     <div class="container container-bg">
-      <img src="assets/18984.jpg" alt="Some bg">
+      <img  class="someBg" src="assets/18984.jpg" alt="Some bg">
     </div>
     <div id='login' class="container px-5">
   
@@ -17,13 +17,14 @@ export const screen1 = () => {
         <input id="email-login" type="email" placeholder="Email" class="input-text" />
         <input id="password-login" type="password" placeholder="Password" class="input-text" />
         <button type="button" id="button-login-email" class="button-pass"> Log in </button>
+        <p></p>
       </div>
   
       <p class="fs-20 px-15">O bien ingresa con...</p>
   
       <a class="devicon-google-plain gmail-color icon-size"id="google-login"></a>
       <a class="devicon-facebook-plain facebook-color icon-size" id="fb-login"></a>
-      <div class="fs-20 px-0 "> Â¿No tienes una cuenta? <a id="showRegister">Registrate</a> </div> 
+      <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a href="#/register" id="showRegister">Registrate</a> </div> 
   
     </div>
   `
@@ -34,4 +35,18 @@ export const screen1 = () => {
     loginButtons();
     clickRegister()
   };
+
+  export const ShowErrorMessaggeDom = (error) => {
+    // if (error) {
+    document.getElementsByClassName('input-text').className += ' error-message';
+    const column = document.querySelector('.one-column');
+   const pStatic = document.getElementsByTagName('p')[0];
+    const pError = document.createElement('p');
+    column.replaceChild(pError,pStatic);
+    pError.className = 'error-message';
+    pError.innerHTML = ` ` ;
+    pError.innerHTML = `${error.message}`;
+    column.appendChild(pError);
+    // }
+}
   
