@@ -1,20 +1,25 @@
+import config from './lib/index.js';
+
+firebase.initializeApp(config);
+
 const signinBtn = document.getElementById('signin-btn');
+const facebook = document.getElementById("facebook");
+const signupBtn = document.getElementById('signup-btn');
 
 signinBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   const signinEmail = document.getElementById('signin-email').value;
   const signinPassword = document.getElementById('signin-password').value;
-  console.log(signinEmail);
-  console.log(signinPassword);
+  // console.log(signinEmail);
+  // console.log(signinPassword);
   firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
       .then(function(result){
-        alert("registro correcto");
+        alert("ingreso correcto");
       })
       .catch(function(error){
        alert("no se realizado la autenticacion");
       });
-
-})
+});
 
 // MODAL - REGISTRO
 // Get the modal
@@ -26,20 +31,19 @@ const span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 btn.addEventListener('click', () => {
   modal.style.display = 'block';
-})
+});
 // When the user clicks on <span> (x), close the modal
 span.addEventListener('click', () => {
   modal.style.display = 'none';
-})
+});
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', (event) => {
   if (event.target == modal) {
     modal.style.display = 'none';
-    }
-})
+    };
+});
 
 // FORM - REGISTRO
-const signupBtn = document.getElementById('signup-btn');
 signupBtn.addEventListener('click', () => {
   const signupName = document.getElementById('signup-name').value;
   const signupEmail = document.getElementById('signup-email').value;
@@ -47,6 +51,23 @@ signupBtn.addEventListener('click', () => {
   console.log(signupName);
   console.log(signupEmail);
   console.log(signupPassword);
-})
+  
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .catch(e => console.log(e.message));
+});
+
+// inicio de sesion con facebook
+facebook.addEventListener('click', () => {
+	const provider = new firebase.auth.FacebookAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+  .then(result => {
+    alert ('exito');
+    console.log(result);
+	})
+	.catch(error => {
+    alert('error')
+		console.log(error);
+	});
+});
 
 
