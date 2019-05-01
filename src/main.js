@@ -2,13 +2,13 @@
 import { setRoute } from "./router.js";
 // Initialize Firebase
 const init = () => {
-  var config = {
-    apiKey: "AIzaSyDzoSiy9yDww7_JcTs9rdgOiKzGofYSO24",
-    authDomain: "redsocial-e3089.firebaseapp.com",
-    databaseURL: "https://redsocial-e3089.firebaseio.com",
-    projectId: "redsocial-e3089",
-    storageBucket: "redsocial-e3089.appspot.com",
-    messagingSenderId: "1015631578701"
+  const config = {
+    apiKey: "AIzaSyCkwXG7Zx6u0mEUPjzTL19bG6O8bLQSyZY",
+    authDomain: "red-social-e9df5.firebaseapp.com",
+    databaseURL: "https://red-social-e9df5.firebaseio.com",
+    projectId: "red-social-e9df5",
+    storageBucket: "red-social-e9df5.appspot.com",
+    messagingSenderId: "258184809756"
   };
   firebase.initializeApp(config);
   setRoute();

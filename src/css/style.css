@@ -18,13 +18,13 @@
 }
 
  .center{
-     margin:auto;
-     padding: 1.5%;
+    margin:auto;
+    padding: 1.5%;
  }
 
  .style-input{
     width: 60%;
-     margin-bottom: 3%;
+    margin-bottom: 3%;
     border-radius: 6px;
     }
  .border{
@@ -41,18 +41,9 @@
      margin-bottom: 5%;
      width: 30%;
      border-radius: 7px;
-     }
-.btn-rss{
-    margin-top:1.5%;
-    border-radius: 50%;
-    font-size: 1rem;
-    font-family: Bold;
-    width: 6.25%;
-    color: white;  
 }
-.color-fb{
-    background: rgba(53, 22, 231, 0.747);
-    
+.btn-rss{
+    margin-top:1.5%;    
 }
 .color-go{
     background: rgba(226, 23, 23, 0.658);
@@ -60,7 +51,6 @@
 button:hover{
     color: rgb(7, 7, 7);
     background:rgba(49, 172, 111, 0.719);
-    
 }
 .style-register{
     display: inline;
@@ -71,14 +61,12 @@ button:hover{
      .header{
          background: red;
      }
-     .col-xs-12 { width: 100% ;
-      
+     .col-xs-12 { 
+         width: 100% ;      
     }
     img{
         max-width: 30%;
-       
-      }
-
+    }
  }
 
  @media screen and (min-width: 30em){
@@ -91,8 +79,9 @@ button:hover{
      .header{
          background: yellow;
      }
-     .col-md-12 { width: 100% ;}
-
+     .col-md-12 { 
+         width: 100% ;
+    }
  }
  @media screen and ( min-width: 48em){
      .header{
@@ -100,7 +89,7 @@ button:hover{
      }
  }
 
- @media screen and (min-width:64em){
+ @media screen and (min-width: 64em){
      .header{
          background: brown;
      }
@@ -117,11 +106,7 @@ button:hover{
     }
     img{
         max-width: 100%;
-       
-      }
-   
-    
-     
+    }       
  }
 
 

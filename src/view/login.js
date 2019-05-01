@@ -17,11 +17,11 @@ export default () => {
     <p>O bien ingresa con...</p>
    <span class = 'center'>
    <button type="button" id="btn-google" class='center btn-google-login btn-rss color-go'>G</button>
-   <button type="button" id="btn-facebook" class='center btn-rss color-fb'>f</button>   
+   <img id="btn-facebook" class='btn-rss color-fb' alt="icono de facebook" height="36" width="36" src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png"/>
    </<span>
   </article>
     <button id = 'btn-new-page' class='style-login'>holaaa</button> 
-  <footer><span><p class= 'style-register'>No tienes una cuenta</p> <a href='' class= 'style-register'>Regístrate</a></span></footer>
+  <footer><span><p class= 'style-register'>No tienes una cuenta</p> <a href='#/registerUser' class= 'style-register'>Regístrate</a></span></footer>
         
     </form>
   </div>
@@ -40,3 +40,6 @@ export default () => {
   // btnNewPage.addEventListener('click', newVista());
   return formLogin;
 };
+
+
+// {/* <button type="button">f</button> */}
