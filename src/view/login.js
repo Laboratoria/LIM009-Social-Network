@@ -22,7 +22,7 @@ export default ()=>{
               <i class="fab fa-facebook-square"></i>
               <i class="fab fa-google"></i>
           </div>
-          <p>¿No tienes una cuenta? <span>Resgístrate</span></p>
+          <p>¿No tienes una cuenta? <span id="register-link">Resgístrate</span></p>
       </div>
     </main>`;
 

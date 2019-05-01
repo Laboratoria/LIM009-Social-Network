@@ -1,6 +1,13 @@
-/* // Registro con solo correo y contraseña
+// Registro con solo correo y contraseña
 export const signUp = (email, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+      console.log(errorCode);
+      console.log(errorMessage);
+    });
   };
 
 // Registro con google
@@ -25,12 +32,11 @@ export const signUp = (email, password) => {
       .catch(error => {
         console.log(error);
       });
-  }; */
-  
+  };
 // Inicion de sesión  con solo email y contraseña
   export const signIn = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
   
-/* 
+
   // Inicio de sesión con g-mail y contraseña de g-mail
   export const signInWhitGoogle = () => { 
     const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -40,4 +46,4 @@ export const signUp = (email, password) => {
   export const signInWithFacebook = () => {
     const facebookProvider = new firebase.auth.FacebookAuthProvider();
     return firebase.auth().signInWithPopup(facebookProvider);
-  }; */
+  }; 

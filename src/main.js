@@ -1,8 +1,8 @@
-
 import Login from './view/login.js';
 
 const initializeFirebase = () => {
-    const config = {
+   // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyBGr7XcDErKCQR-5WRR4IjWiL3nr2o8GMQ",
     authDomain: "social-network-5a022.firebaseapp.com",
     databaseURL: "https://social-network-5a022.firebaseio.com",
