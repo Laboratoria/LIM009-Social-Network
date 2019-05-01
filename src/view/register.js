@@ -1,7 +1,6 @@
-import { signUpOnSubmit } from "../controller/controller1.js";
-const root=document.getElementById("root");
-export default ()=>{
+//import { signUpOnSubmit } from "../controller/controller1.js";
 
+export default () => {
   const divElement = document.createElement("div");
   const registerView = `
     <aside class="left ancho">
@@ -25,11 +24,10 @@ export default ()=>{
       </div>
     </main>`;
 
-divElement.setAttribute("class", "container");
-divElement.innerHTML=registerView;
-
-root.appendChild(divElement);
-signUpOnSubmit();
+  divElement.setAttribute("class", "container");
+  divElement.innerHTML = registerView;
+  return divElement
+ // signUpOnSubmit();
 };
 
 

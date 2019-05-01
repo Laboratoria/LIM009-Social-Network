@@ -1,7 +1,8 @@
+
 import Login from './view/login.js';
+import {changeview} from './view-controller/router.js';
 
 const initializeFirebase = () => {
-   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBGr7XcDErKCQR-5WRR4IjWiL3nr2o8GMQ",
     authDomain: "social-network-5a022.firebaseapp.com",
@@ -14,4 +15,12 @@ const initializeFirebase = () => {
   Login();
 };
 
-window.onload=initializeFirebase();
+window.onload = initializeFirebase();
+const init = () => {
+window.addEventListener('hashchange', () => changeview(window.location.hash));
+}
+
+window.addEventListener('load', init);
+
+const registerClick= document.querySelector("#register-link");
+registerClick.addEventListener("click",changeview);
