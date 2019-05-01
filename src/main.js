@@ -1,5 +1,17 @@
-// Este es el punto de entrada de tu aplicacion
+import Login from './view/login.js';
 
-import { myFunction } from './lib/index.js';
+const initializeFirebase = () => {
+   // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBGr7XcDErKCQR-5WRR4IjWiL3nr2o8GMQ",
+    authDomain: "social-network-5a022.firebaseapp.com",
+    databaseURL: "https://social-network-5a022.firebaseio.com",
+    projectId: "social-network-5a022",
+    storageBucket: "social-network-5a022.appspot.com",
+    messagingSenderId: "587244163856"
+  };
+  firebase.initializeApp(config);
+  Login();
+};
 
-myFunction();
+window.onload=initializeFirebase();
