@@ -19,14 +19,20 @@ let SignInForm = {
         const btnLogin  = document.createElement('button');
         btnLogin.innerHTML ='Log in';
         // btnLogin.classList.add('espacio');
+
+    // Boton para iniciar sesión con Google
+        const btnGoogle  = document.createElement('button');
+        btnGoogle.id = 'btn-google';
+        btnGoogle.innerHTML ='Google';
     
         form.appendChild(email)
         document.getElementById('root').appendChild(form)
         this.insertAfter(email,password)
         this.insertAfter(password,btnLogin)
+        this.insertAfter(btnLogin,btnGoogle)
     },
 
-        insertAfter(current,next) { 
+    insertAfter(current,next) { 
         if(current.nextSibling){ 
             current.parentNode.insertBefore(next,current.nextSibling); 
         } else { 

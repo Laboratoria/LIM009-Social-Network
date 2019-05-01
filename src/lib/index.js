@@ -23,10 +23,7 @@
 //   firebase.database().ref(`colección/${user.uid}`).set(usuario);
 // };
 
-
-
 export const loginGoogle = () => {
-  const provider= new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithPopup(provider);
+  const googleProvider= new firebase.auth.GoogleAuthProvider();
+  return firebase.auth().signInWithPopup(googleProvider);
 };
-
