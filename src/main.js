@@ -1,4 +1,4 @@
-import { screen1 } from './views/login.js'
+import { screen1 } from '../src/mvc-architecture/ui/login.js'
 
 // Initialize Firebase
 const initFirebase = () => {

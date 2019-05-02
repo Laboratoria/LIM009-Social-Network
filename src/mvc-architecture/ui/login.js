@@ -1,5 +1,5 @@
 import { clickRegister } from './register.js'
-import { loginButtons } from '../controllers/login.js'
+import { loginButtons } from '../lib/view-controllers/controller-view-auth.js'
 
 const main = document.getElementById('main');
 

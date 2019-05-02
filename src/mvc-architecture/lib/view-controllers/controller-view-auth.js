@@ -1,6 +1,6 @@
-import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from '../lib/index.js';
-import { printInfoUser, showContent } from '../views/info-user.js';
-import {ShowErrorMessaggeDom} from '../views/login.js'
+import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser } from '../controller-firebase/controller-firebase-auth.js';
+import { printInfoUser, showContent } from '../../ui/info-user.js';
+import {ShowErrorMessaggeDom} from '../../ui/login.js'
 
 const login = () => {
     const emailLogInEmail = document.getElementById('email-login');
