@@ -7,7 +7,7 @@ const init = () => {
     projectId: "social-network-5a022",
     storageBucket: "social-network-5a022.appspot.com",
     messagingSenderId: "587244163856"
-};
-firebase.initializeApp(config);
+  };
+  firebase.initializeApp(config);
 };
 window.onload = init();

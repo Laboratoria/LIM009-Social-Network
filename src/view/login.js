@@ -1,11 +1,9 @@
 import signInOnSubmit from "../controller/controller1.js";
-//export 
 
-//
-const dmostrar = document.createElement("div");
-dmostrar.setAttribute("class", "container");
-const print= () => {
-const divContent = ` 
+export const login = () => {
+  const dmostrar = document.createElement("div");
+  dmostrar.setAttribute("class", "container");
+  const divContent = ` 
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
@@ -27,9 +25,10 @@ const divContent = `
           <p>¿No tienes una cuenta? <span>Resgístrate</span></p>
       </div>
     </main>`;
-    return divContent;
+ 
+  dmostrar.innerHTML = divContent;
+  // seleccionado elementos del Dom
+  const btnSignIn = dmostrar.querySelector('#btn-sign-in');
+  btnSignIn.addEventListener('click', signInOnSubmit); 
+  return divContent;
 };
-dmostrar.innerHTML = print();
-// seleccionado elementos del Dom
- const btnSignIn = dmostrar.querySelector('#btn-sign-in');
-btnSignIn.addEventListener('click', signInOnSubmit); 
