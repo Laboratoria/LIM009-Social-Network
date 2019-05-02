@@ -7,13 +7,12 @@ export const activeUserPage = (user) => {
     let bienvenida = `
     <button id="exit">Cerrar sesión</button>
     <p>Bienvenidx ${User.displayName}</p>
-    <p> Email: ${User.email}<p>
-		<figure><img src="${User.photoURL}" alt="foto"></figure>
-    `;
+    <p>Email: ${User.email}<p>
+    <figure><img src="${User.photoURL}" alt="foto"></figure>`;
     content.innerHTML = bienvenida;
 
-    const buttonExit = document.getElementById('exit');
-    buttonExit.addEventListener('click', () => {
+    const btnExit = document.getElementById('exit');
+    btnExit.addEventListener('click', () => {
       exit();
     });
   }
@@ -25,40 +24,32 @@ export const page1 = () => {
   <figure>
     <img src="../images/undraw_chef_lbjx.svg" alt="" style="width:300px;">
   </figure>
-<div id='login'>
-  <section class="bienvenida">
+  <div id='login'>
     <h1>FoodBook</h1>
     <h3>¡Bienvenido, comensal!</h3>
-  <form id="login-user">
-    <input type="email" id="email-login" placeholder="Email">
-    <input type="password" id="password-login" placeholder="Password">
-    <button id="login-btn">Log in</button>
-    <div>
+    <form id="login-user">
+      <input type="email" id="email-login" placeholder="Email">
+      <input type="password" id="password-login" placeholder="Password">
+      <button id="login-btn">Log in</button>
       <p>O bien ingresa con...</p>
       <button id="googleBtn"><img src="../images/search.svg" alt="Google" style="width:30px;"></img></button>
       <button id="fbBtn"><img src="../images/facebook-logo-in-circular-button-outlined-social-symbol.svg" alt="Facebook" style="width:30px;"></img></button>
-    </div>
-  </form>
-  <div>
-  <p>¿No tienes una cuenta? <a id="myBtn" href="#">Regístrate.</a></p>
-  </div>
-</div>`;
+    </form>
+    <p>¿No tienes una cuenta? <a id="myBtn" href="#">Regístrate.</a></p>
+  </div>`;
   content.innerHTML = loginPage;
-
 
   const registerPage = () => {
     const login = document.getElementById('login')
     login.innerHTML = '';
-    const register =
-      `<form id="add-profile">
+    const register =`
+      <form>
         <input type="text" id="name-signup" placeholder="Nombre">
         <input type="text" id="lastName-signup" placeholder="Apellido">
         <input type="email" id="email-signup" placeholder="Email">
         <input type="password" id="password-signup" placeholder="Password">
-        <div id="signup-btns">
-          <button id="register-btn">Registrarse</button>
-          <button id="regresarHome"><img src="">Regresar</button>
-        </div>
+        <button id="register-btn">Registrarse</button>
+        <button id="regresarHome"><img src="">Regresar</button>
       </form> `;
     const div = document.createElement('div')
     div.innerHTML = register;
@@ -66,27 +57,27 @@ export const page1 = () => {
   };
 
   const registerUserOk = () => {
-    const buttonRegisterEmail = document.getElementById('register-btn');
+    const btnRegisterEmail = document.getElementById('register-btn');
     const emailSignIn = document.getElementById('email-signup');
     const passwordSignIn = document.getElementById('password-signup');
 
-    buttonRegisterEmail.addEventListener('click', (event) => {
+    btnRegisterEmail.addEventListener('click', (event) => {
       event.preventDefault();
       createUser(emailSignIn.value, passwordSignIn.value);
     });
   }
 
-  const registerBtn = document.getElementById('myBtn');
-  registerBtn.addEventListener('click', e => {
+  const btnRegister = document.getElementById('myBtn');
+  btnRegister.addEventListener('click', e => {
     e.preventDefault();
     registerPage();
     registerUserOk();
   });
 
-  const buttonLogInEmail = document.getElementById('login-btn');
+  const btnLogInEmail = document.getElementById('login-btn');
   const emailLogInEmail = document.getElementById('email-login');
   const passwordLogInEmail = document.getElementById('password-login');
-  buttonLogInEmail.addEventListener('click', (event) => {
+  btnLogInEmail.addEventListener('click', (event) => {
     event.preventDefault();
     loginUser(emailLogInEmail.value, passwordLogInEmail.value);
   });
