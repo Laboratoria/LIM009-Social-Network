@@ -9,6 +9,7 @@ signinBtn.addEventListener('click', (e) => {
   firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
       .then(function(result){
         alert("registro correcto");
+        location.href="home.html";
       })
       .catch(function(error){
        alert("no se realizado la autenticacion");
@@ -70,12 +71,75 @@ class authentication {
 const signupBtn = document.getElementById('signup-btn');
 
 signupBtn.addEventListener('click', () => {
-  const signupName = document.getElementById('signup-name').value;
+  // const signupName = document.getElementById('signup-name').value;
   const signupEmail = document.getElementById('signup-email').value;
   const signupPassword = document.getElementById('signup-password').value;
-  console.log(signupName);
-  console.log(signupEmail);
-  console.log(signupPassword);
+  firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword )
+  .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+      // ...
+    });
 })
 
+// const registrar=()=>{
+ 
+//   const email=document.getElementById("email").value;
+//   const contraseña=document.getElementById("contraseña").value;
+//   firebase.auth().createUserWithEmailAndPassword(email, contraseña)
+//   .catch(function(error) {
+//       // Handle Errors here.
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       console.log(errorCode);
+//       console.log(errorMessage);
+//       // ...
+//     });
+    
 
+// rocio
+googleSignIn=()=>{
+  base_provider=new firebase.auth.GoogleAuthProvider()
+  firebase.auth().signInWithPopup(base_provider).then(function (result) {
+console.log(result)
+
+// borrar
+var name = result.user-displayName;
+
+
+
+       $('#page').css("display", "none") && $('#page2').css("display", "block");
+       document.getElementById("borrar").textContent="Bienvenido"+name;
+
+// borrar
+    console.log("Success Goggle")
+  }).catch(function (err){
+    console.log(err)
+    console.log("falled")
+
+})
+}
+// rocio
+
+// function registrar(){
+//     const registrar=()=>{
+ 
+//     const email=document.getElementById("email").value;
+//     const contraseña=document.getElementById("contraseña").value;
+//     firebase.auth().createUserWithEmailAndPassword(email, contraseña)
+//     .catch(function(error) {
+//         // Handle Errors here.
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         console.log(errorCode);
+//         console.log(errorMessage);
+//         // ...
+//       });
+      
+
+
+// };
+// rocio
