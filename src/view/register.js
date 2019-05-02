@@ -1,5 +1,6 @@
 import { signUpOnSubmit } from "../controller/controller1.js";
 
+const root = document.getElementById('root');
 export default () => {
   const divElement = document.createElement("div");
   const registerView = `
@@ -15,17 +16,11 @@ export default () => {
           <input id="password2" class="input redondear" type="password" placeholder="Ingrese su contraseña">
           <button type="button" class="button-acceder redondear" id="btn-sign-up">Registrar</button>
       </form>
-      <div>
-          <p>O bien regístrate con...</p>
-          <div class="iconos">
-              <i class="fab fa-facebook-square"></i>
-              <i class="fab fa-google" id="icon-google"></i>
-            </div>
-      </div>
     </main>`;
 
   divElement.setAttribute("class", "container");
   divElement.innerHTML = registerView;
-  return divElement;
+
+  root.appendChild(divElement);  
   signUpOnSubmit();
 };

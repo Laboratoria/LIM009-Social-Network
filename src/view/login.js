@@ -1,4 +1,4 @@
-import { signInOnSubmit } from "../controller/controller1.js";
+import { signInOnSubmit, signUpOnSubmitGoogle, signUpOnSubmitFacebook } from "../controller/controller1.js";
 
 const root = document.getElementById("root");
 export default () => {
@@ -18,18 +18,23 @@ export default () => {
       <div>
           <p>O bien ingresa con...</p>
           <div class="iconos">
-              <i class="fab fa-facebook-square"></i>
-              <i class="fab fa-google"></i>
+             <button type="submit" class="button-acceder redondear"  id="icon-google">Google</button>
+             <button type="submit" class="button-acceder redondear"  id="icon-facebook">Facebook</button>
+                          
           </div>
           <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Resgístrate</a></p>
       </div>
     </main>`;
 
-  divElement.setAttribute("class", "container");
+  divElement.setAttribute("class", "container", "iconos");
   divElement.innerHTML = loginView;
 
   root.appendChild(divElement);
   signInOnSubmit();
+  signUpOnSubmitGoogle();
+  signUpOnSubmitFacebook();
 };
 
 
+// <i id="icon-google" class="fab fa-google"></i>
+// <i class="fab fa-facebook-square"></i>

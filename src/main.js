@@ -17,10 +17,10 @@ const initializeFirebase = () => {
 
 window.onload = initializeFirebase();
 const init = () => {
-window.addEventListener('hashchange', () => changeview(window.location.hash));
-}
+  window.addEventListener('hashchange', () => changeview(window.location.hash));
+};
 
 window.addEventListener('load', init);
 
 const registerClick = document.querySelector("#register-link");
-registerClick.addEventListener("click",changeview);
+registerClick.addEventListener("click", changeview);
