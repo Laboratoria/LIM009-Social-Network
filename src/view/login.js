@@ -1,20 +1,19 @@
-import signInOnSubmit from "../controller/controller1.js";
+import { signInOnSubmit } from "../controller/controller1.js";
 
-export const login = () => {
-  const dmostrar = document.createElement("div");
-  dmostrar.setAttribute("class", "container");
-  const divContent = ` 
+const root = document.getElementById("root");
+export default () => {
+  const divElement = document.createElement("div");
+  const loginView = `
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
     <main class="right ancho">
       <form action="" class="formulario acceder">
-      <h1>< BreathLife></h1>
+      <h1> < Breath Life > </h1>
       <h3> Respira salud, Respira vida </h3>
-  
           <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
           <input id="password" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-          <button type="submit" class="button-acceder redondear"  id="btn-sing-in">Acceder</button>
+          <button type="submit" class="button-acceder redondear"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
           <p>O bien ingresa con...</p>
@@ -22,13 +21,15 @@ export const login = () => {
               <i class="fab fa-facebook-square"></i>
               <i class="fab fa-google"></i>
           </div>
-          <p>¿No tienes una cuenta? <span>Resgístrate</span></p>
+          <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Resgístrate</a></p>
       </div>
     </main>`;
- 
-  dmostrar.innerHTML = divContent;
-  // seleccionado elementos del Dom
-  const btnSignIn = dmostrar.querySelector('#btn-sign-in');
-  btnSignIn.addEventListener('click', signInOnSubmit); 
-  return divContent;
+
+  divElement.setAttribute("class", "container");
+  divElement.innerHTML = loginView;
+
+  root.appendChild(divElement);
+  signInOnSubmit();
 };
+
+
