@@ -1,6 +1,6 @@
 import { signOut } from '../lib/controller-firebase/controller-firebase-auth.js';
+import {main} from './login.js';
 
-const content = document.getElementById('content')
 
 const leaveSesion = () => {
     const string = `
@@ -9,13 +9,15 @@ const leaveSesion = () => {
     `;
     const div = document.createElement('div')
     div.innerHTML = string;
-    content.appendChild(div);
+    main.innerHTML = ''
+    main.appendChild(div);
 }
 
 export const printInfoUser = (result) => {
     const user = result.user;
     const div = document.createElement('div')
-    content.appendChild(div);
+    main.innerHTML = ''
+    main.appendChild(div);
     console.log(user);
 
     if (user.photoURL) {
