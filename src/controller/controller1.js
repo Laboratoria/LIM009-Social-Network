@@ -1,38 +1,35 @@
-import {signIn} from "../services/firebase.js";
-import { signUp } from "../services/firebase.js";
+import { signIn, signUp ,signInWithGoogle, signInWithFacebook} from "../services/firebase.js";
 /* import { signUpWithGoogle } from "../services/firebase.js"  */
-
-
- const signInOnSubmit = () => {
-
-    const btnSignIn = document.querySelector('#btn-sign-in');
-    btnSignIn.addEventListener('click', () => {
-        const email = document.querySelector('#email').value;
-        const password = document.querySelector('#password').value;
-        signIn(email, password)
-    });
+const signInOnSubmit = () => {
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+    return signIn(email, password);
 };
-export { signInOnSubmit }; 
+
 
 const signUpOnSubmit = () => {
-    const btnSignUp = document.querySelector('#btn-sign-up');
-    btnSignUp.addEventListener('click', () => {
-        signUp(email, password)
-    });
-};
-export { signUpOnSubmit }; 
-
-/* const signUpOnSubmitGoogle = () => {
-    const btnSignUpgoo = document.querySelector('#btn-sign-up');
-    const iconGoogle = document.querySelector('#icon-google');
-    btnSignUpgoo.addEventListener('click', () => {
-        const email = document.querySelector('#email2').value;
-        const password = document.querySelector('#password2').value;
-        signUp(email, password)
-        document.getElementById("register-form").reset()
-    });
-
-    iconGoogle.addEventListener('click', signUpWithGoogle);
+    const email2 = document.querySelector('#email2').value;
+    const password2 = document.querySelector('#password2').value;
+    return signUp(email2, password2);
 };
 
-export { signUpOnSubmitGoogle }; */ 
+const signInOnSubmitGoogle=()=>{
+    signInWithGoogle()
+    .then(result => {
+        console.log("exitosamente con google");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+}
+
+const signInOnSubmitFacebook=()=>{
+    signInWithFacebook()
+    .then((result) => {
+        console.log(" exitosamente con facebook");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+export { signInOnSubmit , signUpOnSubmit ,signInOnSubmitGoogle ,signInOnSubmitFacebook};

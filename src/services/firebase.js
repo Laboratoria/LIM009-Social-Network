@@ -28,24 +28,20 @@ export { signUpWithGoogle };
 const signUpWithFacebook = () => {
   const facebookprovider = new firebase.auth.FacebookAuthProvider();
   firebase.auth().signInWithPopup(facebookprovider)
-    .then(result => {
-      console.log("exitosamente con facebook");
-    })
-    .catch(error => {
-      console.log(error);
-    });
 };
 export { signUpWithFacebook };
-// Inicion de sesión  con solo email y contraseña
-export const signIn = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
 
+// Inicion de sesión  con solo email y contraseña
+const signIn = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
+export { signIn }
 
 // Inicio de sesión con g-mail y contraseña de g-mail
-const signInWhitGoogle = () => {
+const signInWithGoogle = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   return firebase.auth().signInWithPopup(googleProvider);
 };
-export { signInWhitGoogle }
+export { signInWithGoogle }
+
 // Inicio de sesión con  cuenta de facebook y contraseña de facebook
 const signInWithFacebook = () => {
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
