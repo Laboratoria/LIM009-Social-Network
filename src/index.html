@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,82 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" type="text/css" href="index.css">
-
-  <title>Document</title>
-  
-</head>
- <!-- rocio -->
-
- 
- <!-- rocio -->
+  <title>FoodBook</title>
+ </head>
 <body>
-  <header>
-    <figure><img src="../images/undraw_chef_lbjx.svg" alt="" style="width:300px;"></figure>
-  </header>
-  <main>
-    <div class="welcome-area">
-      <h1>The CookBook</h1>
-      <h2>¡Bienvenido, comensal!</h2>
-    </div>
-    <div class="signin-area">
-      <input id="signin-email" type="email" placeholder="Correo electrónico" required><br>
-      <input id="signin-password" type="password" placeholder="Contraseña" required><br>
-      <button id="signin-btn" onclick="registrar()">Iniciar sesión</button>
-    </div>
-    <div class="signin-fb-goo">
-      <p>O bien ingresa con...</p>
-<!-- rocio -->
-      <button onclick="googleSignIn()"><img src ="../images/search.svg"style="width:30px;"></img></button>
-      <!-- rocio -->
-
-      <!-- borrar -->
-      <!-- <h4>Registrate</h4>
-      <input id="email" type="email" placeholder="Ingresa email">
-      <input id="contraseña" type="password" placeholder="Ingresa contraseña">
-      <button onclick="registrar()">Enviar</button> -->
-
-      <!-- borrar -->
-      <figure>
-        <!-- <img src="../images/search.svg" alt="Google" style="width:30px;"> -->
-        <!-- <img src="../images/facebook-logo-in-circular-button-outlined-social-symbol.svg" alt="Facebook" style="width:30px;"> -->
-      </figure>
-      <footer>
-        <p>¿No tienes una cuenta? <a id="myBtn" href="#">Regístrate.</a></p>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <input id="signup-name" type="text" placeholder="Nombre"><br>
-            <input id="signup-email" type="email" placeholder="Correo electrónico"><br>
-            <input id="signup-password" type="password" placeholder="Contraseña"><br>
-            <button onclick="ingreso()" id="signup-btn">Regístrarse</button>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </main>
-
-
-  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyADsSqyH6g5CLTvMPSWJPNAZpVQSsGAI8k",
-      authDomain: "network-5fa12.firebaseapp.com",
-      databaseURL: "https://network-5fa12.firebaseio.com",
-      projectId: "network-5fa12",
-      storageBucket: "network-5fa12.appspot.com",
-      messagingSenderId: "748649026042"
-    };
-    firebase.initializeApp(config);
-  </script>
-  <!-- rocio
-   -->
-
-  <script src="testing.js"></script>
+  <div id="content">
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
   <script type="module" src="main.js"></script>
-
-
 </body>
 </html>
