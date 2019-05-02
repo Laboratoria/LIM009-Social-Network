@@ -1,4 +1,4 @@
-import { signInOnSubmit, signUpOnSubmitGoogle, signUpOnSubmitFacebook } from "../controller/controller1.js";
+import { signInOnSubmit, signInOnSubmitGoogle, signInOnSubmitFacebook } from "../controller/controller1.js";
 
 const root = document.getElementById("root");
 export default () => {
@@ -31,8 +31,8 @@ export default () => {
 
   root.appendChild(divElement);
   signInOnSubmit();
-  signUpOnSubmitGoogle();
-  signUpOnSubmitFacebook();
+  signInOnSubmitGoogle();
+  signInOnSubmitFacebook();
 };
 
 

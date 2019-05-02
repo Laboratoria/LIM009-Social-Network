@@ -33,3 +33,8 @@ const signInWithFacebook = () => {
   return firebase.auth().signInWithPopup(facebookProvider);
 };
 export { signInWithFacebook };
+
+// Cerrar Sesion
+export const signOut = () => {
+ return firebase.auth().signOut();
+}

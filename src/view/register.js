@@ -1,4 +1,4 @@
-import { signUpOnSubmit } from "../controller/controller1.js";
+import { signUpOnSubmit, signUpOnSubmitGoogle, signUpOnSubmitFacebook } from "../controller/controller1.js";
 
 const root = document.getElementById('root');
 export default () => {
@@ -16,6 +16,15 @@ export default () => {
           <input id="password2" class="input redondear" type="password" placeholder="Ingrese su contraseña">
           <button type="button" class="button-acceder redondear" id="btn-sign-up">Registrar</button>
       </form>
+      <div>
+          <p>O continua con...</p>
+          <div class="iconos">
+             <button type="submit" class="button-acceder redondear"  id="icon-signUp-google">Google</button>
+             <button type="submit" class="button-acceder redondear"  id="icon-signUp-facebook">Facebook</button>
+                          
+          </div>
+          <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Resgístrate</a></p>
+      </div>
     </main>`;
 
   divElement.setAttribute("class", "container");
@@ -23,4 +32,6 @@ export default () => {
 
   root.appendChild(divElement);  
   signUpOnSubmit();
+  signUpOnSubmitGoogle();
+  signUpOnSubmitFacebook();
 };
