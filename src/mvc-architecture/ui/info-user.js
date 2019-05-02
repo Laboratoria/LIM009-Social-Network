@@ -1,4 +1,4 @@
-import { signOut } from '../lib/index.js';
+import { signOut } from '../lib/controller-firebase/controller-firebase-auth.js';
 
 const content = document.getElementById('content')
 

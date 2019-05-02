@@ -1,4 +1,4 @@
-import { registerAfterTemplate } from '../controllers/login.js'
+import { registerAfterTemplate } from '../lib/view-controllers/controller-view-auth.js'
 
 const screenRegister = () => {
     const login = document.getElementById('login')
