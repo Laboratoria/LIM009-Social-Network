@@ -1,12 +1,14 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook ,createEmailAndPassword} from "../lib/lib-firebase.js";
 import { dataBaseUser } from '../model/model.js'
-import { changeHash } from '../Utils/util.js'
+// import { changeHash } from '../Utils/util.js'
 
-export const registerUser = (email,password) => {
-   createEmailAndPassword(email,password)
+export const registerUser = () => {
+const emailRegister = document.querySelector('#email-register').value;
+const passwordRegister = document.querySelector('#password-register').value;
+return  createEmailAndPassword(emailRegister,passwordRegister)
   .then(()=> {
     console.log("ya te registraste")
-  }).catch(function(error) {
+  }).catch(error => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -14,15 +16,15 @@ export const registerUser = (email,password) => {
     console.log(errorMessage)
     // ...
   });
-  
 }
 
-export const email = (email, password) => {
-  return signInWithEmail(email, password)
+export const email = () => {
+  const valueEmail = document.querySelector("#email-id").value;
+  const password = document.querySelector("#password-id").value;
+  return signInWithEmail(valueEmail, password)
     .then(() => {
       console.log("todo ha ido bien");
-    })
-    .catch(error => {
+      }).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -48,6 +50,6 @@ export const facebook = () => {
   })
 }
 
-export const newVista = () => {
+/*export const newVista = () => {
   changeHash('/welcomeUser');
-}
+}*/

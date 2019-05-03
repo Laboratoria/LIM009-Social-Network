@@ -1,3 +1,3 @@
-export const changeHash = (hash) => {
+/*export const changeHash = (hash) => {
     location.hash = hash;
-};
+};*/
