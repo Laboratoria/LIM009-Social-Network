@@ -96,3 +96,4 @@ export const page1 = () => {
     googleLogin();
   });
 };
+//no se por que no se suben mis cambios a la rama de la dueña de repositorio
