@@ -1,6 +1,5 @@
-import {facebookLogin,googleLogin,createUser,userSesionActive,loginUser,exit} from '../view-controller/index.js'
+import {facebookLogin,googleLogin,createUser,userSesionActive,signInUser,exit} from '../view-controller/index.js'
 '../view/index.js'
-
 
 export const activeUserPage = (user) => {
   const content = document.getElementById('content');
@@ -58,11 +57,11 @@ export const page1 = () => {
   };
 
   const registerUserOk = () => {
-    const btnRegisterEmail = document.getElementById('register-btn');
+    const btnRegisterSignIn = document.getElementById('register-btn');
     const emailSignIn = document.getElementById('email-signup');
     const passwordSignIn = document.getElementById('password-signup');
 
-    btnRegisterEmail.addEventListener('click', (e) => {
+    btnRegisterSignIn.addEventListener('click', (e) => {
       e.preventDefault();
       createUser(emailSignIn.value, passwordSignIn.value);
     });
@@ -78,9 +77,9 @@ export const page1 = () => {
   const btnLogInEmail = document.getElementById('login-btn');
   const emailLogInEmail = document.getElementById('email-login');
   const passwordLogInEmail = document.getElementById('password-login');
-  btnLogInEmail.addEventListener('click', (event) => {
-    event.preventDefault();
-    loginUser(emailLogInEmail.value, passwordLogInEmail.value);
+  btnLogInEmail.addEventListener('click', (e) => {
+    e.preventDefault();
+    signInUser(emailLogInEmail.value, passwordLogInEmail.value);
   });
   userSesionActive();
 
