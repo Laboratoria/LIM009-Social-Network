@@ -6,9 +6,9 @@ export const registerUser = () => {
 const emailRegister = document.querySelector('#email-register').value;
 const passwordRegister = document.querySelector('#password-register').value;
 return  createEmailAndPassword(emailRegister,passwordRegister)
-  .then(()=> {
-    console.log("ya te registraste")
-  }).catch(error => {
+  .then((result)=> 
+    console.log(result)    
+  ).catch(error => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -18,7 +18,9 @@ return  createEmailAndPassword(emailRegister,passwordRegister)
       alert('El correo ya ha sido utilizado');
     } else if(errorCode == 'auth/weak-password') {
       alert('La contraseña no es lo suficientemente fuerte')
-    } 
+    } else {
+      alert(errorMessage);
+    }
   });
 }
 
@@ -26,8 +28,8 @@ export const email = () => {
 const valueEmail = document.querySelector("#email-id").value;
 const password = document.querySelector("#password-id").value;
   return signInWithEmail(valueEmail, password)
-    .then(() => {
-    console.log("todo ha ido bien");
+    .then((result) => {
+      console.log(result);
     }).catch(error => {
     // Handle Errors here.
       var errorCode = error.code;
