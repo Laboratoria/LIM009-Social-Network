@@ -1,21 +1,27 @@
+import config from './lib/index.js';
+
+firebase.initializeApp(config);
+
 const signinBtn = document.getElementById('signin-btn');
+const facebook = document.getElementById("facebook");
+const signupBtn = document.getElementById('signup-btn');
 
 signinBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   const signinEmail = document.getElementById('signin-email').value;
   const signinPassword = document.getElementById('signin-password').value;
-  console.log(signinEmail);
-  console.log(signinPassword);
+  // console.log(signinEmail);
+  // console.log(signinPassword);
   firebase.auth().createUserWithEmailAndPassword(signinEmail, signinPassword)
       .then(function(result){
+        alert("ingreso correcto");
         alert("registro correcto");
         location.href="home.html";
       })
       .catch(function(error){
        alert("no se realizado la autenticacion");
       });
-
-})
+});
 
 // MODAL - REGISTRO
 // Get the modal
@@ -27,17 +33,17 @@ const span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 btn.addEventListener('click', () => {
   modal.style.display = 'block';
-})
+});
 // When the user clicks on <span> (x), close the modal
 span.addEventListener('click', () => {
   modal.style.display = 'none';
-})
+});
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', (event) => {
   if (event.target == modal) {
     modal.style.display = 'none';
-    }
-})
+    };
+});
 
 class authentication {
     createUserWithEmailAndPass (username, email, password) {
@@ -68,22 +74,10 @@ class authentication {
 }
 
 // FORM - REGISTRO
-const signupBtn = document.getElementById('signup-btn');
-
 signupBtn.addEventListener('click', () => {
   // const signupName = document.getElementById('signup-name').value;
   const signupEmail = document.getElementById('signup-email').value;
   const signupPassword = document.getElementById('signup-password').value;
-  firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword )
-  .catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-      // ...
-    });
-})
 
 // const registrar=()=>{
  
