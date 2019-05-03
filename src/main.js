@@ -12,3 +12,4 @@ var config ={
 firebase.initializeApp(config);
 
 window.onload = page1();
+// firebase
