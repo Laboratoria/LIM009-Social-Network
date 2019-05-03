@@ -1,4 +1,6 @@
-import {facebookLogin,googleLogin,createUser,userSesionActive,loginUser,exit} from './index.js'
+import {facebookLogin,googleLogin,createUser,userSesionActive,loginUser,exit} from '../view-controller/index.js'
+'../view/index.js'
+
 
 export const activeUserPage = (user) => {
   const content = document.getElementById('content');
