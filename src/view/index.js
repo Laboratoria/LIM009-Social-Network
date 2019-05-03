@@ -1,7 +1,9 @@
+import Login from './login.js'
 import Register from '../view/register.js';
 
 const components = {
-  registro: Register
-};
+    login: Login,
+    registro: Register
+}
 
-export {components};
+export { components }

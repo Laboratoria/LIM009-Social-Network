@@ -1,9 +1,9 @@
-import { signInOnSubmit, signInOnSubmitGoogle, signInOnSubmitFacebook } from "../controller/controller1.js";
-
-const root = document.getElementById("root");
+import { signInOnSubmit, signInOnSubmitGoogle ,signInOnSubmitFacebook } from "../controller/controller1.js";
 export default () => {
+  const root = document.getElementById("root");
   const divElement = document.createElement("div");
-  const loginView = `
+  divElement.setAttribute("class", "container");
+  divElement.innerHTML = `
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
@@ -13,26 +13,26 @@ export default () => {
       <h3> Respira salud, Respira vida </h3>
           <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
           <input id="password" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-          <button type="submit" class="button-acceder redondear"  id="btn-sign-in">Acceder</button>
+          <button type="button" class="button-acceder redondear"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
           <p>O bien ingresa con...</p>
           <div class="iconos">
-             <button type="submit" class="button-acceder redondear"  id="icon-google">Google</button>
-             <button type="submit" class="button-acceder redondear"  id="icon-facebook">Facebook</button>
-                          
+              <i id='icon-facebook' class="fab fa-facebook-square"></i>
+              <i id='icon-google' class="fab fa-google"></i>
           </div>
-          <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Resgístrate</a></p>
+          <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Regístrate</a></p>
       </div>
     </main>`;
-
-  divElement.setAttribute("class", "container", "iconos");
-  divElement.innerHTML = loginView;
-
   root.appendChild(divElement);
-  signInOnSubmit();
-  signInOnSubmitGoogle();
-  signInOnSubmitFacebook();
+  const btnSignIn = divElement.querySelector('#btn-sign-in');
+  btnSignIn.addEventListener('click', signInOnSubmit);
+  const iconGoogle = divElement.querySelector("#icon-google");
+  iconGoogle.addEventListener("click",signInOnSubmitGoogle );
+  const iconFacebook = divElement.querySelector("#icon-facebook");
+  iconFacebook.addEventListener("click", signInOnSubmitFacebook );
+
+  return root;
 };
 
 
