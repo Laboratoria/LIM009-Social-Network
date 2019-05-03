@@ -2,13 +2,12 @@ import {facebookLogin,googleLogin,createUser,userSesionActive,loginUser,exit} fr
 
 export const activeUserPage = (user) => {
   const content = document.getElementById('content');
-  const User = user;
-  if (User != null) {
+  if (user != null) {
     let bienvenida = `
     <button id="exit">Cerrar sesión</button>
-    <p>Bienvenidx ${User.displayName}</p>
-    <p>Email: ${User.email}<p>
-    <figure><img src="${User.photoURL}" alt="foto"></figure>`;
+    <p>Bienvenidx ${user.displayName}</p>
+    <p>Email: ${user.email}<p>
+    <figure><img src="${user.photoURL}" alt="foto"></figure>`;
     content.innerHTML = bienvenida;
 
     const btnExit = document.getElementById('exit');
@@ -61,8 +60,8 @@ export const page1 = () => {
     const emailSignIn = document.getElementById('email-signup');
     const passwordSignIn = document.getElementById('password-signup');
 
-    btnRegisterEmail.addEventListener('click', (event) => {
-      event.preventDefault();
+    btnRegisterEmail.addEventListener('click', (e) => {
+      e.preventDefault();
       createUser(emailSignIn.value, passwordSignIn.value);
     });
   }
@@ -82,6 +81,7 @@ export const page1 = () => {
     loginUser(emailLogInEmail.value, passwordLogInEmail.value);
   });
   userSesionActive();
+
 
   const loginFacebook = document.getElementById('fbBtn');
   loginFacebook.addEventListener('click', e => {
