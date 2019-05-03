@@ -14,7 +14,7 @@ body {
     max-width: 1000px;
     height: 80%;
     margin: auto;
-    padding-top:5%;
+    padding-top: 3%;
     display: grid;
     grid-template-areas: "aside aside" "main main";
     grid-template-columns: repeat(2, 6fr);
@@ -95,7 +95,7 @@ span {
         height: 80%;
         margin: auto;
         display: grid;
-        grid-template-areas: "aside main";
+        grid-template-areas: "aside main" "aside main";
         grid-template-columns: repeat(2, 6fr);
         grid-template-rows: 12fr;
         text-align: center;
@@ -108,11 +108,14 @@ span {
         height: 90%;
         width: 100%;
     }
-    .redondear{
+    .redondear {
         height: 15%;
     }
     .formulario {
         height: 50%;
-        padding-top:5%;
+        padding-top: 5%;
+    }
+    main {
+        padding-top: 20%;
     }
 }
