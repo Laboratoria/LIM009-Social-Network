@@ -1,14 +1,16 @@
-import {facebookLogin,googleLogin,createUser,userSesionActive,signInUser,exit} from '../view-controller/index.js'
+import {facebookLogin,googleLogin,createUser,userSesionActive,loginUser,exit} from '../view-controller/index.js'
 '../view/index.js'
+
 
 export const activeUserPage = (user) => {
   const content = document.getElementById('content');
-  if (user != null) {
+  const User = user;
+  if (User != null) {
     let bienvenida = `
     <button id="exit">Cerrar sesión</button>
-    <p>Bienvenidx ${user.displayName}</p>
-    <p>Email: ${user.email}<p>
-    <figure><img src="${user.photoURL}" alt="foto"></figure>`;
+    <p>Bienvenidx ${User.displayName}</p>
+    <p>Email: ${User.email}<p>
+    <figure><img src="${User.photoURL}" alt="foto"></figure>`;
     content.innerHTML = bienvenida;
 
     const btnExit = document.getElementById('exit');
@@ -57,12 +59,12 @@ export const page1 = () => {
   };
 
   const registerUserOk = () => {
-    const btnRegisterSignIn = document.getElementById('register-btn');
+    const btnRegisterEmail = document.getElementById('register-btn');
     const emailSignIn = document.getElementById('email-signup');
     const passwordSignIn = document.getElementById('password-signup');
 
-    btnRegisterSignIn.addEventListener('click', (e) => {
-      e.preventDefault();
+    btnRegisterEmail.addEventListener('click', (event) => {
+      event.preventDefault();
       createUser(emailSignIn.value, passwordSignIn.value);
     });
   }
@@ -77,12 +79,11 @@ export const page1 = () => {
   const btnLogInEmail = document.getElementById('login-btn');
   const emailLogInEmail = document.getElementById('email-login');
   const passwordLogInEmail = document.getElementById('password-login');
-  btnLogInEmail.addEventListener('click', (e) => {
-    e.preventDefault();
-    signInUser(emailLogInEmail.value, passwordLogInEmail.value);
+  btnLogInEmail.addEventListener('click', (event) => {
+    event.preventDefault();
+    loginUser(emailLogInEmail.value, passwordLogInEmail.value);
   });
   userSesionActive();
-
 
   const loginFacebook = document.getElementById('fbBtn');
   loginFacebook.addEventListener('click', e => {
