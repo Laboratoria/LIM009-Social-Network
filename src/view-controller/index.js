@@ -1,5 +1,6 @@
 // aqui exportaras las funciones que necesites
-import {activeUserPage, page1} from './template.js';
+import {activeUserPage, page1} from '../view/template.js';
+
 //salir
 export const exit = () => firebase.auth().signOut()
 .then(()=> {

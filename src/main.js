@@ -1,5 +1,5 @@
 // Este es el punto de entrada de tu aplicacion
-import {page1} from './lib/template.js';
+import {page1} from './view/template.js';
 
 var config ={
     apiKey: "AIzaSyDhPzlMom9mAEcuyk_Dw05NY2awAH_zYAU",
