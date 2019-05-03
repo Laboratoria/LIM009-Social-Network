@@ -1,7 +1,7 @@
 import { clickRegister } from './register.js'
 import { loginButtons } from '../lib/view-controllers/controller-view-auth.js'
 
-const main = document.getElementById('main');
+export const main = document.getElementById('main');
 
 export const screen1 = () => {
     const back1 = `  
@@ -24,16 +24,18 @@ export const screen1 = () => {
   
       <a class="devicon-google-plain gmail-color icon-size"id="google-login"></a>
       <a class="devicon-facebook-plain facebook-color icon-size" id="fb-login"></a>
-      <div class="fs-20 px-0 "> ¿No tienes una cuenta? <a href="#/register" id="showRegister">Registrate</a> </div> 
+      <div class="fs-20 px-0 "> ¿No tienes una cuenta? 
+      <a href="#/register" id="showRegister">Registrate</a> </div> 
   
     </div>
   `
     const div = document.createElement('div')
     div.className = 'fluid-flex';
     div.innerHTML = back1;
+    main.innerHTML = ''
     main.appendChild(div);
     loginButtons();
-    clickRegister()
+    clickRegister();
   };
 
   export const ShowErrorMessaggeDom = (error) => {

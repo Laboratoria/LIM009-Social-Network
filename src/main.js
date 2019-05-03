@@ -1,5 +1,5 @@
-import { screen1 } from '../src/mvc-architecture/ui/login.js'
-
+import { screen1 } from './ui/login.js'
+import { initRoute } from './routes.js'
 // Initialize Firebase
 const initFirebase = () => {
   const config = {
@@ -11,9 +11,11 @@ const initFirebase = () => {
     messagingSenderId: "582126712915"
   };
   firebase.initializeApp(config);
-  screen1();
-
 }
 
-window.onload = initFirebase();
+window.addEventListener('load', () => {
+  initFirebase();
+  screen1();
+  initRoute();
+});
 
