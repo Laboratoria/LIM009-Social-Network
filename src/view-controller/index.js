@@ -1,5 +1,6 @@
 // aqui exportaras las funciones que necesites
-import {activeUserPage, page1} from './template.js';
+import {activeUserPage, page1} from '../view/template.js';
+
 //salir
 export const exit = () => firebase.auth().signOut()
 .then(()=> {
@@ -22,7 +23,7 @@ export const createUser = (emailSignIn, passwordSignIn) => {
 };
 
 //acceder con gmail y contraseña
-export const loginUser = (emailLogIn, passwordLogIn) => {
+export const signInUser = (emailLogIn, passwordLogIn) => {
   return firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn)
 };
 //usuario con sesion activa
