@@ -24,13 +24,3 @@ export default () => {
   registerClick.addEventListener("click", signUpOnSubmit);
   return divElement;
 };
-
-
-
-
-
-  root.appendChild(divElement);  
-  signUpOnSubmit();
-  signUpOnSubmitGoogle();
-  signUpOnSubmitFacebook();
-};
