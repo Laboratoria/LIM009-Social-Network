@@ -33,8 +33,7 @@ describe('singIn', () => {
   it('deberia retornar el email: abc@gmail.com', () => {
     return signIn('abc@gmail.com', '123456')
       .then(user => {
-        expect(user.email).toEqual('abc@gmail.com')
-        
+        expect(user.email).toEqual('abc@gmail.com')      
       });
   });
 });
@@ -45,7 +44,7 @@ describe('signInWithGoogle', () => {
   it('Debería poder iniciar sesion con Google', () => {
     return signInWithGoogle()
       .then(() => {
-        expect('').toEqual('');
+        expect().toEqual();
       });
   });
  });
@@ -57,7 +56,7 @@ describe('signInWithGoogle', () => {
   it('Debería poder iniciar sesion con Google', () => {
     return signInWithFacebook()
       .then((user) => {
-        expect('').toEqual('');
+        expect().toEqual();
       });
   });
  });
