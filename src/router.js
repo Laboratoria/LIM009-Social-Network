@@ -1,11 +1,11 @@
 import login from "./view/login.js";
-import welcomeUser from './view/initi-page.js'
+// import welcomeUser from './view/initi-page.js'
 import register  from './view/pagesRegister.js'
 
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return getRoute('#/login');
-  } else if (hash === '#/welcomeUser' || hash === '#/registerUser') {
+  } else if ( hash === '#/registerUser') {
     return getRoute(hash);
   } else {
     return getRoute('#/login');
@@ -19,8 +19,6 @@ const getRoute = routers => {
   root.innerHTML = '';
   switch (router) {
     case 'login': root.appendChild(login());
-      break;
-    case 'welcomeUser': root.appendChild(welcomeUser())
       break;
     case 'registerUser': root.appendChild(register());
       break;

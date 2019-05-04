@@ -4,18 +4,24 @@
     list-style: none;
     text-decoration: none;
     font-family: bold;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/
-   
 }
-
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+}
 .container{
-    position: relative;
     margin: auto; /*centrado*/
-    width: 100%;
-    height: auto;
-}
+    width: auto;
+    }
 
  .center{
     margin:auto;
@@ -27,12 +33,13 @@
     margin-bottom: 3%;
     border-radius: 6px;
     }
+
  .border{
     border-radius: 5px;
     box-shadow: 2px 6px 5px 5px rgba(49, 172, 111, 0.562);
     border : 1px solid rgba(0, 0, 0, 0.164);
-
  }
+
  .block{    
     display:block;
  }
@@ -43,11 +50,10 @@
      border-radius: 7px;
 }
 .btn-rss{
-    margin-top:1.5%;    
+    margin-top: 2%;
+    margin-right: 3%;
 }
-.color-go{
-    background: rgba(226, 23, 23, 0.658);
-}
+
 button:hover{
     color: rgb(7, 7, 7);
     background:rgba(49, 172, 111, 0.719);
@@ -55,12 +61,9 @@ button:hover{
 .style-register{
     display: inline;
 }
-
-
- @media screen and (min-width: 20em){
-     .header{
-         background: red;
-     }
+ 
+/*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
+ @media screen and (min-width: 20em)/*360px*/ {
      .col-xs-12 { 
          width: 100% ;      
     }
@@ -72,46 +75,28 @@ button:hover{
     }
  }
 
- @media screen and (min-width: 30em){
-     .header{
-         background: blue;
-     }
-     .col-md-12 { width: 100% ;}
- }
- @media screen and (min-width :37.5em){
-     .header{
-         background: yellow;
-     }
+ @media screen and (min-width: 30em) {
      .col-md-12 { 
          width: 100% ;
     }
  }
- @media screen and ( min-width: 48em){
-     .header{
-         background: green;
-     }
+ @media screen and (min-width :37.5em) {
+    .col-md-12 { 
+         width: 100% ;
+    }
  }
 
- @media screen and (min-width: 64em){
-     .header{
-         background: brown;
-     }
- }
- @media screen and (min-width: 78em){
-     .header{
-         background: pink;
-     }
-
+ @media screen and (min-width: 64em) /*1024px*/ {
+    
      .col-lg-6{
         float: left; 
         width: 50%; 
-       
-    }
-    img{
+     } 
+     img{
         max-width: 100%;
     }    
     .style-border{
-        width: 50%;
+        /* width: 50%; */
         margin-top:3%;
         border-radius: 4%;
         padding: 4%;
