@@ -8,7 +8,7 @@ export default () => {
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
     <main class="right ancho">
-    <h1> < Breath > </h1>
+    <h1> < Breath Life > </h1>
     <h3> Respira salud, respira vida </h3>
     <form action="" class="formulario acceder" id="register-form">
     <input type="name" id="name" class="Name input redondear" placeholder="Nombre">
@@ -18,7 +18,7 @@ export default () => {
     <button type="button" class="button-acceder redondear" id="btn-sign-up">Registrar</button>
      </form>
       <div>
-          <p>Si ya tienes una cuenta <a href="#/login">Inicia sesión</a></p>
+          <p class="parrafo">Si ya tienes una cuenta <a href="#/login">Inicia sesión</a></p>
       </div>
     </main>`;
   const registerClick = divElement.querySelector("#btn-sign-up");
