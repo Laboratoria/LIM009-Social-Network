@@ -67,6 +67,9 @@ button:hover{
     img{
         max-width: 30%;
     }
+    .style-border{
+        width: 100%;
+    }
  }
 
  @media screen and (min-width: 30em){
@@ -106,7 +109,15 @@ button:hover{
     }
     img{
         max-width: 100%;
-    }       
+    }    
+    .style-border{
+        width: 50%;
+        margin-top:3%;
+        border-radius: 4%;
+        padding: 4%;
+        box-shadow: 2px 6px 5px 5px rgba(16, 7, 36, 0.486);
+
+         }   
  }
 
 
