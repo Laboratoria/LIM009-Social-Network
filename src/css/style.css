@@ -92,6 +92,7 @@ button:hover{
         float: left; 
         width: 50%; 
      } 
+     .col-12 { width: 100% ;}
      img{
         max-width: 100%;
     }    

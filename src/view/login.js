@@ -7,7 +7,7 @@ export default () => {
   <aside class = 'col-lg-6 col-xs-12 center'>
   <header><img src="./image/apego.jpg" alt="educacion" class='block center'>
   </aside>
-  <form class= 'center'>
+  <form class= 'col-lg-6 col-xs-12 center'>
   <img src="./image/logo.png" alt="educacion" class='block center'>
   <h2 class='center'>"La infancia es fugaz. Que nuestra obsesión por corregirla no nos impida disfrutarla."</h2></header>
   <article>
