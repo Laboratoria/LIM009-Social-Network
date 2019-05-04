@@ -8,6 +8,10 @@ const changeview = (route) => {
             { return components.login() };
         case '#/registro':
             { return root.appendChild(components.registro()) };
+        case '#/user-profile':
+        { return root.appendChild(components.profile())}
+        default:
+            {return root.appendChild(components.error())}
     }
 };
 

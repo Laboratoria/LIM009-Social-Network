@@ -14,13 +14,14 @@ body {
     max-width: 1000px;
     height: 80%;
     margin: auto;
-    padding-top:5%;
+    padding-top: 3%;
     display: grid;
     grid-template-areas: "aside aside" "main main";
     grid-template-columns: repeat(2, 6fr);
     grid-template-rows: 6fr 6fr;
     text-align: center;
 }
+
 
 .left {
     grid-area: aside;
@@ -39,10 +40,6 @@ body {
     width: 100%;
 }
 
-.registrar {
-    display: none;
-}
-
 .formulario {
     height: 80%;
     margin: auto;
@@ -50,10 +47,10 @@ body {
 }
 
 .input {
-    width: 100%;
-    margin: 4% 0;
+    width: 90%;
+    margin: 4%;
     border: 1px solid rgb(136, 135, 135);
-    text-align: center;
+    padding-left: 3%;
 }
 
 .redondear {
@@ -95,7 +92,7 @@ span {
         height: 80%;
         margin: auto;
         display: grid;
-        grid-template-areas: "aside main";
+        grid-template-areas: "aside main" "aside main";
         grid-template-columns: repeat(2, 6fr);
         grid-template-rows: 12fr;
         text-align: center;
@@ -108,11 +105,21 @@ span {
         height: 90%;
         width: 100%;
     }
-    .redondear{
+    .redondear {
         height: 15%;
     }
     .formulario {
         height: 50%;
-        padding-top:5%;
+        padding-top: 5%;
+    }
+    .formulario2 {
+        height: 50%;
+    }
+    .Name , .last-Name{
+        width: 40%;
+        display: inline-block;
+    }
+    main {
+        padding-top: 20%;
     }
 }
