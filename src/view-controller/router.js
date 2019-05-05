@@ -5,9 +5,6 @@ const changeview = (route) => {
     root.innerHTML = '';
     switch (route) {
         case '':
-        case '#':
-        case '#/':
-        case '#/login':
             { return components.login() };
         case '#/registro':
             { return root.appendChild(components.registro()) };
