@@ -9,26 +9,16 @@ body {
     width: 100vw;
     font-family: 'Lato', sans-serif;
 }
-.general{
+
+.container {
     max-width: 1000px;
     height: 80%;
     margin: auto;
     display: grid;
     text-align: center;
-}
-.container {
     grid-template-areas:  "aside" "main";
     grid-template-columns: 12fr;
     grid-template-rows: 6fr 6fr;
-}
-.container2{
-    grid-template-areas: "header " "aside " "main ";
-    grid-template-columns: 12fr;
-    grid-template-rows: 2fr 3fr 7fr;
-}
-
-.header{
-    grid-area:header;
 }
 .left {
     grid-area: aside;
@@ -66,15 +56,17 @@ body {
     -webkit-border-radius: 10px;
     height: 20%;
 }
-
+.boton{
+    border-radius: 6px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: rgb(159, 187, 252);
+}
 .button-acceder {
     width: 40%;
     margin: auto;
-    color: black;
-    background-color: rgb(159, 187, 252);
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .button-acceder:hover {
@@ -95,10 +87,6 @@ span {
     display: block;
 }
 
-.user-name, .post-zone, .header{
-    outline:1px solid black;
-    height: 20%;
-}
 .parrafo{
     padding-top:20%;
 
@@ -116,16 +104,11 @@ li{
     .general{
         height: 80%;
     }
-    .container-view-init {
+    .container{
         grid-template-areas:"aside main" "aside main";
         grid-template-columns: repeat(2, 6fr);
         grid-template-rows: 6fr 6fr;
     }  
-    .container-view-profile{
-        grid-template-areas: "header header""nav main""aside main" "aside main";
-        grid-template-columns: repeat(2, 6fr);
-        grid-template-rows: 6fr 6fr 6fr;
-    } 
     .img {
         margin-top: 10%;
         height: 90%;

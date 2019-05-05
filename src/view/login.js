@@ -2,7 +2,7 @@ import { signInOnSubmit, signInOnSubmitGoogle ,signInOnSubmitFacebook } from "..
 export default () => {
   const root = document.getElementById("root");
   const divElement = document.createElement("div");
-  divElement.setAttribute("class", "container-view-init general");
+  divElement.setAttribute("class", "container");
   divElement.innerHTML = `
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
@@ -13,15 +13,15 @@ export default () => {
       <form action="" class="formulario acceder">
           <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
           <input id="password" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-          <button type="button" class="button-acceder redondear"  id="btn-sign-in">Acceder</button>
+          <button type="button" class="button-acceder redondear boton"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
           <p>O bien ingresa con:</p><a href="#/user-profile">aqui</a>        
           <div class="iconos">
             <ul>
               <li>
-                <a><img class="icon-network" id="icon-facebook" src="../css/img/facebook.png"></a>
-                <a><img class="icon-network" id="icon-google" src="../css/img/google-plus.png"></a>
+                <a><img class="icon-network" id="icon-facebook" src="./css/img/facebook.png"></a>
+                <a><img class="icon-network" id="icon-google" src="./css/img/google-plus.png"></a>
               </li>
             </ul>
           </div>

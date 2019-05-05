@@ -1,9 +1,6 @@
-
-import Login from './view/login.js';
 import { changeview } from './view-controller/router.js';
 //import login from './view/login.js';
 
-const initializeFirebase = () => {
   var config = {
     apiKey: "AIzaSyBGr7XcDErKCQR-5WRR4IjWiL3nr2o8GMQ",
     authDomain: "social-network-5a022.firebaseapp.com",
@@ -13,16 +10,10 @@ const initializeFirebase = () => {
     messagingSenderId: "587244163856"
   };
   firebase.initializeApp(config);
- Login();
-};
-window.onload = initializeFirebase();
 
 const init = () => {
- // changeview(window.location.hash)
+ changeview(window.location.hash)
   window.addEventListener('hashchange', () => changeview(window.location.hash));
 }
 
 window.addEventListener('load', init);
-
-/* const registerClick = document.querySelector("#register-link");
-registerClick.addEventListener("click", changeview); */

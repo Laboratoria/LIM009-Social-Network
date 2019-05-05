@@ -15,10 +15,10 @@ export default () => {
     <input type="text" id="last-name" class="last-Name input redondear" placeholder="Apellidos">
     <input id="email2" class="input redondear" type="email" placeholder="Ingrese su correo">
     <input id="password2" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-    <button type="button" class="button-acceder redondear" id="btn-sign-up">Registrar</button>
+    <button type="button" class="button-acceder redondear boton" id="btn-sign-up">Registrar</button>
      </form>
       <div>
-          <p class="parrafo">Si ya tienes una cuenta <a href="#/login">Inicia sesión</a></p>
+          <p class="parrafo">Si ya tienes una cuenta <a href="">Inicia sesión</a></p>
       </div>
     </main>`;
   const registerClick = divElement.querySelector("#btn-sign-up");
