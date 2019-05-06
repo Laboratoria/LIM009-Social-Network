@@ -12,12 +12,14 @@ export const Register = () => {
       <div class="one-column">
         <input id="email-signin" type="email" placeholder="Email" class="input-text" />
         <input id="password-signin" type="password" placeholder="Password" class="input-text" />
+        <p class="error-message"></p>
         <button type="button" id="button-register" class="button-pass"> Registrarme </button>
       </div>
       <div class="px-15">¿Ya estás registrado? <a href="#" id="back-login">Ingresa aquí</a> </div>
     </div>
   `;
   const div = document.createElement('div')
+  div.className = 'fluid-flex';
   div.innerHTML = string;
 
     const buttonRegisterEmail = div.querySelector('#button-register');
