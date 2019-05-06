@@ -1,6 +1,5 @@
 import { signUpOnSubmit } from "../controller/controller1.js";
 
-const root = document.getElementById('root');
 export default () => {
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container");
@@ -26,3 +25,8 @@ export default () => {
   registerClick.addEventListener("click", signUpOnSubmit);
   return divElement;
 };
+
+
+
+
+

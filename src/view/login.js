@@ -40,5 +40,3 @@ export default () => {
 };
 
 
-// <i id="icon-google" class="fab fa-google"></i>
-// <i class="fab fa-facebook-square"></i>
