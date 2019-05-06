@@ -58,7 +58,9 @@ export const google = () => {
         alert('El correo es inválido')
       } else if(errorCode == 'auth/wrong-password') {
         alert('La contraseña es equivocada.')
-      } else {
+      } else if(errorCode == 'auth/account-exists-with-different-credential') {
+        alert('La cuenta ya ha sido utilizada con una credencial diferente')
+      } else {      
         alert(errorMessage);
       }     
     })
@@ -72,6 +74,20 @@ export const google = () => {
 export const facebook = () => {
   return signInWithFacebook().then(result => {
     dataBaseUser(result.user);
+  }).catch(error => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    if (errorCode == 'auth/cancelled-popup-request') {
+      alert('Sólo se permite una solicitud emergente a la vez.');
+    } else if (errorCode == 'auth/invalid-email') {
+      alert('El correo es inválido')
+    } else if(errorCode == 'auth/wrong-password') {
+      alert('La contraseña es equivocada.')
+    } else if(errorCode == 'auth/account-exists-with-different-credential') {
+      alert('La cuenta ya ha sido utilizada con una credencial diferente')
+    } else {      
+      alert(errorMessage);
+    }     
   });
 }
 
