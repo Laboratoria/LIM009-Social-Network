@@ -17,4 +17,40 @@ const signInWithFacebook = () => {
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
   return firebase.auth().signInWithPopup(facebookProvider);
 };
-export { signUp, signIn, signInWithGoogle, signInWithFacebook };
+
+const activeUser=()=>{
+  return firebase.auth().onAuthStateChanged((user)=>{
+    if (user) {
+      console.log(user.uid);
+      firebase.firestore().collection('users').onSnapshot((snapshot)=>{
+console.log(snapshot);
+      },err =>{
+        console.log(err.message)
+      }).catch(err=>{
+
+      })
+    } else {
+      // No user is signed in.
+      //setUp()
+      //setupGuides([])
+    }
+  })
+};
+
+
+const currentUser=()=>{
+  var user = firebase.auth().currentUser;
+if (user != null) {
+  name = user.displayName;
+  email = user.email;
+  photoUrl = user.photoURL;
+  emailVerified = user.emailVerified;
+  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                   // this value to authenticate with your backend server, if
+                   // you have one. Use User.getToken() instead.
+                   return uid;
+}
+};
+
+
+export { signUp, signIn, signInWithGoogle, signInWithFacebook,activeUser,currentUser };
