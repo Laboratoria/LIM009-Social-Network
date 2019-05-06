@@ -15,8 +15,8 @@ export const Login = () => {
       <div class="one-column">
         <input id="email-login" type="email" placeholder="Email" class="input-text" />
         <input id="password-login" type="password" placeholder="Password" class="input-text" />
-        <button type="button" href="#/content" id="button-login-email" class="button-pass"> Log in </button>
         <p class="error-message"></p>
+        <button type="button" href="#/content" id="button-login-email" class="button-pass"> Log in </button>
       </div>
   
       <p class="fs-20 px-15">O bien ingresa con...</p>
@@ -45,9 +45,3 @@ export const Login = () => {
   return div
 };
 
-export const ShowErrorMessaggeDom = (error) => {
-  document.getElementsByClassName('input-text').className += ' error-message';
-  const pError = document.getElementsByTagName('p')[0];
-  pError.innerHTML = ` `;
-  pError.innerHTML = `${error.message}`;
-}

@@ -1,6 +1,4 @@
 import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser, signOut } from '../controller-firebase/auth.js';
-import { Content } from '../../ui/info-user.js';
-import { ShowErrorMessaggeDom } from '../../ui/login.js'
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -10,7 +8,7 @@ const changeHash = (hash) => {
 const getActiveUser = (user) => {
   if (user) {
     console.log("existe usuario acctivo")
-
+console.log(user)
   } else {
     console.log("no existe usuario activo")
   }
@@ -24,6 +22,13 @@ export const signOutUser = () => {
   signOut();
   changeHash('#')
 }
+
+const ShowErrorMessaggeDom = (error) => {
+  const pError = document.getElementsByTagName('p')[0];
+  pError.innerHTML = ` `;
+  pError.innerHTML = `${error.message}`;
+}
+
 export const login = () => {
   // event.preventDefault();
   const emailLogInEmail = document.querySelector('#email-login')
@@ -47,23 +52,23 @@ export const googleLogin = () => {
 }
 
 export const facebookLogin = () => {
-     funcFacebook()
-      .then(result => {
-        changeHash('#/content')
-        // Content(result);
-      })
-      .catch(error => ShowErrorMessaggeDom(error))
+  funcFacebook()
+    .then(result => {
+      changeHash('#/content')
+      // Content(result);
+    })
+    .catch(error => ShowErrorMessaggeDom(error))
 }
 
 export const register = () => {
   const emailSignIn = document.getElementById('email-signin');
   const passwordSignIn = document.getElementById('password-signin');
 
-    funcRegister(emailSignIn.value, passwordSignIn.value)
-      .then(result => {
-        changeHash('#/content')
-        // Content(result);
-
-  });
+  funcRegister(emailSignIn.value, passwordSignIn.value)
+    .then(result => {
+      changeHash('#/content')
+      // Content(result);
+    })
+    .catch(error => ShowErrorMessaggeDom(error))
 }
 
