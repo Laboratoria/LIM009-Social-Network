@@ -109,6 +109,22 @@ const signOutAll = () =>{
     console.log ('Paso por aqui');
   }
   )};
+  
+
+  const userProvideGoogle = ()=>{
+    const name = document.querySelector('#email2').value;
+    const photoUser = document.querySelector('#password2').value;
+    firebase.auth().onAuthStateChanged(function(user) {
+
+      if (user) {
+        
+      } else {
+       
+      }
+    });
+    
+  }
+
 
 
 export {
@@ -116,5 +132,6 @@ export {
   signUpOnSubmit,
   signInOnSubmitGoogle,
   signInOnSubmitFacebook,
-  signOutAll
+  signOutAll,
+  userProvideGoogle
 };

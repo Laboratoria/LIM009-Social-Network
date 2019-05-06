@@ -6,7 +6,7 @@ export default () => {
 <header class="header">
   <ul class="menu">
   <li class="small">
-  <a>nose</a>
+  <a id=user>nose</a>
   </li>
   <li class="title"> 
     <h1>

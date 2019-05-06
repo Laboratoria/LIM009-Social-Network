@@ -22,5 +22,13 @@ const signInWithFacebook = () => {
  const signOut = () => {
   return firebase.auth().signOut();
 };
-export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut};
+// funcion para auditar usuario 
+
+const informationProvideUser = () =>{
+  const user =firebase.auth().currentUser;
+  return user;
+};
+
+
+export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut, informationProvideUser };
 
