@@ -17,4 +17,10 @@ const signInWithFacebook = () => {
   const facebookProvider = new firebase.auth.FacebookAuthProvider();
   return firebase.auth().signInWithPopup(facebookProvider);
 };
-export { signUp, signIn, signInWithGoogle, signInWithFacebook };
+
+// funcion para cerrar sesion
+ const signOut = () => {
+  return firebase.auth().signOut();
+};
+export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut};
+

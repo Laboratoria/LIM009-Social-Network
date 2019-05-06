@@ -1,3 +1,4 @@
+import { signOutAll } from "../controller/controller1.js";
 export default () => {
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container-view-profile");
@@ -12,7 +13,7 @@ export default () => {
     < Breath Life>
     </h1> 
   </li>
-  <li class="small"><a href="">Cerrar sesión</a></li>
+  <li class="small"><a href="" id ="sign-out">Cerrar sesión</a></li>
   </ul>
 </header>
 <div class="sub-container">
@@ -36,5 +37,7 @@ export default () => {
   </div>
 </main>
 </div>`;
+const signOutAllPage = divElement.querySelector("#sign-out");
+signOutAllPage.addEventListener("click", signOutAll );
   return divElement;
 };

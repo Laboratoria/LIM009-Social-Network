@@ -100,11 +100,21 @@ const signInOnSubmitFacebook = () => {
       console.log(error);
     });
 }
+const signOutAll = () =>{
+  signOut()
+  .then(()=> changeHash (''))
+  .catch(function (error){
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log ('Paso por aqui');
+  }
+  )};
 
 
 export {
   signInOnSubmit,
   signUpOnSubmit,
   signInOnSubmitGoogle,
-  signInOnSubmitFacebook
+  signInOnSubmitFacebook,
+  signOutAll
 };
