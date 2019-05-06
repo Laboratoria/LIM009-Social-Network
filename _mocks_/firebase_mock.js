@@ -25,7 +25,8 @@ const auth = () => {
     return {
         signInWithEmailAndPassword: (email, password) => {
            return new Promise((resolve) => {
-              resolve({email : email,                    
+              resolve({email : email,
+                      password : password                 
               });
             });
         }

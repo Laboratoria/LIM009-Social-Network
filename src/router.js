@@ -1,5 +1,4 @@
 import login from "./view/login.js";
-// import welcomeUser from './view/initi-page.js'
 import register  from './view/pagesRegister.js'
 
 const changeTmp = (hash) => {

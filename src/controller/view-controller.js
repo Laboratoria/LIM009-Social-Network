@@ -1,13 +1,16 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook ,createEmailAndPassword} from "../lib/lib-firebase.js";
 import { dataBaseUser } from '../model/model.js'
-// import { changeHash } from '../Utils/util.js'
+
+const changeHash = (hash) => {
+  location.hash = hash;
+}
 
 export const registerUser = () => {
 const emailRegister = document.querySelector('#email-register').value;
 const passwordRegister = document.querySelector('#password-register').value;
 return  createEmailAndPassword(emailRegister,passwordRegister)
-  .then((result)=> 
-    console.log(result)    
+  .then((result)=> {
+    dataBaseUserCreateEmail(result.user)}
   ).catch(error => {
     // Handle Errors here.
     var errorCode = error.code;
@@ -48,7 +51,7 @@ const password = document.querySelector("#password-id").value;
 
 export const google = () => {
   return signInWithGoogle().then(result => {
-    dataBaseUser(result.user);
+    dataBaseUser(result.user)  
     }).catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -63,12 +66,7 @@ export const google = () => {
       } else {      
         alert(errorMessage);
       }     
-    })
-    // console.log(result);
-    //       // let imgUser = document.createElement("img");
-    //       // imgUser.src = `${result.user.photoURL}`;
-    //       // document.body.appendChild(imgUser);
- ;
+    });
 }
 
 export const facebook = () => {
