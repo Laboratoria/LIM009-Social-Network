@@ -14,15 +14,12 @@ body {
     max-width: 1000px;
     height: 80%;
     margin: auto;
-    padding-top: 3%;
     display: grid;
-    grid-template-areas: "aside aside" "main main";
-    grid-template-columns: repeat(2, 6fr);
-    grid-template-rows: 6fr 6fr;
     text-align: center;
+    grid-template-areas:  "aside" "main";
+    grid-template-columns: 12fr;
+    grid-template-rows: 6fr 6fr;
 }
-
-
 .left {
     grid-area: aside;
 }
@@ -41,7 +38,7 @@ body {
 }
 
 .formulario {
-    height: 80%;
+    height: 45%;
     margin: auto;
     width: 70%;
 }
@@ -59,67 +56,78 @@ body {
     -webkit-border-radius: 10px;
     height: 20%;
 }
-
+.boton{
+    border-radius: 6px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: rgb(159, 187, 252);
+}
 .button-acceder {
     width: 40%;
     margin: auto;
-    color: #ffffff;
-    background-color: rgb(159, 187, 252);
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 .button-acceder:hover {
-    color: #000;
     background-color: #ffffff;
 }
 
 .iconos {
-    display: inline-block;
     width: 100%;
-    font-size: 40px;
     margin: 3%;
+    cursor: pointer;
 }
 
 span {
     color: rgb(159, 187, 252);
     cursor: pointer;
 }
+.box{
+    display: block;
+}
+
+.parrafo{
+    padding-top:20%;
+
+}
+li{
+    list-style: none;
+}
+.icon-network{
+    height: 32px;
+    width: 32px;
+
+}
 
 @media(min-width:768px) {
-    .container {
-        max-width: 1000px;
+    .general{
         height: 80%;
-        margin: auto;
-        display: grid;
-        grid-template-areas: "aside main" "aside main";
+    }
+    .container{
+        grid-template-areas:"aside main" "aside main";
         grid-template-columns: repeat(2, 6fr);
-        grid-template-rows: 12fr;
-        text-align: center;
-    }
-    header h1 {
-        margin: 30% auto 5% auto;
-    }
+        grid-template-rows: 6fr 6fr;
+    }  
     .img {
         margin-top: 10%;
         height: 90%;
         width: 100%;
     }
     .redondear {
-        height: 15%;
+        height: 20%;
     }
     .formulario {
-        height: 50%;
-        padding-top: 5%;
-    }
-    .formulario2 {
-        height: 50%;
+        height: 40%;
     }
     .Name , .last-Name{
         width: 40%;
         display: inline-block;
     }
-    main {
+    .right {
         padding-top: 20%;
+    }
+    .parrafo{
+        padding-top:10%;
     }
 }

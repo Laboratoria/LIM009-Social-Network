@@ -119,7 +119,3 @@ Recuerda que no puedes usar frameworks CSS, sólo *vanilla css*.
 * [Mobile First - ZURB](https://zurb.com/word/mobile-first)
 * [Mobile First Is NOT Mobile Only - Nielsen Norman Group](https://www.nngroup.com/articles/mobile-first-not-mobile-only/)
 ***
-Contraer
-
-
-
