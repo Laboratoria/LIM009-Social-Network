@@ -14,5 +14,7 @@ const firebase = {
     auth: auth,
     // initializeApp() {}
 };
+
 export default jest.fn(() => {
-    return fi
+    return firebase
+})
