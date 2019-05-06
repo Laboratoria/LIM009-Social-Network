@@ -15,5 +15,4 @@ const firebase = {
     // initializeApp() {}
 };
 export default jest.fn(() => {
-    return firebase
-})    
+    return fi
