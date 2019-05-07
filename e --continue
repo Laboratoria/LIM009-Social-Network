@@ -1,0 +1,144 @@
+[33mcommit 8a468fb107bad2bd0b0e2e5923b319fdf4d03af8[m[33m ([m[1;32mmaster[m[33m)[m
+Author: nayruthCalla <nayruth.calla@gmail.com>
+Date:   Mon May 6 22:34:46 2019 -0500
+
+    agregando datos
+
+[1mdiff --git a/src/controller/view-controller.js b/src/controller/view-controller.js[m
+[1mindex 7e2eae0..c7debbc 100644[m
+[1m--- a/src/controller/view-controller.js[m
+[1m+++ b/src/controller/view-controller.js[m
+[36m@@ -1,47 +1,47 @@[m
+[31m-import { signInWithEmail, signInWithGoogle, signInWithFacebook ,createEmailAndPassword} from "../lib/lib-firebase.js";[m
+[32m+[m[32mimport { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword } from "../lib/lib-firebase.js";[m
+ import { dataBaseUser } from '../model/model.js'[m
+ // import { changeHash } from '../Utils/util.js'[m
+ [m
+ export const registerUser = () => {[m
+[31m-const emailRegister = document.querySelector('#email-register').value;[m
+[31m-const passwordRegister = document.querySelector('#password-register').value;[m
+[31m-return  createEmailAndPassword(emailRegister,passwordRegister)[m
+[31m-  .then((result)=> [m
+[31m-    console.log(result)    [m
+[31m-  ).catch(error => {[m
+[31m-    // Handle Errors here.[m
+[31m-    var errorCode = error.code;[m
+[31m-    var errorMessage = error.message;[m
+[31m-    if(errorCode == 'auth/invalid-email') {[m
+[31m-      alert('El correo es inválido');[m
+[31m-    } else if(errorCode == 'auth/email-already-in-use') {[m
+[31m-      alert('El correo ya ha sido utilizado');[m
+[31m-    } else if(errorCode == 'auth/weak-password') {[m
+[31m-      alert('La contraseña no es lo suficientemente fuerte')[m
+[31m-    } else {[m
+[31m-      alert(errorMessage);[m
+[31m-    }[m
+[31m-  });[m
+[32m+[m[32m  const emailRegister = document.querySelector('#email-register').value;[m
+[32m+[m[32m  const passwordRegister = document.querySelector('#password-register').value;[m
+[32m+[m[32m  return createEmailAndPassword(emailRegister, passwordRegister)[m
+[32m+[m[32m    .then((result) =>[m
+[32m+[m[32m      console.log(result)[m
+[32m+[m[32m    ).catch(error => {[m
+[32m+[m[32m      // Handle Errors here.[m
+[32m+[m[32m      var errorCode = error.code;[m
+[32m+[m[32m      var errorMessage = error.message;[m
+[32m+[m[32m      if (errorCode == 'auth/invalid-email') {[m
+[32m+[m[32m        alert('El correo es inválido');[m
+[32m+[m[32m      } else if (errorCode == 'auth/email-already-in-use') {[m
+[32m+[m[32m        alert('El correo ya ha sido utilizado');[m
+[32m+[m[32m      } else if (errorCode == 'auth/weak-password') {[m
+[32m+[m[32m        alert('La contraseña no es lo suficientemente fuerte')[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        alert(errorMessage);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    });[m
+ }[m
+ [m
+ export const email = () => {[m
+[31m-const valueEmail = document.querySelector("#email-id").value;[m
+[31m-const password = document.querySelector("#password-id").value;[m
+[32m+[m[32m  const valueEmail = document.querySelector("#email-id").value;[m
+[32m+[m[32m  const password = document.querySelector("#password-id").value;[m
+   return signInWithEmail(valueEmail, password)[m
+     .then((result) => {[m
+       console.log(result);[m
+     }).catch(error => {[m
+[31m-    // Handle Errors here.[m
+[32m+[m[32m      // Handle Errors here.[m
+       var errorCode = error.code;[m
+       var errorMessage = error.message;[m
+       if (errorCode == 'auth/user-not-found') {[m
+[31m-      alert('El correo no ha sido registrado');[m
+[32m+[m[32m        alert('El correo no ha sido registrado');[m
+       } else if (errorCode == 'auth/invalid-email') {[m
+[31m-      alert('El correo es inválido')[m
+[31m-      } else if(errorCode == 'auth/wrong-password') {[m
+[31m-      alert('La contraseña es equivocada.')[m
+[32m+[m[32m        alert('El correo es inválido')[m
+[32m+[m[32m      } else if (errorCode == 'auth/wrong-password') {[m
+[32m+[m[32m        alert('La contraseña es equivocada.')[m
+       } else {[m
+[31m-      alert(errorMessage);[m
+[32m+[m[32m        alert(errorMessage);[m
+       }[m
+     });[m
+ };[m
+[36m@@ -49,30 +49,42 @@[m [mconst password = document.querySelector("#password-id").value;[m
+ export const google = () => {[m
+   return signInWithGoogle().then(result => {[m
+     dataBaseUser(result.user);[m
+[31m-    }).catch(error => {[m
+[31m-      var errorCode = error.code;[m
+[31m-      var errorMessage = error.message;[m
+[31m-      if (errorCode == 'auth/cancelled-popup-request') {[m
+[31m-        alert('Sólo se permite una solicitud emergente a la vez.');[m
+[31m-      } else if (errorCode == 'auth/invalid-email') {[m
+[31m-        alert('El correo es inválido')[m
+[31m-      } else if(errorCode == 'auth/wrong-password') {[m
+[31m-        alert('La contraseña es equivocada.')[m
+[31m-      } else {[m
+[31m-        alert(errorMessage);[m
+[31m-      }     [m
+[31m-    })[m
+[32m+[m[32m  }).catch(error => {[m
+[32m+[m[32m    var errorCode = error.code;[m
+[32m+[m[32m    var errorMessage = error.message;[m
+[32m+[m[32m    if (errorCode == 'auth/cancelled-popup-request') {[m
+[32m+[m[32m      alert('Sólo se permite una solicitud emergente a la vez.');[m
+[32m+[m[32m    } else if (errorCode == 'auth/invalid-email') {[m
+[32m+[m[32m      alert('El correo es inválido')[m
+[32m+[m[32m    } else if (errorCode == 'auth/wrong-password') {[m
+[32m+[m[32m      alert('La contraseña es equivocada.')[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      alert(errorMessage);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  })[m
+     // console.log(result);[m
+     //       // let imgUser = document.createElement("img");[m
+     //       // imgUser.src = `${result.user.photoURL}`;[m
+     //       // document.body.appendChild(imgUser);[m
+[31m- ;[m
+[32m+[m[32m    ;[m
+ }[m
+ [m
+ export const facebook = () => {[m
+   return signInWithFacebook().then(result => {[m
+     dataBaseUser(result.user);[m
+[31m-  });[m
+[32m+[m[32m  }).catch(error => {[m
+[32m+[m[32m    var errorCode = error.code;[m
+[32m+[m[32m    var errorMessage = error.message;[m
+[32m+[m[32m    if (errorCode == 'auth/cancelled-popup-request') {[m
+[32m+[m[32m      alert('Sólo se permite una solicitud emergente a la vez.');[m
+[32m+[m[32m    } else if (errorCode == 'auth/invalid-email') {[m
+[32m+[m[32m      alert('El correo es inválido')[m
+[32m+[m[32m    } else if (errorCode == 'auth/wrong-password') {[m
+[32m+[m[32m      alert('La contraseña es equivocada.')[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      alert(errorMessage);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  })[m
+ }[m
+ [m
+ /*export const newVista = () => {[m
