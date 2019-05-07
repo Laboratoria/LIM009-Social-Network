@@ -1,5 +1,5 @@
 const firebasemock = require('firebase-mock');
-const mockauth = new firebasemock.MockFirebase();
+const mockauth = new firebasemock.MockAuthentication();
 const mockfirestore = new firebasemock.MockFirestore();
 mockfirestore.autoFlush();
 mockauth.autoFlush();
@@ -16,7 +16,7 @@ import { signInWithEmail, createEmailAndPassword, signInWithGoogle, signInWithFa
 
 
 describe('myFunction', () => {
-  it('debería ser una función createEmailAndPassword', () => {
+  it('debería ser una función signInWithEmail', () => {
     expect(typeof signInWithEmail).toBe('function');
   });
   it('debería ser una función createEmailAndPassword', () => {
@@ -30,14 +30,14 @@ describe('myFunction', () => {
   });
 });
 
-describe('Incio de secion con autenticacion', () => {
-  it('Deberia crear cuenta ', () => {
+describe('Incio de sesion con autenticacion', () => {
+  it('Deberia iniciar sesion con cuenta creada', () => {
     return signInWithEmail('naye@gmail.com', '1234567')
       .then(user => {
         expect(user.email).toBe('naye@gmail.com');
       })
   });
-  it('Deberia iniciar sesion con cuenta creada', () => {
+  it('Deberia crear una cuenta', () => {
     return createEmailAndPassword('naye@gmail.com', '1234567')
       .then(user => {
         expect(user.email).toBe('naye@gmail.com');
