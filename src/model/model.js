@@ -12,7 +12,6 @@ export const dataBaseUser = user => {
     });
 };
 
-
 export const dataBaseUserCreateEmail = user => {
     let db = firebase.firestore();
     return db.collection('users-create').doc(user.uid).set({
@@ -26,6 +25,17 @@ export const dataBaseUserCreateEmail = user => {
       console.error("Error adding document: ", error);
     });
  }
+
+
+
+ db.collection('user-s-create').get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+});
+
+
 
 
 
