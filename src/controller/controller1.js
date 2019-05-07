@@ -59,7 +59,8 @@ const signUpOnSubmit = () => {
     if (email2 === '' || password2 === '') {
         alert('Completa tus datos para registrarte');
     } else {
-        signUp(email2, password2).then((cred) => {
+        signUp(email2, password2)
+        .then((cred) => {
             console.log(cred.user);
             return firebase.firestore().collection('users').doc(cred.user.uid).set({
                 name: userName,
@@ -67,6 +68,16 @@ const signUpOnSubmit = () => {
                 uid: cred.user.uid,
                 email: email2,
                 password: password2,
+            })
+            .then(()=>{
+              const form = document.querySelector('#register-form');
+                form.reset();
+                alert('Registrado exitosamente');
+                /*
+                document.querySelector('#email2').value = ' ';
+                document.querySelector('#password2').value=' ';
+                document.querySelector('#name').value ='';
+                document.querySelector('#last-name').value=''; */
             });
         }).catch(function(error) {
             // Handle Errors here.
@@ -178,9 +189,9 @@ const signOutUser = () => {
             console.log('Paso por aqui');
         })
 };
+
 const getUser = () => {
     return firebase.auth().currentUser
-
 };
 console.log(getUser);
 
