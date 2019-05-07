@@ -1,23 +1,36 @@
-// // importamos la funcion que vamos a testear
-// import { myFunction } from "../src/lib/index";
-
-// describe('myFunction', () => {
-//   it('debería ser una función', () => {
-//     expect(typeof myFunction).toBe('function');
-//   });
-// });
-
-const firebasemock = require('firebase_mock');
+const firebasemock = require('firebase-mock');
 const mockauth = new firebasemock.MockFirebase();
+const mockfirestore = new firebasemock.MockFirestore();
+mockfirestore.autoFlush();
 mockauth.autoFlush();
 
 global.firebase = firebasemock.MockFirebaseSdk(
   // use null if your code does not use RTDB
   path => (path ? mockdatabase.child(path) : null),
   () => mockauth,
-  );
+  () => mockfirestore
+);
 
-import {signInWithEmail, createEmailAndPassword, signInWithGoogle, signInWithFacebook} from '../lib/lib-firebase.js'
+import { signInWithEmail, createEmailAndPassword, signInWithGoogle, signInWithFacebook } from '../lib/lib-firebase.js'
+
+
+describe('myFunction', () => {
+  it('debería ser una función', () => {
+    expect(typeof createEmailAndPassword).toBe('function');
+  });
+  it('debería ser una función', () => {
+    expect(typeof signInWithGoogle).toBe('function');
+  });
+  it('debería ser una función', () => {
+    expect(typeof signWithGoogle).toBe('function');
+  });
+  it('debería ser una función', () => {
+    expect(typeof signInWithFacebook).toBe('function');
+  });
+});
+
+
+
 
 describe('signInWithEmail', () => {
   it('debería ser una función', () => {
@@ -28,5 +41,5 @@ describe('signInWithEmail', () => {
       .then((user) => {
         expect(user.email).toBe('laboratoria_2017@hotmail.com');
       });
-  }); 
+  });
 });
