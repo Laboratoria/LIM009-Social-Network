@@ -189,16 +189,6 @@ const getData = (uid) => {
 
 };
 
-
-
-
-/*
-
-/// doc.docs().forEach((doc) => {
-  console.log(doc)
-  //  profileUser(doc);
-})*/
-
 export {
     signInOnSubmit,
     signUpOnSubmit,
