@@ -32,9 +32,8 @@ export const email = () => {
   const valueEmail = document.querySelector("#email-id").value;
   const password = document.querySelector("#password-id").value;
   return signInWithEmail(valueEmail, password)
-    .then((result) => {
-      console.log(result);
-    }).catch(error => {
+    .then(() => changeHash('/welcome-user')
+    ).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
