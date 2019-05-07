@@ -1,10 +1,10 @@
 export const dataBaseUser = user => {
     let db = firebase.firestore();
-    return db.collection('users-rrss').doc(user.uid).set({
+    return db.collection('users').doc(user.uid).set({
         uid: user.uid,
-        name: user.displayName,
+        name: user.displayName || '',
         email: user.email,
-        photo: user.photoURL
+        photo: user.photoURL || './image/profile-padre.jpg'
     }).then((docRef) => {
         console.log("Document written with ID: ", docRef);
     }).catch((error) => {
