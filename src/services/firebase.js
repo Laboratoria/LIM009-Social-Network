@@ -19,10 +19,6 @@ const signInWithFacebook = () => {
     return firebase.auth().signInWithPopup(facebookProvider);
 };
 
-
-
-
-
 const currentUser = () => {
     var user = firebase.auth().currentUser;
     if (user != null) {
@@ -40,6 +36,5 @@ const currentUser = () => {
 const signOut = () => {
     return firebase.auth().signOut();
 };
-
 
 export { signUp, signIn, signInWithGoogle, signInWithFacebook, currentUser, signOut };
