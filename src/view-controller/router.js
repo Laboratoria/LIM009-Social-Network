@@ -13,7 +13,7 @@ const changeview = (route) => {
                 getData(getUser().uid)
                 .then((data) => {
                     console.log(data)
-                    root.appendChild(components.profile(data))
+                    return root.appendChild(components.profile(data))
                 })
             }
         default:

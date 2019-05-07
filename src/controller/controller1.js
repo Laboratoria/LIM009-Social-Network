@@ -91,7 +91,26 @@ const signUpOnSubmit = () => {
 
 const signInOnSubmitGoogle = () => {
     signInWithGoogle()
-        .then(() => changeHash('#/user-profile'))
+        .then((result) => {
+            changeHash('#/user-profile')
+                // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user; // ...
+            console.log(token);
+            const userName = user.displayName;
+            const userEmail = user.email;
+            const userPhoto = user.photoURL;
+            const userId = user.uid;
+            return firebase.firestore().collection('users').doc(userId).set({
+                name: userName,
+                uid: userId,
+                email: userEmail,
+                photo: userPhoto,
+            });
+
+
+        })
         .catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -107,8 +126,25 @@ const signInOnSubmitGoogle = () => {
 
 const signInOnSubmitFacebook = () => {
     signInWithFacebook()
-        .then(() => changeHash('#/user-profile'))
-        .catch(function(error) {
+        .then((result) => {
+            changeHash('#/user-profile');
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            console.log(token);
+            // The signed-in user info.
+            var user = result.user;
+
+            const userName = user.displayName;
+            const userEmail = user.email;
+            const userPhoto = user.photoURL;
+            const userId = user.uid;
+            return firebase.firestore().collection('users').doc(userId).set({
+                name: userName,
+                uid: userId,
+                email: userEmail,
+                photo: userPhoto,
+            });
+        }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -119,7 +155,7 @@ const signInOnSubmitFacebook = () => {
             }
             console.log(error);
         });
-}
+};
 
 
 // Funcion para actualizar un documento de la coleccion users like
