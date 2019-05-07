@@ -63,6 +63,7 @@ export const getDataCreat = users => {
 }
 //actualizar
 
+
 export const updateDatos = (user, name, email) => {
     let db = firebase.firestore();
     db.collection("users-rrss").doc(`${user}`).update({
