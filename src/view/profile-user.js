@@ -13,7 +13,7 @@ export default (user) => {
 <div class="sub-container">
 <aside class="user-name">
   <div class="imagen-fondo"><img class="image" src="./css/img/habitos.jpg">
-    <div class="element"><img class="image-photo" id="image-user"src="${user.photoURL}" >
+    <div class="element"><img class="image-photo" id="image-user"src="${user.photo}" >
       <div class="nombre"><h2 id="name-user">${user.name}</h2></div>
     </div>
   </div>
