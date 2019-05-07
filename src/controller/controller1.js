@@ -3,8 +3,8 @@ import {
     signUp,
     signInWithGoogle,
     signInWithFacebook,
-    currentUser,
     signOut,
+    addPost,
 
 } from "../services/firebase.js";
 
@@ -13,7 +13,7 @@ const changeHash = (hash) => {
     location.hash = hash;
 };
 
-/* import { signUpWithGoogle } from "../services/firebase.js"  */
+
 const signInOnSubmit = () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
@@ -60,43 +60,43 @@ const signUpOnSubmit = () => {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
-        .then((cred) => {
-            console.log(cred.user);
-            return firebase.firestore().collection('users').doc(cred.user.uid).set({
-                name: userName,
-                lastName: userLastName,
-                uid: cred.user.uid,
-                email: email2,
-                password: password2,
+            .then((cred) => {
+                console.log(cred.user);
+                return firebase.firestore().collection('users').doc(cred.user.uid).set({
+                        name: userName,
+                        lastName: userLastName,
+                        uid: cred.user.uid,
+                        email: email2,
+                        password: password2,
+                    })
+                    .then(() => {
+                        const form = document.querySelector('#register-form');
+                        form.reset();
+                        alert('Registrado exitosamente');
+                        /*
+                        document.querySelector('#email2').value = ' ';
+                        document.querySelector('#password2').value=' ';
+                        document.querySelector('#name').value ='';
+                        document.querySelector('#last-name').value=''; */
+                    });
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+                if (errorCode == 'auth/weak-password') {
+                    alert('El nivel de seguridad de la contraseña es : débil.');
+                } else if (errorCode == "auth/email-already-in-use") {
+                    alert('Ya existe esta cuenta')
+                } else if (errorCode == 'auth/invalid-email') {
+                    alert('La dirección de correo electrónico es inválida')
+                } else if (errorCode == 'auth/invalid-email') {
+                    alert('La dirección de correo electrónico es inválida')
+                } else {
+                    alert('No hay registro de usuario correspondiente a este identificador. El usuario puede haber sido eliminado.')
+                }
+                console.log(error);
             })
-            .then(()=>{
-              const form = document.querySelector('#register-form');
-                form.reset();
-                alert('Registrado exitosamente');
-                /*
-                document.querySelector('#email2').value = ' ';
-                document.querySelector('#password2').value=' ';
-                document.querySelector('#name').value ='';
-                document.querySelector('#last-name').value=''; */
-            });
-        }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
-            if (errorCode == 'auth/weak-password') {
-                alert('El nivel de seguridad de la contraseña es : débil.');
-            } else if (errorCode == "auth/email-already-in-use") {
-                alert('Ya existe esta cuenta')
-            } else if (errorCode == 'auth/invalid-email') {
-                alert('La dirección de correo electrónico es inválida')
-            } else if (errorCode == 'auth/invalid-email') {
-                alert('La dirección de correo electrónico es inválida')
-            } else {
-                alert('No hay registro de usuario correspondiente a este identificador. El usuario puede haber sido eliminado.')
-            }
-            console.log(error);
-        })
     };
 };
 
@@ -133,7 +133,7 @@ const signInOnSubmitGoogle = () => {
             }
             console.log(error);
         });
-}
+};
 
 const signInOnSubmitFacebook = () => {
     signInWithFacebook()
@@ -169,17 +169,6 @@ const signInOnSubmitFacebook = () => {
 };
 
 
-// Funcion para actualizar un documento de la coleccion users like
-const addCommentToUserDoc = () => { //userId,commentValue
-    const inputCommentUser = document.querySelector('#input-comment').value;
-    console.log(inputCommentUser);
-    const currentUserId = firebase.auth().currentUser.uid;
-    console.log(currentUserId);
-    return firebase.firestore().collection('users').doc(currentUserId).update({
-        'comment': inputCommentUser,
-    });
-};
-
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
@@ -195,56 +184,30 @@ const getUser = () => {
 };
 console.log(getUser);
 
-/*const activeUserObserver = () => {
-    const userName = document.querySelector('#name-user');
-    const userImage = document.querySelector('#image-user');
-    return firebase.auth().onAuthStateChanged((user) => {
-        if (user) { // signed in 
-            console.log(user.uid);
-            const name = user.displayName;
-            // email = user.email;
-            // photoUrl = user.photoURL;
-            console.log(user.displayName);
-            userName.innerHTML = name;
-            //userImage.src = photoURL;
-            firebase.firestore().collection('users').onSnapshot((snapshot) => {
-                console.log(snapshot);
-            }, err => {
-                console.log(err.message)
-            }).catch(err => {
-
-            })
-        } else {
-            // No user is signed in.
-            //setUp()
-            //setupGuides([])
-        }
-    })
-};*/
-//import profileUser from "../view/profile-user.js"
+//Funcion para obtener la data  del usuario registrado
 const getData = (uid) => {
     return firebase.firestore().collection('users').doc(uid).get()
         .then(function(doc) {
 
-            return doc.data();
+            return doc.data(); // data del usuario registrado
 
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
 
+};
 
-
+const addCommentToUserDoc = (event) => {
+    event.preventDefault();
+    const inputComment = document.querySelector("#input-new-comment").value;
+    const currentUser = firebase.auth().currentUser;
+    const userId = currentUser.uid;
+    addPost(inputComment, userId);
 };
 
 
+const
 
-
-/*
-
-/// doc.docs().forEach((doc) => {
-  console.log(doc)
-  //  profileUser(doc);
-})*/
 
 export {
     signInOnSubmit,
@@ -253,8 +216,8 @@ export {
     signInOnSubmitFacebook,
     addCommentToUserDoc,
     signOutUser,
-    //activeUserObserver,
     getUser,
     getData,
+
 
 };
