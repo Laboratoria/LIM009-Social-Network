@@ -1,21 +1,35 @@
 import { components } from '../view/index.js'
-import { getData, getUser } from '../controller/controller1.js'
-const changeview = (route) => {
+import { getData, getUserActive } from '../controller/controller1.js'
+const changeview = (route) => { 
     const root = document.getElementById("root");
+    console.log (route);
     root.innerHTML = '';
     switch (route) {
         case '':
-            { return components.login() };
+             root.appendChild(components.login());
+            break;
         case '#/registro':
-            { return root.appendChild(components.registro()) };
+            root.appendChild(components.registro());
+            break;
         case '#/user-profile':
             {
-                getData(getUser().uid)
-                .then((data) => {
-                    console.log(data)
-                    return root.appendChild(components.profile(data))
-                })
+                const userInfo =(user)=>{
+                    if (user) {
+                         const uid = user.uid;
+                        getData(uid) 
+                        .then((data) => {
+                            root.appendChild(components.profile(data))
+                        })
+                    } else {
+                        console.log("no hay usuario");
+                    }
+
+                
+                }
+                getUserActive(userInfo);
+                
             }
+            break;
         default:
             { return root.appendChild(components.error()) }
     }

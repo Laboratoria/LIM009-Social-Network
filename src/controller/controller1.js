@@ -3,8 +3,8 @@ import {
     signUp,
     signInWithGoogle,
     signInWithFacebook,
-    currentUser,
     signOut,
+ //   getUser
 
 } from "../services/firebase.js";
 
@@ -22,11 +22,7 @@ const signInOnSubmit = () => {
     } else {
         signIn(email, password).then((cred) => {
                 changeHash('#/user-profile');
-                console.log(cred.user.uid);
-                console.log(cred.user)
-
-
-            })
+               })
             .catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -73,12 +69,8 @@ const signUpOnSubmit = () => {
               const form = document.querySelector('#register-form');
                 form.reset();
                 alert('Registrado exitosamente');
-                /*
-                document.querySelector('#email2').value = ' ';
-                document.querySelector('#password2').value=' ';
-                document.querySelector('#name').value ='';
-                document.querySelector('#last-name').value=''; */
-            });
+            })
+            .then(() => changeHash(''));
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -167,8 +159,27 @@ const signInOnSubmitFacebook = () => {
             console.log(error);
         });
 };
+/*
 
+const editProfileUser = ()=>{
 
+    var usuarios = db.collection("users").doc(userId);
+
+    // Set the "capital" field of the city 'DC'
+    return usuarios.update({
+        name: true,
+        email :true,
+        photo : true
+
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+}
 // Funcion para actualizar un documento de la coleccion users like
 const addCommentToUserDoc = () => { //userId,commentValue
     const inputCommentUser = document.querySelector('#input-comment').value;
@@ -178,7 +189,7 @@ const addCommentToUserDoc = () => { //userId,commentValue
     return firebase.firestore().collection('users').doc(currentUserId).update({
         'comment': inputCommentUser,
     });
-};
+};*/
 
 const signOutUser = () => {
     signOut()
@@ -190,37 +201,6 @@ const signOutUser = () => {
         })
 };
 
-const getUser = () => {
-    return firebase.auth().currentUser
-};
-console.log(getUser);
-
-/*const activeUserObserver = () => {
-    const userName = document.querySelector('#name-user');
-    const userImage = document.querySelector('#image-user');
-    return firebase.auth().onAuthStateChanged((user) => {
-        if (user) { // signed in 
-            console.log(user.uid);
-            const name = user.displayName;
-            // email = user.email;
-            // photoUrl = user.photoURL;
-            console.log(user.displayName);
-            userName.innerHTML = name;
-            //userImage.src = photoURL;
-            firebase.firestore().collection('users').onSnapshot((snapshot) => {
-                console.log(snapshot);
-            }, err => {
-                console.log(err.message)
-            }).catch(err => {
-
-            })
-        } else {
-            // No user is signed in.
-            //setUp()
-            //setupGuides([])
-        }
-    })
-};*/
 //import profileUser from "../view/profile-user.js"
 const getData = (uid) => {
     return firebase.firestore().collection('users').doc(uid).get()
@@ -231,30 +211,35 @@ const getData = (uid) => {
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-
-
-
 };
 
-
-
-
-/*
-
-/// doc.docs().forEach((doc) => {
-  console.log(doc)
-  //  profileUser(doc);
-})*/
+// usuario activo 
+const getUserActive = (callback) => { //userinfo()
+    if ( firebase.auth().currentUser){
+      callback(firebase.auth().currentUser) // userinfo recibe al usuario actual
+   }else {
+      const unsuscribe = firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          callback (user)
+        } else {
+         callback (null)
+        }
+    })
+    unsuscribe();
+   // desactiva el observador
+   }
+   
+ };
 
 export {
     signInOnSubmit,
     signUpOnSubmit,
     signInOnSubmitGoogle,
-    signInOnSubmitFacebook,
-    addCommentToUserDoc,
+    signInOnSubmitFacebook,   
     signOutUser,
     //activeUserObserver,
-    getUser,
+ 
     getData,
+    getUserActive
 
 };
