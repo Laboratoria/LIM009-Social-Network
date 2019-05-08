@@ -1,13 +1,12 @@
 import login from "./view/login.js";
 import register  from './view/pagesRegister.js'
-import welcomeUser from './view/welcome-user.js'
+import welcomeUser from './view/welcomeUser.js'
+import { getDataDoc, getUserUid } from "./model/model.js";
 
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return getRoute('#/login');
-  } else if ( hash === '#/registerUser') {
-    return getRoute(hash);
-  } else if ( hash === '#/welcomeUser') {
+  } else if ( hash === '#/registerUser' || hash === '#/welcomeUser' ) {
     return getRoute(hash);
   } else {
     return getRoute('#/login');
@@ -20,13 +19,49 @@ const getRoute = routers => {
   const root = document.getElementById('root');
   root.innerHTML = '';
   switch (router) {
-    case 'login': root.appendChild(login());
-      break;
+    case 'login':
+      root.appendChild(login());
+    break;
     case 'registerUser': root.appendChild(register());
       break;
-    case 'welcomeUser': root.appendChild(welcomeUser());
-      break;
+    case 'welcomeUser': 
+    getDataDoc(getUserUid())
+    .then(data => {
+    return root.appendChild(welcomeUser(data));
+    })
+    break;
   }
+  
+  
+ 
+
+
+
+//   import { components } from '../view/index.js'
+// import { getData, getUser } from '../controller/controller1.js'
+// const changeview = (route) => {
+//     const root = document.getElementById("root");
+//     root.innerHTML = '';
+//     switch (route) {
+//         case '':
+//             { return components.login() };
+//         case '#/registro':
+//             { return root.appendChild(components.registro()) };
+//         case '#/user-profile':
+//             {
+//                 getData(getUser().uid)
+//                 .then((data) => {
+//                     console.log(data)
+//                     return root.appendChild(components.profile(data))
+//                 })
+//             }
+//         default:
+//             { return root.appendChild(components.error()) }
+//     }
+// };
+
+// export { changeview };
+  
   // if (router === 'login') {
   //   root.appendChild(login());
   //   // console.log(login)
