@@ -1,6 +1,5 @@
 import { signInOnSubmit, signInOnSubmitGoogle ,signInOnSubmitFacebook } from "../controller/controller1.js";
 export default () => {
-  const root = document.getElementById("root");
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container");
   divElement.innerHTML = `
@@ -28,7 +27,6 @@ export default () => {
           <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Regístrate</a></p>
       </div>
     </main>`;
-  root.appendChild(divElement);
   const btnSignIn = divElement.querySelector('#btn-sign-in');
   btnSignIn.addEventListener('click', signInOnSubmit);
   const iconGoogle = divElement.querySelector("#icon-google");
@@ -36,7 +34,7 @@ export default () => {
   const iconFacebook = divElement.querySelector("#icon-facebook");
   iconFacebook.addEventListener("click", signInOnSubmitFacebook );
 
-  return root;
+  return divElement;
 };
 
 

@@ -1,11 +1,11 @@
-import { addCommentToUserDoc, signOutUser } from "../controller/controller1.js"
+import {  signOutUser } from "../controller/controller1.js"
 export default (user) => {
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
     divElement.innerHTML = `
 <header class="header">
   <ul class="menu">
-  <li class="small" ><a>MAYTE SOUZA ></a></li>
+  <li class="small" ><a>${user.name} ></a></li>
   <li class="title"><h1>< Breath Life></h1></li>
   <li id ="sign-out" class="small"><a>Cerrar sesión</a></li>
   </ul>
@@ -38,8 +38,8 @@ export default (user) => {
 </main>
 </div>
 `;
-    const shareBtn = divElement.querySelector("#btn-share");
-    shareBtn.addEventListener("click", addCommentToUserDoc);
+    //const shareBtn = divElement.querySelector("#btn-share");
+    //shareBtn.addEventListener("click", addCommentToUserDoc);
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
     //activeUserObserver();
