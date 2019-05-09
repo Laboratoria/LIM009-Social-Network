@@ -1,9 +1,16 @@
 import { components } from '../view/index.js'
+
+import { getData, getUser } from '../controller/controller1.js'
+const changeview = (route) => { 
+    const root = document.getElementById("root");
+    root.innerHTML = ''; 
+
 import { getDataOfUser, getUserActive } from '../controller/controller1.js'
 const changeview = (route) => {
     const root = document.getElementById("root");
     console.log(route);
     root.innerHTML = '';
+
     switch (route) {
         case '':
             root.appendChild(components.login());
@@ -13,6 +20,22 @@ const changeview = (route) => {
             break;
         case '#/user-profile':
             {
+
+                getData(getUser().uid)
+                    .then((data) => {
+                        return root.appendChild(components.profile(data))
+                    })
+            }
+            break
+        case '#/configura':
+            {
+               getData(getUser().uid)
+                .then((data) => {
+                return root.appendChild(components.configurar(data))
+              }) 
+            }
+            break
+
                 const printUserInfo = (user) => {
                     if (user) { // si el  usuario existe
                         const uid = user.uid; // entonces obtenemos el id del usuario
@@ -31,6 +54,7 @@ const changeview = (route) => {
                 // funcion para desactivar el observador despues de haber activado al observador y haber identificado que no existe current user 
             }
             break;
+
         default:
             { return root.appendChild(components.error()) }
     }

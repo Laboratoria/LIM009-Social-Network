@@ -19,7 +19,11 @@ const signInWithFacebook = () => {
     return firebase.auth().signInWithPopup(facebookProvider);
 };
 
+
+
+
 // Cerrar seión
+
 const signOut = () => {
     return firebase.auth().signOut();
 };
@@ -27,6 +31,9 @@ const dataBaseCloudFirestore=()=>{
    return  firebase.firestore();
 };
 
+
+export { signUp, signIn, signInWithGoogle, signInWithFacebook, currentUser, signOut };
+=======
 
 export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut,dataBaseCloudFirestore
  

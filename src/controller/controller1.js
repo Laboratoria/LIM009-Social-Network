@@ -47,8 +47,10 @@ const signInAfterClick = () => {
 
 
 
+
 // cambiar nombre de la funcion **********
 const signUpAfterClick = () => {
+
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
@@ -173,17 +175,29 @@ const signOutUser = () => {
         })
 };
 
+const getUser = () => {
+    return firebase.auth().currentUser;
+
+};
+console.log(getUser);
+
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function(doc) {
 
+            console.log(doc.data());
+            return doc.data();         
+
+
             return doc.data(); // retorna una promesa
+
 
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
 };
+
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
@@ -201,6 +215,7 @@ const getUserActive = (callback) => { //printUserinfo()
    }
    
  };
+
 
 export {
     signInAfterClick,
