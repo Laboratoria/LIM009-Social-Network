@@ -4,7 +4,8 @@ import {
     signInWithGoogle,
     signInWithFacebook,
     signOut,
-    addPost,
+    dataBaseCloudFirestore,
+    
 
 } from "../services/firebase.js";
 
@@ -14,7 +15,7 @@ const changeHash = (hash) => {
 };
 
 
-const signInOnSubmit = () => {
+const signInAfterClick = () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     if (email === '' || password === '') {
@@ -47,57 +48,36 @@ const signInOnSubmit = () => {
 
 
 // cambiar nombre de la funcion **********
-const signUpOnSubmit = () => {
+const signUpAfterClick = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
     const userLastName = document.querySelector('#last-name').value;
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || lastName === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userLastName === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
-            .then((cred) => {
-                console.log(cred.user);
-                return firebase.firestore().collection('users').doc(cred.user.uid).set({
-                        name: userName,
-                        lastName: userLastName,
-                        uid: cred.user.uid,
-                        email: email2,
-                        password: password2,
-                    })
-                    .then(() => {
-                        const form = document.querySelector('#register-form');
-                        form.reset();
-                        alert('Registrado exitosamente');
-                        /*
-                        document.querySelector('#email2').value = ' ';
-                        document.querySelector('#password2').value=' ';
-                        document.querySelector('#name').value ='';
-                        document.querySelector('#last-name').value=''; */
-                    });
-            }).catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorMessage);
-                if (errorCode == 'auth/weak-password') {
-                    alert('El nivel de seguridad de la contraseña es : débil.');
-                } else if (errorCode == "auth/email-already-in-use") {
-                    alert('Ya existe esta cuenta')
-                } else if (errorCode == 'auth/invalid-email') {
-                    alert('La dirección de correo electrónico es inválida')
-                } else if (errorCode == 'auth/invalid-email') {
-                    alert('La dirección de correo electrónico es inválida')
-                } else {
-                    alert('No hay registro de usuario correspondiente a este identificador. El usuario puede haber sido eliminado.')
-                }
-                console.log(error);
+        .then((cred) => { // afinar nombres *********
+            console.log(cred.user);
+            // cambiar el llamado de firebase ********
+            return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
+                name: userName,
+                lastName: userLastName,
+                uid: cred.user.uid,
+                email: email2,
+                password: password2,
             })
-    };
+            .then(()=>{
+              const form = document.querySelector('#register-form');
+                form.reset();
+                alert('Registrado exitosamente');
+            })
+    })
+}
 };
 
-const signInOnSubmitGoogle = () => {
+const signInWithGoogleAfterClick = () => {
     signInWithGoogle()
         .then((result) => {
             changeHash('#/user-profile')
@@ -110,7 +90,7 @@ const signInOnSubmitGoogle = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const userId = user.uid;
-            return firebase.firestore().collection('users').doc(userId).set({
+            return dataBaseCloudFirestore().collection('users').doc(userId).set({
                 name: userName,
                 uid: userId,
                 email: userEmail,
@@ -132,7 +112,7 @@ const signInOnSubmitGoogle = () => {
         });
 };
 
-const signInOnSubmitFacebook = () => {
+const signInWithFacebookAfterClick = () => {
     signInWithFacebook()
         .then((result) => {
             changeHash('#/user-profile');
@@ -146,7 +126,7 @@ const signInOnSubmitFacebook = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const userId = user.uid;
-            return firebase.firestore().collection('users').doc(userId).set({
+            return dataBaseCloudFirestore().collection('users').doc(userId).set({
                 name: userName,
                 uid: userId,
                 email: userEmail,
@@ -164,17 +144,6 @@ const signInOnSubmitFacebook = () => {
             console.log(error);
         });
 };
-/*
-
-const editProfileUser = ()=>{
-
-    var usuarios = db.collection("users").doc(userId);
-
-    // Set the "capital" field of the city 'DC'
-    return usuarios.update({
-        name: true,
-        email :true,
-        photo : true
 
 const signOutUser = () => {
     signOut()
@@ -186,17 +155,12 @@ const signOutUser = () => {
         })
 };
 
-const getUser = () => {
-    return firebase.auth().currentUser
-};
-console.log(getUser);
-
-//Funcion para obtener la data  del usuario registrado
-const getData = (uid) => {
-    return firebase.firestore().collection('users').doc(uid).get()
+//Funcion que retorna la data del usuario (documento con el id del usuario)
+const getDataOfUser = (uid) => {
+    return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function(doc) {
 
-            return doc.data(); // data del usuario registrado
+            return doc.data(); // retorna una promesa
 
         }).catch(function(error) {
             console.log("Error getting document:", error);
@@ -212,19 +176,31 @@ const addCommentToUserDoc = (event) => {
     addPost(inputComment, userId);
 };
 
-
-const
-
+// usuario activo 
+const getUserActive = (callback) => { //printUserinfo()
+    if ( firebase.auth().currentUser){ // si el usuario ha iniciado sesion y existe un current user
+      callback(firebase.auth().currentUser) // printUserinfo() recibe al usuario actual
+   }else {// si el usuario recarga la pagina ,se activa un observador para saber el estado del usuario
+      const unsuscribe = firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {// si se verifica que exite un current user
+          callback (user)// printUserInfo recibe al usuario actual
+        } else { // si no existe un current user
+            unsuscribe(); //entonces se desactiva el observador  // se deberia poner el unsuscribe en esta posicion 
+        }
+    })
+  
+   }
+   
+ };
 
 export {
-    signInOnSubmit,
-    signUpOnSubmit,
-    signInOnSubmitGoogle,
-    signInOnSubmitFacebook,   
+    signInAfterClick,
+    signUpAfterClick,
+    signInWithGoogleAfterClick,
+    signInWithFacebookAfterClick,   
     signOutUser,
-    getUser,
-    getData,
-    getUserActive
+    getDataOfUser,
+    getUserActive,
 
 
-};*/
+};
