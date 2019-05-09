@@ -161,25 +161,21 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function(doc) {
-            console.log(doc.data);
             return doc.data(); // retorna una promesa
-
-
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-
 };
+
 
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
-    console.log(inputComment);
-    console.log(getDataOfUser(currentUser().uid));
+    // console.log(inputComment);
+    // console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
-    const nameUser = currentUser().displayName;
+    const nameUser = currentUser().name;
     console.log(nameUser);
-    console.log(currentUser());
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser, nameUser);
 };

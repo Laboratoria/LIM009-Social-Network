@@ -51,7 +51,6 @@ const getOnePostInRealtime = (callback) => {
         arrOfAllPosts.forEach((onePost) => { // {}
                 onePost; // {}
                 arrOfOnePost.push({ id: onePost.id, ...onePost.data() })
-
             })
             //arrOfOnePost [{}]
         callback(arrOfOnePost)
