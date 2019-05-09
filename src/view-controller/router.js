@@ -30,6 +30,8 @@ const changeview = (route) => {
                 
             }
             break;
+        case '#/edit-profile':
+             root.appendChild(components.editProfiles());
         default:
             { return root.appendChild(components.error()) }
     }

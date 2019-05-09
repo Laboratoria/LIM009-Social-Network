@@ -5,7 +5,16 @@ export default (user) => {
     divElement.innerHTML = `
 <header class="header">
   <ul class="menu">
-  <li class="small" ><a>${user.name} ></a></li>
+  <li class="small" >
+  <select name="DatosPagina">
+
+<option>${user.name}</option>
+
+<option>Editar Perfil </option><a href="#/edit-profile">
+
+<option>Configuracion de la Pagina</option>
+
+</select><a></a></li>
   <li class="title"><h1>< Breath Life></h1></li>
   <li id ="sign-out" class="small"><a>Cerrar sesión</a></li>
   </ul>
@@ -44,11 +53,11 @@ export default (user) => {
     signOutOption.addEventListener("click", signOutUser);
     //activeUserObserver();
 
-    return divElement;
+
 };
 
 
-/*
+/*<a href="#/edit-profile">
 const renderPosts = (doc) => {
   const commentList=document.querySelector("#comment-list"); // elemento ul
   let li = document.createElement('li');
