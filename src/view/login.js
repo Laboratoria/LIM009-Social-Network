@@ -16,7 +16,7 @@ export default () => {
           <button type="button" class="button-acceder redondear boton"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
-          <p>O bien ingresa con:</p><a href="#/user-profile">aqui</a>        
+          <p>O bien ingresa con:</p>   
           <div class="iconos">
             <ul>
               <li>

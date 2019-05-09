@@ -5,9 +5,17 @@ export default (user) => {
     divElement.innerHTML = `
 <header class="header">
   <ul class="menu">
-  <li class="small" ><a>MAYTE SOUZA ></a></li>
+  <li class="small"><div class="nombre-menu"><a class="name-list"> ${user.name} </a></div></li>
+ <li><div class="check">
+  <input type="checkbox"class="Condition" name="" id="">
+  <h2 class="click">|||</h2></li></div>
+  <ul class="submenu">
+        <li><a>Editar Perfil</a></li>
+        <li><a href="#/configura">Configurar cuenta</a></li>
+      </ul>
+  </li>
   <li class="title"><h1>< Breath Life></h1></li>
-  <li id ="sign-out" class="small"><a>Cerrar sesión</a></li>
+  <li id ="sign-out" class=""><a>Cerrar sesión</a></li>
   </ul>
 </header>
 <div class="sub-container">
@@ -47,6 +55,21 @@ export default (user) => {
     return divElement;
 };
 
+/* <li class="small"><a class="name-list"> ${user.name} </a>
+      <ul class="submenu">
+        <li><a>Editar Perfil</a></li>
+        <li><a href="#/configura">Configurar cuenta</a></li>
+      </ul>
+  </li>
+  <li class="title"><h1>< Breath Life></h1></li>
+  <li id ="sign-out" class=""><a>Cerrar sesión</a></li>
+  </ul>
+</header>
+<div class="sub-container">
+<aside class="user-name">
+  <div class="imagen-fondo"><img class="image" src="./css/img/habitos.jpg">
+    <div class="element"><img class="image-photo" id="image-user"src="${user.photo}" >
+      <div class="nombre"><h2 id="name-user">${user.name}</h2></div> */
 
 /*
 const renderPosts = (doc) => {

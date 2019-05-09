@@ -24,8 +24,6 @@ const signInOnSubmit = () => {
                 changeHash('#/user-profile');
                 console.log(cred.user.uid);
                 console.log(cred.user)
-
-
             })
             .catch(function(error) {
                 // Handle Errors here.
@@ -47,9 +45,15 @@ const signInOnSubmit = () => {
             });
     }
 };
-
-
-
+const getObject=(userName,userLastName,)=>{
+    return {
+        name: userName,
+        lastName: userLastName,
+        uid: cred.user.uid,
+        email: email2,
+        password: password2,
+    }
+}
 
 const signUpOnSubmit = () => {
     const email2 = document.querySelector('#email2').value;
@@ -179,7 +183,7 @@ const signOutUser = () => {
         })
 };
 const getUser = () => {
-    return firebase.auth().currentUser
+    return firebase.auth().currentUser;
 
 };
 console.log(getUser);
@@ -214,15 +218,11 @@ console.log(getUser);
 const getData = (uid) => {
     return firebase.firestore().collection('users').doc(uid).get()
         .then(function(doc) {
-
-            return doc.data();
-
+            console.log(doc.data());
+            return doc.data();         
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-
-
-
 };
 
 export {
