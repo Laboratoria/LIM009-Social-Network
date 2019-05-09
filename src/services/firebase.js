@@ -19,16 +19,15 @@ const signInWithFacebook = () => {
     return firebase.auth().signInWithPopup(facebookProvider);
 };
 
-
+// Cerrar seión
 const signOut = () => {
     return firebase.auth().signOut();
 };
-/*
-const getUser = () => {
-    return firebase.auth().currentUser;
+const dataBaseCloudFirestore=()=>{
+   return  firebase.firestore();
 };
-*/
 
-export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut,
-  //  getUser
+
+export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut,dataBaseCloudFirestore
+ 
  };
