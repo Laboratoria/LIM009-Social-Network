@@ -29,11 +29,6 @@ const getUser = () => {
 };
 */
 
-<<<<<<< HEAD
-export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut,
-  //  getUser
- };
-=======
 
 // Crear un post con el contenido del post y el id del usuario
 export const addPost = (textNewNote, uidUser) =>
@@ -61,4 +56,3 @@ export const getPost = (callback) =>
     });
 
 export { signUp, signIn, signInWithGoogle, signInWithFacebook, currentUser, signOut };
->>>>>>> 15eee775739425b276453f74f93aa3cece5d0130
