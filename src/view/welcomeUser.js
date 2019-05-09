@@ -1,14 +1,22 @@
+// import {signOut} from '../lib/lib-firebase.js'
+ 
 export default (user) => {
-    const welcome = document.createElement('div');
+    const root = document.getElementById('root')
     const templateWelcome = `
-   <p>Nombre del usuario</p>
-   <span>${user.name}</span>
-   <p>E-mail</p>
-   <span>${user.email}</span>
+    <div>
+    <p>Nombre del usuario</p>
+    <span>${user.displayName}</span>
+    <p>E-mail</p>
+    <span>${user.email}</span>
+    <p>Foto</p>
+    <img src='${user.photoURL}'>
+    </div>
     `;
-welcome.innerHTML = templateWelcome;
-return welcome;
+root.innerHTML = templateWelcome;
+return root;
 };
+
+
 
 
 

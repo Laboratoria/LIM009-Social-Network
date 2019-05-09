@@ -1,5 +1,4 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword } from "../lib/lib-firebase.js";
-import { dataBaseUser } from '../model/model.js'
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -10,7 +9,7 @@ export const registerUser = () => {
   const passwordRegister = document.querySelector('#password-register').value;
   return createEmailAndPassword(emailRegister, passwordRegister)
     .then((result) => {
-      dataBaseUser(result.user);
+      // dataBaseUser(result.user);
       alert('Registro con éxito')
     }).catch(error => {
       // Handle Errors here.
@@ -50,9 +49,9 @@ export const email = () => {
 };
 
 export const google = () => {
-  return signInWithGoogle().then(result => {
-    dataBaseUser(result.user)
-  }).catch(error => {
+  return signInWithGoogle().then(() => 
+  changeHash('/welcomeUser'))
+  .catch(error => {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/cancelled-popup-request') {
@@ -70,9 +69,9 @@ export const google = () => {
 }
 
 export const facebook = () => {
-  return signInWithFacebook().then(result => {
-    dataBaseUser(result.user);
-  }).catch(error => {
+  return signInWithFacebook().then(() => 
+    changeHash('/welcomeUser')
+  ).catch(error => {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/cancelled-popup-request') {

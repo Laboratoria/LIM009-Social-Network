@@ -1,7 +1,18 @@
-import login from "./view/login.js";
+import login from "./view/login.js"
 import register  from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
-import { getDataDoc, getUserUid } from "./model/model.js";
+
+
+const infoUser = () => {
+  firebase.auth().onAuthStateChanged(user => {
+    // console.log(user);
+      if(user) {
+      welcomeUser(user);
+      } else {
+      welcomeUser();
+      }
+  })
+};
 
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
@@ -14,7 +25,6 @@ const changeTmp = (hash) => {
 }
 
 const getRoute = routers => {
-  //   console.log(route);
   const router = routers.substr(2, routers.length - 2)
   const root = document.getElementById('root');
   root.innerHTML = '';
@@ -24,41 +34,28 @@ const getRoute = routers => {
     break;
     case 'registerUser': root.appendChild(register());
       break;
-    case 'welcomeUser': 
-    getDataDoc(getUserUid())
-    .then(data => {
-    return root.appendChild(welcomeUser(data));
-    })
+    case 'welcomeUser': infoUser();
+    // getDataDoc(getUserUid())
+    // .then(data => {
+    // return root.appendChild(welcomeUser(data));
+    // })
     break;
   }
-  
+};
+
+
+
+export const setRoute = () => {
+  window.addEventListener('load', changeTmp(window.location.hash))
+  if (("onhashchange" in window)) window.onhashchange = () => changeTmp(window.location.hash)
+  // return window.addEventListener("load", getRoute(location.href));
+};
+
   
  
 
 
 
-//   import { components } from '../view/index.js'
-// import { getData, getUser } from '../controller/controller1.js'
-// const changeview = (route) => {
-//     const root = document.getElementById("root");
-//     root.innerHTML = '';
-//     switch (route) {
-//         case '':
-//             { return components.login() };
-//         case '#/registro':
-//             { return root.appendChild(components.registro()) };
-//         case '#/user-profile':
-//             {
-//                 getData(getUser().uid)
-//                 .then((data) => {
-//                     console.log(data)
-//                     return root.appendChild(components.profile(data))
-//                 })
-//             }
-//         default:
-//             { return root.appendChild(components.error()) }
-//     }
-// };
 
 // export { changeview };
   
@@ -81,13 +78,7 @@ const getRoute = routers => {
   //     root.appendChild(login);
   //     break;
   // }
-};
 
-export const setRoute = () => {
-  window.addEventListener('load', changeTmp(window.location.hash))
-  if (("onhashchange" in window)) window.onhashchange = () => changeTmp(window.location.hash)
-  // return window.addEventListener("load", getRoute(location.href));
-};
 
 /* import Inite from './templates/pagInite.js';
 import Login from './templates/pagLogin.js';
