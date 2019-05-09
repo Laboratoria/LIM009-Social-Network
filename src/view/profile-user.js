@@ -28,7 +28,7 @@ export default (user) => {
 <ul id="comment-list" class="comment-post box">
     <li>
     <div >Publicado por Mayte</div>
-    <div class="text-comment">"Amo esta frase:Eres el error que estoy dispuesto a cometer"</div>
+    <div id="input-new-comment"class="text-comment">"Amo esta frase:Eres el error que estoy dispuesto a cometer"</div>
     <div><i class="fab fa-gratipay"></i>
     <i class="fas fa-paper-plane"></i></div>
     <button id="btn-delete"class="share boton">Eliminar</button></div>
@@ -42,8 +42,6 @@ export default (user) => {
     //shareBtn.addEventListener("click", addCommentToUserDoc);
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
-    //activeUserObserver();
-
     return divElement;
 };
 

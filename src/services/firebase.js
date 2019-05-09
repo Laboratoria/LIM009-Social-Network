@@ -29,6 +29,36 @@ const getUser = () => {
 };
 */
 
+<<<<<<< HEAD
 export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut,
   //  getUser
  };
+=======
+
+// Crear un post con el contenido del post y el id del usuario
+export const addPost = (textNewNote, uidUser) =>
+    firebase.firestore().collection('posts').doc(uidUser).set({
+        content: textNewNote,
+        likes: 0,
+        idUser: uidUser,
+        state: false,
+
+    })
+    //Elimina un post
+export const deletePost = (idPost) =>
+    firebase.firestore().collection('posts').doc(idPost).delete()
+
+
+//Obteniedo cada document  post de firebase para posteriormente crear un array de posts
+export const getPost = (callback) =>
+    firebase.firestore().collection('posts')
+    .onSnapshot((querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            data.push({ id: doc.id, ...doc.data() })
+        });
+        callback(data); // [{},{},{}]
+    });
+
+export { signUp, signIn, signInWithGoogle, signInWithFacebook, currentUser, signOut };
+>>>>>>> 15eee775739425b276453f74f93aa3cece5d0130

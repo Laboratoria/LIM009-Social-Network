@@ -4,7 +4,7 @@ import {
     signInWithGoogle,
     signInWithFacebook,
     signOut,
- //   getUser
+    addPost,
 
 } from "../services/firebase.js";
 
@@ -13,7 +13,7 @@ const changeHash = (hash) => {
     location.hash = hash;
 };
 
-/* import { signUpWithGoogle } from "../services/firebase.js"  */
+
 const signInOnSubmit = () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
@@ -57,40 +57,43 @@ const signUpOnSubmit = () => {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
-        .then((cred) => { // afinar nombres *********
-            console.log(cred.user);
-            // cambiar el llamado de firebase ********
-            return firebase.firestore().collection('users').doc(cred.user.uid).set({
-                name: userName,
-                lastName: userLastName,
-                uid: cred.user.uid,
-                email: email2,
-                password: password2,
+            .then((cred) => {
+                console.log(cred.user);
+                return firebase.firestore().collection('users').doc(cred.user.uid).set({
+                        name: userName,
+                        lastName: userLastName,
+                        uid: cred.user.uid,
+                        email: email2,
+                        password: password2,
+                    })
+                    .then(() => {
+                        const form = document.querySelector('#register-form');
+                        form.reset();
+                        alert('Registrado exitosamente');
+                        /*
+                        document.querySelector('#email2').value = ' ';
+                        document.querySelector('#password2').value=' ';
+                        document.querySelector('#name').value ='';
+                        document.querySelector('#last-name').value=''; */
+                    });
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+                if (errorCode == 'auth/weak-password') {
+                    alert('El nivel de seguridad de la contraseña es : débil.');
+                } else if (errorCode == "auth/email-already-in-use") {
+                    alert('Ya existe esta cuenta')
+                } else if (errorCode == 'auth/invalid-email') {
+                    alert('La dirección de correo electrónico es inválida')
+                } else if (errorCode == 'auth/invalid-email') {
+                    alert('La dirección de correo electrónico es inválida')
+                } else {
+                    alert('No hay registro de usuario correspondiente a este identificador. El usuario puede haber sido eliminado.')
+                }
+                console.log(error);
             })
-            .then(()=>{
-              const form = document.querySelector('#register-form');
-                form.reset();
-                alert('Registrado exitosamente');
-            })
-            .then(() => changeHash(''));
-        }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
-            if (errorCode == 'auth/weak-password') {
-                alert('El nivel de seguridad de la contraseña es : débil.');
-            } else if (errorCode == "auth/email-already-in-use") {
-                alert('Ya existe esta cuenta')
-            } else if (errorCode == 'auth/invalid-email') {
-                alert('La dirección de correo electrónico es inválida')
-            } else if (errorCode == 'auth/invalid-email') {
-                alert('La dirección de correo electrónico es inválida')
-            } else {
-                alert('No hay registro de usuario correspondiente a este identificador. El usuario puede haber sido eliminado.')
-            }
-            console.log(error);
-        })
     };
 };
 
@@ -127,7 +130,7 @@ const signInOnSubmitGoogle = () => {
             }
             console.log(error);
         });
-}
+};
 
 const signInOnSubmitFacebook = () => {
     signInWithFacebook()
@@ -173,26 +176,6 @@ const editProfileUser = ()=>{
         email :true,
         photo : true
 
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-}
-// Funcion para actualizar un documento de la coleccion users like
-const addCommentToUserDoc = () => { //userId,commentValue
-    const inputCommentUser = document.querySelector('#input-comment').value;
-    console.log(inputCommentUser);
-    const currentUserId = firebase.auth().currentUser.uid;
-    console.log(currentUserId);
-    return firebase.firestore().collection('users').doc(currentUserId).update({
-        'comment': inputCommentUser,
-    });
-};*/
-
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
@@ -203,34 +186,35 @@ const signOutUser = () => {
         })
 };
 
-//import profileUser from "../view/profile-user.js"
+const getUser = () => {
+    return firebase.auth().currentUser
+};
+console.log(getUser);
+
+//Funcion para obtener la data  del usuario registrado
 const getData = (uid) => {
     return firebase.firestore().collection('users').doc(uid).get()
         .then(function(doc) {
 
-            return doc.data();
+            return doc.data(); // data del usuario registrado
 
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
+
 };
 
-// usuario activo 
-const getUserActive = (callback) => { //userinfo()
-    if ( firebase.auth().currentUser){
-      callback(firebase.auth().currentUser) // userinfo recibe al usuario actual
-   }else {
-      const unsuscribe = firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          callback (user)
-        } else {
-            unsuscribe(); // ********* se deberia poner el unsuscribe en esta posicion
-        }
-    })
-   // desactiva el observador
-   }
-   
- };
+const addCommentToUserDoc = (event) => {
+    event.preventDefault();
+    const inputComment = document.querySelector("#input-new-comment").value;
+    const currentUser = firebase.auth().currentUser;
+    const userId = currentUser.uid;
+    addPost(inputComment, userId);
+};
+
+
+const
+
 
 export {
     signInOnSubmit,
@@ -238,9 +222,9 @@ export {
     signInOnSubmitGoogle,
     signInOnSubmitFacebook,   
     signOutUser,
-    //activeUserObserver,
- 
+    getUser,
     getData,
     getUserActive
+
 
 };
