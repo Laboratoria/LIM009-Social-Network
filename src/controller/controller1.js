@@ -224,10 +224,9 @@ const getUserActive = (callback) => { //userinfo()
         if (user) {
           callback (user)
         } else {
-         callback (null)
+            unsuscribe(); // ********* se deberia poner el unsuscribe en esta posicion
         }
     })
-    unsuscribe();
    // desactiva el observador
    }
    
