@@ -46,18 +46,20 @@ const signInOnSubmit = () => {
 
 
 
-
+// cambiar nombre de la funcion **********
 const signUpOnSubmit = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
     const userLastName = document.querySelector('#last-name').value;
-    if (email2 === '' || password2 === '') {
+    // cambios *******
+    if (email2 === '' || password2 === '' || userName === '' || lastName === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
-        .then((cred) => {
+        .then((cred) => { // afinar nombres *********
             console.log(cred.user);
+            // cambiar el llamado de firebase ********
             return firebase.firestore().collection('users').doc(cred.user.uid).set({
                 name: userName,
                 lastName: userLastName,
@@ -222,10 +224,9 @@ const getUserActive = (callback) => { //userinfo()
         if (user) {
           callback (user)
         } else {
-         callback (null)
+            unsuscribe(); // ********* se deberia poner el unsuscribe en esta posicion
         }
     })
-    unsuscribe();
    // desactiva el observador
    }
    
