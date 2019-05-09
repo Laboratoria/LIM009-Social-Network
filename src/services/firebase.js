@@ -23,11 +23,40 @@ const signInWithFacebook = () => {
 const signOut = () => {
     return firebase.auth().signOut();
 };
-const dataBaseCloudFirestore=()=>{
-   return  firebase.firestore();
+const dataBaseCloudFirestore = () => {
+    return firebase.firestore();
+};
+const currentUser = () => {
+    return firebase.auth().currentUser
+};
+
+const addPostToCloudFirestore = (inputComment, userId,userName) =>
+    dataBaseCloudFirestore().collection('posts').add({
+        author:userName,
+        content: inputComment,
+        id: userId,
+        state: false,
+        likes: 0,
+    });
+
+
+const getOnePostInRealtime = (callback) => {
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts)=>{ // [{},{},{}] c/object representa un post diferente
+        const arrOfOnePost=[];
+arrOfAllPosts.forEach((onePost)=>{// {}
+    onePost ;// {}
+    arrOfOnePost.push({ id:onePost.id,... onePost.data()})
+
+})
+//arrOfOnePost [{}]
+callback(arrOfOnePost)
+});
+
 };
 
 
-export { signUp, signIn, signInWithGoogle, signInWithFacebook, signOut,dataBaseCloudFirestore
- 
- };
+export {
+    signUp, signIn, signInWithGoogle, signInWithFacebook, signOut, dataBaseCloudFirestore,
+    currentUser, addPostToCloudFirestore,getOnePostInRealtime
+};
+

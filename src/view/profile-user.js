@@ -1,8 +1,10 @@
-import {  signOutUser } from "../controller/controller1.js"
+import { signOutUser, createPostInCloudFirestore } from "../controller/controller1.js"
+import { getOnePostInRealtime } from "../services/firebase.js"
+
 export default (user) => {
-    const divElement = document.createElement("div");
-    divElement.setAttribute("class", "container-view-profile");
-    divElement.innerHTML = `
+  const divElement = document.createElement("div");
+  divElement.setAttribute("class", "container-view-profile");
+  divElement.innerHTML = `
 <header class="header">
   <ul class="menu">
   <li class="small" ><a>${user.name} ></a></li>
@@ -27,72 +29,47 @@ export default (user) => {
 </form>
 <ul id="comment-list" class="comment-post box">
     <li>
-    <div >Publicado por Mayte</div>
-    <div id="input-new-comment"class="text-comment">"Amo esta frase:Eres el error que estoy dispuesto a cometer"</div>
+    <div id="comment-author" >Publicado por Mayte</div>
+    <div id="comment-content"class="text-comment">"Amo esta frase:Eres el error que estoy dispuesto a cometer"</div>
     <div><i class="fab fa-gratipay"></i>
-    <i class="fas fa-paper-plane"></i></div>
-    <button id="btn-delete"class="share boton">Eliminar</button></div>
+    <i class="fas fa-paper-plane"></i>
+    <button id="btn-delete"class="share boton">Eliminar</button>
+    </div>
+    
     </li>
 
 </ul>
 </main>
 </div>
 `;
-    //const shareBtn = divElement.querySelector("#btn-share");
-    //shareBtn.addEventListener("click", addCommentToUserDoc);
-    const signOutOption = divElement.querySelector("#sign-out");
-    signOutOption.addEventListener("click", signOutUser);
-    return divElement;
+  const shareBtn = divElement.querySelector("#btn-share");
+  shareBtn.addEventListener("click", () => {
+    createPostInCloudFirestore();
+    getOnePostInRealtime(renderOnePost) // Primero se obtiene el arrOfOnePost [{}]
+    //despues se le pasa como parametro al callback(renderOnePost) 
+    //cuando se ejecuta el callback(renderOnePost) se imprime la info de un post
+    
+  });
+  const signOutOption = divElement.querySelector("#sign-out");
+  signOutOption.addEventListener("click", signOutUser);
+  return divElement;
 };
 
 
-/*
-const renderPosts = (doc) => {
-  const commentList=document.querySelector("#comment-list"); // elemento ul
+//Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha
+const renderOnePost = (post) => { // [{}]
+  const commentList = document.querySelector("#comment-list"); // elemento ul
   let li = document.createElement('li');
-  li.innerHTML=` 
-  <div id="comment-author">Publicado por Mayte</div>
-  <div id="comment" class="text-comment">"Amo esta frase:Eres el error que estoy dispuesto a cometer"</div>
+  li.innerHTML = ` 
+  <div id="comment-author">${post[0].author}</div>
+  <div id="comment-content" id="${post[0].id}" class="text-comment">${post[0].content}</div>
   <div>
   <i class="fab fa-gratipay"></i>
   <i class="fas fa-paper-plane"></i>
-  </div>`;
-  li.setAttribute('data-id', doc.id);
-  const author=document.querySelector('#comment-author');
-  const comment=document.querySelector('#comment');
-  author.setAttribute('data-name', doc.name);
-  comment.setAttribute('data-comment', doc.id);
-  comment.textContent = doc.data().comment;
-  author.textContent = doc.data().name;
- return commentList.appendChild(li);
+  <button id="btn-delete"class="share boton" id="${post[0].id}">Eliminar</button>
+  </div>
+ `;
+  li.setAttribute('data-id', post[0].id);
+  return commentList.appendChild(li); // que imprima una un post ,que se añada al ul element
 
-};*/
-//CREANDO FUNCION PNARA QUE PAAREZCA UNA LISTA 
-//Create element and render posts 
-
-
-/*
-//GETTING DATA FROM FIRESTORE
-db.collection('Users').get().then((snapshot)=>{
-  snapshot.doc.forEach((doc)=>{
-  renderPosts(doc);
-  })
-  });*/
-
-/*
-  const commentList=document.querySelector("#comment-list");
-  const form=document.querySelector("#add-comment-form");
-
-  
-  
-//  saving data  // add a document  // add a property comment to the user document
-form.addEventListener('submit',(e)=>{
-  e.preventDefault();
-  db.collection('users').update({
-    comment:form.comment.value,
-
-  });
-  form.comment.value="";
-  
-  
-});*/
+};

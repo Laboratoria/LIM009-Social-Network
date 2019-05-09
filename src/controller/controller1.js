@@ -5,6 +5,8 @@ import {
     signInWithFacebook,
     signOut,
     dataBaseCloudFirestore,
+    currentUser,
+    addPostToCloudFirestore,
     
 
 } from "../services/firebase.js";
@@ -168,12 +170,15 @@ const getDataOfUser = (uid) => {
 
 };
 
-const addCommentToUserDoc = (event) => {
+const createPostInCloudFirestore = () => {
     event.preventDefault();
-    const inputComment = document.querySelector("#input-new-comment").value;
-    const currentUser = firebase.auth().currentUser;
-    const userId = currentUser.uid;
-    addPost(inputComment, userId);
+    const inputComment = document.querySelector("#input-comment").value;
+    console.log(inputComment);
+    const idUser = currentUser().uid;
+    const nameUser=currentUser().displayName;
+    console.log(currentUser());
+    console.log(idUser);
+   return  addPostToCloudFirestore(inputComment,idUser,nameUser);
 };
 
 // usuario activo 
@@ -201,6 +206,7 @@ export {
     signOutUser,
     getDataOfUser,
     getUserActive,
+    createPostInCloudFirestore,
 
 
 };
