@@ -96,6 +96,16 @@
     height: 30px;
     width: 30px;
 }
+.nombre-menu{
+    display: none;
+}
+.menu >li{
+    float: left;
+}
+.Condition{
+    position: absolute;
+	left: -40px;
+} 
 
 @media(min-width:768px) {
     .sub-container{
@@ -136,6 +146,34 @@
     }
     .menu .title {
         width: 69%;
+    }
+    .small .name-list, .submenu li a {
+        padding: 10px 15px;
+        display: block;
+        border: 1px solid black;
+        background-color: aliceblue;
+        width: 220px;
+    }      
+    .submenu {
+         display: none; 
+         position: absolute; 
+         width: 140px;
+    }
+    
+    .small:hover > .submenu {
+        display: block;
+    }
+    
+    .menu .small ul li {
+        position:relative;
+    }
+    
+    .small li ul{
+       /*  right:-140px; */
+        top:0px;
+    }
+    .check{
+        display: none;
     }
 
 }

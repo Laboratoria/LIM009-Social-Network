@@ -2,9 +2,9 @@ import { signOutUser, createPostInCloudFirestore } from "../controller/controlle
 import { getOnePostInRealtime } from "../services/firebase.js"
 
 export default (user) => {
-  const divElement = document.createElement("div");
-  divElement.setAttribute("class", "container-view-profile");
-  divElement.innerHTML = `
+    const divElement = document.createElement("div");
+    divElement.setAttribute("class", "container-view-profile");
+    divElement.innerHTML = `
 <header class="header">
   <ul class="menu">
   <li class="small" ><a>${user.name} ></a></li>
@@ -42,25 +42,25 @@ export default (user) => {
 </main>
 </div>
 `;
-  const shareBtn = divElement.querySelector("#btn-share");
-  shareBtn.addEventListener("click", () => {
-    createPostInCloudFirestore();
-    getOnePostInRealtime(renderOnePost) // Primero se obtiene el arrOfOnePost [{}]
-    //despues se le pasa como parametro al callback(renderOnePost) 
-    //cuando se ejecuta el callback(renderOnePost) se imprime la info de un post
-    
-  });
-  const signOutOption = divElement.querySelector("#sign-out");
-  signOutOption.addEventListener("click", signOutUser);
-  return divElement;
+    const shareBtn = divElement.querySelector("#btn-share");
+    shareBtn.addEventListener("click", () => {
+        createPostInCloudFirestore();
+        getOnePostInRealtime(renderOnePost) // Primero se obtiene el arrOfOnePost [{}]
+            //despues se le pasa como parametro al callback(renderOnePost) 
+            //cuando se ejecuta el callback(renderOnePost) se imprime la info de un post
+
+    });
+    const signOutOption = divElement.querySelector("#sign-out");
+    signOutOption.addEventListener("click", signOutUser);
+    return divElement;
 };
 
 
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha
 const renderOnePost = (post) => { // [{}]
-  const commentList = document.querySelector("#comment-list"); // elemento ul
-  let li = document.createElement('li');
-  li.innerHTML = ` 
+    const commentList = document.querySelector("#comment-list"); // elemento ul
+    let li = document.createElement('li');
+    li.innerHTML = ` 
   <div id="comment-author">${post[0].author}</div>
   <div id="comment-content" id="${post[0].id}" class="text-comment">${post[0].content}</div>
   <div>
@@ -69,7 +69,7 @@ const renderOnePost = (post) => { // [{}]
   <button id="btn-delete"class="share boton" id="${post[0].id}">Eliminar</button>
   </div>
  `;
-  li.setAttribute('data-id', post[0].id);
-  return commentList.appendChild(li); // que imprima una un post ,que se añada al ul element
+    li.setAttribute('data-id', post[0].id);
+    return commentList.appendChild(li); // que imprima una un post ,que se añada al ul element
 
 };

@@ -99,7 +99,7 @@ a {
     padding-top: 20%;
 }
 
-li {
+ul, li {
     list-style: none;
 }
 
@@ -107,6 +107,7 @@ li {
     height: 32px;
     width: 32px;
 }
+
 
 @media(min-width:768px) {
     .general {
@@ -128,8 +129,7 @@ li {
     .formulario {
         height: 40%;
     }
-    .Name,
-    .last-Name {
+    .Name, .last-Name {
         width: 40%;
         display: inline-block;
     }
@@ -138,5 +138,8 @@ li {
     }
     .parrafo {
         padding-top: 10%;
+    }
+    .nombre-menu{
+        display: block;
     }
 }

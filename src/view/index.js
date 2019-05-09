@@ -1,3 +1,4 @@
+
 import Login from './login.js';
 import Register from '../view/register.js';
 import Error404 from '../view/error.js';
@@ -11,3 +12,4 @@ const components = {
 }
 
 export { components }
+

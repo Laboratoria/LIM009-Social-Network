@@ -1,3 +1,4 @@
+
 import { signInAfterClick, signInWithGoogleAfterClick,
   signInWithFacebookAfterClick } from "../controller/controller1.js";
 export default () => {
