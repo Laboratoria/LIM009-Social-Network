@@ -1,6 +1,7 @@
-import { signInOnSubmit, signInOnSubmitGoogle ,signInOnSubmitFacebook } from "../controller/controller1.js";
+
+import { signInAfterClick, signInWithGoogleAfterClick,
+  signInWithFacebookAfterClick } from "../controller/controller1.js";
 export default () => {
-  const root = document.getElementById("root");
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container");
   divElement.innerHTML = `
@@ -16,7 +17,7 @@ export default () => {
           <button type="button" class="button-acceder redondear boton"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
-          <p>O bien ingresa con:</p>   
+          <p>O bien ingresa con:</p><a href="#/user-profile">aqui</a>        
           <div class="iconos">
             <ul>
               <li>
@@ -28,15 +29,14 @@ export default () => {
           <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Regístrate</a></p>
       </div>
     </main>`;
-  root.appendChild(divElement);
   const btnSignIn = divElement.querySelector('#btn-sign-in');
-  btnSignIn.addEventListener('click', signInOnSubmit);
+  btnSignIn.addEventListener('click', signInAfterClick);
   const iconGoogle = divElement.querySelector("#icon-google");
-  iconGoogle.addEventListener("click",signInOnSubmitGoogle );
+  iconGoogle.addEventListener("click",signInWithGoogleAfterClick );
   const iconFacebook = divElement.querySelector("#icon-facebook");
-  iconFacebook.addEventListener("click", signInOnSubmitFacebook );
+  iconFacebook.addEventListener("click", signInWithFacebookAfterClick );
 
-  return root;
+  return divElement;
 };
 
 

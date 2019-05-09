@@ -1,19 +1,10 @@
-import { addCommentToUserDoc, signOutUser } from "../controller/controller1.js"
+import {  signOutUser } from "../controller/controller1.js"
 export default (user) => {
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
     divElement.innerHTML = `
 <header class="header">
   <ul class="menu">
-  <li class="small"><div class="nombre-menu"><a class="name-list"> ${user.name} </a></div></li>
- <li><div class="check">
-  <input type="checkbox"class="Condition" name="" id="">
-  <h2 class="click">|||</h2></li></div>
-  <ul class="submenu">
-        <li><a>Editar Perfil</a></li>
-        <li><a href="#/configura">Configurar cuenta</a></li>
-      </ul>
-  </li>
   <li class="title"><h1>< Breath Life></h1></li>
   <li id ="sign-out" class=""><a>Cerrar sesión</a></li>
   </ul>
@@ -46,8 +37,8 @@ export default (user) => {
 </main>
 </div>
 `;
-    const shareBtn = divElement.querySelector("#btn-share");
-    shareBtn.addEventListener("click", addCommentToUserDoc);
+    //const shareBtn = divElement.querySelector("#btn-share");
+    //shareBtn.addEventListener("click", addCommentToUserDoc);
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
     //activeUserObserver();

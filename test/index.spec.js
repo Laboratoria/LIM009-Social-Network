@@ -53,7 +53,7 @@ describe('signInWithGoogle', () => {
   it('debería ser una función', () => {
     expect(typeof signInWithFacebook).toBe('function');
   });
-  it('Debería poder iniciar sesion con Google', () => {
+  it('Debería poder iniciar sesion con Facebook', () => {
     return signInWithFacebook()
       .then((user) => {
         expect().toEqual();
