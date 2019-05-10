@@ -2,7 +2,6 @@ import { components } from '../view/index.js'
 import { getDataOfUser, getUserActive } from '../controller/controller1.js'
 const changeview = (route) => {
     const root = document.getElementById("root");
-    console.log(route);
     root.innerHTML = '';
     switch (route) {
         case '':
@@ -18,7 +17,7 @@ const changeview = (route) => {
                         const uid = user.uid; // entonces obtenemos el id del usuario
                         getDataOfUser(uid)  //  retorna una promesa ,en algun momento obtendremos el {} data del usuario
                             .then((data) => { // cuando la promesa este resuelta(cuando obtengamos el {} data del usuario)
-                                root.appendChild(components.profile(data))// imprimeros el perfil del usuario
+                                root.appendChild(components.profile(data));// imprimeros el perfil del usuario
                             })
                     } else {
                         console.log("no hay usuario");
@@ -32,7 +31,20 @@ const changeview = (route) => {
             }
             break;
         case '#/edit-profile':
-             root.appendChild(components.editProfiles());
+                const printUserInfo = (user) => {
+                    if (user) { // si el  usuario existe
+                        const uid = user.uid; // entonces obtenemos el id del usuario
+                        getDataOfUser(uid)  //  retorna una promesa ,en algun momento obtendremos el {} data del usuario
+                            .then((data) => { // cuando la promesa este resuelta(cuando obtengamos el {} data del usuario)
+                            root.appendChild(components.editProfiles());// imprimeros el perfil del usuario
+                            })
+                    } else {
+                        console.log("no hay usuario");
+                    }
+
+
+                }                       // printUserInfo es el callback
+                getUserActive(printUserInfo)
         default:
             { return root.appendChild(components.error()) }
     }

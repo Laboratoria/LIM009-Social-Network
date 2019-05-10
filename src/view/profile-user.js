@@ -10,7 +10,7 @@ export default (user) => {
 
 <option>${user.name}</option>
 
-<option>Editar Perfil </option><a href="#/edit-profile">
+<option>Editar Perfil <a href="#/edit-profile"></option>
 
 <option>Configuracion de la Pagina</option>
 

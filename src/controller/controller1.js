@@ -177,9 +177,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function(doc) {
-
             return doc.data(); // retorna una promesa
-
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
@@ -197,10 +195,7 @@ const getUserActive = (callback) => { //printUserinfo()
             unsuscribe(); //entonces se desactiva el observador  // se deberia poner el unsuscribe en esta posicion 
         }
     })
-<<<<<<< HEAD
-=======
   
->>>>>>> e81bba25b416534f18899b4736c8654eecf10837
    }
    
  };
