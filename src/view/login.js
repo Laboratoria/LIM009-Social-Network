@@ -1,4 +1,7 @@
-import { signInOnSubmit, signInOnSubmitGoogle ,signInOnSubmitFacebook } from "../controller/controller1.js";
+import {     signInAfterClick,
+  signInWithGoogleAfterClick,
+  signInWithFacebookAfterClick
+} from "../controller/controller1.js";
 export default () => {
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container");
@@ -28,11 +31,11 @@ export default () => {
       </div>
     </main>`;
   const btnSignIn = divElement.querySelector('#btn-sign-in');
-  btnSignIn.addEventListener('click', signInOnSubmit);
+  btnSignIn.addEventListener('click', signInAfterClick);
   const iconGoogle = divElement.querySelector("#icon-google");
-  iconGoogle.addEventListener("click",signInOnSubmitGoogle );
+  iconGoogle.addEventListener("click",signInWithGoogleAfterClick );
   const iconFacebook = divElement.querySelector("#icon-facebook");
-  iconFacebook.addEventListener("click", signInOnSubmitFacebook );
+  iconFacebook.addEventListener("click", signInWithFacebookAfterClick );
 
   return divElement;
 };

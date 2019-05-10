@@ -1,4 +1,4 @@
-import { signUpOnSubmit } from "../controller/controller1.js";
+import { signUpAfterClick } from "../controller/controller1.js";
 
 export default () => {
   const divElement = document.createElement("div");
@@ -22,7 +22,7 @@ export default () => {
       </div>
     </main>`;
   const registerClick = divElement.querySelector("#btn-sign-up");
-  registerClick.addEventListener("click", signUpOnSubmit);
+  registerClick.addEventListener("click", signUpAfterClick);
   return divElement;
 };
 

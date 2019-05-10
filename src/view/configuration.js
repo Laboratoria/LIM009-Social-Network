@@ -1,6 +1,5 @@
 import {  signOutUser } from "../controller/controller1.js"
 
-
 export default (user) => {
   const elemento = document.createElement("div");
  // elemento.setAttribute("class", "container");
@@ -25,6 +24,5 @@ export default (user) => {
 </div> `;
 const signOutOption = divElement.querySelector("#sign-out");
 signOutOption.addEventListener("click", signOutUser);
-
 return elemento;
 };
