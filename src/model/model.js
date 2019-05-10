@@ -1,4 +1,45 @@
 
+let db = firebase.firestore();
+
+//Set Up data
+
+const createPost = () => {
+
+}
+
+
+
+// Get data
+
+db.collection(posts).get().then(snapshot => {
+     createPost (console.log(snapshot.docs))
+});
+
+
+
+
+
+
+db.collection("cities").add({
+    name: "Tokyo",
+    country: "Japan"
+})
+.then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+})
+.catch(function(error) {
+    console.error("Error adding document: ", error);
+});
+
+
+
+
+
+
+
+
+
+
 // export const dataBaseUser = user => {
 //     let db = firebase.firestore();
 //         return db.collection('users').doc(`${user.uid}`).set({
