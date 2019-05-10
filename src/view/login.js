@@ -1,6 +1,4 @@
-
-import { signInAfterClick, signInWithGoogleAfterClick,
-  signInWithFacebookAfterClick } from "../controller/controller1.js";
+import { signInOnSubmit, signInOnSubmitGoogle ,signInOnSubmitFacebook } from "../controller/controller1.js";
 export default () => {
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container");
@@ -9,7 +7,7 @@ export default () => {
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
     <main class="right ancho">
-    <h1> < Breath Life > </h1>
+    <h1> Breath Life  </h1>
     <h3> Respira salud, respira vida </h3>
       <form action="" class="formulario acceder">
           <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
@@ -30,11 +28,11 @@ export default () => {
       </div>
     </main>`;
   const btnSignIn = divElement.querySelector('#btn-sign-in');
-  btnSignIn.addEventListener('click', signInAfterClick);
+  btnSignIn.addEventListener('click', signInOnSubmit);
   const iconGoogle = divElement.querySelector("#icon-google");
-  iconGoogle.addEventListener("click",signInWithGoogleAfterClick );
+  iconGoogle.addEventListener("click",signInOnSubmitGoogle );
   const iconFacebook = divElement.querySelector("#icon-facebook");
-  iconFacebook.addEventListener("click", signInWithFacebookAfterClick );
+  iconFacebook.addEventListener("click", signInOnSubmitFacebook );
 
   return divElement;
 };

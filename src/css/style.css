@@ -64,7 +64,7 @@ body {
     -webkit-border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    background-color: rgb(159, 187, 252);
+    background-color: #4C97FF;
 }
 
 .button-acceder {
@@ -99,15 +99,14 @@ a {
     padding-top: 20%;
 }
 
-ul, li {
+li {
     list-style: none;
 }
 
 .icon-network {
-    height: 32px;
-    width: 32px;
+    height: 40px;
+    width: 40px;
 }
-
 
 @media(min-width:768px) {
     .general {
@@ -129,7 +128,8 @@ ul, li {
     .formulario {
         height: 40%;
     }
-    .Name, .last-Name {
+    .Name,
+    .last-Name {
         width: 40%;
         display: inline-block;
     }
@@ -138,8 +138,5 @@ ul, li {
     }
     .parrafo {
         padding-top: 10%;
-    }
-    .nombre-menu{
-        display: block;
     }
 }
