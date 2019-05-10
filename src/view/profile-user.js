@@ -1,6 +1,6 @@
 import { signOutUser, createPostInCloudFirestore } from "../controller/controller1.js"
 
-const renderOnePost = (post) => { // [{}]
+const renderOnePost = (post) => { // {}
     console.log(post);
 
     let label = document.createElement('div');
