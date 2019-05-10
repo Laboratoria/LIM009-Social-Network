@@ -19,7 +19,8 @@ const changeview = (route) => {
                             const uid = user.uid; // entonces obtenemos el id del usuario
                             getDataOfUser(uid) //  retorna una promesa ,en algun momento obtendremos el {} data del usuario
                                 .then((dataUser) => { // cuando la promesa este resuelta(cuando obtengamos el {} dataUser del usuario)
-                                    getOnePostInRealtime((arrPosts) => {
+                                console.log(dataUser)    
+                                getOnePostInRealtime((arrPosts) => {
                                         root.innerHTML = '';
                                         root.appendChild(components.profile(dataUser, arrPosts)) // imprimeros el perfil del usuario
                                     })
