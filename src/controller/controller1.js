@@ -95,10 +95,8 @@ const signInOnSubmitGoogle = () => {
                 email: userEmail,
                 photo: userPhoto,
             });
-
-
         })
-        .catch(function(error) {
+        .catch((error)=> {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -116,11 +114,10 @@ const signInOnSubmitFacebook = () => {
         .then((result) => {
             changeHash('#/user-profile');
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            var token = result.credential.accessToken;
+            let token = result.credential.accessToken;
             console.log(token);
             // The signed-in user info.
-            var user = result.user;
-
+            let user = result.user;
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
@@ -133,8 +130,8 @@ const signInOnSubmitFacebook = () => {
             });
         }).catch(function(error) {
             // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            let errorCode = error.code;
+            let errorMessage = error.message;
             if (errorCode == 'auth/weak-password') {
                 alert('The password is too weak.');
             } else {
@@ -143,37 +140,6 @@ const signInOnSubmitFacebook = () => {
             console.log(error);
         });
 };
-/*
-
-const editProfileUser = ()=>{
-
-    var usuarios = db.collection("users").doc(userId);
-
-    // Set the "capital" field of the city 'DC'
-    return usuarios.update({
-        name: true,
-        email :true,
-        photo : true
-
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-}
-// Funcion para actualizar un documento de la coleccion users like
-const addCommentToUserDoc = () => { //userId,commentValue
-    const inputCommentUser = document.querySelector('#input-comment').value;
-    console.log(inputCommentUser);
-    const currentUserId = firebase.auth().currentUser.uid;
-    console.log(currentUserId);
-    return firebase.firestore().collection('users').doc(currentUserId).update({
-        'comment': inputCommentUser,
-    });
-};*/
 
 const signOutUser = () => {
     signOut()
