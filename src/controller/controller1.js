@@ -168,7 +168,7 @@ const createPostInCloudFirestore = () => {
     // console.log(inputComment);
     // console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
-    const nameUser = currentUser().name;
+    const nameUser = currentUser().displayName;
     console.log(nameUser);
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser, nameUser);
