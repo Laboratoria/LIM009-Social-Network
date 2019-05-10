@@ -23,11 +23,8 @@ const changeview = (route) => {
                     } else {
                         console.log("no hay usuario");
                     }
-
-                
                 }
-                getUserActive(userInfo);
-                
+                getUserActive(userInfo); 
             }
             break;
         case '#/configuration':

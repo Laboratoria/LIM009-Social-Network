@@ -200,9 +200,7 @@ const signOutUser = () => {
 const getData = (uid) => {
     return firebase.firestore().collection('users').doc(uid).get()
         .then(function(doc) {
-
             return doc.data();
-
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
@@ -222,8 +220,7 @@ const getUserActive = (callback) => { //userinfo()
     })
     unsuscribe();
    // desactiva el observador
-   }
-   
+   } 
  };
 
 export {
