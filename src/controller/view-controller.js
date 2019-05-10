@@ -1,4 +1,4 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword } from "../lib/lib-firebase.js";
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut} from "../lib/lib-firebase.js";
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -88,6 +88,29 @@ export const facebook = () => {
   });
 }
 
-/*export const newVista = () => {
-  changeHash('/welcomeUser');
-}*/
+
+export const logOut = () => {
+  return signOut()
+  .then(() => {
+    changeHash('/login')
+  }).catch((err) => {
+    console.log(err.message);
+  }); 
+}
+
+
+//Crear post con IDs por defecto
+export const createPost = (description) => {
+  let db = firebase.firestore();
+    db.collection("posts").add({
+        description: description,
+    })
+    .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+        // description.reset();
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+}
+

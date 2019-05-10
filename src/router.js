@@ -2,14 +2,12 @@ import login from "./view/login.js"
 import register  from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
 
-
 const infoUser = () => {
   firebase.auth().onAuthStateChanged(user => {
-    // console.log(user);
       if(user) {
       welcomeUser(user);
       } else {
-      welcomeUser();
+      welcomeUser(null);
       }
   })
 };
