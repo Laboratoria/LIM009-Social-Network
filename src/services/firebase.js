@@ -45,15 +45,15 @@ const addPostToCloudFirestore = (inputComment, userId, userName) =>
     });;
 
 
-const getOnePostInRealtime = (callback) => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => { // [{},{},{}] c/object representa un post diferente
-        const arrOfOnePost = [];
-        arrOfAllPosts.forEach((onePost) => { // {}
-                onePost; // {}
-                arrOfOnePost.push({ id: onePost.id, ...onePost.data() })
-            })
-            //arrOfOnePost [{}]
-        callback(arrOfOnePost)
+const getPostsInRealtime = (callback) => {
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+        const arrOfPosts = [];
+        arrOfAllPosts.forEach((onePost) => {
+            onePost;
+            arrOfPosts.push({ id: onePost.id, ...onePost.data() })
+        })
+
+        callback(arrOfPosts)
     });
 
 };
@@ -68,5 +68,5 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    getOnePostInRealtime
+    getPostsInRealtime
 };
