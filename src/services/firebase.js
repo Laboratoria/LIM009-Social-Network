@@ -19,25 +19,54 @@ const signInWithFacebook = () => {
     return firebase.auth().signInWithPopup(facebookProvider);
 };
 
-const currentUser = () => {
-    var user = firebase.auth().currentUser;
-    if (user != null) {
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-        return uid;
-    }
-};
-
-
+// Cerrar seión
 const signOut = () => {
     return firebase.auth().signOut();
 };
+const dataBaseCloudFirestore = () => {
+    return firebase.firestore();
+};
+const currentUser = () => {
+    return firebase.auth().currentUser
+};
+
+const addPostToCloudFirestore = (inputComment, userId, userName) =>
+    dataBaseCloudFirestore().collection('posts').add({
+        author: userName,
+        content: inputComment,
+        id: userId,
+        state: false,
+        likes: 0,
+    }).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });;
 
 
+const getOnePostInRealtime = (callback) => {
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => { // [{},{},{}] c/object representa un post diferente
+        const arrOfOnePost = [];
+        arrOfAllPosts.forEach((onePost) => { // {}
+                onePost; // {}
+                arrOfOnePost.push({ id: onePost.id, ...onePost.data() })
+            })
+            //arrOfOnePost [{}]
+        callback(arrOfOnePost)
+    });
 
-export { signUp, signIn, signInWithGoogle, signInWithFacebook, currentUser, signOut };
+};
+
+
+export {
+    signUp,
+    signIn,
+    signInWithGoogle,
+    signInWithFacebook,
+    signOut,
+    dataBaseCloudFirestore,
+    currentUser,
+    addPostToCloudFirestore,
+    getOnePostInRealtime
+};

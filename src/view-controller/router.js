@@ -1,8 +1,10 @@
 import { components } from '../view/index.js'
-import { getData, getUserActive } from '../controller/controller1.js'
-const changeview = (route) => { 
+import { getDataOfUser, getUserActive } from '../controller/controller1.js'
+import { getOnePostInRealtime } from "../services/firebase.js"
+
+const changeview = (route) => {
     const root = document.getElementById("root");
-    console.log (route);
+    console.log(route);
     root.innerHTML = '';
     switch (route) {
         case '':
@@ -13,22 +15,27 @@ const changeview = (route) => {
             break;
         case '#/user-profile':
             {
-                const userInfo =(user)=>{
-                    if (user) {
-                         const uid = user.uid;
-                        getData(uid) 
-                        .then((data) => {
-                            root.appendChild(components.profile(data))
-                        })
-                    } else {
-                        console.log("no hay usuario");
-                    }
-                }
-                getUserActive(userInfo); 
+                const printUserInfo = (user) => {
+                        if (user) { // si el  usuario existe
+                            const uid = user.uid; // entonces obtenemos el id del usuario
+                            getDataOfUser(uid) //  retorna una promesa ,en algun momento obtendremos el {} data del usuario
+                                .then((dataUser) => { // cuando la promesa este resuelta(cuando obtengamos el {} dataUser del usuario)
+                                    getOnePostInRealtime((arrPosts) => {
+                                        root.innerHTML = '';
+                                        root.appendChild(components.profile(dataUser, arrPosts)) // imprimeros el perfil del usuario
+                                    })
+                                })
+                        } else {
+                            console.log("no hay usuario");
+                        }
+
+
+                    } // printUserInfo es el callback
+                getUserActive(printUserInfo); // funcion para aplicar el callback al usuario actual   
+                // funcion para aplicar el callback al usuario actual ,despues de haber activado al observador (al momento de recargar) y verificar que existe un current user
+                // funcion para desactivar el observador despues de haber activado al observador y haber identificado que no existe current user 
             }
             break;
-        case '#/configuration':
-            root.appendChild(components.config());
         default:
             { return root.appendChild(components.error()) }
     }
