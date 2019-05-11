@@ -52,16 +52,14 @@ export const getDataCreat = users => {
     return docRef.get().then(function (doc) {
         if (doc.exists) {
             return doc.data()
-            console.log("Document data:", doc.data());
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
-    }).catch(function (error) {
+    }).catch(error => {
         console.log("Error getting document:", error);
     });
 }
-//actualizar
+// Actualizar perfil del usuario
 
 
 export const updateDatos = (user, name, email) => {
@@ -69,11 +67,10 @@ export const updateDatos = (user, name, email) => {
     db.collection("users-rrss").doc(`${user}`).update({
         name: name,
         email: email
-    })
-        .then(function () {
+    }).then( () => {
             alert('Tus datos fueron actualizados exitosamente!')
             console.log("Document successfully updated!");
-        }).catch(error => alert('Upps hubo un error! '));
+        }).catch(error => alert('Upps hubo un error! ', error));
 }
 
 export const updateDatosCreate = (user, name, email) => {
@@ -82,10 +79,10 @@ export const updateDatosCreate = (user, name, email) => {
         name: name,
         email: email
     })
-        .then(function () {
+        .then( () => {
             alert('Tus datos fueron actualizados exitosamente!')
             console.log("Document successfully updated!");
-        }).catch(error => alert('Upps hubo un error! '));
+        }).catch(error => alert('Upps hubo un error! ',error));
 }
 
 

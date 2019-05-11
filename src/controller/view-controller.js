@@ -72,6 +72,7 @@ export const google = () => {
 
 export const facebook = () => {
   return signInWithFacebook().then(result => {
+    console.log(result);
     dataBaseUser(result.user);
   }).catch(error => {
     var errorCode = error.code;
