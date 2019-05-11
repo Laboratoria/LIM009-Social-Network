@@ -174,7 +174,7 @@ const createPostInCloudFirestore = () => {
     // console.log(inputComment);
     // console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
-    const nameUser = currentUser().name;
+    const nameUser = currentUser().displayName;
     console.log(nameUser);
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser, nameUser);
@@ -182,11 +182,11 @@ const createPostInCloudFirestore = () => {
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
-    if (firebase.auth().currentUser) { // si el usuario ha iniciado sesion y existe un current user
-        callback(firebase.auth().currentUser) // printUserinfo() recibe al usuario actual
+    if (currentUser()) { // si el usuario ha iniciado sesion y existe un current user
+        callback(currentUser()) // printUserinfo() recibe al usuario actual
     } else { // si el usuario recarga la pagina ,se activa un observador para saber el estado del usuario
-        const unsuscribe = firebase.auth().onAuthStateChanged(function(user) {
-            if (user) { // si se verifica que exite un current user
+        const unsuscribe = firebase.auth().onAuthStateChanged((user) => {
+            if (user) { // si se verifica que existe un current user
                 callback(user) // printUserInfo recibe al usuario actual
             } else { // si no existe un current user
                 unsuscribe(); //entonces se desactiva el observador  // se deberia poner el unsuscribe en esta posicion 

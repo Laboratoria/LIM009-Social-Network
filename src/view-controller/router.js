@@ -1,6 +1,6 @@
 import { components } from '../view/index.js'
 import { getDataOfUser, getUserActive } from '../controller/controller1.js'
-import { getOnePostInRealtime } from "../services/firebase.js"
+import { getPostsInRealtime } from "../services/firebase.js"
 
 const changeview = (route) => {
     const root = document.getElementById("root");
@@ -19,8 +19,12 @@ const changeview = (route) => {
                             const uid = user.uid; // entonces obtenemos el id del usuario
                             getDataOfUser(uid) //  retorna una promesa ,en algun momento obtendremos el {} data del usuario
                                 .then((dataUser) => { // cuando la promesa este resuelta(cuando obtengamos el {} dataUser del usuario)
+<<<<<<< HEAD
                                 console.log(dataUser)    
                                 getOnePostInRealtime((arrPosts) => {
+=======
+                                    getPostsInRealtime((arrPosts) => {
+>>>>>>> 23c2d62a0b89f1916d447c58269ec06dcb29a7bd
                                         root.innerHTML = '';
                                         root.appendChild(components.profile(dataUser, arrPosts)) // imprimeros el perfil del usuario
                                     })
