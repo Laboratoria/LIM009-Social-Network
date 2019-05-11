@@ -32,13 +32,8 @@ const currentUser = () => {
 
 const addPostToCloudFirestore = (inputComment, userId, userName) =>
     dataBaseCloudFirestore().collection('posts').add({
-<<<<<<< HEAD
-        author: userName,
-        content:  ,
-=======
         name: userName,
         content: inputComment,
->>>>>>> 23c2d62a0b89f1916d447c58269ec06dcb29a7bd
         id: userId,
         state: false,
         likes: 0,
