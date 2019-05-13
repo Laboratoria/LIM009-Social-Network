@@ -1,12 +1,7 @@
-
-
- //Set Up data
+//Set Up data
 //Recorrer la colección de post 
 // const getPost = () => {
-
 // }
-
-
 
 // Get data
 // Leer lo que estás obteniendo de la función getPost

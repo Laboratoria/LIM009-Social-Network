@@ -12,16 +12,12 @@ html {
     height: 100%;
 }
 body {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
-    height: 100%;
+    justify-content: center  
 }
-.container{
-    margin: auto; /*centrado*/
-    width: auto;
-    }
 
  .center{
     margin:auto;

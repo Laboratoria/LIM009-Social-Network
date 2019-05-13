@@ -88,7 +88,6 @@ export const facebook = () => {
   });
 }
 
-
 export const logOut = () => {
   return signOut()
   .then(() => {
@@ -98,19 +97,41 @@ export const logOut = () => {
   }); 
 }
 
-
 //Crear post con IDs por defecto
-export const createPost = (description) => {
+export const createPost = () => {
+let description = document.querySelector('#description').value;
   let db = firebase.firestore();
     db.collection("posts").add({
         description: description,
+        state: 'Público',
+        likes: 0
     })
-    .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-        // description.reset();
+    .then(() => {
+      document.getElementById('create-post').reset();
+      console.log("Document written succesfully");        
     })
-    .catch(function(error) {
+    .catch((error) => {
         console.error("Error adding document: ", error);
     });
-}
+};
 
+/*let db = firebase.firestore();
+db.collection('posts').get.then(snapshot => {
+  console.log(snapshot.docs)
+});*/
+
+export const setUpPost = (data) => {
+  let html = '';
+  const postList = document.querySelector('#post-list');
+  data.forEach(doc => {
+    const post = doc.data();
+    const li = `
+    <li>
+      <p>${post.description}</p>
+    </li>
+    `;
+    html += li;
+  });
+
+  return postList.innerHTML = html;
+}

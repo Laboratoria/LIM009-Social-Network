@@ -7,7 +7,7 @@ export default (user) => {
     <header>
         <ul class = 'header'>
             <li><a href='#'>${user.displayName}</a></li>
-            <li><img src="../image/apego.jpg"></li>
+            <li><img src=""></li>
             <li><a id='sign-out'>Cerrar Sesión</a></li>
         </ul>
     </header>
@@ -19,17 +19,18 @@ export default (user) => {
     <p>Foto</p>
     <img src='${user.photoURL}'>
     </div>
-    <div>
-    <p>Crear una publicación</p>
-    <input id= 'description' placeholder='¿Qué estás pensando?'></input>
-    <button type = 'button' id ='btn-share'>Compartir</button>
-    </div>
+    <form id= 'create-post'>
+        <label>Crear una publicación</label>
+        <input type = 'text' id = 'description' placeholder='¿Qué estás pensando?'></input>
+        <button type = 'button' id ='btn-share'>Compartir</button>
+    </form>
+    <li id='post-list'>
+    </li>
     `;
     root.innerHTML = templateWelcome;
     const btnSignOut = document.querySelector('#sign-out');
     btnSignOut.addEventListener('click', logOut);
-    const btnSharePost = document.querySelector('#btn-share');
-    const description = document.getElementById('description').value;
-    btnSharePost.addEventListener('click', createPost(description));
+    const btnSharePost = document.querySelector('#btn-share');   
+    btnSharePost.addEventListener('click', createPost);
     return root;
 };

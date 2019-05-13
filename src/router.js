@@ -1,13 +1,18 @@
 import login from "./view/login.js"
 import register  from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
+import { setUpPost } from "./controller/view-controller.js";
 
 const infoUser = () => {
   firebase.auth().onAuthStateChanged(user => {
       if(user) {
-      welcomeUser(user);
+        let db = firebase.firestore();
+        db.collection('posts').onSnapshot(snapshot => {
+        setUpPost(snapshot.docs);
+        });
+        welcomeUser(user);
       } else {
-      welcomeUser(null);
+        welcomeUser(null);
       }
   })
 };

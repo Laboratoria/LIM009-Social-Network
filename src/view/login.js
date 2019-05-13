@@ -5,7 +5,7 @@ export default () => {
   const templateFormLogin = `
   <div class= 'col-12 col-xs-12'>
   <aside class = 'col-lg-6 col-xs-12 center'>
-  <header><img src="./image/apego.jpg" alt="educacion" class='block center'>
+  <header><img src="./image/portada1.jpeg" alt="educacion" class='block center'>
   </aside>
   <form class= 'col-lg-6 col-xs-12 center'>
   <img src="./image/logo.png" alt="educacion" class='block center'>
@@ -25,6 +25,7 @@ export default () => {
   </div>
   `;
   formLogin.innerHTML = templateFormLogin;
+  //formLogin.classList.add('page-login');
   const btnSingIn = formLogin.querySelector("#btn-sing-in");
   const btnFacebook = formLogin.querySelector('#btn-facebook');
   const btnGoogle = formLogin.querySelector('#btn-google');
