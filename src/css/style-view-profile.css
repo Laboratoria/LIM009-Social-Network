@@ -1,6 +1,6 @@
 .header {
     background-color: #313a52;
-    height: 25%;
+    height: 50px;
     width: 100%;
     color: white;
     padding-top: 1%;
@@ -8,13 +8,13 @@
 
 .sub-container {
     position: absolute;
-    top: 8%;
+    top: 10%;
     margin: auto;
 }
 
 .user-name {
     height: auto;
-    margin: 3% 10% 0% 10%;
+    margin: 3% 5% 5% 5%;
     outline: 2px solid gray;
 }
 
@@ -27,7 +27,7 @@
 
 .imagen-fondo {
     width: 100%;
-    height: 70%;
+    height: 50%;
 }
 
 .imagen-fondo .image {
@@ -41,12 +41,13 @@
     -webkit-border-radius: 50%;
     border-radius: 50%;
     float: left;
-    margin: 1% 1% 1% 8%;
+    margin: 8%;
 }
 
 .element {
-    height: 30%;
+    height: 50%;
     width: 100%;
+    font-size: 80%;
 }
 
 .nombre {
@@ -55,6 +56,10 @@
     float: right;
     text-align: left;
     margin: 7% 1% 0% 0%;
+}
+
+.photo {
+    padding-top: 6px;
 }
 
 .menu {
@@ -66,36 +71,37 @@
     display: inline-block;
 }
 
+
 .menu .small {
     width: 15%;
 }
 
 .menu .title {
     width: 60%;
-}
+} 
 
 .box {
     margin: 5% 10%;
     width: 80%;
-    height: 145px;
+    height: 150px;
     display: block;
     outline: 2px solid gray;
 }
 
 .post-zone {
+    margin-top: 5%;
     height: auto;
-}
-
-.comment-post {
-    height: 170px;
-    text-align: left;
 }
 
 .text-write,
 .text-comment {
     width: 80%;
-    height: 70px;
+    height: 50px;
     margin: 3% 10%;
+}
+
+.text-write {
+    height: 85px;
 }
 
 .text-comment {
@@ -153,22 +159,33 @@
         height: auto;
         margin: auto;
     }
+
     .header {
         height: 60px;
         margin-bottom: 5%;
     }
+
     .user-name {
         width: 45%;
         position: relative;
         float: left;
         margin: 0;
     }
+
     .post-zone {
         width: 54%;
         position: relative;
         float: right;
     }
-    .menu {
+
+    .box {
+        height: 165px;        
+    }
+    .text-write,
+.text-comment {
+    height: 70px;
+}
+    /*   .menu {
         width: 100%;
         text-align: center;
     }
@@ -202,8 +219,6 @@
     }
     .small li ul {
         /*  right:-140px; */
-        top: 0px;
-    }
     .check {
         display: none;
     }

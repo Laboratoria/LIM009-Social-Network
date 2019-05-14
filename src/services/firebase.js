@@ -30,11 +30,11 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, userId, userName) =>
+const addPostToCloudFirestore = (inputComment, idUser, userName) =>
     dataBaseCloudFirestore().collection('posts').add({
-        name: userName,
+        author: userName,
         content: inputComment,
-        id: userId,
+        userId: idUser,
         state: false,
         likes: 0,
     }).then(function(docRef) {
@@ -52,7 +52,6 @@ const getPostsInRealtime = (callback) => {
             onePost;
             arrOfPosts.push({ id: onePost.id, ...onePost.data() })
         })
-
         callback(arrOfPosts)
     });
 

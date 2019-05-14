@@ -23,7 +23,8 @@ const signInAfterClick = () => {
     if (email === '' || password === '') {
         alert('Completa tus datos para ingresar');
     } else {
-        signIn(email, password).then((cred) => {
+        signIn(email, password)
+        .then((cred) => {
                 changeHash('#/user-profile');
             })
             .catch(function(error) {
@@ -65,10 +66,10 @@ const signUpAfterClick = () => {
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
                         name: userName,
-                        lastName: userLastName,
-                        uid: cred.user.uid,
+                        photo: userLastName,
+                        userId: cred.user.uid,
                         email: email2,
-                        password: password2,
+                       // password: password2,
                     })
                     .then(() => {
                         const form = document.querySelector('#register-form');
@@ -91,10 +92,10 @@ const signInWithGoogleAfterClick = () => {
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
-            const userId = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(userId).set({
+            const idUser = user.uid;
+            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
                 name: userName,
-                uid: userId,
+                userId: idUser,
                 email: userEmail,
                 photo: userPhoto,
             });
@@ -127,10 +128,10 @@ const signInWithFacebookAfterClick = () => {
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
-            const userId = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(userId).set({
+            const idUser = user.uid;
+            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
                 name: userName,
-                uid: userId,
+                userId: idUser,
                 email: userEmail,
                 photo: userPhoto,
             });
@@ -161,6 +162,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function(doc) {
+            console.log(doc.data())
             return doc.data(); // retorna una promesa
         }).catch(function(error) {
             console.log("Error getting document:", error);
@@ -172,8 +174,9 @@ const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
     // console.log(inputComment);
-    // console.log(getDataOfUser(currentUser().uid));
+    //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
+    console.log(currentUser());
     const nameUser = currentUser().displayName;
     console.log(nameUser);
     console.log(idUser);

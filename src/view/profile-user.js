@@ -1,22 +1,29 @@
-import { signOutUser, createPostInCloudFirestore } from "../controller/controller1.js"
+import { signOutUser, createPostInCloudFirestore } from "../controller/controller1.js" ;
 
 const renderOnePost = (post) => { // {}
-    console.log(post);
 
     let label = document.createElement('div');
-    label.innerHTML = ` 
+    label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${post.author}</div>
-  <div id="${post.id}" class="text-comment">${post.content}</div>
+  <div id="${post.userId}" class="text-comment">${post.content}</div>
   <div class="icons-like">
       <i class="fab fa-gratipay"></i>
       <i class="fas fa-paper-plane"></i></div>
-      <button  id="${post.id}" class="share boton">Eliminar</button>
+      <button id="${post.userId}" class="share boton">Eliminar</button>
  `;
-    label.setAttribute('class', "new-comment");
+    label.setAttribute('class', "box");
     return label // que imprima una un post ,que se añada al ul element
 };
 
 export default (user, posts) => {
+    let photoUrl='';
+    if(user.photo!==''||user.photo!==null){
+        photoUrl=user.photo;
+
+    }else{
+        photoUrl= "../css/img/usuario.png";
+    }
+    console.log(photoUrl)
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
     divElement.innerHTML = `
@@ -36,8 +43,7 @@ export default (user, posts) => {
     <aside class="user-name">
         <div class="imagen-fondo"><img class="image"
                 src="./css/img/cell.jpg">
-            <div class="element"><img class="image-photo"
-                    id="image-user" src="${user.photo}">
+            <div class="element"><img class="image-photo" id="image-user" src="${photoUrl}" alt="default photo">
                 <div class="nombre"><h2 id="name-user">${user.name}</h2><p>${user.email}</p></div>
             </div>
         </div>
@@ -49,13 +55,12 @@ export default (user, posts) => {
                 <img class="icon-photograph"
                 src="./css/img/6799.png_860.png">
             <button id="btn-share" class="share boton">Compartir</button></div>
-        <div id="comment-list" class="comment-post box">
-    
-          
+        <div id="comment-list" >        
         </div>
     </main>
 </div>
 `;
+//class="comment-post box"
     const divCommentList = divElement.querySelector("#comment-list");
 
     const shareBtn = divElement.querySelector("#btn-share");
