@@ -17,12 +17,13 @@ const renderOnePost = (post) => { // {}
 
 export default (user, posts) => {
     let photoUrl='';
-    if(user.photo!==''||user.photo!==null){
-        photoUrl=user.photo;
-
-    }else{
-        photoUrl= "../css/img/usuario.png";
-    }
+        try {
+          new URL(user.photo);
+          photoUrl=user.photo;
+        } catch (_) {
+            photoUrl= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
+        }
+      
     console.log(photoUrl)
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
