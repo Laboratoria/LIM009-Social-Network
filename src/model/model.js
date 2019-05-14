@@ -1,3 +1,18 @@
+
+export const updatePerfilUser = (user, name) => {
+
+    return user.updateProfile({
+        displayName: `${name}`
+
+    })
+}
+export const updateEmailUser = (user, email) => {
+    // var user = firebase.auth().currentUser;
+    // console.log(email, user)
+
+    return user.updateEmail(`${email}`)
+}
+
 //Set Up data
 //Recorrer la colección de post 
 // const getPost = () => {

@@ -1,5 +1,5 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
-
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
+import { updatePerfilUser, updateEmailUser } from '../model/model.js'
 const changeHash = (hash) => {
   location.hash = hash;
 }
@@ -141,3 +141,23 @@ export const setUpPost = (data) => {
   return postList.innerHTML = html;
 }
 
+export const editPErfilUser = (idUser, name, email) => {
+  updatePerfilUser(idUser, name).then(() => {
+    // Update successful.
+    alert('Nombre se actualizó correctamente')
+    updateEmailUser(idUser, email).then(() => {
+      // Update successful.
+      alert('Email se actualizó correctamente')
+    }).catch((error) => {
+      // An error happened.
+      alert(error + 'Actualización Ha ocurrido un error. en email..')
+    });
+  }).catch((error) => {
+    // An error happened.
+    if (error === 'Error: This operation is sensitive and requires recent authentication. Log in again before retrying this request.Actualización Ha ocurrido un error. en email..') {
+      alert('esta operación es confidencial y requiere autenticación reciente. Vuelva a iniciar sesión antes de volver a intentar esta solicitud de Actualización ')
+    } else {
+      alert('Actualización Ha ocurrido un error. en nombre..')
+    }
+  });
+}

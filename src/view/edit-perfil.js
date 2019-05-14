@@ -1,3 +1,5 @@
+import { editPErfilUser } from '../controller/view-controller.js'
+import { getUserReady } from "../lib/lib-firebase.js";
 export default () => {
     const formPerfil = document.createElement('form');
     const templateEditPerf = `
@@ -35,5 +37,15 @@ export default () => {
         `
         ;
     formPerfil.innerHTML = templateEditPerf;
+    const name = formPerfil.querySelector('#name-user-edit');
+    const email = formPerfil.querySelector('#email-email-edit');
+    const btnEdit = formPerfil.querySelector('#btn-edit');
+
+    const getUserIdEdit = (idUser) => {
+        btnEdit.addEventListener('click', () => {
+            editPErfilUser(idUser, name.value, email.value)
+        })
+    }
+    getUserReady(getUserIdEdit);
     return formPerfil
 }

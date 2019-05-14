@@ -12,6 +12,7 @@ const infoUser = () => {
         setUpPost(snapshot.docs);
       });
       welcomeUser(user);
+
     } else {
       welcomeUser(null);
     }
