@@ -5,7 +5,7 @@ const renderOnePost = (post) => { // {}
 
     let label = document.createElement('div');
     label.innerHTML = ` 
-  <div id="comment-author" class='encabezado'>Publicado por ${post.author}</div>
+  <div id="comment-author" class='encabezado'>Publicado por ${post.name}</div>
   <div id="${post.id}" class="text-comment">${post.content}</div>
   <div class="icons-like">
       <i class="fab fa-gratipay"></i>
@@ -22,10 +22,10 @@ export default (user, posts) => {
     divElement.innerHTML = `
     <header class="header">
     <ul class="menu">
-        <li class="small"><a>${user.name} ></a>
+        <li class="small"><p>${user.name}</p>
             <ul>
                 <li><a>Configurar cuenta</a></li>
-                <li><a>Editar Perfil</a></li>
+                <li>Editar Perfil<a>#/edit-profile</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
