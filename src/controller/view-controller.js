@@ -100,11 +100,13 @@ export const logOut = () => {
 //Crear post con IDs por defecto
 export const createPost = () => {
 let description = document.querySelector('#description').value;
+let userName = document.querySelector('#user-name').textContent;
   let db = firebase.firestore();
     db.collection("posts").add({
         description: description,
         state: 'Público',
-        likes: 0
+        likes: 0,
+        user: userName     
     })
     .then(() => {
       document.getElementById('create-post').reset();
@@ -127,7 +129,10 @@ export const setUpPost = (data) => {
     const post = doc.data();
     const li = `
     <li>
+      <p>Publicado por ${post.user}</p>
       <p>${post.description}</p>
+      <img class ='btn-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
+      <img class ='btn-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete'>
     </li>
     `;
     html += li;
@@ -135,3 +140,4 @@ export const setUpPost = (data) => {
 
   return postList.innerHTML = html;
 }
+

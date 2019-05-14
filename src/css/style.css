@@ -45,9 +45,16 @@ body {
      width: 30%;
      border-radius: 7px;
 }
-.btn-rss{
+.btn-rss, .btn-post{
     margin-top: 2%;
     margin-right: 3%;
+    height: 36px;
+    width: 36px
+}
+
+.btn-post {
+    margin-top: 1%;
+    margin-right: 1%
 }
 
 button:hover{

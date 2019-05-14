@@ -6,7 +6,7 @@ export default (user) => {
     const templateWelcome = `
     <header>
         <ul class = 'header'>
-            <li><a href='#'>${user.displayName}</a></li>
+            <li><a id='user-name' href='#'>${user.displayName}</a></li>
             <li><img src=""></li>
             <li><a id='sign-out'>Cerrar Sesión</a></li>
         </ul>

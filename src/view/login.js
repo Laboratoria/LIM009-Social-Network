@@ -16,8 +16,8 @@ export default () => {
     <button type="button" id="btn-sing-in" class='center style-btn-login block border' >Log in</button>
     <p>De manera opcional ingresa con : </p>
     <span class = 'center'>
-      <img id="btn-google" class='btn-rss' alt="icono de google" height="36" width="36" src="./css/google-plus.png"/>
-      <img id="btn-facebook" class='btn-rss' alt="icono de facebook" height="36" width="36" src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png"/>
+      <img id="btn-google" class='btn-rss' alt="icono de google" src="./css/google-plus.png"/>
+      <img id="btn-facebook" class='btn-rss' alt="icono de facebook"  src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png"/>
     </span>
   </article>
     <footer><span><p class= 'style-register'>Si eres usuario nuevo, </p> <a href='#/registerUser' class= 'style-register'>Regístrate</a></span></footer>
