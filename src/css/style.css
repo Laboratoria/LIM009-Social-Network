@@ -8,9 +8,9 @@
     text-align: center;
     box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/
 }
-html {
+/* html {
     height: 100%;
-}
+} */
 body {
     height: 100%;
     display: flex;
@@ -64,7 +64,36 @@ button:hover{
 .style-register{
     display: inline;
 }
- 
+.header-perfil{
+    background: rgba(13, 93, 107, 0.226);
+    color:rgba(24, 23, 23, 0.822);
+    }
+.margin-top{
+        margin-top : 3%;   
+}
+.style-color-header{
+        /* margin :2%; */
+        border: 0.7px solid rgba(37, 4, 90, 0.863);
+        padding: 1%;
+        border-radius: 3%;
+        margin: 1%;
+        /* background: rgba(0, 0, 0, 0.185); */
+        color: rgb(100, 0, 0)
+}
+
+.edit-perfil{
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 0.1px; */
+}
+.style-header-perfil{
+    color: white;
+    padding: 1%;
+}
+a:hover{
+    font-size: 30px;
+}
+
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {
      .col-xs-12 { 
@@ -116,6 +145,9 @@ button:hover{
         background-color: rgb(6, 129, 68, 0.60);
         color: white
     }
+    .col-6{    
+        width: 50%;  
+        }
  }
 
 
