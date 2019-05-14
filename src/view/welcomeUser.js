@@ -6,7 +6,7 @@ export default (user) => {
     const templateWelcome = `
     <header>
         <ul class = 'header'>
-            <li><a href='#'>${user.displayName}</a></li>
+            <li><a id = 'edit-perfil' href='#/edit-perfil'>${user.displayName}</a></li>
             <li><img src=""></li>
             <li><a id='sign-out'>Cerrar Sesión</a></li>
         </ul>
@@ -30,7 +30,7 @@ export default (user) => {
     root.innerHTML = templateWelcome;
     const btnSignOut = document.querySelector('#sign-out');
     btnSignOut.addEventListener('click', logOut);
-    const btnSharePost = document.querySelector('#btn-share');   
+    const btnSharePost = document.querySelector('#btn-share');
     btnSharePost.addEventListener('click', createPost);
     return root;
 };

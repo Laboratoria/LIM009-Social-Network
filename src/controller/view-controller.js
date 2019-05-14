@@ -1,4 +1,4 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut} from "../lib/lib-firebase.js";
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -49,27 +49,27 @@ export const email = () => {
 };
 
 export const google = () => {
-  return signInWithGoogle().then(() => 
-  changeHash('/welcomeUser'))
-  .catch(error => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorCode == 'auth/cancelled-popup-request') {
-      alert('Sólo se permite una solicitud emergente a la vez.');
-    } else if (errorCode == 'auth/invalid-email') {
-      alert('El correo es inválido')
-    } else if (errorCode == 'auth/wrong-password') {
-      alert('La contraseña es equivocada.')
-    } else if (errorCode == 'auth/account-exists-with-different-credential') {
-      alert('La cuenta ya ha sido utilizada con una credencial diferente')
-    } else {
-      alert(errorMessage);
-    }
-  });
+  return signInWithGoogle().then(() =>
+    changeHash('/welcomeUser'))
+    .catch(error => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode == 'auth/cancelled-popup-request') {
+        alert('Sólo se permite una solicitud emergente a la vez.');
+      } else if (errorCode == 'auth/invalid-email') {
+        alert('El correo es inválido')
+      } else if (errorCode == 'auth/wrong-password') {
+        alert('La contraseña es equivocada.')
+      } else if (errorCode == 'auth/account-exists-with-different-credential') {
+        alert('La cuenta ya ha sido utilizada con una credencial diferente')
+      } else {
+        alert(errorMessage);
+      }
+    });
 }
 
 export const facebook = () => {
-  return signInWithFacebook().then(() => 
+  return signInWithFacebook().then(() =>
     changeHash('/welcomeUser')
   ).catch(error => {
     var errorCode = error.code;
@@ -90,28 +90,28 @@ export const facebook = () => {
 
 export const logOut = () => {
   return signOut()
-  .then(() => {
-    changeHash('/login')
-  }).catch((err) => {
-    console.log(err.message);
-  }); 
+    .then(() => {
+      changeHash('/login')
+    }).catch((err) => {
+      console.log(err.message);
+    });
 }
 
 //Crear post con IDs por defecto
 export const createPost = () => {
-let description = document.querySelector('#description').value;
+  let description = document.querySelector('#description').value;
   let db = firebase.firestore();
-    db.collection("posts").add({
-        description: description,
-        state: 'Público',
-        likes: 0
-    })
+  db.collection("posts").add({
+    description: description,
+    state: 'Público',
+    likes: 0
+  })
     .then(() => {
       document.getElementById('create-post').reset();
-      console.log("Document written succesfully");        
+      console.log("Document written succesfully");
     })
     .catch((error) => {
-        console.error("Error adding document: ", error);
+      console.error("Error adding document: ", error);
     });
 };
 
