@@ -31,7 +31,12 @@ const currentUser = () => {
 };
 
 const addPostToCloudFirestore = (inputComment, userId, userName) =>
-    dataBaseCloudFirestore().collection('posts').add({
+getDataOfUser(uid)
+       .then((dataUser)=> {
+        dataUser.uid=userId;
+        dataUser.name=userName;
+       }).
+        dataBaseCloudFirestore().collection('posts').add({
         name: userName,
         content: inputComment,
         id: userId,
@@ -42,6 +47,7 @@ const addPostToCloudFirestore = (inputComment, userId, userName) =>
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
+    
     });;
 
 
@@ -70,3 +76,5 @@ export {
     addPostToCloudFirestore,
     getPostsInRealtime
 };
+
+import{getDataOfUser} from '../controller/controller1.js';

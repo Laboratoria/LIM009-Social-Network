@@ -1,5 +1,5 @@
 
-export default (user) => {
+/*export default (user) => {
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container");
     divElement.innerHTML = ` 
@@ -17,4 +17,4 @@ export default (user) => {
    
     return divElement;
   };
-  
+  */

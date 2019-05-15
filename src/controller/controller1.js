@@ -75,6 +75,8 @@ const signUpAfterClick = () => {
                         form.reset();
                         alert('Registrado exitosamente');
                     })
+                    .then(() => changeHash(''))
+                    
             })
     }
 };
@@ -172,7 +174,7 @@ const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
     // console.log(inputComment);
-    // console.log(getDataOfUser(currentUser().uid));
+     //console.log(getDataOfUser().currentUser().uid);
     const idUser = currentUser().uid;
     const nameUser = currentUser().displayName;
     console.log(nameUser);

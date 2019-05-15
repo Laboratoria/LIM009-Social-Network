@@ -25,7 +25,7 @@ export default (user, posts) => {
         <li class="small"><p>${user.name}</p>
             <ul>
                 <li><a>Configurar cuenta</a></li>
-                <li>Editar Perfil<a>#/edit-profile</a></li>
+                <li><a>Editar Perfil</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
