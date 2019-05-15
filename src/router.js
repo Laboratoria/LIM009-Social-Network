@@ -3,6 +3,7 @@ import register from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
 import { setUpPost } from "./controller/view-controller.js";
 import editPerfil from './view/edit-perfil.js'
+import error from './view/page-error.js'
 
 const infoUser = () => {
 
@@ -26,7 +27,7 @@ const changeTmp = (hash) => {
   } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil') {
     return getRoute(hash);
   } else {
-    return getRoute('#/login');
+    return getRoute('#/page-error');
   }
 }
 
@@ -47,7 +48,9 @@ const getRoute = routers => {
       // .then(data => {
       // return root.appendChild(welcomeUser(data));
       // })
-      break;
+    break;
+    default: 
+      return root.appendChild(error())
   }
 };
 

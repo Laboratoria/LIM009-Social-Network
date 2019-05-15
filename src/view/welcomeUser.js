@@ -23,25 +23,24 @@ export default (user) => {
     <div id = 'post' class='col-7 col-xs-12 center'>   
     <article class= 'flex-container  margin-top border center'>     
       <header class='header-post'> 
-      <img id='photo-post-user' src='${user.photoURL}' alt='feminismo' class='img-perfil-post'>                
-      <label id='name-user-post' class=''>${user.displayName} </label> 
-      <label id='fecha-post' class='center'>hora</label>            
+        <img id='photo-post-user' src='${user.photoURL}' alt='feminismo' class='img-perfil-post'>                
+        <label id='name-user-post' class=''>${user.displayName} </label> 
+        <label id='fecha-post' class='center'>hora</label>            
       </header>
       <section class='content-post'>
       <div class=''>
       <h2></h2> 
-      <textarea id = 'description' class="textarea" placeholder='¿Qué estás pensando?'></textarea>            
-          
-      </div>        
+      <textarea id = 'description' class="textarea" placeholder='¿Qué estás pensando?'></textarea>
+        </div>
       </section>
       <footer class = ''>
-      <img id='image-post' src="./image/image-post.png" alt="imagen-post" class='img-post'> 
-      <select name="" id="estado-post" class = 'btn-post-create'>
-      <option selected="true" disabled="disabled">Elige una opción</option>
-      <option value="publico">Público</option>
-      <option value="privado" select>Privado</option>
-      </select>
-      <button id ='btn-share' class='btn-post-create'>Compartir</button>
+        <img id='image-post' src="./image/image-post.png" alt="imagen-post" class='img-post'> 
+        <select name="" id="estado-post" class = 'btn-post-create'>
+            <option selected="true" disabled="disabled">Elige una opción</option>
+            <option value="publico">Público</option>
+            <option value="privado" select>Privado</option>
+        </select>
+        <button id ='btn-share' class='btn-post-create'>Compartir</button>
       </footer>
     </article>  
     

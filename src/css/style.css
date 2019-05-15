@@ -69,16 +69,16 @@ button:hover{
     color:rgba(24, 23, 23, 0.822);
     }
 .margin-top{
-        margin-top : 3%;   
+    margin-top : 3%;   
 }
 .style-color-header{
-        /* margin :2%; */
-        border: 0.7px solid rgba(37, 4, 90, 0.863);
-        padding: 1%;
-        border-radius: 3%;
-        margin: 1%;
-        /* background: rgba(0, 0, 0, 0.185); */
-        color: rgb(100, 0, 0)
+    /* margin :2%; */
+    border: 0.7px solid rgba(37, 4, 90, 0.863);
+    padding: 1%;
+    border-radius: 3%;
+    margin: 1%;
+    /* background: rgba(0, 0, 0, 0.185); */
+    color: rgb(100, 0, 0)
 }
 
 .edit-perfil{
@@ -93,8 +93,6 @@ button:hover{
 a:hover{
     font-size: 30px;
 }
-
-
 .col-12{
     width: 100%;
     padding-bottom: 5rem;
@@ -114,23 +112,20 @@ a:hover{
     flex-direction: row;
     height: 3rem;
     justify-content: center;  
-    align-content: center;
-    
+    align-content: center    
  }
  .img-perfil-post{        
     height: 2rem;
     border-radius: 50%;
-    margin-right: 2%;
-       
-    }
-    .img-post{ 
-        width: 7%;
-        margin-top: 3%;       
-        height: 1.5rem;
-         border-radius: 30%;  
-        margin-right: 0.5%;
-        
-        }
+    margin-right: 2%;       
+}
+.img-post{ 
+    width: 7%;
+    margin-top: 3%;       
+    height: 1.5rem;
+    border-radius: 30%;  
+    margin-right: 0.5%   
+}
     #image-post:hover{
         box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
     }

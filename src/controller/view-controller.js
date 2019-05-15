@@ -113,7 +113,6 @@ export const createPost = (state) => {
     state: state,
     likes: 0,
     user: userName,
-
   })
     .then(() => {
       document.getElementById('create-post').reset();
