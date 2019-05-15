@@ -55,9 +55,9 @@ const signUpAfterClick = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
-    const userLastName = document.querySelector('#last-name').value;
+    const userPhoto = document.querySelector('#user-photo').value;
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userLastName === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userPhoto === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
@@ -66,7 +66,7 @@ const signUpAfterClick = () => {
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
                         name: userName,
-                        photo: userLastName,
+                        photo: userPhoto,
                         userId: cred.user.uid,
                         email: email2,
                        // password: password2,
@@ -170,6 +170,7 @@ const getDataOfUser = (uid) => {
 };
 
 
+
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
@@ -177,10 +178,10 @@ const createPostInCloudFirestore = () => {
     //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
     console.log(currentUser());
-    const nameUser = currentUser().displayName;
-    console.log(nameUser);
+    
+    
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser, nameUser);
+    return addPostToCloudFirestore(inputComment, idUser);
 };
 
 // usuario activo 
@@ -209,6 +210,7 @@ export {
     getDataOfUser,
     getUserActive,
     createPostInCloudFirestore,
+   
 
 
 };

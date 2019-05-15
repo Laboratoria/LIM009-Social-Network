@@ -30,9 +30,8 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser, userName) =>
+const addPostToCloudFirestore = (inputComment, idUser) =>
     dataBaseCloudFirestore().collection('posts').add({
-        author: userName,
         content: inputComment,
         userId: idUser,
         state: false,

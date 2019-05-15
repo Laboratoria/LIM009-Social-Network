@@ -1,10 +1,9 @@
-import { signOutUser, createPostInCloudFirestore } from "../controller/controller1.js" ;
+import { signOutUser, createPostInCloudFirestore,getDataOfUser } from "../controller/controller1.js" ;
 
-const renderOnePost = (post) => { // {}
-
-    let label = document.createElement('div');
+const renderOnePost = (post,user) => { // {}
+  let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'>Publicado por ${post.author}</div>
+  <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
   <div id="${post.userId}" class="text-comment">${post.content}</div>
   <div class="icons-like">
       <i class="fab fa-gratipay"></i>
@@ -73,8 +72,12 @@ export default (user, posts) => {
 
 
     posts.forEach((onePost) => {
-        const divPost = renderOnePost(onePost);
+        getDataOfUser(onePost.userId).then((userdata)=>{
+            console.log((userdata.name));
+            const divPost = renderOnePost(onePost,userdata);
         divCommentList.appendChild(divPost);
+            });
+        
     })
 
 
