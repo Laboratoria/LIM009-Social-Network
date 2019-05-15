@@ -106,7 +106,7 @@ let userName = document.querySelector('#user-name').textContent;
         description: description,
         state: 'Público',
         likes: 0,
-        user: userName   
+        user: userName
     })
     .then(() => {
       document.getElementById('create-post').reset();
@@ -117,21 +117,17 @@ let userName = document.querySelector('#user-name').textContent;
     });
 };
 
-/*let db = firebase.firestore();
-db.collection('posts').get.then(snapshot => {
-  console.log(snapshot.docs)
-});*/
-
 export const setUpPost = (data) => {
   let html = '';
   const postList = document.querySelector('#post-list');
   data.forEach(doc => {
+    console.log(doc.data());
     const post = doc.data();
     const li = `
     <li>
       <p>Publicado por ${post.user}</p>
       <p>${post.description}</p>
-      <img class ='btn-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
+      <img class ='btn-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit${post.uid}'>
       <img class ='btn-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete'>
     </li>
     `;
@@ -141,3 +137,10 @@ export const setUpPost = (data) => {
   return postList.innerHTML = html;
 }
 
+export const deletePost = (uid) => {
+  db.collection("posts").doc(uid).delete().then(() => {
+    console.log("Document successfully deleted!");
+  }).catch((error) => {
+    console.error("Error removing document: ", error);
+  });
+}

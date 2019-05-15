@@ -5,10 +5,12 @@ import { setUpPost } from "./controller/view-controller.js";
 import editPerfil from './view/edit-perfil.js'
 
 const infoUser = () => {
+
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       let db = firebase.firestore();
       db.collection('posts').onSnapshot(snapshot => {
+        console.log(snapshot.docs)
         setUpPost(snapshot.docs);
       });
       welcomeUser(user);
