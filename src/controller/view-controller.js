@@ -1,5 +1,4 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword } from "../lib/lib-firebase.js";
-import { dataBaseUser } from '../model/model.js'
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut} from "../lib/lib-firebase.js";
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -10,9 +9,9 @@ export const registerUser = () => {
   const passwordRegister = document.querySelector('#password-register').value;
   return createEmailAndPassword(emailRegister, passwordRegister)
     .then((result) => {
-      dataBaseUserCreateEmail(result.user)
-    }
-    ).catch(error => {
+      // dataBaseUser(result.user);
+      alert('Registro con éxito')
+    }).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -32,9 +31,8 @@ export const email = () => {
   const valueEmail = document.querySelector("#email-id").value;
   const password = document.querySelector("#password-id").value;
   return signInWithEmail(valueEmail, password)
-    .then((result) => {
-      console.log(result);
-    }).catch(error => {
+    .then(() => changeHash('/welcomeUser')
+    ).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -51,9 +49,9 @@ export const email = () => {
 };
 
 export const google = () => {
-  return signInWithGoogle().then(result => {
-    dataBaseUser(result.user)
-  }).catch(error => {
+  return signInWithGoogle().then(() => 
+  changeHash('/welcomeUser'))
+  .catch(error => {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/cancelled-popup-request') {
@@ -71,10 +69,9 @@ export const google = () => {
 }
 
 export const facebook = () => {
-  return signInWithFacebook().then(result => {
-    console.log(result);
-    dataBaseUser(result.user);
-  }).catch(error => {
+  return signInWithFacebook().then(() => 
+    changeHash('/welcomeUser')
+  ).catch(error => {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/cancelled-popup-request') {
@@ -91,6 +88,31 @@ export const facebook = () => {
   });
 }
 
-/*export const newVista = () => {
-  changeHash('/welcomeUser');
-}*/
+
+export const logOut = () => {
+  return signOut()
+  .then(() => {
+    changeHash('/login')
+  }).catch((err) => {
+    console.log(err.message);
+  }); 
+}
+
+
+//Crear post con IDs por defecto
+export const createPost = () => {
+const input= document.querySelector('#description').value;
+console.log(input);  
+    let db = firebase.firestore();
+    db.collection("posts").add({
+    description: description,
+    })
+    .then((docRef) => {
+    console.log("Document written with ID: ", docRef);
+    // description.reset();
+    })
+    .catch(function(error) {
+    console.error("Error adding document: ", error);
+    });
+}
+

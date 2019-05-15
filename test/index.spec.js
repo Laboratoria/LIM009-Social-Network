@@ -31,14 +31,14 @@ describe('myFunction', () => {
 });
 
 describe('Incio de sesion con autenticacion', () => {
-  it('Deberia crear cuenta ', () => {
-    return createEmailAndPassword('naye@gmail.com', '1234567')
+  it('Deberia iniciar sesion con cuenta creada', () => {
+    return signInWithEmail('naye@gmail.com', '1234567')
       .then(user => {
         expect(user.email).toBe('naye@gmail.com');
       })
   });
-  it('Deberia iniciar sesion con cuenta creada', () => {
-    return signInWithEmail('naye@gmail.com', '1234567')
+  it('Deberia crear una cuenta', () => {
+    return createEmailAndPassword('naye@gmail.com', '1234567')
       .then(user => {
         expect(user.email).toBe('naye@gmail.com');
       })
