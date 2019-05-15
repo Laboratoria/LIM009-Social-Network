@@ -24,10 +24,10 @@ const signInAfterClick = () => {
         alert('Completa tus datos para ingresar');
     } else {
         signIn(email, password)
-        .then((cred) => {
+            .then((cred) => {
                 changeHash('#/user-profile');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -65,19 +65,19 @@ const signUpAfterClick = () => {
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
-                        name: userName,
-                        photo: userPhoto,
-                        userId: cred.user.uid,
-                        email: email2,
-                       // password: password2,
-                    })
+                    name: userName,
+                    photo: userPhoto,
+                    userId: cred.user.uid,
+                    email: email2,
+                    // password: password2,
+                })
                     .then(() => {
                         const form = document.querySelector('#register-form');
                         form.reset();
                         alert('Registrado exitosamente');
                     })
                     .then(() => changeHash(''))
-                    
+
             })
     }
 };
@@ -86,7 +86,7 @@ const signInWithGoogleAfterClick = () => {
     signInWithGoogle()
         .then((result) => {
             changeHash('#/user-profile')
-                // This gives you a Google Access Token. You can use it to access the Google API.
+            // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user; // ...
@@ -104,7 +104,7 @@ const signInWithGoogleAfterClick = () => {
 
 
         })
-        .catch(function(error) {
+        .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -137,7 +137,7 @@ const signInWithFacebookAfterClick = () => {
                 email: userEmail,
                 photo: userPhoto,
             });
-        }).catch(function(error) {
+        }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -153,7 +153,7 @@ const signInWithFacebookAfterClick = () => {
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
-        .catch(function(error) {
+        .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log('Paso por aqui');
@@ -163,10 +163,10 @@ const signOutUser = () => {
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
-        .then(function(doc) {
+        .then(function (doc) {
             console.log(doc.data())
             return doc.data(); // retorna una promesa
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
 };
@@ -180,8 +180,8 @@ const createPostInCloudFirestore = () => {
     //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
     console.log(currentUser());
-    
-    
+
+
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser);
 };
@@ -203,6 +203,31 @@ const getUserActive = (callback) => { //printUserinfo()
 
 };
 
+
+export const deletePost = (postId) => {
+    return dataBaseCloudFirestore().collection("posts").doc(postId).delete();
+}
+
+
+export const editPost = (postId,postText) => {
+    document.querySelector('#post-content').value = postText;
+
+    let  collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
+    // Set the "capital" field of the city 'DC'
+    return collectionPost.update({
+        content: postText,
+      
+    })
+        .then(function () {
+            console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+}
+
+
 export {
     signInAfterClick,
     signUpAfterClick,
@@ -212,7 +237,7 @@ export {
     getDataOfUser,
     getUserActive,
     createPostInCloudFirestore,
-   
+
 
 
 };
