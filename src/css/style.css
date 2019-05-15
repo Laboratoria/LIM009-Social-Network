@@ -94,6 +94,75 @@ a:hover{
     font-size: 30px;
 }
 
+
+.col-12{
+    width: 100%;
+    padding-bottom: 5rem;
+}
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: 2px 6px 5px 5px rgba(16, 7, 36, 0.486); */
+    padding: 2%;
+    background: white;
+    width:85%;
+    /* color: rgb(24, 13, 13) */
+}
+.header-post{
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    height: 3rem;
+    justify-content: center;  
+    align-content: center;
+    
+ }
+ .img-perfil-post{        
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 2%;
+       
+    }
+    .img-post{ 
+        width: 7%;
+        margin-top: 3%;       
+        height: 1.5rem;
+         border-radius: 30%;  
+        margin-right: 0.5%;
+        
+        }
+    #image-post:hover{
+        box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
+    }
+    .textarea{
+    width: 70%;
+    height: 7rem;
+    box-shadow: 1px 3px 3px 3px rgba(13, 14, 13, 0.233); 
+    border-radius: 5%;   
+    }
+.color{
+    background: rgba(102, 4, 28, 0.048);
+    color: rgb(24, 13, 13);
+    border-radius: 3%;
+}
+.btn-post-create{
+    /* width: 30%; */
+    padding: 2%;
+    background: white;
+    color: black;
+    border: 1px solid rgba(71, 70, 70, 0.247);
+    /* border-radius: ; */
+}
+.style-title-post{
+    color : rgba(56, 4, 4, 0.712);
+
+}
+.btn-header-main{
+    background: rgba(119, 8, 26, 0.082);
+    border: 0.5px solid rgba(119, 8, 26, 0);
+    padding: 1%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {
      .col-xs-12 { 
@@ -148,6 +217,15 @@ a:hover{
     .col-6{    
         width: 50%;  
         }
+    .col-4{  
+        width: 33.3333333333%;   
+        float: left;
+    }
+    
+    .col-7{
+        width: 58.3333333333%;
+        float: left;
+    }
  }
 
 

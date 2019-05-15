@@ -5,12 +5,12 @@
 // }
 
 
-export const createEmailAndPassword = (email,password)=>{
+export const createEmailAndPassword = (email, password) => {
   return firebase.auth().createUserWithEmailAndPassword(email, password)
 };
 
-export const signInWithEmail = (email, password) =>{
- return firebase.auth().signInWithEmailAndPassword(email, password)
+export const signInWithEmail = (email, password) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password)
 };
 // Inicio de sesión con Google
 export const signInWithGoogle = () => {
@@ -26,3 +26,23 @@ export const signInWithFacebook = () => {
 export const signOut = () => {
   return firebase.auth().signOut()
 };
+
+export const getUserReady = (calback) => {
+  var userCurrent = firebase.auth().currentUser;
+  if (userCurrent) {
+    return calback(userCurrent)
+  } else {
+    const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        return calback(user)
+        // User is signed in.
+      } else {
+        // No user is signed in.
+        return calback(null)
+
+      }
+      unsubscribe()
+    });
+
+  }
+}

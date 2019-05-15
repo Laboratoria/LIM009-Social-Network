@@ -1,5 +1,5 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
-
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
+import { updatePerfilUser, updateEmailUser } from '../model/model.js'
 const changeHash = (hash) => {
   location.hash = hash;
 }
@@ -98,16 +98,23 @@ export const logOut = () => {
 }
 
 //Crear post con IDs por defecto
-export const createPost = () => {
-let description = document.querySelector('#description').value;
-let userName = document.querySelector('#user-name').textContent;
+export const createPost = (state) => {
+  let description = document.querySelector('#description').value;
+  let userName = document.querySelector('#user-name').textContent;
+  // const state = document.querySelector('#estado-post')
+  const imagePost = document.querySelector('#image-post');
+  const fechaHoraPost = document.querySelector('#fecha-post')
+  // state.addEventListener('change', () => {
+  console.log('llegue aqui')
+  console.log(state)
   let db = firebase.firestore();
-    db.collection("posts").add({
-        description: description,
-        state: 'Público',
-        likes: 0,
-        user: userName
-    })
+  db.collection("posts").add({
+    description: description,
+    state: state,
+    likes: 0,
+    user: userName,
+
+  })
     .then(() => {
       document.getElementById('create-post').reset();
       console.log("Document written succesfully");
@@ -115,7 +122,8 @@ let userName = document.querySelector('#user-name').textContent;
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-};
+  // })
+}
 
 export const setUpPost = (data) => {
   let html = '';
@@ -142,5 +150,26 @@ export const deletePost = (uid) => {
     console.log("Document successfully deleted!");
   }).catch((error) => {
     console.error("Error removing document: ", error);
+  });
+}
+
+export const editPErfilUser = (idUser, name, email) => {
+  updatePerfilUser(idUser, name).then(() => {
+    // Update successful.
+    alert('Nombre se actualizó correctamente')
+    updateEmailUser(idUser, email).then(() => {
+      // Update successful.
+      alert('Email se actualizó correctamente')
+    }).catch((error) => {
+      // An error happened.
+      alert(error + 'Actualización Ha ocurrido un error. en email..')
+    });
+  }).catch((error) => {
+    // An error happened.
+    if (error === 'Error: This operation is sensitive and requires recent authentication. Log in again before retrying this request.Actualización Ha ocurrido un error. en email..') {
+      alert('esta operación es confidencial y requiere autenticación reciente. Vuelva a iniciar sesión antes de volver a intentar esta solicitud de Actualización ')
+    } else {
+      alert('Actualización Ha ocurrido un error. en nombre..')
+    }
   });
 }

@@ -1,3 +1,7 @@
+import { editPErfilUser } from '../controller/view-controller.js'
+import { getUserReady } from "../lib/lib-firebase.js";
+import { updatePhoto } from '../model/model.js';
+import fileImage from '../lib/comple-firebase.js'
 export default () => {
     const formPerfil = document.createElement('form');
     const templateEditPerf = `
@@ -25,7 +29,7 @@ export default () => {
             <button type="button" id="btn-edit" class='center style-btn-login block border' >Guardar</button>  
             <label  class = 'block'>Editar mi foto: </label>  
             <progress value="0" max="100" id="uploader" class = 'margin-top border'>0%</progress>
-            <input type="file" value="upload" id="fileButton" class='center  block border margin-top' />  
+            <input type="file" value="upload" id="file-button" class='center  block border margin-top' />  
             </div>          
            </section>           
          </article>
@@ -35,5 +39,25 @@ export default () => {
         `
         ;
     formPerfil.innerHTML = templateEditPerf;
+    const name = formPerfil.querySelector('#name-user-edit');
+    const email = formPerfil.querySelector('#email-email-edit');
+    const btnEdit = formPerfil.querySelector('#btn-edit');
+    const uploader = formPerfil.querySelector('#uploader');
+    const fileButton = formPerfil.querySelector('#file-button');
+    const getUserIdEdit = (idUser) => {
+        btnEdit.addEventListener('click', () => {
+            editPErfilUser(idUser, name.value, email.value)
+        })
+        fileButton.addEventListener('change', (e) => {
+            //Obtener archivo
+            let file = e.target.files[0];
+            const getImage = (image) => {
+
+                updatePhoto(idUser, image)
+            }
+            fileImage(file, uploader, getImage)
+        });
+    }
+    getUserReady(getUserIdEdit);
     return formPerfil
 }

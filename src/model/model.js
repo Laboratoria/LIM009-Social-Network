@@ -1,14 +1,31 @@
-//Set Up data
-//Recorrer la colección de post 
-// const getPost = () => {
-// }
 
-// Get data
-// Leer lo que estás obteniendo de la función getPost
+export const updatePerfilUser = (user, name) => {
 
-// db.collection(posts).get().then(snapshot => {
-//  console.log(snapshot.docs)
-// });
+    return user.updateProfile({
+        displayName: `${name}`
+
+    })
+}
+export const updateEmailUser = (user, email) => {
+    // var user = firebase.auth().currentUser;
+    // console.log(email, user)
+
+    return user.updateEmail(`${email}`)
+}
+export const updatePhoto = (user, photo) => {
+    // console.log(user, photo)
+    return user.updateProfile({
+        // displayName: "Jane Q. User",
+
+        photoURL: `${photo}`
+
+    }).then(function () {
+        console.log(user, photo)
+        alert('exito')
+    }).catch(function (error) {
+        alert('no exito')
+    });
+}
 
 // export const dataBaseUser = user => {
 //     let db = firebase.firestore();
