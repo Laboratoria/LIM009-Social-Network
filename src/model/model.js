@@ -12,6 +12,20 @@ export const updateEmailUser = (user, email) => {
 
     return user.updateEmail(`${email}`)
 }
+export const updatePhoto = (user, photo) => {
+    // console.log(user, photo)
+    return user.updateProfile({
+        // displayName: "Jane Q. User",
+
+        photoURL: `${photo}`
+
+    }).then(function () {
+        console.log(user, photo)
+        alert('exito')
+    }).catch(function (error) {
+        alert('no exito')
+    });
+}
 
 //Set Up data
 //Recorrer la colección de post 
