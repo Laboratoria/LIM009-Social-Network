@@ -4,15 +4,16 @@ const renderOnePost = (post,user) => { // {}
   let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
-  <div id="${post.id}" class="text-comment">${post.content}</div>
+  <div class="text-comment">${post.content}</div>
   <div class="icons-like">
       <i class="fab fa-gratipay"></i>
       <i class="fas fa-paper-plane"></i></div>
-      <button id="delete-btn-${post.id}" class="share boton">Eliminar</button>
+      <button id="delete-btn" data-uidPost="${post.userId}"class="share boton">Eliminar</button>
  `;
     label.setAttribute('class', "box");
-    const deleteButton = label.querySelector(`#delete-btn-${post.id}`);
-    deleteButton.addEventListener('click', deletePostAfterClick(post));
+    label.setAttribute('data-id',`${post.id}`);
+    const deleteButton = label.querySelector("#delete-btn");
+    deleteButton.addEventListener('click',(e)=>{deletePostAfterClick(e)});
     
     return label // que imprima una un post ,que se añada al ul element
 };

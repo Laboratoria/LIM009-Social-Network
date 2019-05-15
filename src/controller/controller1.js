@@ -182,9 +182,12 @@ const createPostInCloudFirestore = () => {
     return addPostToCloudFirestore(inputComment, idUser);
 };
 
- const deletePostAfterClick = (objPost) =>{
-
- deletePostInCloudFireStore(objPost.id)};
+ const deletePostAfterClick = (e) =>{
+    const postId=e.target.parentElement.getAttribute('data-id');
+   
+    const  userIdOfPost=e.target.getAttribute('data-uidPost');
+console.log(postId);
+ deletePostInCloudFireStore(postId,userIdOfPost)};
 
 
 
