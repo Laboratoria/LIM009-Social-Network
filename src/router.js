@@ -10,6 +10,7 @@ const infoUser = () => {
       let db = firebase.firestore();
       db.collection('posts').onSnapshot(snapshot => {
         setUpPost(snapshot.docs);
+        console.log(snapshot.docs)
       });
       welcomeUser(user);
 

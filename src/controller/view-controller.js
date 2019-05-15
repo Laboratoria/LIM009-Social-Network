@@ -98,16 +98,23 @@ export const logOut = () => {
 }
 
 //Crear post con IDs por defecto
-export const createPost = () => {
-let description = document.querySelector('#description').value;
-let userName = document.querySelector('#user-name').textContent;
+export const createPost = (state) => {
+  let description = document.querySelector('#description').value;
+  let userName = document.querySelector('#user-name').textContent;
+  // const state = document.querySelector('#estado-post')
+  const imagePost = document.querySelector('#image-post');
+  const fechaHoraPost = document.querySelector('#fecha-post')
+  // state.addEventListener('change', () => {
+  console.log('llegue aqui')
+  console.log(state)
   let db = firebase.firestore();
-    db.collection("posts").add({
-        description: description,
-        state: 'Público',
-        likes: 0,
-        user: userName   
-    })
+  db.collection("posts").add({
+    description: description,
+    state: state,
+    likes: 0,
+    user: userName,
+
+  })
     .then(() => {
       document.getElementById('create-post').reset();
       console.log("Document written succesfully");
@@ -115,7 +122,8 @@ let userName = document.querySelector('#user-name').textContent;
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-};
+  // })
+}
 
 /*let db = firebase.firestore();
 db.collection('posts').get.then(snapshot => {
