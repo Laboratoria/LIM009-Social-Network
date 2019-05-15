@@ -11,7 +11,7 @@ const infoUser = () => {
     if (user) {
       let db = firebase.firestore();
       db.collection('posts').onSnapshot(snapshot => {
-        console.log(snapshot.docs)
+        // console.log(snapshot.docs)
         setUpPost(snapshot.docs);
       });
       welcomeUser(user);

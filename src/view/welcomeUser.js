@@ -58,10 +58,7 @@ export default (user) => {
         btnSharePost.addEventListener('click', () => {
             createPost(state.value)
         });
-
-    })
-
-
+    });
     return root;
 };
 

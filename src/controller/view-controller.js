@@ -105,17 +105,17 @@ export const createPost = (state) => {
   const imagePost = document.querySelector('#image-post');
   const fechaHoraPost = document.querySelector('#fecha-post')
   // state.addEventListener('change', () => {
-  console.log('llegue aqui')
-  console.log(state)
+  /* console.log('llegue aqui')
+  console.log(state) */
   let db = firebase.firestore();
   db.collection("posts").add({
     description: description,
     state: state,
     likes: 0,
     user: userName,
-  })
+    })
     .then(() => {
-      document.getElementById('create-post').reset();
+      //document.getElementById('create-post').reset();
       console.log("Document written succesfully");
     })
     .catch((error) => {
@@ -124,28 +124,37 @@ export const createPost = (state) => {
   // })
 }
 
-export const setUpPost = (data) => {
-  let html = '';
+export const setUpPost = data => {
   const postList = document.querySelector('#post-list');
   data.forEach(doc => {
-    console.log(doc.data());
+    //console.log(doc.id);
     const post = doc.data();
+    const article = document.createElement('article');
     const li = `
     <li>
       <p>Publicado por ${post.user}</p>
       <p>${post.description}</p>
-      <img class ='btn-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit${post.uid}'>
-      <img class ='btn-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete'>
+      <img class ='btn-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
+      <img class ='btn-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
     </li>
-    `;
-    html += li;
+    `
+    article.innerHTML = li;
+    let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
+    btnDelete.addEventListener('click', () => {
+      deletePost(doc.id);
+    })
+    return postList.appendChild(article);
   });
-
-  return postList.innerHTML = html;
+  return postList
 }
 
-export const deletePost = (uid) => {
-  db.collection("posts").doc(uid).delete().then(() => {
+
+
+
+
+const deletePost = id => {
+  let db = firebase.firestore();
+  db.collection("posts").doc(id).delete().then(() => {
     console.log("Document successfully deleted!");
   }).catch((error) => {
     console.error("Error removing document: ", error);
