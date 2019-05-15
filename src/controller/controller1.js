@@ -7,6 +7,7 @@ import {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
+    deletePostInCloudFireStore,
 
 
 } from "../services/firebase.js";
@@ -170,7 +171,6 @@ const getDataOfUser = (uid) => {
 };
 
 
-
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
@@ -178,11 +178,15 @@ const createPostInCloudFirestore = () => {
     //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
     console.log(currentUser());
-    
-    
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser);
 };
+
+ const deletePostAfterClick = (objPost) =>{
+
+ deletePostInCloudFireStore(objPost.id)};
+
+
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
@@ -210,6 +214,7 @@ export {
     getDataOfUser,
     getUserActive,
     createPostInCloudFirestore,
+    deletePostAfterClick,
    
 
 

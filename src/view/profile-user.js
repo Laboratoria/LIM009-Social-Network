@@ -1,16 +1,19 @@
-import { signOutUser, createPostInCloudFirestore,getDataOfUser } from "../controller/controller1.js" ;
+import { signOutUser, createPostInCloudFirestore,getDataOfUser, deletePostAfterClick } from "../controller/controller1.js" ;
 
 const renderOnePost = (post,user) => { // {}
   let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
-  <div id="${post.userId}" class="text-comment">${post.content}</div>
+  <div id="${post.id}" class="text-comment">${post.content}</div>
   <div class="icons-like">
       <i class="fab fa-gratipay"></i>
       <i class="fas fa-paper-plane"></i></div>
-      <button id="${post.userId}" class="share boton">Eliminar</button>
+      <button id="delete-btn-${post.id}" class="share boton">Eliminar</button>
  `;
     label.setAttribute('class', "box");
+    const deleteButton = label.querySelector(`#delete-btn-${post.id}`);
+    deleteButton.addEventListener('click', deletePostAfterClick(post));
+    
     return label // que imprima una un post ,que se añada al ul element
 };
 
@@ -72,6 +75,7 @@ export default (user, posts) => {
 
 
     posts.forEach((onePost) => {
+        console.log(onePost);
         getDataOfUser(onePost.userId).then((userdata)=>{
             console.log((userdata.name));
             const divPost = renderOnePost(onePost,userdata);

@@ -41,9 +41,17 @@ const addPostToCloudFirestore = (inputComment, idUser) =>
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
-    });;
+    });
 
 
+const deletePostInCloudFireStore = (idPost) => {
+    dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
+        console.log("Document successfully deleted!");
+    }).catch((error)=>{
+        console.error("Error removing document: ", error);
+    });
+};
+    
 const getPostsInRealtime = (callback) => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
         const arrOfPosts = [];
@@ -66,5 +74,6 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    getPostsInRealtime
+    getPostsInRealtime,
+    deletePostInCloudFireStore,
 };
