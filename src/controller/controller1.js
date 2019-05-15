@@ -23,7 +23,8 @@ const signInAfterClick = () => {
     if (email === '' || password === '') {
         alert('Completa tus datos para ingresar');
     } else {
-        signIn(email, password).then((cred) => {
+        signIn(email, password)
+        .then((cred) => {
                 changeHash('#/user-profile');
             })
             .catch(function(error) {
@@ -54,9 +55,9 @@ const signUpAfterClick = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
-    const userLastName = document.querySelector('#last-name').value;
+    const userPhoto = document.querySelector('#user-photo').value;
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userLastName === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userPhoto === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
@@ -65,10 +66,10 @@ const signUpAfterClick = () => {
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
                         name: userName,
-                        lastName: userLastName,
-                        uid: cred.user.uid,
+                        photo: userPhoto,
+                        userId: cred.user.uid,
                         email: email2,
-                        password: password2,
+                       // password: password2,
                     })
                     .then(() => {
                         const form = document.querySelector('#register-form');
@@ -93,10 +94,10 @@ const signInWithGoogleAfterClick = () => {
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
-            const userId = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(userId).set({
+            const idUser = user.uid;
+            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
                 name: userName,
-                uid: userId,
+                userId: idUser,
                 email: userEmail,
                 photo: userPhoto,
             });
@@ -129,10 +130,10 @@ const signInWithFacebookAfterClick = () => {
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
-            const userId = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(userId).set({
+            const idUser = user.uid;
+            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
                 name: userName,
-                uid: userId,
+                userId: idUser,
                 email: userEmail,
                 photo: userPhoto,
             });
@@ -163,6 +164,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function(doc) {
+            console.log(doc.data())
             return doc.data(); // retorna una promesa
         }).catch(function(error) {
             console.log("Error getting document:", error);
@@ -170,16 +172,18 @@ const getDataOfUser = (uid) => {
 };
 
 
+
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
     // console.log(inputComment);
-     //console.log(getDataOfUser().currentUser().uid);
+    //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
-    const nameUser = currentUser().displayName;
-    console.log(nameUser);
+    console.log(currentUser());
+    
+    
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser, nameUser);
+    return addPostToCloudFirestore(inputComment, idUser);
 };
 
 // usuario activo 
@@ -208,6 +212,7 @@ export {
     getDataOfUser,
     getUserActive,
     createPostInCloudFirestore,
+   
 
 
 };
