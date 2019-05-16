@@ -216,7 +216,7 @@ console.log(postId);
         divContent.setAttribute("contenteditable",false);
         const newContent=(divContent.textContent);
         console.log(newContent);
-        editPostInCloudFireStore(idOfPost,userIdOfPost,newContent);
+        editPostInCloudFireStore(idOfPost,userIdOfPost,newContent)
     })
     
     }else{

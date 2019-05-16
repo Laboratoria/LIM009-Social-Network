@@ -37,6 +37,7 @@ const addPostToCloudFirestore = (inputComment, idUser) =>
         state: false,
         likes: 0,
     }).then(function(docRef) {
+        console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
     .catch(function(error) {
@@ -92,7 +93,7 @@ const getPostsInRealtime = (callback) => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
         const arrOfPosts = [];
         arrOfAllPosts.forEach((onePost) => {
-            onePost;
+            console.log(Object.keys(onePost));
             arrOfPosts.push({ id: onePost.id, ...onePost.data() })
         })
         callback(arrOfPosts)
