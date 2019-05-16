@@ -7,6 +7,8 @@ import {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
+    deletePostInCloudFireStore,
+  //  editPostInCloudFireStore,
 
 
 } from "../services/firebase.js";
@@ -172,7 +174,6 @@ const getDataOfUser = (uid) => {
 };
 
 
-
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
@@ -180,11 +181,44 @@ const createPostInCloudFirestore = () => {
     //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
     console.log(currentUser());
-
-
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser);
 };
+
+ const deletePostAfterClick = (e) =>{
+    const postId=e.target.parentElement.getAttribute('data-id');
+   
+    const  userIdOfPost=e.target.getAttribute('data-uidPost');
+console.log(postId);
+ deletePostInCloudFireStore(postId,userIdOfPost)};
+
+
+
+
+
+ const editPostAfterClick = (e) =>{
+    const divContent=document.querySelector("#content-comment-div");
+    console.log(divContent);
+     const currentUserId=currentUser().uid;
+     console.log(currentUserId);
+    const  userIdOfPost=e.target.getAttribute('data-uidPost');
+    console.log(userIdOfPost);
+    const  idOfPost=e.target.getAttribute('data-id-post');
+    console.log(idOfPost);
+    if (currentUserId=== userIdOfPost){
+       divContent.setAttribute("contenteditable",true);
+       console.log("You can edit now");
+       console.log(divContent);
+    }else{
+
+        divContent.setAttribute("contenteditable",'false')
+        alert("You cant edit a coment that was not published by you");
+    }
+    
+    
+};
+
+
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
@@ -237,7 +271,9 @@ export {
     getDataOfUser,
     getUserActive,
     createPostInCloudFirestore,
-
+    deletePostAfterClick,
+    editPostAfterClick,
+   
 
 
 };
