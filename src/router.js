@@ -11,7 +11,7 @@ const infoUser = () => {
     if (user) {
       let db = firebase.firestore();
       db.collection('posts').onSnapshot(snapshot => {
-        // console.log(snapshot.docs)
+        console.log(snapshot.docs)
         setUpPost(snapshot.docs);
       });
       welcomeUser(user);
@@ -24,7 +24,7 @@ const infoUser = () => {
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return getRoute('#/login');
-  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil' || hash == '#/login' ) {
+  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil' || hash == '#/login') {
     return getRoute(hash);
   } else {
     return getRoute('#/page-error');
@@ -48,8 +48,8 @@ const getRoute = routers => {
       // .then(data => {
       // return root.appendChild(welcomeUser(data));
       // })
-    break;
-    default: 
+      break;
+    default:
       return root.appendChild(error())
   }
 };

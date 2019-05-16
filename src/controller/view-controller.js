@@ -131,6 +131,7 @@ export const createPost = (state, imagePost) => {
 
 export const setUpPost = data => {
   const postList = document.querySelector('#post-list');
+  postList.innerHTML = '';
   data.forEach(doc => {
     console.log(doc.data())
     getDataDoc(doc.data().user).then((getUser) => {
@@ -139,6 +140,7 @@ export const setUpPost = data => {
         // console.log("Document data:", doc.data().name);
         const post = doc.data();
         const article = document.createElement('article');
+
         const li = `
     <article id = 'content-post' class= 'flex-container  margin-top border center'> 
     <div class = 'btn-post-edit-del'>
@@ -168,6 +170,7 @@ export const setUpPost = data => {
         btnDelete.addEventListener('click', () => {
           deletePost(doc.id);
         })
+        // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
         return postList.appendChild(article);
       }
     })

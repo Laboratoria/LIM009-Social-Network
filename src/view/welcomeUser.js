@@ -78,6 +78,7 @@ export default (user) => {
     }
 
     btnSharePost.addEventListener('click', () => {
+        const postList = document.querySelector('#post-list');
         let selectImage = fileButton.files[0]
         let selectState = state.value;
         if (selectImage === undefined && selectState === 'Amigos') {
