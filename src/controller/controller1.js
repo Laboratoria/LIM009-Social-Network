@@ -8,7 +8,7 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-  //  editPostInCloudFireStore,
+    editPostInCloudFireStore,
 
 
 } from "../services/firebase.js";
@@ -198,20 +198,28 @@ console.log(postId);
 
  const editPostAfterClick = (e) =>{
     const divContent=document.querySelector("#content-comment-div");
+    const saveBtn=document.querySelector("#btn-save-after-edit");
+    
     console.log(divContent);
      const currentUserId=currentUser().uid;
      console.log(currentUserId);
-    const  userIdOfPost=e.target.getAttribute('data-uidPost');
+     console.log(e);
+     console.log(e.target);
+    const  userIdOfPost=e.target.dataset.uidPost;
     console.log(userIdOfPost);
-    const  idOfPost=e.target.getAttribute('data-id-post');
+    const  idOfPost=e.target.dataset.idPost
     console.log(idOfPost);
     if (currentUserId=== userIdOfPost){
        divContent.setAttribute("contenteditable",true);
        console.log("You can edit now");
-       console.log(divContent);
+       saveBtn.addEventListener('click',()=>{
+        divContent.setAttribute("contenteditable",false);
+        const newContent=(divContent.textContent);
+        console.log(newContent);
+        editPostInCloudFireStore(idOfPost,userIdOfPost,newContent);
+    })
+    
     }else{
-
-        divContent.setAttribute("contenteditable",'false')
         alert("You cant edit a coment that was not published by you");
     }
     
