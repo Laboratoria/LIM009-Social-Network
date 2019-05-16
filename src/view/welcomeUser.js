@@ -73,15 +73,27 @@ export default (user) => {
         };
         fr.readAsDataURL(e.target.files[0]);
     }
-    state.onchange = (e) => {
-        console.log(e)
+    state.onchange = () => {
+        console.log(state.value)
     }
 
     btnSharePost.addEventListener('click', () => {
         let selectImage = fileButton.files[0]
-        if (selectImage === undefined) {
+        let selectState = state.value;
+        if (selectImage === undefined && selectState === 'Amigos') {
             createPost('publico', './image/image-post.png')
-        } else {
+        } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
+            createPost(selectState, './image/image-post.png')
+        } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
+            const getImage = (image) => {
+                // console.log(image)
+                imagePostView.src = image
+                createPost(selectState, image)
+
+            }
+            imagePost(selectImage, uploader, getImage)
+        }
+        else if (selectState === 'Amigos' && selectImage !== undefined) {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
