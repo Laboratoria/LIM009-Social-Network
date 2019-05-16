@@ -78,18 +78,19 @@ export default (user) => {
     }
 
     btnSharePost.addEventListener('click', () => {
-        const postList = document.querySelector('#post-list');
+        let fecha = new Date();
+        let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         let selectImage = fileButton.files[0]
         let selectState = state.value;
         if (selectImage === undefined && selectState === 'Amigos') {
-            createPost('publico', './image/image-post.png')
+            createPost('publico', './image/image-post.png', fechaPost)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
-            createPost(selectState, './image/image-post.png')
+            createPost(selectState, './image/image-post.png', fechaPost)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
-                createPost(selectState, image)
+                createPost(selectState, image, fechaPost)
 
             }
             imagePost(selectImage, uploader, getImage)
@@ -98,7 +99,7 @@ export default (user) => {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
-                createPost('publico', image)
+                createPost('publico', image, fechaPost)
 
             }
             imagePost(selectImage, uploader, getImage)

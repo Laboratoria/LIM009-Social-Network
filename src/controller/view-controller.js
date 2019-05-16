@@ -106,10 +106,10 @@ export const logOut = () => {
 }
 
 //Crear post con IDs por defecto
-export const createPost = (state, imagePost) => {
+export const createPost = (state, imagePost, fechaPost) => {
   let description = document.querySelector('#description').value;
   let userID = document.querySelector('#user-id').textContent;
-  console.log('llegue aqui')
+  console.log(fechaPost)
   console.log(state)
   let db = firebase.firestore();
   db.collection("posts").add({
@@ -117,7 +117,8 @@ export const createPost = (state, imagePost) => {
     state: state,
     likes: 0,
     user: userID,
-    image: imagePost
+    image: imagePost,
+    fechaPost: fechaPost
   })
     .then(() => {
       //document.getElementById('create-post').reset();
@@ -150,7 +151,7 @@ export const setUpPost = data => {
       <header class='header-post'>       
       <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
       <label id='name-user-post' class=''>${getUser.data().name}</label> 
-      <label id='fecha-post' class='center'></label>            
+      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}</label>            
       </header>
       <section class='content-post'>     
       <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
