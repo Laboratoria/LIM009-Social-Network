@@ -189,6 +189,14 @@ const createPostInCloudFirestore = () => {
 console.log(postId);
  deletePostInCloudFireStore(postId,userIdOfPost)};
 
+ const editPostAfterClick = (e) =>{
+    const postId=e.target.parentElement.getAttribute('data-id');
+    const inputComment = document.querySelector("#input-comment").value;
+    const  userIdOfPost=e.target.getAttribute('data-uidPost');
+console.log(postId);
+ deletePostInCloudFireStore(postId,userIdOfPost,inputComment)
+};
+
 
 
 // usuario activo 
@@ -218,6 +226,7 @@ export {
     getUserActive,
     createPostInCloudFirestore,
     deletePostAfterClick,
+    editPostAfterClick,
    
 
 
