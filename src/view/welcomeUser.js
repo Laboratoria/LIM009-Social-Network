@@ -35,7 +35,7 @@ export default (user) => {
       <textarea id = 'description' class="textarea" placeholder='¿Qué estás pensando?'></textarea>
       </div>      
       </section>
-      <footer class = 'margin-footer'>
+      <footer class = 'margin-footer' id = 'foo-View'>
       <div class = 'style-color-header style-content-post-img'>
       <progress value="0" max="100" id="uploader" class = 'progress'>0%</progress>
       <input type="file" value="upload" id="file-button" class='btn-image-post'/>        
@@ -63,35 +63,77 @@ export default (user) => {
     const state = document.querySelector('#estado-post')
     const uploader = document.querySelector('#uploader');
     const fileButton = document.querySelector('#file-button');
+    const fooView = document.querySelector('foo-View');
 
-    constentPost.addEventListener('change', (e) => {
-        if (e.target.id === 'file-button') {
-            const imagePostView = document.querySelector('#image-post-view');
-            let file = e.target.files[0];
-            const getImage = (image) => {
-                console.log(image)
-                imagePostView.src = image
-                state.addEventListener('change', () => {
-                    if (e.target.id === 'btn-share') {
-                        btnSharePost.addEventListener('click', () => {
-                            createPost(state.value, image)
-                        })
+    fileButton.onchange = (e) => {
+        const imagePostView = document.querySelector('#image-post-view');
+        let fr = new FileReader();
+        fr.onload = () => {
+            imagePostView.src = fr.result;
+        };
+        fr.readAsDataURL(e.target.files[0]);
+    }
+    state.onchange = (e) => {
+        console.log(e)
+    }
 
-                    }
-                })
-            }
-            imagePost(file, uploader, getImage)
-        } else if (e.target.id === 'estado-post') {
-            btnSharePost.addEventListener('click', () => {
-                createPost(state.value, './image/image-post.png')
-            })
+    btnSharePost.addEventListener('click', () => {
+        let selectImage = fileButton.files[0]
+        if (selectImage === undefined) {
+            createPost('publico', './image/image-post.png')
         } else {
-            btnSharePost.addEventListener('click', () => {
-                createPost('publico', './image/image-post.png')
-            })
+            const getImage = (image) => {
+                // console.log(image)
+                imagePostView.src = image
+                createPost('publico', image)
+
+            }
+            imagePost(selectImage, uploader, getImage)
         }
 
     })
+
+    // constentPost.addEventListener('change', (e) => {
+    //     if (e.target.id === 'file-button') {
+    //         const imagePostView = document.querySelector('#image-post-view');
+    //         let file = e.target.files[0];
+    //         const getImage = (image) => {
+    //             // console.log(image)
+    //             imagePostView.src = image
+    //             createPost('publico', image)
+
+    //         }
+    //         imagePost(file, uploader, getImage)
+    //     }
+    // })
+    // constentPost.addEventListener('change', (e) => {
+    //     if (e.target.id === 'file-button') {
+    //         const imagePostView = document.querySelector('#image-post-view');
+    //         let file = e.target.files[0];
+    //         const getImage = (image) => {
+    //             console.log(image)
+    //             imagePostView.src = image
+    //             state.addEventListener('change', (e) => {
+    //                 if (e.target.id === 'btn-share') {
+    //                     btnSharePost.addEventListener('click', () => {
+    //                         createPost(state.value, image)
+    //                     })
+
+    //                 }
+    //             })
+    //         }
+    //         imagePost(file, uploader, getImage)
+    //     } else if (e.target.id === 'estado-post') {
+    //         btnSharePost.addEventListener('click', () => {
+    //             createPost(state.value, './image/image-post.png')
+    //         })
+    //     } else {
+    //         btnSharePost.addEventListener('click', () => {
+    //             createPost('publico', './image/image-post.png')
+    //         })
+    //     }
+
+    // })
 
     return root;
 };

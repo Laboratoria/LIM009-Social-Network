@@ -159,8 +159,7 @@ export const setUpPost = data => {
       <button id ='btn-like' class='btn-post-create'>Like</button>
       <button id ='btn-love' class='btn-post-create'>Me encanta</button>
       <button id ='btn-coment' class='btn-post-create'>Comentar</button>  
-      </div >      
-      
+      </div >       
       </footer>
     </article>  
         `
