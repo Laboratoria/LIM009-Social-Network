@@ -15,25 +15,25 @@ export default (file, uploader, calback) => {
             uploader.value = progress;
             // console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: console.log('Upload is paused');
+                case firebase.storage.TaskState.PAUSED: alert('Upload is paused');
                     break;
-                case firebase.storage.TaskState.RUNNING: break;
+                case firebase.storage.TaskState.RUNNING: alert('exito'); break;
             }
         }, function (error) {
 
             switch (error.code) {
                 case 'storage/unauthorized':
-                    // User doesn't have permission to access the object
+                    alert('User doesnt have permission to access the object')
                     break;
 
                 case 'storage/canceled':
-                    // User canceled the upload
+                    alert('// User canceled the upload')
                     break;
 
                 // ...
 
                 case 'storage/unknown':
-                    // Unknown error occurred, inspect error.serverResponse
+                    alert(' // Unknown error occurred, inspect error.serverResponse')
                     break;
             }
         }, () => {

@@ -22,7 +22,7 @@ export default (user) => {
     <img src='${user.photoURL}'>   
     </div>
     <div id = 'post' class='col-7 col-xs-12 center'>   
-    <article class= 'flex-container  margin-top border center'>     
+    <article id = 'content-post' class= 'flex-container  margin-top border center'>     
       <header class='header-post'> 
         <img id='photo-post-user' src='${user.photoURL}' alt='feminismo' class='img-perfil-post'>                
         <label id='name-user-post' class=''>${user.displayName} </label> 
@@ -57,39 +57,56 @@ export default (user) => {
     const btnSignOut = document.querySelector('#sign-out');
     btnSignOut.addEventListener('click', logOut);
     const btnSharePost = document.querySelector('#btn-share');
-    // const imagePost = document.querySelector('#image-post');
+    const constentPost = document.querySelector('#content-post');
     const imagePostView = document.querySelector('#image-post-view');
     const state = document.querySelector('#estado-post')
     const uploader = document.querySelector('#uploader');
     const fileButton = document.querySelector('#file-button');
 
+    // constentPost.addEventListener('click',e=>{
+    //     if(e.target.id === 'btn-share'){
 
-    fileButton.addEventListener('change', (e) => {
-        //Obtener archivo
-        let file = e.target.files[0];
-        const getImage = (image) => {
-            console.log(image)
+    //     }
+    // })
 
-            const btnImagePost = document.querySelector('#btn-share');
-            btnImagePost.addEventListener('click', () => {
 
-                createPost('publico', image)
-            })
-        }
-        imagePost(file, uploader, getImage)
-    });
+    constentPost.addEventListener('change', (e) => {
+        if (e.target.id === 'file-button') {
+            fileButton.addEventListener('change', (e) => {
+                //Obtener archivo
+                let file = e.target.files[0];
+                const getImage = (image) => {
+                    console.log(image)
 
-    state.addEventListener('change', () => {
-        const btnState = document.querySelector('#btn-share');
-        btnState.addEventListener('click', () => {
+                    const btnImagePost = document.querySelector('#btn-share');
+                    btnImagePost.addEventListener('click', () => {
 
-            createPost(state.value, './image/image-post.png')
-        });
+                        createPost('publico', image)
+                    })
+                }
+                imagePost(file, uploader, getImage)
+            });
+        } else
+            if (e.target.addEventListener === 'estado-post') {
+                state.addEventListener('change', () => {
+                    const btnState = document.querySelector('#btn-share');
+                    btnState.addEventListener('click', () => {
+
+                        createPost(state.value, './image/image-post.png')
+                    });
+                })
+            } else {
+                btnSharePost.addEventListener('click', () => {
+
+                    createPost('publico', './image/image-post.png')
+                });
+            }
     })
-    btnSharePost.addEventListener('click', () => {
 
-        createPost('publico', './image/image-post.png')
-    });
+
+
+
+
 
 
     return root;
