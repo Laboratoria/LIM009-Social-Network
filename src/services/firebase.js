@@ -41,6 +41,7 @@ const addPostToCloudFirestore = (inputComment, idUser) =>
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
+    
     });;
 
 
@@ -68,3 +69,5 @@ export {
     addPostToCloudFirestore,
     getPostsInRealtime
 };
+
+import{getDataOfUser} from '../controller/controller1.js';

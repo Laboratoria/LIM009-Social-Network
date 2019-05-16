@@ -1,35 +1,45 @@
-import { signOutUser, createPostInCloudFirestore,getDataOfUser } from "../controller/controller1.js" ;
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePost,editPost } from "../controller/controller1.js";
 
-const renderOnePost = (post,user) => { // {}
-  let label = document.createElement('div');
+const renderOnePost = (post, user) => { // {}
+    let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
-  <div id="${post.userId}" class="text-comment">${post.content}</div>
+  <div id="post-content" class="text-comment">${post.content}</div>
   <div class="icons-like">
       <i class="fab fa-gratipay"></i>
       <i class="fas fa-paper-plane"></i></div>
-      <button id="${post.userId}" class="share boton">Eliminar</button>
+      <button id="btn-delete" class="share boton">Eliminar</button>
+      <button id="btn-editar" class="share boton">Editar</button>
  `;
+    const deleteBtn = label.querySelector("#btn-delete");
+    deleteBtn.addEventListener("click", () => {
+        deletePost(post.id);
+    });
+    const editBtn = label.querySelector("#btn-editar");
+    editBtn.addEventListener("click", () => {
+        editPost(post.id,post.content);
+    });
+
     label.setAttribute('class', "box");
     return label // que imprima una un post ,que se añada al ul element
 };
 
 export default (user, posts) => {
-    let photoUrl='';
-        try {
-          new URL(user.photo);
-          photoUrl=user.photo;
-        } catch (_) {
-            photoUrl= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
-        }
-      
+    let photoUrl = '';
+    try {
+        new URL(user.photo);
+        photoUrl = user.photo;
+    } catch (_) {
+        photoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
+    }
+
     console.log(photoUrl)
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
     divElement.innerHTML = `
     <header class="header">
     <ul class="menu">
-        <li class="small"><a>${user.name} ></a>
+        <li class="small"><p>${user.name}</p>
             <ul>
                 <li><a>Configurar cuenta</a></li>
                 <li><a>Editar Perfil</a></li>
@@ -60,7 +70,7 @@ export default (user, posts) => {
     </main>
 </div>
 `;
-//class="comment-post box"
+    //class="comment-post box"
     const divCommentList = divElement.querySelector("#comment-list");
 
     const shareBtn = divElement.querySelector("#btn-share");
@@ -72,12 +82,14 @@ export default (user, posts) => {
 
 
     posts.forEach((onePost) => {
-        getDataOfUser(onePost.userId).then((userdata)=>{
-            console.log((userdata.name));
-            const divPost = renderOnePost(onePost,userdata);
-        divCommentList.appendChild(divPost);
-            });
-        
+        getDataOfUser(onePost.userId).then((userdata) => {
+            console.log((userdata.userId));
+            const divPost = renderOnePost(onePost, userdata);
+            console.log(onePost.id);
+            console.log(onePost.content)
+            divCommentList.appendChild(divPost);
+        });
+
     })
 
 
