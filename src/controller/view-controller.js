@@ -141,7 +141,10 @@ export const setUpPost = data => {
         const article = document.createElement('article');
         const li = `
     <article id = 'content-post' class= 'flex-container  margin-top border center'> 
-        
+    <div class = 'btn-post-edit-del'>
+    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
+    <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
+    </div>    
       <header class='header-post'>       
       <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
       <label id='name-user-post' class=''>${getUser.data().name}</label> 
