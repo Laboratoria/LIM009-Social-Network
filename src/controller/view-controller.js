@@ -132,21 +132,35 @@ export const createPost = (state, imagePost) => {
 export const setUpPost = data => {
   const postList = document.querySelector('#post-list');
   data.forEach(doc => {
+    console.log(doc.data())
     getDataDoc(doc.data().user).then((getUser) => {
       if (getUser.exists) {
         // return doc.data()
         // console.log("Document data:", doc.data().name);
         const post = doc.data();
         const article = document.createElement('article');
-        //console.log(doc.id);    
-        const li = `  
-    <li>
-      <p>Publicado por ${post.user}</p>
-      <p>${post.description}</p>
-      <img class ='btn-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
-      <img class ='btn-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
-    </li>
-    `
+        const li = `
+    <article id = 'content-post' class= 'flex-container  margin-top border center'> 
+        
+      <header class='header-post'>       
+      <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
+      <label id='name-user-post' class=''>${getUser.data().name}</label> 
+      <label id='fecha-post' class='center'></label>            
+      </header>
+      <section class='content-post'>     
+      <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
+      <textarea id = 'description' class="textarea center">${post.description}</textarea>      
+      </section>
+      <footer class = 'margin-footer center'>
+      <div class = 'style-color-header style-content-post-img'>
+      <button id ='btn-like' class='btn-post-create'>Like</button>
+      <button id ='btn-love' class='btn-post-create'>Me encanta</button>
+      <button id ='btn-coment' class='btn-post-create'>Comentar</button>  
+      </div >      
+      
+      </footer>
+    </article>  
+        `
         article.innerHTML = li;
         let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
         btnDelete.addEventListener('click', () => {
@@ -154,43 +168,41 @@ export const setUpPost = data => {
         })
         return postList.appendChild(article);
       }
-    });
-
-
-
-    return postList
-  }
+    })
+  });
+  return postList
+}
 
 
 
 
 
 const deletePost = id => {
-    let db = firebase.firestore();
-    db.collection("posts").doc(id).delete().then(() => {
-      console.log("Document successfully deleted!");
-    }).catch((error) => {
-      console.error("Error removing document: ", error);
-    });
-  }
+  let db = firebase.firestore();
+  db.collection("posts").doc(id).delete().then(() => {
+    console.log("Document successfully deleted!");
+  }).catch((error) => {
+    console.error("Error removing document: ", error);
+  });
+}
 
-  export const editPErfilUser = (idUser, name, email) => {
-    updatePerfilUser(idUser, name).then(() => {
+export const editPErfilUser = (idUser, name, email) => {
+  updatePerfilUser(idUser, name).then(() => {
+    // Update successful.
+    alert('Nombre se actualizó correctamente')
+    updateEmailUser(idUser, email).then(() => {
       // Update successful.
-      alert('Nombre se actualizó correctamente')
-      updateEmailUser(idUser, email).then(() => {
-        // Update successful.
-        alert('Email se actualizó correctamente')
-      }).catch((error) => {
-        // An error happened.
-        alert(error + 'Actualización Ha ocurrido un error. en email..')
-      });
+      alert('Email se actualizó correctamente')
     }).catch((error) => {
       // An error happened.
-      if (error === 'Error: This operation is sensitive and requires recent authentication. Log in again before retrying this request.Actualización Ha ocurrido un error. en email..') {
-        alert('esta operación es confidencial y requiere autenticación reciente. Vuelva a iniciar sesión antes de volver a intentar esta solicitud de Actualización ')
-      } else {
-        alert('Actualización Ha ocurrido un error. en nombre..')
-      }
+      alert(error + 'Actualización Ha ocurrido un error. en email..')
     });
-  }
+  }).catch((error) => {
+    // An error happened.
+    if (error === 'Error: This operation is sensitive and requires recent authentication. Log in again before retrying this request.Actualización Ha ocurrido un error. en email..') {
+      alert('esta operación es confidencial y requiere autenticación reciente. Vuelva a iniciar sesión antes de volver a intentar esta solicitud de Actualización ')
+    } else {
+      alert('Actualización Ha ocurrido un error. en nombre..')
+    }
+  });
+}
