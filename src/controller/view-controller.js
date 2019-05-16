@@ -132,10 +132,14 @@ export const createPost = (state, imagePost) => {
 export const setUpPost = data => {
   const postList = document.querySelector('#post-list');
   data.forEach(doc => {
-    //console.log(doc.id);
-    const post = doc.data();
-    const article = document.createElement('article');
-    const li = `  
+    getDataDoc(doc.data().user).then((getUser) => {
+      if (getUser.exists) {
+        // return doc.data()
+        // console.log("Document data:", doc.data().name);
+        const post = doc.data();
+        const article = document.createElement('article');
+        //console.log(doc.id);    
+        const li = `  
     <li>
       <p>Publicado por ${post.user}</p>
       <p>${post.description}</p>
@@ -143,49 +147,50 @@ export const setUpPost = data => {
       <img class ='btn-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
     </li>
     `
-    article.innerHTML = li;
-    let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
-    btnDelete.addEventListener('click', () => {
-      deletePost(doc.id);
-    })
-    return postList.appendChild(article);
-  });
+        article.innerHTML = li;
+        let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
+        btnDelete.addEventListener('click', () => {
+          deletePost(doc.id);
+        })
+        return postList.appendChild(article);
+      }
+    });
 
 
 
-  return postList
-}
+    return postList
+  }
 
 
 
 
 
 const deletePost = id => {
-  let db = firebase.firestore();
-  db.collection("posts").doc(id).delete().then(() => {
-    console.log("Document successfully deleted!");
-  }).catch((error) => {
-    console.error("Error removing document: ", error);
-  });
-}
+    let db = firebase.firestore();
+    db.collection("posts").doc(id).delete().then(() => {
+      console.log("Document successfully deleted!");
+    }).catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+  }
 
-export const editPErfilUser = (idUser, name, email) => {
-  updatePerfilUser(idUser, name).then(() => {
-    // Update successful.
-    alert('Nombre se actualizó correctamente')
-    updateEmailUser(idUser, email).then(() => {
+  export const editPErfilUser = (idUser, name, email) => {
+    updatePerfilUser(idUser, name).then(() => {
       // Update successful.
-      alert('Email se actualizó correctamente')
+      alert('Nombre se actualizó correctamente')
+      updateEmailUser(idUser, email).then(() => {
+        // Update successful.
+        alert('Email se actualizó correctamente')
+      }).catch((error) => {
+        // An error happened.
+        alert(error + 'Actualización Ha ocurrido un error. en email..')
+      });
     }).catch((error) => {
       // An error happened.
-      alert(error + 'Actualización Ha ocurrido un error. en email..')
+      if (error === 'Error: This operation is sensitive and requires recent authentication. Log in again before retrying this request.Actualización Ha ocurrido un error. en email..') {
+        alert('esta operación es confidencial y requiere autenticación reciente. Vuelva a iniciar sesión antes de volver a intentar esta solicitud de Actualización ')
+      } else {
+        alert('Actualización Ha ocurrido un error. en nombre..')
+      }
     });
-  }).catch((error) => {
-    // An error happened.
-    if (error === 'Error: This operation is sensitive and requires recent authentication. Log in again before retrying this request.Actualización Ha ocurrido un error. en email..') {
-      alert('esta operación es confidencial y requiere autenticación reciente. Vuelva a iniciar sesión antes de volver a intentar esta solicitud de Actualización ')
-    } else {
-      alert('Actualización Ha ocurrido un error. en nombre..')
-    }
-  });
-}
+  }
