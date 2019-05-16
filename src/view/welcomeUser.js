@@ -1,4 +1,5 @@
 import { logOut, createPost } from '../controller/view-controller.js';
+import imagePost from '../lib/comple-firebase.js'
 // import {createPost} from '../model/model.js'
 
 export default (user) => {
@@ -28,6 +29,9 @@ export default (user) => {
         <label id='fecha-post' class='center'>hora</label>            
       </header>
       <section class='content-post'>
+      <progress value="0" max="100" id="uploader" class = 'margin-top border'>0%</progress>
+       <input type="file" value="upload" id="file-button" class='center  block border margin-top' />  
+      <img id='image-post-view' src="./image/image-post.png" alt="imagen-post" class='img-post'> 
       <div class=''>
       <h2></h2> 
       <textarea id = 'description' class="textarea" placeholder='¿Qué estás pensando?'></textarea>
@@ -53,12 +57,41 @@ export default (user) => {
     const btnSignOut = document.querySelector('#sign-out');
     btnSignOut.addEventListener('click', logOut);
     const btnSharePost = document.querySelector('#btn-share');
+    // const imagePost = document.querySelector('#image-post');
+    const imagePostView = document.querySelector('#image-post-view');
     const state = document.querySelector('#estado-post')
-    state.addEventListener('change', () => {
-        btnSharePost.addEventListener('click', () => {
-            createPost(state.value)
-        });
+    const uploader = document.querySelector('#uploader');
+    const fileButton = document.querySelector('#file-button');
+
+
+    fileButton.addEventListener('change', (e) => {
+        //Obtener archivo
+        let file = e.target.files[0];
+        const getImage = (image) => {
+            console.log(image)
+
+            const btnImagePost = document.querySelector('#btn-share');
+            btnImagePost.addEventListener('click', () => {
+
+                createPost('publico', image)
+            })
+        }
+        imagePost(file, uploader, getImage)
     });
+
+    state.addEventListener('change', () => {
+        const btnState = document.querySelector('#btn-share');
+        btnState.addEventListener('click', () => {
+
+            createPost(state.value, './image/image-post.png')
+        });
+    })
+    btnSharePost.addEventListener('click', () => {
+
+        createPost('publico', './image/image-post.png')
+    });
+
+
     return root;
 };
 
