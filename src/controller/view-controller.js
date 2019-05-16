@@ -1,5 +1,6 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser } from '../model/model.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc } from '../model/model.js'
+
 const changeHash = (hash) => {
   location.hash = hash;
 }
@@ -9,7 +10,7 @@ export const registerUser = () => {
   const passwordRegister = document.querySelector('#password-register').value;
   return createEmailAndPassword(emailRegister, passwordRegister)
     .then((result) => {
-      // dataBaseUser(result.user);
+      dataBaseUser(result.user);
       alert('Registro con éxito')
     }).catch(error => {
       // Handle Errors here.
@@ -31,7 +32,10 @@ export const email = () => {
   const valueEmail = document.querySelector("#email-id").value;
   const password = document.querySelector("#password-id").value;
   return signInWithEmail(valueEmail, password)
-    .then(() => changeHash('/welcomeUser')
+    .then((result) => {
+      dataBaseUser(result.user)
+      changeHash('/welcomeUser')
+    }
     ).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
@@ -49,8 +53,10 @@ export const email = () => {
 };
 
 export const google = () => {
-  return signInWithGoogle().then(() =>
-    changeHash('/welcomeUser'))
+  return signInWithGoogle().then((result) => {
+    dataBaseUser(result.user)
+    changeHash('/welcomeUser')
+  })
     .catch(error => {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -69,8 +75,10 @@ export const google = () => {
 }
 
 export const facebook = () => {
-  return signInWithFacebook().then(() =>
+  return signInWithFacebook().then((result) => {
+    dataBaseUser(result.user);
     changeHash('/welcomeUser')
+  }
   ).catch(error => {
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -100,7 +108,7 @@ export const logOut = () => {
 //Crear post con IDs por defecto
 export const createPost = (state, imagePost) => {
   let description = document.querySelector('#description').value;
-  let userName = document.querySelector('#user-name').textContent;
+  let userID = document.querySelector('#user-id').textContent;
   console.log('llegue aqui')
   console.log(state)
   let db = firebase.firestore();
@@ -108,7 +116,7 @@ export const createPost = (state, imagePost) => {
     description: description,
     state: state,
     likes: 0,
-    user: userName,
+    user: userID,
     image: imagePost
   })
     .then(() => {
@@ -127,7 +135,7 @@ export const setUpPost = data => {
     //console.log(doc.id);
     const post = doc.data();
     const article = document.createElement('article');
-    const li = `
+    const li = `  
     <li>
       <p>Publicado por ${post.user}</p>
       <p>${post.description}</p>
@@ -142,6 +150,9 @@ export const setUpPost = data => {
     })
     return postList.appendChild(article);
   });
+
+
+
   return postList
 }
 

@@ -73,7 +73,7 @@ button:hover{
 }
 .style-color-header{
     /* margin :2%; */
-    border: 0.7px solid rgba(37, 4, 90, 0.863);
+    border: 0.7px solid rgba(37, 4, 90, 0.37);
     padding: 1%;
     border-radius: 3%;
     margin: 1%;
@@ -120,11 +120,12 @@ a:hover{
     margin-right: 2%;       
 }
 .img-post{ 
-    width: 7%;
+    width: 25%;
     margin-top: 3%;       
     height: 1.5rem;
     border-radius: 30%;  
-    margin-right: 0.5%   
+    margin-right: 0.5%;
+    border: 1px solid rgba(0, 0, 0, 0.322);
 }
     #image-post:hover{
         box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
@@ -141,8 +142,8 @@ a:hover{
     border-radius: 3%;
 }
 .btn-post-create{
-    /* width: 30%; */
-    padding: 2%;
+    margin-left: 2%;
+    padding: 1%;
     background: white;
     color: black;
     border: 1px solid rgba(71, 70, 70, 0.247);
@@ -157,6 +158,33 @@ a:hover{
     border: 0.5px solid rgba(119, 8, 26, 0);
     padding: 1%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.style-content-footer{
+    display: flex;
+    padding: 2%;
+    height: 4rem;
+    }
+
+.img-post-prev{    
+    height: 6.3rem;
+    margin: 2%;
+}
+.progress{
+    width: 15%;
+  margin: 2%;
+}
+.margin-footer{
+    margin:auto 5% auto 5%;
+}
+.style-content-post-img{
+display: flex;
+padding: 2%;
+}
+.opacity{
+    opacity: 0;
+}
+.btn-post-edit-del{
+    padding-left: 80%;
 }
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {
