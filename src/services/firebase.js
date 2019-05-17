@@ -84,7 +84,7 @@ const editPostInCloudFireStore = (idPost,idUserOfPost,commentInputNewValue) => {
 
 
 }
-else{ alert("You can not delete a comment which was not published by you");
+else{ alert("You can not edit a comment which was not published by you");
 
 }
 };
@@ -112,5 +112,5 @@ export {
     addPostToCloudFirestore,
     getPostsInRealtime,
     deletePostInCloudFireStore,
-   editPostInCloudFireStore,
+  editPostInCloudFireStore,
 };

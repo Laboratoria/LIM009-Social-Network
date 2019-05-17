@@ -3,11 +3,11 @@ import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfter
 const renderOnePost = (post, user) => { 
     let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'>Publicado por ${user.name}<button type="button" class="btn-delete delete" id="btn-delete" data-uidPost="${post.userId}" ><img src="./css/img/error.png" class="share delete"></button></div>
+  <div id="comment-author" class='encabezado'>Publicado por ${user.name}<button type="button" class="btn-delete delete" 
+  id="btn-delete" data-uidPost="${post.userId}" ><img src="./css/img/error.png" class="share delete"></button></div>
   <div class="text-comment" id="content-comment-div" >${post.content}</div>
    <img src="./css/img/like-1.png" class="icons like" alt="icon like">
   <button type="button" id="btn-edit" data-uid-post="${post.userId}" class="icons edit"><img src="./css/img/paper-plane-1.png" data-id-post="${post.id}" class="icons edit" alt="icon edit"></button>
-  
  `;
     label.setAttribute('class', "box");
     label.setAttribute('data-id', `${post.id}`);
@@ -18,11 +18,38 @@ const renderOnePost = (post, user) => {
     });
 
 
-    const editButton = label.querySelector("#btn-edit");
-    editButton.addEventListener('click', (e) => {
-        console.log(e);
-        editPostAfterClick(e)
-    });
+    const divCommentContent = label.querySelector("#content-comment-div");
+    const idPostAttributeOfDivContent=divCommentContent.dataset.idPost;
+   const editButton = label.querySelector("#btn-edit");
+   editButton.addEventListener('click',(e)=>{
+       console.log(idPostAttributeOfDivContent);
+       const idPostAttributeOfEditButton=e.target.dataset.idPost;
+       const userIdAttributeOfEditButton=e.target.dataset.uidPost;
+       console.log(idPostAttributeOfEditButton);
+       if(idPostAttributeOfDivContent===idPostAttributeOfEditButton){ //si el id del post del div content es  igual al id del post que quiere modificar
+           if(currentUser().uid===userIdAttributeOfEditButton){ // si el id del usuario actual es igual al id del usuario que publico el post
+               divCommentContent.setAttribute("contenteditable",true);
+               console.log("You can edit now");
+               const saveBtn=label.querySelector("#btn-save-after-edit");
+               saveBtn.addEventListener('click',()=>{
+                   divCommentContent.setAttribute("contenteditable",false);
+                   const newContent=(divCommentContent.textContent);
+                   console.log(newContent);
+                   editPostInCloudFireStore(idPostAttributeOfEditButton,userIdAttributeOfEditButton,newContent);
+               });
+
+           }else{
+               alert("You can not edit a comment which was not published by you");
+               divCommentContent.setAttribute("contenteditable",false);
+
+           }
+
+       }else{
+           divCommentContent.setAttribute("contenteditable",false);
+
+       }
+      
+   });
 
     return label // que imprima una un post ,que se añada al ul element
 };
@@ -45,8 +72,8 @@ export default (user, posts) => {
         <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
             <ul class="interior">
                 <li><a href="#/configuration">Configurar cuenta</a></li>
-                <li><a href="#/editProfile">Editar Perfil</a></li>
-                <li><a id="sign-out-list" class="sign-out-list">Cerrar sesión</a></li>
+                <li><a href="#/edit-profile">Editar Perfil</a></li>
+                <li><a id="sign-out-list" class="sign-out-list" href="#/privacity">Configuracion de la Privacidad</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
