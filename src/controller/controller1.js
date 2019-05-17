@@ -8,7 +8,7 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    editPostInCloudFireStore,
+    //editPostInCloudFireStore,
 
 
 } from "../services/firebase.js";
@@ -193,7 +193,7 @@ console.log(postId);
 
 
 
-
+/*
  const editPostAfterClick = (e) =>{
     const divContent=document.querySelector("#content-comment-div");
     const saveBtn=document.querySelector("#btn-save-after-edit");
@@ -222,7 +222,7 @@ console.log(postId);
     }
     
     
-};
+ };*/
 
 
 
@@ -278,7 +278,7 @@ export {
     getUserActive,
     createPostInCloudFirestore,
     deletePostAfterClick,
-    editPostAfterClick,
+   // editPostAfterClick,
    
 
 

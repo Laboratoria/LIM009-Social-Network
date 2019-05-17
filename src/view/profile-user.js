@@ -1,14 +1,14 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostAfterClick } from "../controller/controller1.js";
-
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick } from "../controller/controller1.js";
+import {currentUser,editPostInCloudFireStore,} from "../services/firebase.js";
 const renderOnePost = (post, user) => { // {}
     let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
-  <div class="text-comment" id="content-comment-div" >${post.content}</div>
-  <button class="fab fa-gratipay"></button>
-  <button class="fas fa-paper-plane" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}"></button>
-  <button id="btn-save-after-edit">Save</button>
-  <button id="btn-delete" data-uidPost="${post.userId}"class="share boton">Eliminar</button>
+    <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
+    <div class="text-comment" id="content-comment-div" data-id-post="${post.id}">${post.content}</div>
+    <button class="fab fa-gratipay"></button>
+    <button class="fas fa-paper-plane" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}" ></button>
+    <button id="btn-save-after-edit">Save</button>
+    <button id="btn-delete" data-uid-post="${post.userId}" data-id-post="${post.id}"class="share boton">Eliminar</button>
  `;
     label.setAttribute('class', "box");
     label.setAttribute('data-id', `${post.id}`);
@@ -19,11 +19,38 @@ const renderOnePost = (post, user) => { // {}
     });
 
 
-    const editButton = label.querySelector("#btn-edit");
-    editButton.addEventListener('click', (e) => {
-        console.log(e);
-        editPostAfterClick(e)
-    });
+    const divCommentContent = label.querySelector("#content-comment-div");
+    const idPostAttributeOfDivContent=divCommentContent.dataset.idPost;
+   const editButton = label.querySelector("#btn-edit");
+   editButton.addEventListener('click',(e)=>{
+       console.log(idPostAttributeOfDivContent);
+       const idPostAttributeOfEditButton=e.target.dataset.idPost;
+       const userIdAttributeOfEditButton=e.target.dataset.uidPost;
+       console.log(idPostAttributeOfEditButton);
+       if(idPostAttributeOfDivContent===idPostAttributeOfEditButton){ //si el id del post del div content es  igual al id del post que quiere modificar
+           if(currentUser().uid===userIdAttributeOfEditButton){ // si el id del usuario actual es igual al id del usuario que publico el post
+               divCommentContent.setAttribute("contenteditable",true);
+               console.log("You can edit now");
+               const saveBtn=label.querySelector("#btn-save-after-edit");
+               saveBtn.addEventListener('click',()=>{
+                   divCommentContent.setAttribute("contenteditable",false);
+                   const newContent=(divCommentContent.textContent);
+                   console.log(newContent);
+                   editPostInCloudFireStore(idPostAttributeOfEditButton,userIdAttributeOfEditButton,newContent);
+               });
+
+           }else{
+               alert("You can not edit a comment which was not published by you");
+               divCommentContent.setAttribute("contenteditable",false);
+
+           }
+
+       }else{
+           divCommentContent.setAttribute("contenteditable",false);
+
+       }
+      
+   });
 
     return label // que imprima una un post ,que se añada al ul element
 };
