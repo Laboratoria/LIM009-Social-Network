@@ -1,22 +1,29 @@
 import login from "./view/login.js"
-import register  from './view/pagesRegister.js'
+import register from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
+import { setUpPost } from "./controller/view-controller.js";
+import editPerfil from './view/edit-perfil.js'
 
 
 const infoUser = () => {
   firebase.auth().onAuthStateChanged(user => {
-      if(user) {
+    if (user) {
+      let db = firebase.firestore();
+      db.collection('posts').onSnapshot(snapshot => {
+        setUpPost(snapshot.docs);
+      });
       welcomeUser(user);
-      } else {
+
+    } else {
       welcomeUser(null);
-      }
+    }
   })
 };
 
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return getRoute('#/login');
-  } else if ( hash === '#/registerUser' || hash === '#/welcomeUser' ) {
+  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil') {
     return getRoute(hash);
   } else {
     return getRoute('#/login');
@@ -30,15 +37,17 @@ const getRoute = routers => {
   switch (router) {
     case 'login':
       root.appendChild(login());
-    break;
+      break;
     case 'registerUser': root.appendChild(register());
       break;
     case 'welcomeUser': infoUser();
-    // getDataDoc(getUserUid())
-    // .then(data => {
-    // return root.appendChild(welcomeUser(data));
-    // })
-    break;
+      break;
+    case 'edit-perfil': root.appendChild(editPerfil())
+      // getDataDoc(getUserUid())
+      // .then(data => {
+      // return root.appendChild(welcomeUser(data));
+      // })
+      break;
   }
 };
 
@@ -50,14 +59,14 @@ export const setRoute = () => {
   // return window.addEventListener("load", getRoute(location.href));
 };
 
-  
- 
+
+
 
 
 
 
 // export { changeview };
-  
+
   // if (router === 'login') {
   //   root.appendChild(login());
   //   // console.log(login)

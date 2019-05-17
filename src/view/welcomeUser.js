@@ -6,24 +6,26 @@ export default (user) => {
     const templateWelcome = `
     <header>
         <ul class = 'header'>
-            <li><a href='#'>${user.displayName}</a></li>
-            <li><img src='../src/image/logo.png'></li>
+            <li><a id = 'edit-perfil' href='#/edit-perfil'>${user.displayName}</a></li>
+            <li><img src=""></li>
             <li><a id='sign-out'>Cerrar Sesión</a></li>
         </ul>
     </header>
     <div>
     <p>Nombre del usuario</p>
-    <span>${user.displayName}</span>
+    <span id='user-name'>${user.displayName}</span>
     <p>E-mail</p>
     <span>${user.email}</span>
     <p>Foto</p>
     <img src='${user.photoURL}'>
     </div>
-    <div>
-    <p>Crear una publicación</p>
-    <input id='description' type='text' placeholder='¿Qué estás pensando?'></input>
-    <button type ='button' id ='btn-share'>Compartir</button>
-    </div>
+    <form id= 'create-post'>
+        <label>Crear una publicación</label>
+        <input type = 'text' id = 'description' placeholder='¿Qué estás pensando?'></input>
+        <button type = 'button' id ='btn-share'>Compartir</button>
+    </form>
+    <li id='post-list'>
+    </li>
     `;
     root.innerHTML = templateWelcome;
     const btnSignOut = document.querySelector('#sign-out');

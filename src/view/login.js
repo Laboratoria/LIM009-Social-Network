@@ -5,7 +5,7 @@ export default () => {
   const templateFormLogin = `
   <div class= 'col-12 col-xs-12'>
   <aside class = 'col-lg-6 col-xs-12 center'>
-  <header><img src="./image/apego.jpg" alt="educacion" class='block center'>
+  <header><img src="./image/portada1.jpeg" alt="educacion" class='block center'>
   </aside>
   <form class= 'col-lg-6 col-xs-12 center'>
   <img src="./image/logo.png" alt="educacion" class='block center'>
@@ -16,8 +16,8 @@ export default () => {
     <button type="button" id="btn-sing-in" class='center style-btn-login block border' >Log in</button>
     <p>De manera opcional ingresa con : </p>
     <span class = 'center'>
-      <img id="btn-google" class='btn-rss' alt="icono de google" height="36" width="36" src="./css/google-plus.png"/>
-      <img id="btn-facebook" class='btn-rss' alt="icono de facebook" height="36" width="36" src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png"/>
+      <img id="btn-google" class='btn-rss' alt="icono de google" src="./css/google-plus.png"/>
+      <img id="btn-facebook" class='btn-rss' alt="icono de facebook"  src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png"/>
     </span>
   </article>
     <footer><span><p class= 'style-register'>Si eres usuario nuevo, </p> <a href='#/registerUser' class= 'style-register'>Regístrate</a></span></footer>
@@ -25,6 +25,7 @@ export default () => {
   </div>
   `;
   formLogin.innerHTML = templateFormLogin;
+  //formLogin.classList.add('page-login');
   const btnSingIn = formLogin.querySelector("#btn-sing-in");
   const btnFacebook = formLogin.querySelector('#btn-facebook');
   const btnGoogle = formLogin.querySelector('#btn-google');
