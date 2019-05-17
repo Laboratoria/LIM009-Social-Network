@@ -39,7 +39,7 @@ body {
 }
 
 .formulario {
-    height: 45%;
+    height: 60%;
     margin: auto;
     width: 70%;
 }
@@ -53,12 +53,11 @@ body {
 
 .redondear {
     display: block;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    border-radius: 20px;
+     -moz-border-radius: 10px;
+    -webkit-border-radius: 10px; 
     height: 20%;
 }
-
-
 
 .boton {
     border-radius: 6px;
@@ -66,7 +65,7 @@ body {
     -webkit-border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    background-color: rgb(159, 187, 252);
+    background-color: #4C97FF;
 }
 
 .button-acceder {
@@ -98,18 +97,17 @@ a {
 }
 
 .parrafo {
-    padding-top: 20%;
+    padding-top: 11%;
 }
 
-ul, li {
+li {
     list-style: none;
 }
 
 .icon-network {
-    height: 32px;
-    width: 32px;
+    height: 40px;
+    width: 40px;
 }
-
 
 @media(min-width:768px) {
     .general {
@@ -131,17 +129,12 @@ ul, li {
     .formulario {
         height: 40%;
     }
-    .Name, .last-Name {
-        width: 40%;
-        display: inline-block;
-    }
     .right {
         padding-top: 20%;
     }
     .parrafo {
         padding-top: 10%;
-    }
-    .nombre-menu{
-        display: block;
+    }.parrafo {
+        padding-top: 20%;
     }
 }

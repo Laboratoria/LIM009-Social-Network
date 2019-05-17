@@ -27,7 +27,7 @@ const renderOnePost = (post, user) => { // {}
         const userIdAttributeOfEditButton=e.target.dataset.uidPost;
         console.log(idPostAttributeOfEditButton);
         if(idPostAttributeOfDivContent===idPostAttributeOfEditButton){ //si el id del post del div content es  igual al id del post que quiere modificar
-            if(currentUser().uid===userIdAttributeOfEditButton){ // si el id del usuario logueado actualmente es igual al id del usuario que publico el post
+            if(currentUser().uid===userIdAttributeOfEditButton){ // si el id del usuario actual es igual al id del usuario que publico el post
                 divCommentContent.setAttribute("contenteditable",true);
                 console.log("You can edit now");
                 const saveBtn=label.querySelector("#btn-save-after-edit");
@@ -69,14 +69,15 @@ export default (user, posts) => {
     divElement.innerHTML = `
     <header class="header">
     <ul class="menu">
-        <li class="small"><p>${user.name}</p>
-            <ul>
-                <li><a  href="#/configuration">Configurar cuenta</a></li>
-                <li><a  href="#/edit-profile">Editar Perfil</a></li>
+        <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
+            <ul class="interior">
+                <li><a href="#/configuration">Configurar cuenta</a></li>
+                <li><a href="#/edit-profile">Editar Perfil</a></li>
+                <li><a id="sign-out-list" class="sign-out-list" href="#/privacity">Configuracion de la Privacidad</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
-        <li id="sign-out" class="small"><a>Cerrar sesión</a></li>
+        <li id="sign-out" class="small sign-out"><a>Cerrar sesión</a></li>
     </ul>
 </header>
 <div class="sub-container">
@@ -109,18 +110,20 @@ export default (user, posts) => {
     });
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
-
-
+    
     posts.forEach((onePost) => {
         console.log(onePost);
-        getDataOfUser(onePost.userId).then((userdata)=>{
+        getDataOfUser(onePost.userId).then((userdata) => {
             console.log((userdata.name));
-            const divPost = renderOnePost(onePost,userdata);
-        divCommentList.appendChild(divPost);
-            });
-        
+            const divPost = renderOnePost(onePost, userdata);
+            divCommentList.appendChild(divPost);
+        });
+
     })
-
-
     return divElement;
 };
+
+
+
+
+//Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha

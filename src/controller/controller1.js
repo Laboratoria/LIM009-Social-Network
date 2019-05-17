@@ -13,11 +13,9 @@ import {
 
 } from "../services/firebase.js";
 
-
 const changeHash = (hash) => {
     location.hash = hash;
 };
-
 
 const signInAfterClick = () => {
     const email = document.querySelector('#email').value;
@@ -194,8 +192,8 @@ console.log(postId);
 
 
 
-/*
 
+/*
  const editPostAfterClick = (e) =>{
     const divContent=document.querySelector("#content-comment-div");
     const saveBtn=document.querySelector("#btn-save-after-edit");
