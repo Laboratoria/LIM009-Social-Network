@@ -4,22 +4,32 @@ import welcomeUser from './view/welcomeUser.js'
 import { setUpPost } from "./controller/view-controller.js";
 import editPerfil from './view/edit-perfil.js'
 import error from './view/page-error.js'
+import { getUserReady } from "./lib/lib-firebase.js";
 
-const infoUser = () => {
+// const infoUser = () => {
 
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      let db = firebase.firestore();
-      db.collection('posts').onSnapshot(snapshot => {
-        console.log(snapshot.docs)
-        setUpPost(snapshot.docs);
-      });
-      welcomeUser(user);
-    } else {
-      welcomeUser(null);
-    }
+//   firebase.auth().onAuthStateChanged(user => {
+//     if (user) {
+//       let db = firebase.firestore();
+//       db.collection('posts').onSnapshot(snapshot => {
+//         console.log(snapshot.docs)
+//         setUpPost(snapshot.docs);
+//       });
+//       welcomeUser(user);
+//     } else {
+//       welcomeUser(null);
+//     }
+//   })
+// };
+const getUserActiv = (user) => {
+
+  let db = firebase.firestore();
+  db.collection('posts').onSnapshot(snapshot => {
+    console.log(snapshot.docs)
+    setUpPost(snapshot.docs);
   })
-};
+  welcomeUser(user)
+}
 
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
@@ -41,7 +51,9 @@ const getRoute = routers => {
       break;
     case 'registerUser': root.appendChild(register());
       break;
-    case 'welcomeUser': infoUser();
+    // case 'welcomeUser': infoUser();
+    case 'welcomeUser': getUserReady(getUserActiv);
+
       break;
     case 'edit-perfil': root.appendChild(editPerfil())
       // getDataDoc(getUserUid())

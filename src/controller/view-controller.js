@@ -1,5 +1,5 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc } from '../model/model.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, deletePostModel } from '../model/model.js'
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -131,18 +131,20 @@ export const createPost = (state, imagePost, fechaPost) => {
 }
 
 export const setUpPost = data => {
-  const postList = document.querySelector('#post-list');
-  postList.innerHTML = '';
-  data.forEach(doc => {
-    console.log(doc.data())
-    getDataDoc(doc.data().user).then((getUser) => {
-      if (getUser.exists) {
-        // return doc.data()
-        // console.log("Document data:", doc.data().name);
-        const post = doc.data();
-        const article = document.createElement('article');
+  const getUserIdEdit = (idUserAuth) => {
+    const postList = document.querySelector('#post-list');
+    postList.innerHTML = '';
+    data.forEach(doc => {
+      console.log(doc.data())
+      getDataDoc(doc.data().user).then((getUser) => {
+        console.log(getUser.data())
+        if (getUser.exists) {
+          console.log(doc.id)
+          // console.log("Document data:", doc.data().name);
+          const post = doc.data();
+          const article = document.createElement('article');
 
-        const li = `
+          const li = `
     <article id = 'content-post' class= 'flex-container  margin-top border center'> 
     <div class = 'btn-post-edit-del'>
     <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
@@ -166,17 +168,29 @@ export const setUpPost = data => {
       </footer>
     </article>  
         `
-        article.innerHTML = li;
-        let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
-        btnDelete.addEventListener('click', () => {
-          deletePost(doc.id);
-        })
-        // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
-        return postList.appendChild(article);
-      }
-    })
-  });
-  return postList
+          article.innerHTML = li;
+          let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
+          btnDelete.addEventListener('click', () => {
+            console.log(post.user)
+            console.log(idUserAuth.uid)
+            if (post.user === idUserAuth.uid) {
+              alert('Post eliminado correctamente')
+              deletePost(doc.id);
+
+            } else {
+              alert('Permiso denegado paraeliminar este post')
+            }
+
+          })
+          // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
+          return postList.appendChild(article);
+        }
+      })
+    });
+
+    return postList
+  }
+  getUserReady(getUserIdEdit)
 }
 
 

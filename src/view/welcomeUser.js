@@ -41,8 +41,7 @@ export default (user) => {
       <input type="file" value="upload" id="file-button" class='btn-image-post'/>        
       </div >       
       <select name="" id="estado-post" class = 'btn-post-create'>
-      <option selected="true" disabled="disabled">Amigos</option>
-      <option value="publico">Público</option>
+      <option value="publico" select>Público</option>
       <option value="privado" select>Privado</option>
       </select>
         <button id ='btn-share' class='btn-post-create'>Compartir</button>
@@ -82,7 +81,7 @@ export default (user) => {
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         let selectImage = fileButton.files[0]
         let selectState = state.value;
-        if (selectImage === undefined && selectState === 'Amigos') {
+        if (selectImage === undefined && selectState === 'publico') {
             createPost('publico', './image/image-post.png', fechaPost)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
             createPost(selectState, './image/image-post.png', fechaPost)
