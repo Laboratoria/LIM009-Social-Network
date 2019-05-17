@@ -1,28 +1,26 @@
-import { signOutUser, createPostInCloudFirestore,getDataOfUser, deletePostAfterClick,editPostAfterClick } from "../controller/controller1.js" ;
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePost,editPost } from "../controller/controller1.js";
 
 const renderOnePost = (post, user) => { // {}
     let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
-  <div class="text-comment" id="content-comment-div" >${post.content}</div>
-  <button class="fab fa-gratipay"></button>
-  <button class="fas fa-paper-plane" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}"></button>
-  <button id="btn-save-after-edit">Save</button>
-  <button id="btn-delete" data-uidPost="${post.userId}"class="share boton">Eliminar</button>
+  <div id="post-content" class="text-comment">${post.content}</div>
+  <div class="icons-like">
+      <i class="fab fa-gratipay"></i>
+      <i class="fas fa-paper-plane"></i></div>
+      <button id="btn-delete" class="share boton">Eliminar</button>
+      <button id="btn-editar" class="share boton">Editar</button>
  `;
-    label.setAttribute('class', "box");
-    label.setAttribute('data-id',`${post.id}`);
-
-    const deleteButton = label.querySelector("#btn-delete");
-    deleteButton.addEventListener('click',(e)=>{deletePostAfterClick(e)
+    const deleteBtn = label.querySelector("#btn-delete");
+    deleteBtn.addEventListener("click", () => {
+        deletePost(post.id);
+    });
+    const editBtn = label.querySelector("#btn-editar");
+    editBtn.addEventListener("click", () => {
+        editPost(post.id,post.content);
     });
 
-    
-    const editButton = label.querySelector("#btn-edit");
-    editButton.addEventListener('click',(e)=>{
-       console.log(e);
-        editPostAfterClick(e)});
-    
+    label.setAttribute('class', "box");
     return label // que imprima una un post ,que se añada al ul element
 };
 
@@ -64,7 +62,8 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <img class="icon-photograph"
+                
+                <img  id=share-image class="icon-photograph"
                 src="./css/img/6799.png_860.png">
             <button id="btn-share" class="share boton">Compartir</button></div>
         <div id="comment-list" >        
@@ -84,13 +83,14 @@ export default (user, posts) => {
 
 
     posts.forEach((onePost) => {
-        console.log(onePost);
-        getDataOfUser(onePost.userId).then((userdata)=>{
-            console.log((userdata.name));
-            const divPost = renderOnePost(onePost,userdata);
-        divCommentList.appendChild(divPost);
-            });
-        
+        getDataOfUser(onePost.userId).then((userdata) => {
+            console.log((userdata.userId));
+            const divPost = renderOnePost(onePost, userdata);
+            console.log(onePost.id);
+            console.log(onePost.content)
+            divCommentList.appendChild(divPost);
+        });
+
     })
 
 

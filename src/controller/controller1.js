@@ -185,45 +185,41 @@ const createPostInCloudFirestore = () => {
     return addPostToCloudFirestore(inputComment, idUser);
 };
 
- const deletePostAfterClick = (e) =>{
-    const postId=e.target.parentElement.getAttribute('data-id');
-   
-    const  userIdOfPost=e.target.getAttribute('data-uidPost');
-console.log(postId);
- deletePostInCloudFireStore(postId,userIdOfPost)};
+const deletePostAfterClick = (e) => {
+    const postId = e.target.parentElement.getAttribute('data-id');
+    const userIdOfPost = e.target.getAttribute('data-uidPost');
+    console.log(postId);
+    deletePostInCloudFireStore(postId, userIdOfPost)
+};
 
+const editPostAfterClick = (e) => {
+    const divContent = document.querySelector("#content-comment-div");
+    const saveBtn = document.querySelector("#btn-save-after-edit");
 
-
-
-
- const editPostAfterClick = (e) =>{
-    const divContent=document.querySelector("#content-comment-div");
-    const saveBtn=document.querySelector("#btn-save-after-edit");
-    
     console.log(divContent);
-     const currentUserId=currentUser().uid;
-     console.log(currentUserId);
-     console.log(e);
-     console.log(e.target);
-    const  userIdOfPost=e.target.dataset.uidPost;
+    const currentUserId = currentUser().uid;
+    console.log(currentUserId);
+    console.log(e);
+    console.log(e.target);
+    const userIdOfPost = e.target.dataset.uidPost;
     console.log(userIdOfPost);
-    const  idOfPost=e.target.dataset.idPost
+    const idOfPost = e.target.dataset.idPost
     console.log(idOfPost);
-    if (currentUserId=== userIdOfPost){
-       divContent.setAttribute("contenteditable",true);
-       console.log("You can edit now");
-       saveBtn.addEventListener('click',()=>{
-        divContent.setAttribute("contenteditable",false);
-        const newContent=(divContent.textContent);
-        console.log(newContent);
-        editPostInCloudFireStore(idOfPost,userIdOfPost,newContent);
-    })
-    
-    }else{
-        alert("You cant edit a coment that was not published by you");
+    if (currentUserId === userIdOfPost) {
+        divContent.setAttribute("contenteditable", true);
+        console.log("You can edit now");
+        saveBtn.addEventListener('click', () => {
+            divContent.setAttribute("contenteditable", false);
+            const newContent = (divContent.textContent);
+            console.log(newContent);
+            editPostInCloudFireStore(idOfPost, userIdOfPost, newContent);
+        })
+
+    } else {
+        alert("You can't edit a coment that was not published by you");
     }
-    
-    
+
+
 };
 
 
@@ -251,14 +247,14 @@ export const deletePost = (postId) => {
 }
 
 
-export const editPost = (postId,postText) => {
+export const editPost = (postId, postText) => {
     document.querySelector('#post-content').value = postText;
 
-    let  collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
+    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
     // Set the "capital" field of the city 'DC'
     return collectionPost.update({
         content: postText,
-      
+
     })
         .then(function () {
             console.log("Document successfully updated!");
@@ -281,7 +277,7 @@ export {
     createPostInCloudFirestore,
     deletePostAfterClick,
     editPostAfterClick,
-   
+
 
 
 };
