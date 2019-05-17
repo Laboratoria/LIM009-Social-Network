@@ -36,17 +36,27 @@ const changeview = (route) => {
             }
             break;
         case '#/configuration':
-                    const printUserInfo = (user) => {
-                            const uid = user.uid; 
-                            getDataOfUser(uid) 
-                                .then((dataUser) => { 
-                                        root.appendChild(components.configuration(dataUser)) ;
-                                    })
-                    getUserActive(printUserInfo); 
-                }
+            const printConfiguration = (user) => {
+                const uid = user.uid;
+                getDataOfUser(uid)
+                    .then((dataUser) => {
+                        root.appendChild(components.configuration(dataUser));
+                    })
+                getUserActive(printConfiguration);
+            }
+            break;
+        case "#/editProfile":
+            const printEdit = (user) => {
+                const uid = user.uid;
+                getDataOfUser(uid)
+                    .then((dataUser) => {
+                        root.appendChild(components.edit(dataUser));
+                    })
+                getUserActive(printEdit); 
+            }
             break;
         default:
-            root.appendChild(components.error()) 
+            root.appendChild(components.error());
     }
 };
 

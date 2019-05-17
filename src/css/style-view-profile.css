@@ -120,7 +120,7 @@
 .box {
     margin: 0 10% 5% 10%;
     width: 80%;
-    height: 150px;
+    height: 160px;
     display: block;
     outline: 2px solid gray;
 }
@@ -131,12 +131,12 @@
 
 .text-write, .text-comment {
     width: 80%;
-    height: 50px;
+    min-height: 50px;
     margin: 3% 10%;
 }
 
 .text-write {
-    height: 85px;
+    height: 80px;
 }
 
 .text-comment {
@@ -147,14 +147,6 @@
     height: 10%;
 }
 
-.share {
-    position: relative;
-    float: right;
-    margin-right: 10%;
-    height: 30px;
-    width: auto;
-    padding: 1%;
-}
 
 .icon-photograph {
     position: relative;
@@ -164,20 +156,44 @@
     width: 40px;
 }
 
-.icons-like {
+.icons {
     position: relative;
     float: left;
-    margin-left: 10%;
-    height: 40px;
+    margin-left: 8%;
+    height: 35px;
+    cursor: pointer;
 }
-
+.edit{
+    margin-left: 1%;
+}
+.cerrar{
+    margin-left: 55%;
+}
 .nombre-menu {
     display: none;
 }
 .sign-out-list{
     display: block;
 }
-
+.share {
+    position: relative;
+    float: right;
+    margin-right: 10%;
+    height: 30px;
+    width: auto;
+    padding: 1%;
+}
+.delete{
+   padding: 0; 
+   margin: auto;
+   cursor: pointer;
+}
+.btn-delete{
+    position: relative;
+    float: right;
+    height: auto;
+}
+   
 @media(min-width:768px) {
     .sub-container {
         position: relative;
@@ -209,10 +225,10 @@
         float: right;
     }
     .box {
-        height: 165px;
+        min-height: 175px;
     }
     .text-write, .text-comment {
-        height: 70px;
+        min-height: 70px;
     }
     .check {
         display: none;

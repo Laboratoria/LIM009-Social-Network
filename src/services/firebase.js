@@ -101,7 +101,6 @@ const getPostsInRealtime = (callback) => {
 
 };
 
-
 export {
     signUp,
     signIn,

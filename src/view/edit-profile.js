@@ -1,20 +1,27 @@
 
-/*export default (user) => {
-    const divElement = document.createElement("div");
-    divElement.setAttribute("class", "container");
-    divElement.innerHTML = ` 
-      <main class="right ancho">
-      <h1> < Breath Life > </h1>
-      <h3> Respira salud, respira vida </h3>
-      <form action="" class="formulario acceder" id="register-form">
-      <input type="name" id="name" class="Name input redondear" placeholder="" <p> ${user.name}</p>>
-      <input type="text" id="last-name" class="last-Name input redondear" placeholder="Apellidos">
-      <input id="email2" class="input redondear" type="email" placeholder="Ingrese su correo">
-      <input id="password2" class="input redondear" type="password" placeholder="Ingrese su contraseña">
-      <button type="button" class="button-acceder redondear boton" id="btn-edit-profile">Editar Datos</button>
-       </form>
-      </main>`;
-   
-    return divElement;
-  };
-  */
+export default (user) => {
+  const divElement = document.createElement("div");
+  divElement.setAttribute("class", "container");
+  divElement.innerHTML = ` 
+    <header class="header">
+    <ul class="menu">
+        <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
+            <ul class="interior">
+                <li><a href="#/configuration">Configurar cuenta</a></li>
+                <li><a>Editar Perfil</a></li>
+                <li><a id="sign-out-list" class="sign-out-list">Cerrar sesión</a></li>
+            </ul>
+        </li>
+        <li class="title"><h1>Breath Life</h1></li>
+        <li id="sign-out" class="small sign-out"><a>Cerrar sesión</a></li>
+    </ul>
+</header>
+<div class="sub-container">
+<aside class="user-name">
+</aside>
+<main class="post-zone">
+</main>
+</div>`;
+
+  return divElement;
+};
