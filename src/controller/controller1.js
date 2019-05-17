@@ -11,11 +11,9 @@ import {
 
 } from "../services/firebase.js";
 
-
 const changeHash = (hash) => {
     location.hash = hash;
 };
-
 
 const signInAfterClick = () => {
     const email = document.querySelector('#email').value;
@@ -54,7 +52,7 @@ const signUpAfterClick = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
-    const userLastName = document.querySelector('#last-name').value;
+    const userPhoto = document.querySelector('#link-photo').value;
     // cambios *******
     if (email2 === '' || password2 === '' || userName === '' || userLastName === '') {
         alert('Completa tus datos para registrarte');
@@ -65,10 +63,10 @@ const signUpAfterClick = () => {
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
                         name: userName,
-                        lastName: userLastName,
+                        photoURL: userPhoto,
                         uid: cred.user.uid,
                         email: email2,
-                        password: password2,
+                       // password: password2,
                     })
                     .then(() => {
                         const form = document.querySelector('#register-form');

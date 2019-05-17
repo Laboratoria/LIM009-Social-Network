@@ -128,11 +128,11 @@ li {
     .formulario {
         height: 40%;
     }
-    .Name,
+ /*    .Name,
     .last-Name {
         width: 40%;
         display: inline-block;
-    }
+    } */
     .right {
         padding-top: 20%;
     }
