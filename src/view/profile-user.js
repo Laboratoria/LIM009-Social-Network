@@ -71,8 +71,8 @@ export default (user, posts) => {
     <ul class="menu">
         <li class="small"><p>${user.name}</p>
             <ul>
-                <li><a>Configurar cuenta</a></li>
-                <li><a>Editar Perfil</a></li>
+                <li><a  href="#/configuration">Configurar cuenta</a></li>
+                <li><a  href="#/edit-profile">Editar Perfil</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
