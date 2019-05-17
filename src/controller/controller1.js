@@ -188,7 +188,7 @@ const createPostInCloudFirestore = () => {
  const deletePostAfterClick = (e) =>{
     const postId=e.target.parentElement.getAttribute('data-id');
    
-    const  userIdOfPost=e.target.getAttribute('data-uidPost');
+    const  userIdOfPost=e.target.getAttribute('data-uid-post');
 console.log(postId);
  deletePostInCloudFireStore(postId,userIdOfPost)};
 
@@ -207,11 +207,12 @@ console.log(postId);
      console.log(e.target);
     const  userIdOfPost=e.target.dataset.uidPost;
     console.log(userIdOfPost);
-    const  idOfPost=e.target.dataset.idPost
+    const  idOfPost=e.target.parentElement.getAttribute('data-id');
     console.log(idOfPost);
     if (currentUserId=== userIdOfPost){
        divContent.setAttribute("contenteditable",true);
        console.log("You can edit now");
+       console.log(e.target);
        saveBtn.addEventListener('click',()=>{
         divContent.setAttribute("contenteditable",false);
         const newContent=(divContent.textContent);

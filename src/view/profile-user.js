@@ -6,9 +6,9 @@ const renderOnePost = (post, user) => { // {}
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
   <div class="text-comment" id="content-comment-div" >${post.content}</div>
   <button class="fab fa-gratipay"></button>
-  <button class="fas fa-paper-plane" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}"></button>
+  <button class="fas fa-paper-plane" id="btn-edit" data-uid-post="${post.userId}" ></button>
   <button id="btn-save-after-edit">Save</button>
-  <button id="btn-delete" data-uidPost="${post.userId}"class="share boton">Eliminar</button>
+  <button id="btn-delete" data-uid-post="${post.userId}"class="share boton">Eliminar</button>
  `;
     label.setAttribute('class', "box");
     label.setAttribute('data-id',`${post.id}`);
