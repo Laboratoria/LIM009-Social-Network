@@ -13,11 +13,9 @@ import {
 
 } from "../services/firebase.js";
 
-
 const changeHash = (hash) => {
     location.hash = hash;
 };
-
 
 const signInAfterClick = () => {
     const email = document.querySelector('#email').value;
