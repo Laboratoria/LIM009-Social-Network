@@ -26,8 +26,8 @@ const renderOnePost = (post, user) => { // {}
         const idPostAttributeOfEditButton=e.target.dataset.idPost;
         const userIdAttributeOfEditButton=e.target.dataset.uidPost;
         console.log(idPostAttributeOfEditButton);
-        if(idPostAttributeOfDivContent===idPostAttributeOfEditButton){
-            if(currentUser().uid===userIdAttributeOfEditButton){
+        if(idPostAttributeOfDivContent===idPostAttributeOfEditButton){ //si el id del post del div content es  igual al id del post que quiere modificar
+            if(currentUser().uid===userIdAttributeOfEditButton){ // si el id del usuario logueado actualmente es igual al id del usuario que publico el post
                 divCommentContent.setAttribute("contenteditable",true);
                 console.log("You can edit now");
                 const saveBtn=label.querySelector("#btn-save-after-edit");
@@ -124,8 +124,3 @@ export default (user, posts) => {
 
     return divElement;
 };
-
-
-
-
-//Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha
