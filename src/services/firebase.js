@@ -30,29 +30,72 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, userId, userName) =>
+const addPostToCloudFirestore = (inputComment, idUser) =>
     dataBaseCloudFirestore().collection('posts').add({
-        name: userName,
         content: inputComment,
-        id: userId,
+        userId: idUser,
         state: false,
         likes: 0,
     }).then(function(docRef) {
+        console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
-    });;
+    });
 
 
+const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
+   
+    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
+    console.log(uidOfCurrentUser); // id del usuario logueado actual 
+    console.log(idUserOfPost); // id del usuario  dentro del objeto post
+  
+    console.log(idPost); // id del post
+    if(uidOfCurrentUser=== idUserOfPost){
+    dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
+        console.log("Document successfully deleted!");
+    }).catch((error)=>{
+        console.error("Error removing document: ", error);
+    });
+}else{ alert("You can not delete a comment which was not published by you");
+
+}
+};
+
+const editPostInCloudFireStore = (idPost,idUserOfPost,commentInputNewValue) => {
+   
+    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
+    console.log(uidOfCurrentUser); // id del usuario logueado actual 
+    console.log(idUserOfPost); // id del usuario  dentro del objeto post
+  
+    console.log(idPost); // id del post
+    if(uidOfCurrentUser=== idUserOfPost){
+    dataBaseCloudFirestore().collection("posts").doc(idPost).update({
+        content: commentInputNewValue,
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+
+
+}
+else{ alert("You can not delete a comment which was not published by you");
+
+}
+};
+    
 const getPostsInRealtime = (callback) => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
         const arrOfPosts = [];
         arrOfAllPosts.forEach((onePost) => {
-            onePost;
+            console.log(Object.keys(onePost));
             arrOfPosts.push({ id: onePost.id, ...onePost.data() })
         })
-
         callback(arrOfPosts)
     });
 
@@ -68,5 +111,7 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    getPostsInRealtime
+    getPostsInRealtime,
+    deletePostInCloudFireStore,
+   editPostInCloudFireStore,
 };
