@@ -1,4 +1,4 @@
-import {  signOutUser } from "../controller/controller1.js"
+//import {  signOutUser } from "../controller/controller1.js"
 
 export default (user) => {
   const elemento = document.createElement("div");
@@ -22,8 +22,8 @@ export default (user) => {
 <main class="post-zone">
 </main>
 </div> `;
-const signOutOption = divElement.querySelector("#sign-out");
-signOutOption.addEventListener("click", signOutUser);
+//const signOutOption = divElement.querySelector("#sign-out");
+//signOutOption.addEventListener("click", signOutUser);
 return elemento;
 };
 

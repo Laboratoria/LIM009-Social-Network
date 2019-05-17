@@ -46,8 +46,8 @@ export default (user, posts) => {
         <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
             <ul class="interior">
                 <li><a href="#/configuration">Configurar cuenta</a></li>
-                <li><a href="">Editar Perfil</a></li>
-                <li><a id="sign-out-list" class="sign-out-list">Cerrar sesión</a></li>
+                <li><a href="#/edit-profile">Editar Perfil</a></li>
+                <li><a id="sign-out-list" class="sign-out-list" href="#/privacity">Configuracion de la Privacidad</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>

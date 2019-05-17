@@ -35,18 +35,26 @@ const changeview = (route) => {
                 // funcion para desactivar el observador despues de haber activado al observador y haber identificado que no existe current user 
             }
             break;
-        case '#/configuration':
-                    const printUserInfo = (user) => {
-                            const uid = user.uid; 
-                            getDataOfUser(uid) 
-                                .then((dataUser) => { 
-                                        root.appendChild(components.configuration(dataUser)) ;
-                                    })
-                    getUserActive(printUserInfo); 
+        case '#/edit-profile': {
+            const printUserInfo = (user) => {
+                if (user) {
+                    const uid = user.uid;
+                    getDataOfUser(uid)
+                        .then((dataUser) => {
+                            root.appendChild(components.editProfile(dataUser));
+                        })
+                } else {
+                    console.log("no hay usuario");
                 }
+
+
+            };
+            getUserActive(printUserInfo);
+
+        }
             break;
         default:
-            root.appendChild(components.error()) 
+            root.appendChild(components.error())
     }
 };
 
