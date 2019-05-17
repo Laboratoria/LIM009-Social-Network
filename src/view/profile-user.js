@@ -1,4 +1,4 @@
-import { signOutUser, createPostInCloudFirestore,getDataOfUser, deletePostAfterClick,editPostAfterClick } from "../controller/controller1.js" ;
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostAfterClick } from "../controller/controller1.js";
 
 const renderOnePost = (post, user) => { // {}
     let label = document.createElement('div');
@@ -11,18 +11,20 @@ const renderOnePost = (post, user) => { // {}
   <button id="btn-delete" data-uidPost="${post.userId}"class="share boton">Eliminar</button>
  `;
     label.setAttribute('class', "box");
-    label.setAttribute('data-id',`${post.id}`);
+    label.setAttribute('data-id', `${post.id}`);
 
     const deleteButton = label.querySelector("#btn-delete");
-    deleteButton.addEventListener('click',(e)=>{deletePostAfterClick(e)
+    deleteButton.addEventListener('click', (e) => {
+        deletePostAfterClick(e)
     });
 
-    
+
     const editButton = label.querySelector("#btn-edit");
-    editButton.addEventListener('click',(e)=>{
-       console.log(e);
-        editPostAfterClick(e)});
-    
+    editButton.addEventListener('click', (e) => {
+        console.log(e);
+        editPostAfterClick(e)
+    });
+
     return label // que imprima una un post ,que se añada al ul element
 };
 
@@ -41,14 +43,15 @@ export default (user, posts) => {
     divElement.innerHTML = `
     <header class="header">
     <ul class="menu">
-        <li class="small"><p>${user.name}</p>
-            <ul>
-                <li><a>Configurar cuenta</a></li>
-                <li><a>Editar Perfil</a></li>
+        <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
+            <ul class="interior">
+                <li><a href="#/configuration">Configurar cuenta</a></li>
+                <li><a href="">Editar Perfil</a></li>
+                <li><a id="sign-out-list" class="sign-out-list">Cerrar sesión</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
-        <li id="sign-out" class="small"><a>Cerrar sesión</a></li>
+        <li id="sign-out" class="small sign-out"><a>Cerrar sesión</a></li>
     </ul>
 </header>
 <div class="sub-container">
@@ -81,14 +84,15 @@ export default (user, posts) => {
     });
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
+    
     posts.forEach((onePost) => {
         console.log(onePost);
-        getDataOfUser(onePost.userId).then((userdata)=>{
+        getDataOfUser(onePost.userId).then((userdata) => {
             console.log((userdata.name));
-            const divPost = renderOnePost(onePost,userdata);
-        divCommentList.appendChild(divPost);
-            });
-        
+            const divPost = renderOnePost(onePost, userdata);
+            divCommentList.appendChild(divPost);
+        });
+
     })
     return divElement;
 };
