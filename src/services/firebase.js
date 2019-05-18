@@ -60,31 +60,8 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
 }
 };
 
-const editPostInCloudFireStore = (idPost,idUserOfPost,commentInputNewValue) => {
-   
-    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
-    console.log(uidOfCurrentUser); // id del usuario logueado actual 
-    console.log(idUserOfPost); // id del usuario  dentro del objeto post
-  
-    console.log(idPost); // id del post
-    if(uidOfCurrentUser=== idUserOfPost){
-    dataBaseCloudFirestore().collection("posts").doc(idPost).update({
-        content: commentInputNewValue,
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
 
 
-}
-else{ alert("You can not edit a comment which was not published by you");
-
-}
-};
     
 const getPostsInRealtime = (callback) => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
@@ -109,5 +86,5 @@ export {
     addPostToCloudFirestore,
     getPostsInRealtime,
     deletePostInCloudFireStore,
-  editPostInCloudFireStore,
+ 
 };

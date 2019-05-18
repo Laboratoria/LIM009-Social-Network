@@ -164,7 +164,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function (doc) {
-           // console.log(doc.data()
+            // console.log(doc.data()
             return doc.data(); // retorna una promesa
         }).catch(function (error) {
             console.log("Error getting document:", error);
@@ -183,15 +183,34 @@ const createPostInCloudFirestore = () => {
     return addPostToCloudFirestore(inputComment, idUser);
 };
 
- const deletePostAfterClick = (e) =>{
-     console.log(e.target)
-    const postId=e.target.dataset.idPost;
-    const  userIdOfPost=e.target.dataset.uidPost;
- deletePostInCloudFireStore(postId,userIdOfPost)
+const deletePostAfterClick = (e) => {
+    console.log(e.target)
+    const postId = e.target.dataset.idPost;
+    const userIdOfPost = e.target.dataset.uidPost;
+    deletePostInCloudFireStore(postId, userIdOfPost)
 };
 
+const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) => {
 
+    const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual   
+    console.log(idPost); // id del post
+    if (uidOfCurrentUser === idUserOfPost) {
+        dataBaseCloudFirestore().collection("posts").doc(idPost).update({
+            content: commentInputNewValue,
+        })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+    }
+    else {
+        alert("You can not edit a comment which was not published by you");
 
+    }
+};
 
 /*
  const editPostAfterClick = (e) =>{
@@ -249,14 +268,14 @@ export const deletePost = (postId) => {
 }
 
 
-export const editPost = (postId,postText) => {
+export const editPost = (postId, postText) => {
     document.querySelector('#post-content').value = postText;
 
-    let  collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
+    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
     // Set the "capital" field of the city 'DC'
     return collectionPost.update({
         content: postText,
-      
+
     })
         .then(function () {
             console.log("Document successfully updated!");
@@ -278,8 +297,8 @@ export {
     getUserActive,
     createPostInCloudFirestore,
     deletePostAfterClick,
-   // editPostAfterClick,
-   
+    editPostInCloudFireStore,
+
 
 
 };

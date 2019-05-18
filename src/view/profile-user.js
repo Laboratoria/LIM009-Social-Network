@@ -1,7 +1,5 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick/* editPostAfterClick */ } from "../controller/controller1.js";
-import { currentUser,editPostInCloudFireStore } from "../services/firebase.js"
-/*  <button id="btn-delete"  class="btn-delete delete"></button> */
-const renderOnePost = (post, user) => {
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore } from "../controller/controller1.js";
+const renderOnePost = (post, user,current) => {
     let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
@@ -28,7 +26,7 @@ const renderOnePost = (post, user) => {
         const userIdAttributeOfEditButton = e.target.dataset.uidPost;
         console.log(idPostAttributeOfEditButton);
         if (idPostAttributeOfDivContent === idPostAttributeOfEditButton) { //si el id del post del div content es  igual al id del post que quiere modificar
-            if (currentUser().uid === userIdAttributeOfEditButton) { // si el id del usuario actual es igual al id del usuario que publico el post
+            if (current.userId === userIdAttributeOfEditButton) { // si el id del usuario actual es igual al id del usuario que publico el post
                 divCommentContent.setAttribute("contenteditable", true);
                 console.log("You can edit now");
                 const saveBtn = label.querySelector("#btn-save-after-edit");
@@ -115,7 +113,7 @@ export default (user, posts) => {
     posts.forEach((onePost) => {
         console.log(onePost);
         getDataOfUser(onePost.userId).then((userdata) => {
-            const divPost = renderOnePost(onePost, userdata);
+            const divPost = renderOnePost(onePost, userdata,user);
             divCommentList.appendChild(divPost);
         });
 
