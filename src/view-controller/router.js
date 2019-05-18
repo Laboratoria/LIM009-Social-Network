@@ -2,6 +2,8 @@ import { components } from '../view/index.js'
 import { getDataOfUser, getUserActive,getPostsInRealtime } from '../controller/controller1.js'
 
 const changeview = (route) => {
+
+
     const root = document.getElementById("root");
     root.innerHTML = '';
     switch (route) {
@@ -18,10 +20,13 @@ const changeview = (route) => {
                         const uid = user.uid; // entonces obtenemos el id del usuario
                         getDataOfUser(uid) //  retorna una promesa ,en algun momento obtendremos el {} data del usuario
                             .then((dataUser) => { // cuando la promesa este resuelta(cuando obtengamos el {} dataUser del usuario)
-                                getPostsInRealtime((arrPosts) => {
+                                getPostsInRealtime((arrPosts) => {   
                                     root.innerHTML = '';
                                     root.appendChild(components.profile(dataUser, arrPosts)) // imprimeros el perfil del usuario
                                 })
+                            })
+                            .catch((error)=>{
+                                console.log(error)
                             })
                     } else {
                         console.log("no hay usuario");

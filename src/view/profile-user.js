@@ -1,5 +1,5 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore } from "../controller/controller1.js";
-const renderOnePost = (post, user,current) => {
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar } from "../controller/controller1.js";
+const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
@@ -14,7 +14,7 @@ const renderOnePost = (post, user,current) => {
 
     const deleteButton = label.querySelector("#btn-delete");
     deleteButton.addEventListener('click', (e) => {
-        deletePostAfterClick(e)
+        deletePostAfterClick(e);
     });
 
     const divCommentContent = label.querySelector("#content-comment-div");
@@ -58,7 +58,6 @@ export default (user, posts) => {
     } catch (_) {
         photoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
     }
-
     console.log(photoUrl)
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
@@ -92,22 +91,16 @@ export default (user, posts) => {
                 <img class="icon-photograph" src="./css/img/6799.png_860.png">
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
-    <form class="filter" name="myForm" id="form"><fieldset>
+    <div class="filter" id="valores"><fieldset>
  <legend>¿Que publicaciones deseo ver?</legend>
-<input type="radio" name="filterPost" id="allPost" value="myPosts"><label for="public">Todas</label>
-<input type="radio" name="filterPost" id="privatePost" value="publicPosts"><label for="private">Solo mías</label>
-</fieldset></form>
+<input type="radio" name="filterPost" id="allPost" value="publicPost"><label for="allPost">Todas</label>
+<input type="radio" name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
+</fieldset></div>
         <div id="comment-list"></div>
     </main>
 </div>
 `;
-/*                <fieldset class="privacity">
- <legend>Privacidad</legend>
-<input type="radio" name="commentStatus" id="public" value="public"><label for="public">Pública</label>
-<input type="radio" name="commentStatus" id="private" value="private"><label for="private">Privada</label>
-</fieldset> */
 
-    //class="comment-post box"
     const divCommentList = divElement.querySelector("#comment-list");
 
     const shareBtn = divElement.querySelector("#btn-share");
@@ -117,17 +110,40 @@ export default (user, posts) => {
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
 
-    posts.forEach((onePost) => {
-        getDataOfUser(onePost.userId).then((userdata) => {
-            const divPost = renderOnePost(onePost, userdata,user);
-            divCommentList.appendChild(divPost);
-        });
+    const viewComments = divElement.querySelector('#valores');
+    viewComments.addEventListener("click", () => {
+        console.log(validar())
+        divCommentList.innerHTML='';
+        switch (validar()) {
+            case 'publicPost':
+                posts.forEach((onePost) => {
+                    if (onePost.state === false) {
+                    getDataOfUser(onePost.userId)
+                        .then((userdata) => {
+                                const divPost = renderOnePost(onePost, userdata, user);
+                                divCommentList.appendChild(divPost);
 
-    })
+                        })
+                    }
+                });
+                break
+            case 'myPosts':
+                posts.forEach((onePost) => {
+                    getDataOfUser(onePost.userId)
+                        .then((userdata) => {
+                            if (userdata.userId === user.userId) {
+                                console.log(onePost.userId);
+                                console.log(userdata.userId);
+                                const divPost = renderOnePost(onePost, userdata, user);    
+                                divCommentList.appendChild(divPost);
+                            }
+
+                        })
+                });
+                break
+        }
+    });
     return divElement;
 };
-
-
-
 
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha

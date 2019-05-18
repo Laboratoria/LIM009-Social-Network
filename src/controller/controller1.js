@@ -9,8 +9,6 @@ import {
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
     //editPostInCloudFireStore,
-
-
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -175,17 +173,17 @@ const getDataOfUser = (uid) => {
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
-    const inputStatus=document.querySelector('#private').checked;
+    const inputStatus = document.querySelector('#private').checked;
     console.log(inputStatus);
     let status;
-    if(inputStatus){
-        status=true;
-    }else{
-        status=false;
+    if (inputStatus) {
+        status = true;
+    } else {
+        status = false;
     }
     const idUser = currentUser().uid;
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser,status);
+    return addPostToCloudFirestore(inputComment, idUser, status);
 };
 
 const deletePostAfterClick = (e) => {
@@ -216,21 +214,29 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
 
     }
 };
+const validar = () => {
+const e = document.querySelector('#privatePost');
+  try {
+    if (e.checked==true) {     
+        return 'myPosts';
+    }else if(e.checked==false){
+        return 'publicPost';
+    }
+  } catch(err){
+    return 'publicPost';
+  }
+};
+
 const getPostsInRealtime = (callback) => {
-    /* const form = document.querySelector('form').filterPost.value; */
-    //const selectElement = form.querySelector('input[name="filterPost"]');
-    /* const viewPost=myForm.selectElement.value; */
-    /* console.log(selectElement); */
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-        const arrOfPosts = [];
-        arrOfAllPosts.forEach((onePost) => {
-            console.log(onePost.data());
-            if(onePost.data().state==false){
+
+        dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+            const arrOfPosts = [];
+            arrOfAllPosts.forEach((onePost) => {
                     arrOfPosts.push({ id: onePost.id, ...onePost.data() })
-            }
-        })
-        callback(arrOfPosts)
-    });
+            })
+            callback(arrOfPosts)
+        });
+
 };
 
 // usuario activo 
@@ -249,7 +255,6 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 
 };
-
 
 export const deletePost = (postId) => {
     return dataBaseCloudFirestore().collection("posts").doc(postId).delete();
@@ -287,4 +292,6 @@ export {
     deletePostAfterClick,
     editPostInCloudFireStore,
     getPostsInRealtime,
+    validar,
+    
 };
