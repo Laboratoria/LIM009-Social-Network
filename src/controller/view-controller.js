@@ -1,5 +1,5 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc } from '../model/model.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, deletePostModel } from '../model/model.js'
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -131,21 +131,22 @@ export const createPost = (state, imagePost, fechaPost) => {
 }
 
 export const setUpPost = data => {
-  const postList = document.querySelector('#post-list');
-  postList.innerHTML = '';
-  data.forEach(doc => {
-    console.log(doc.data())
-    getDataDoc(doc.data().user).then((getUser) => {
-      if (getUser.exists) {
-        // return doc.data()
-        // console.log("Document data:", doc.data().name);
-        const post = doc.data();
-        const article = document.createElement('article');
-
-        const li = `
+  const getUserIdEdit = (idUserAuth) => {
+    const postList = document.querySelector('#post-list');
+    postList.innerHTML = '';
+    data.forEach(doc => {
+      //console.log(doc.data())
+      getDataDoc(doc.data().user).then(getUser => {
+        //console.log(getUser.data())
+        if (getUser.exists) {
+          //console.log(doc.id)
+          // console.log("Document data:", doc.data().name);
+          const post = doc.data();
+          const article = document.createElement('article');
+          const li = `
     <article id = 'content-post' class= 'flex-container  margin-top border center'> 
     <div class = 'btn-post-edit-del'>
-    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
+    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-${doc.id}'>
     <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
     </div>    
       <header class='header-post'>       
@@ -155,7 +156,7 @@ export const setUpPost = data => {
       </header>
       <section class='content-post'>     
       <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
-      <textarea id = 'description' class="textarea center">${post.description}</textarea>      
+      <textarea id = 'description-${doc.id}' class="textarea center">${post.description}</textarea>      
       </section>
       <footer class = 'margin-footer center'>
       <div class = 'style-color-header style-content-post-img'>
@@ -166,21 +167,44 @@ export const setUpPost = data => {
       </footer>
     </article>  
         `
-        article.innerHTML = li;
-        let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
-        btnDelete.addEventListener('click', () => {
-          deletePost(doc.id);
-        })
-        // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
-        return postList.appendChild(article);
-      }
-    })
-  });
-  return postList
+          article.innerHTML = li;
+          let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
+          btnDelete.addEventListener('click', () => {
+            //console.log(post.user)
+            //console.log(idUserAuth.uid)
+            if (post.user === idUserAuth.uid) {
+              alert('Post eliminado correctamente')
+              deletePost(doc.id);
+
+            } else {
+              alert('Permiso denegado para eliminar este post')
+            }
+
+          });
+          
+          let btnEdit = article.querySelector(`#btn-edit-${doc.id}`);
+          btnEdit.addEventListener('click', () => {
+            //console.log(post.user)
+            //console.log(idUserAuth.uid)
+            if (post.user === idUserAuth.uid) {
+            let editDescription = article.querySelector(`#description-${doc.id}`).value;
+              editPost(doc.id,editDescription);
+              alert('Post editado correctamente');
+
+            } else {
+              alert('Permiso denegado para editar este post');
+            }
+          });
+          // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
+          return postList.appendChild(article);
+        }
+      })
+    });
+
+    return postList
+  }
+  getUserReady(getUserIdEdit)
 }
-
-
-
 
 
 const deletePost = id => {
@@ -190,6 +214,21 @@ const deletePost = id => {
   }).catch((error) => {
     console.error("Error removing document: ", error);
   });
+}
+
+const editPost = (id,description) => {
+  let db = firebase.firestore();
+  return db.collection("posts").doc(id).update({
+      description: description
+  })
+  .then(function() {
+      console.log("Document successfully updated!");
+  })
+  .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+  });
+  
 }
 
 export const editPErfilUser = (idUser, name, email) => {

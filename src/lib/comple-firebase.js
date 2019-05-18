@@ -15,9 +15,9 @@ export default (file, uploader, calback) => {
             uploader.value = progress;
             // console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: alert('Upload is paused');
+                case firebase.storage.TaskState.PAUSED: alert('la carga de la imagen se detuvo');
                     break;
-                case firebase.storage.TaskState.RUNNING: alert('exito'); break;
+                case firebase.storage.TaskState.RUNNING: alert('imagen cargando'); break;
             }
         }, function (error) {
 

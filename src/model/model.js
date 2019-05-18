@@ -47,6 +47,16 @@ export const getDataDoc = users => {
     return docRef.get()
 }
 
+export const deletePostModel = (userID) => {
+    let db = firebase.firestore();
+    // Create a reference to the cities collection
+    let citiesRef = db.collection("posts");
+
+    // Create a query against the collection.
+    let query = citiesRef.where("user", "==", `${userID}`);
+    console.log(query._query)
+}
+
 
 // export const dataBaseUser = user => {
 //     let db = firebase.firestore();
