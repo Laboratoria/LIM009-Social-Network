@@ -8,7 +8,7 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    //editPostInCloudFireStore,
+  
 
 
 } from "../services/firebase.js";
@@ -256,24 +256,7 @@ const getUserActive = (callback) => { //printUserinfo()
 
 
 
- const editPost = (postId, postText) => {
-    document.querySelector('#post-content').value = postText;
-
-    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
-    // Set the "capital" field of the city 'DC'
-    return collectionPost.update({
-        content: postText,
-
-    })
-        .then(function () {
-            console.log("Document successfully updated!");
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-};
-
+ 
 const editProfile = (email1,name1,userId1) => {
     
         
@@ -331,7 +314,7 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     likesForPosts,
-    editPost,
+   editPostInCloudFireStore,
     editProfile,
     
 };
