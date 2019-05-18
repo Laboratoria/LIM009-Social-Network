@@ -26,18 +26,27 @@ export const updatePhoto = (user, photo) => {
         alert('no exito')
     });
 }
+export const dataBaseUser = (user) => {
+    let db = firebase.firestore();
+    return db.collection('users').doc(user.uid).set({
+        uid: user.uid,
+        name: (user.displayName === null) ? 'Anónimo' : user.displayName,
+        email: user.email,
+        photo: (user.photoURL === null) ? './image/image-post.png' : user.photoURL
+    }).then((docRef) => {
+        // return docRef;
+        console.log("Document written with ID: ", docRef);
+    }).catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+};
+export const getDataDoc = users => {
+    let db = firebase.firestore();
+    var docRef = db.collection("users").doc(`${users}`);
 
-//Set Up data
-//Recorrer la colección de post 
-// const getPost = () => {
-// }
+    return docRef.get()
+}
 
-// Get data
-// Leer lo que estás obteniendo de la función getPost
-
-// db.collection(posts).get().then(snapshot => {
-//  console.log(snapshot.docs)
-// });
 
 // export const dataBaseUser = user => {
 //     let db = firebase.firestore();

@@ -3,17 +3,19 @@ import register from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
 import { setUpPost } from "./controller/view-controller.js";
 import editPerfil from './view/edit-perfil.js'
+import error from './view/page-error.js'
 
 
 const infoUser = () => {
+
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       let db = firebase.firestore();
       db.collection('posts').onSnapshot(snapshot => {
+        console.log(snapshot.docs)
         setUpPost(snapshot.docs);
       });
       welcomeUser(user);
-
     } else {
       welcomeUser(null);
     }
@@ -23,10 +25,10 @@ const infoUser = () => {
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return getRoute('#/login');
-  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil') {
+  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil' || hash == '#/login') {
     return getRoute(hash);
   } else {
-    return getRoute('#/login');
+    return getRoute('#/page-error');
   }
 }
 
@@ -48,6 +50,8 @@ const getRoute = routers => {
       // return root.appendChild(welcomeUser(data));
       // })
       break;
+    default:
+      return root.appendChild(error())
   }
 };
 
