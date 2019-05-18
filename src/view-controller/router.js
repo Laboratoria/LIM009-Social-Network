@@ -1,6 +1,5 @@
 import { components } from '../view/index.js'
-import { getDataOfUser, getUserActive } from '../controller/controller1.js'
-import { getPostsInRealtime } from "../services/firebase.js"
+import { getDataOfUser, getUserActive,getPostsInRealtime } from '../controller/controller1.js'
 
 const changeview = (route) => {
     const root = document.getElementById("root");

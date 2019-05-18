@@ -1,9 +1,11 @@
 .header {
     background-color: #313a52;
-    height: 70px;
+    min-height: 70px;
     width: 100%;
     color: white;
     padding-top: 1%;
+    height: auto;
+
 }
 
 .sub-container {
@@ -134,10 +136,13 @@
     width: 80%;
     min-height: 50px;
     margin: 3% 10%;
+    height: auto;
 }
 
 .text-write {
-    height: 80px;
+    min-height: 80px;
+    height: auto;
+
 }
 
 .text-comment {
@@ -192,6 +197,21 @@
 .btn-delete{
     position: relative;
     float: right;
+    height: auto;
+}
+.privacity{
+    display: inline-block;
+    width: 45%;
+    padding: 1%;
+}
+.filter fieldset{
+    padding: 5%;
+}
+.filter{
+    display: block;
+    width: 70%;
+    margin: auto;
+    padding: 0 5% 5% 5%;
     height: auto;
 }
    

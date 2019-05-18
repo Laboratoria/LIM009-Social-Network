@@ -1,7 +1,5 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick/* editPostAfterClick */ } from "../controller/controller1.js";
-import { currentUser,editPostInCloudFireStore } from "../services/firebase.js"
-/*  <button id="btn-delete"  class="btn-delete delete"></button> */
-const renderOnePost = (post, user) => {
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore } from "../controller/controller1.js";
+const renderOnePost = (post, user,current) => {
     let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
@@ -23,19 +21,16 @@ const renderOnePost = (post, user) => {
     const editButton = label.querySelector("#btn-edit");
     editButton.addEventListener('click', (e) => {
         const idPostAttributeOfDivContent = divCommentContent.dataset.idPost;
-        console.log(idPostAttributeOfDivContent);
         const idPostAttributeOfEditButton = e.target.dataset.idPost;
         const userIdAttributeOfEditButton = e.target.dataset.uidPost;
-        console.log(idPostAttributeOfEditButton);
         if (idPostAttributeOfDivContent === idPostAttributeOfEditButton) { //si el id del post del div content es  igual al id del post que quiere modificar
-            if (currentUser().uid === userIdAttributeOfEditButton) { // si el id del usuario actual es igual al id del usuario que publico el post
+            if (current.userId === userIdAttributeOfEditButton) { // si el id del usuario actual es igual al id del usuario que publico el post
                 divCommentContent.setAttribute("contenteditable", true);
                 console.log("You can edit now");
                 const saveBtn = label.querySelector("#btn-save-after-edit");
                 saveBtn.addEventListener('click', () => {
                     divCommentContent.setAttribute("contenteditable", false);
                     const newContent = (divCommentContent.textContent);
-                    console.log();
                     editPostInCloudFireStore(idPostAttributeOfEditButton, userIdAttributeOfEditButton, newContent);
                 });
 
@@ -94,14 +89,24 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <img class="icon-photograph"
-                src="./css/img/6799.png_860.png">
-            <button id="btn-share" class="share boton">Compartir</button></div>
-        <div id="comment-list" >        
-        </div>
+                <img class="icon-photograph" src="./css/img/6799.png_860.png">
+                <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
+            <button id="btn-share" class="share boton">Compartir</button></div>          
+    <form class="filter" name="myForm" id="form"><fieldset>
+ <legend>¿Que publicaciones deseo ver?</legend>
+<input type="radio" name="filterPost" id="allPost" value="myPosts"><label for="public">Todas</label>
+<input type="radio" name="filterPost" id="privatePost" value="publicPosts"><label for="private">Solo mías</label>
+</fieldset></form>
+        <div id="comment-list"></div>
     </main>
 </div>
 `;
+/*                <fieldset class="privacity">
+ <legend>Privacidad</legend>
+<input type="radio" name="commentStatus" id="public" value="public"><label for="public">Pública</label>
+<input type="radio" name="commentStatus" id="private" value="private"><label for="private">Privada</label>
+</fieldset> */
+
     //class="comment-post box"
     const divCommentList = divElement.querySelector("#comment-list");
 
@@ -113,9 +118,8 @@ export default (user, posts) => {
     signOutOption.addEventListener("click", signOutUser);
 
     posts.forEach((onePost) => {
-        console.log(onePost);
         getDataOfUser(onePost.userId).then((userdata) => {
-            const divPost = renderOnePost(onePost, userdata);
+            const divPost = renderOnePost(onePost, userdata,user);
             divCommentList.appendChild(divPost);
         });
 
