@@ -1,6 +1,7 @@
-
-import { signInAfterClick, signInWithGoogleAfterClick,
-  signInWithFacebookAfterClick } from "../controller/controller1.js";
+import {     signInAfterClick,
+  signInWithGoogleAfterClick,
+  signInWithFacebookAfterClick
+} from "../controller/controller1.js";
 export default () => {
   const divElement = document.createElement("div");
   divElement.setAttribute("class", "container");
@@ -9,7 +10,7 @@ export default () => {
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
     <main class="right ancho">
-    <h1> < Breath Life > </h1>
+    <h1> Breath Life  </h1>
     <h3> Respira salud, respira vida </h3>
       <form action="" class="formulario acceder">
           <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo">
@@ -17,7 +18,6 @@ export default () => {
           <button type="button" class="button-acceder redondear boton"  id="btn-sign-in">Acceder</button>
       </form>
       <div>
-          <p>O bien ingresa con:</p><a href="#/user-profile">aqui</a>        
           <div class="iconos">
             <ul>
               <li>

@@ -8,16 +8,14 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    editPostInCloudFireStore,
+    //editPostInCloudFireStore,
 
 
 } from "../services/firebase.js";
 
-
 const changeHash = (hash) => {
     location.hash = hash;
 };
-
 
 const signInAfterClick = () => {
     const email = document.querySelector('#email').value;
@@ -186,16 +184,17 @@ const createPostInCloudFirestore = () => {
 };
 
 const deletePostAfterClick = (e) => {
-    const postId = e.target.parentElement.getAttribute('data-id');
-    const userIdOfPost = e.target.getAttribute('data-uidPost');
+    const postId = e.target.getAttribute('data-id-post');
+    const userIdOfPost = e.target.getAttribute('data-uid-post');
     console.log(postId);
     deletePostInCloudFireStore(postId, userIdOfPost)
 };
 
-const editPostAfterClick = (e) => {
-    const divContent = document.querySelector("#content-comment-div");
-    const saveBtn = document.querySelector("#btn-save-after-edit");
-
+/*
+ const editPostAfterClick = (e) =>{
+    const divContent=document.querySelector("#content-comment-div");
+    const saveBtn=document.querySelector("#btn-save-after-edit");
+    
     console.log(divContent);
     const currentUserId = currentUser().uid;
     console.log(currentUserId);
@@ -218,9 +217,9 @@ const editPostAfterClick = (e) => {
     } else {
         alert("You can't edit a coment that was not published by you");
     }
-
-
-};
+    
+    
+ };*/
 
 
 
@@ -276,8 +275,6 @@ export {
     getUserActive,
     createPostInCloudFirestore,
     deletePostAfterClick,
-    editPostAfterClick,
-
-
+   // editPostAfterClick,
 
 };

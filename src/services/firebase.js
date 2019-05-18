@@ -54,7 +54,7 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
     console.log(idPost); // id del post
     if(uidOfCurrentUser=== idUserOfPost){
     dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
-        console.log("Document successfully deleted!");
+        alert("Document successfully deleted!");
     }).catch((error)=>{
         console.error("Error removing document: ", error);
     });
@@ -84,7 +84,7 @@ const editPostInCloudFireStore = (idPost,idUserOfPost,commentInputNewValue) => {
 
 
 }
-else{ alert("You can not delete a comment which was not published by you");
+else{ alert("You can not edit a comment which was not published by you");
 
 }
 };
@@ -113,5 +113,5 @@ export {
     addPostToCloudFirestore,
     getPostsInRealtime,
     deletePostInCloudFireStore,
-   editPostInCloudFireStore,
+  editPostInCloudFireStore,
 };

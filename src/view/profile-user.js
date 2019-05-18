@@ -1,26 +1,56 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePost,editPost } from "../controller/controller1.js";
-
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick } from "../controller/controller1.js";
+import {currentUser,editPostInCloudFireStore,} from "../services/firebase.js";
 const renderOnePost = (post, user) => { // {}
     let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
-  <div id="post-content" class="text-comment">${post.content}</div>
-  <div class="icons-like">
-      <i class="fab fa-gratipay"></i>
-      <i class="fas fa-paper-plane"></i></div>
-      <button id="btn-delete" class="share boton">Eliminar</button>
-      <button id="btn-editar" class="share boton">Editar</button>
+    <div id="comment-author" class='encabezado'>Publicado por ${user.name}</div>
+    <div class="text-comment" id="content-comment-div" data-id-post="${post.id}">${post.content}</div>
+    <button class="fab fa-gratipay"></button>
+    <button class="fas fa-paper-plane" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}" ></button>
+    <button id="btn-save-after-edit">Save</button>
+    <button id="btn-delete" data-uid-post="${post.userId}" data-id-post="${post.id}"class="share boton">Eliminar</button>
  `;
-    const deleteBtn = label.querySelector("#btn-delete");
-    deleteBtn.addEventListener("click", () => {
-        deletePost(post.id);
-    });
-    const editBtn = label.querySelector("#btn-editar");
-    editBtn.addEventListener("click", () => {
-        editPost(post.id,post.content);
+    label.setAttribute('class', "box");
+
+    const deleteButton = label.querySelector("#btn-delete");
+    deleteButton.addEventListener('click', (e) => {
+        deletePostAfterClick(e)
     });
 
-    label.setAttribute('class', "box");
+    const divCommentContent = label.querySelector("#content-comment-div");
+    
+    const idPostAttributeOfDivContent=divCommentContent.dataset.idPost;
+    const editButton = label.querySelector("#btn-edit");
+    editButton.addEventListener('click',(e)=>{
+       console.log(idPostAttributeOfDivContent);
+       const idPostAttributeOfEditButton=e.target.dataset.idPost;
+       const userIdAttributeOfEditButton=e.target.dataset.uidPost;
+       console.log(idPostAttributeOfEditButton);
+       if(idPostAttributeOfDivContent===idPostAttributeOfEditButton){ //si el id del post del div content es  igual al id del post que quiere modificar
+           if(currentUser().uid===userIdAttributeOfEditButton){ // si el id del usuario actual es igual al id del usuario que publico el post
+               divCommentContent.setAttribute("contenteditable",true);
+               console.log("You can edit now");
+               const saveBtn=label.querySelector("#btn-save-after-edit");
+               saveBtn.addEventListener('click',()=>{
+                   divCommentContent.setAttribute("contenteditable",false);
+                   const newContent=(divCommentContent.textContent);
+                   console.log(newContent);
+                   editPostInCloudFireStore(idPostAttributeOfEditButton,userIdAttributeOfEditButton,newContent);
+               });
+
+           }else{
+               alert("You can not edit a comment which was not published by you");
+               divCommentContent.setAttribute("contenteditable",false);
+
+           }
+
+       }else{
+           divCommentContent.setAttribute("contenteditable",false);
+
+       }
+      
+   });
+
     return label // que imprima una un post ,que se añada al ul element
 };
 
@@ -39,14 +69,15 @@ export default (user, posts) => {
     divElement.innerHTML = `
     <header class="header">
     <ul class="menu">
-        <li class="small"><p>${user.name}</p>
-            <ul>
-                <li><a>Configurar cuenta</a></li>
-                <li><a>Editar Perfil</a></li>
+        <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
+            <ul class="interior">
+                <li><a href="#/configuration">Configurar cuenta</a></li>
+                <li><a href="#/edit-profile">Editar Perfil</a></li>
+                <li><a id="sign-out-list" class="sign-out-list" href="#/privacity">Configuracion de la Privacidad</a></li>
             </ul>
         </li>
         <li class="title"><h1>Breath Life</h1></li>
-        <li id="sign-out" class="small"><a>Cerrar sesión</a></li>
+        <li id="sign-out" class="small sign-out"><a>Cerrar sesión</a></li>
     </ul>
 </header>
 <div class="sub-container">
@@ -62,7 +93,7 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                
+                <input type="file" id="imagen-coment" name="fichero" class="hidden" >
                 <img  id=share-image class="icon-photograph"
                 src="./css/img/6799.png_860.png">
             <button id="btn-share" class="share boton">Compartir</button></div>
@@ -80,20 +111,16 @@ export default (user, posts) => {
     });
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
-
-
+    
     posts.forEach((onePost) => {
+        console.log(onePost);
         getDataOfUser(onePost.userId).then((userdata) => {
-            console.log((userdata.userId));
+            console.log((userdata.name));
             const divPost = renderOnePost(onePost, userdata);
-            console.log(onePost.id);
-            console.log(onePost.content)
             divCommentList.appendChild(divPost);
         });
 
     })
-
-
     return divElement;
 };
 
