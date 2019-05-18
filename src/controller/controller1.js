@@ -172,6 +172,8 @@ const getDataOfUser = (uid) => {
 };
 
 
+
+
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
@@ -251,12 +253,9 @@ const getUserActive = (callback) => { //printUserinfo()
 };
 
 
-export const deletePost = (postId) => {
-    return dataBaseCloudFirestore().collection("posts").doc(postId).delete();
-}
 
 
-export const editPost = (postId, postText) => {
+ const editPost = (postId, postText) => {
     document.querySelector('#post-content').value = postText;
 
     let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
@@ -272,7 +271,46 @@ export const editPost = (postId, postText) => {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-}
+};
+/*
+const editProfile = (postId, postText) => {
+    document.querySelector('#post-content').value = postText;
+
+    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
+    // Set the "capital" field of the city 'DC'
+    return collectionPost.update({
+        content: postText,
+
+    })
+        .then(function () {
+            console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+};*/
+
+const likesForPosts = (postId, contador1) => {
+ 
+
+    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
+    // Set the "capital" field of the city 'DC'
+    return collectionPost.update({
+        likes: contador1,
+
+    })
+        .then(function () {
+            console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+};
+
+
+
 
 
 export {
@@ -287,4 +325,7 @@ export {
     deletePostAfterClick,
     editPostInCloudFireStore,
     getPostsInRealtime,
+    likesForPosts,
+    editPost,
+    
 };

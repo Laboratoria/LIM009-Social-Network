@@ -61,6 +61,10 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
 };
 
 
+ 
+
+
+
 
 export {
     signUp,
@@ -73,4 +77,5 @@ export {
     addPostToCloudFirestore,
     
     deletePostInCloudFireStore,
+   
 };

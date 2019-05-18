@@ -1,5 +1,6 @@
 import { signOutUser } from "../controller/controller1.js";
 export default (user) => {
+    console.log(user)
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container");
     divElement.innerHTML = ` 
@@ -18,16 +19,36 @@ export default (user) => {
 </header>
 <main class="right ancho">
     <h3> Respira salud, respira vida </h3>
-    <form action="" class="formulario acceder" id="register-form">
-    <input type="name" id="full-name" class="Name input redondear" placeholder="Nombres y Apellidos" readonly="readonly">
-    <input id="email" class="input redondear" type="email" placeholder="Ingrese su correo" readonly="readonly">
-    <input id="password" class="input redondear" type="password" placeholder="Ingrese su contraseña" readonly="readonly">
+    <div class="formulario acceder" id="edit-form">
+    <div class="element"><img id="user-image" class="image-photo" src="${user.photo}" alt="default photo"></div>    
+    <div id="full-name" class="Name input redondear" >${user.name}</div>
+    <div id="email" class="input redondear" >${user.email}</div>
     <button type="button" class="button-acceder redondear boton" id="btn-edit-profile">Editar Datos</button>
     <button type="button" class="button-acceder redondear boton" id="btn-save-profile">Guardar Datos</button>
-     </form>
+    <div></div>
+</div>
     </main>`;
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
+    const btnSave=divElement.querySelector('#btn-save-profile');
+    const editProfileButton=divElement.querySelector('#btn-edit-profile');
+    const email=divElement.querySelector('#email');
+    const fullName=divElement.querySelector('#full-name');
+    editProfileButton.addEventListener('click',()=>{
+    fullName.setAttribute('contenteditable',true);
+    email.setAttribute('contenteditable',true);});
+
+  btnSave.addEventListener('click',()=>{
+    fullName.setAttribute('contenteditable',false);
+    email.setAttribute('contenteditable',false); 
+    const newFullName=fullName.textContent;
+const newEmail=email.textContent;
+console.log(newFullName);
+console.log(newEmail);
+  
+
+    });
+
    
     return divElement;
   };
