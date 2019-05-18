@@ -256,18 +256,35 @@ const getUserActive = (callback) => { //printUserinfo()
 
 };
 
-export const deletePost = (postId) => {
-    return dataBaseCloudFirestore().collection("posts").doc(postId).delete();
-}
+const editProfile = (email1,name1,userId1) => {
+    
+        
+    dataBaseCloudFirestore().collection("users").doc(userId1).update({
+        email: email1,
+        name:name1,
+        
+        
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
 
 
-export const editPost = (postId, postText) => {
-    document.querySelector('#post-content').value = postText;
+
+
+};
+
+const likesForPosts = (postId, contador1) => {
+ 
 
     let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
     // Set the "capital" field of the city 'DC'
     return collectionPost.update({
-        content: postText,
+        likes: contador1,
 
     })
         .then(function () {
@@ -277,7 +294,8 @@ export const editPost = (postId, postText) => {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-}
+};
+
 
 
 export {
@@ -293,5 +311,7 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
+    editProfile,
+    likesForPosts,
     
 };
