@@ -30,11 +30,11 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser) =>
+const addPostToCloudFirestore = (inputComment, idUser,statusComment) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
-        state: false,
+        state: statusComment,
         likes: 0,
     }).then(function(docRef) {
         console.log(docRef);
@@ -62,19 +62,6 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
 
 
 
-    
-const getPostsInRealtime = (callback) => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-        const arrOfPosts = [];
-        arrOfAllPosts.forEach((onePost) => {
-            console.log(Object.keys(onePost));
-            arrOfPosts.push({ id: onePost.id, ...onePost.data() })
-        })
-        callback(arrOfPosts)
-    });
-
-};
-
 export {
     signUp,
     signIn,
@@ -84,7 +71,6 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    getPostsInRealtime,
+    
     deletePostInCloudFireStore,
- 
 };

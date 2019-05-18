@@ -175,12 +175,17 @@ const getDataOfUser = (uid) => {
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
-    // console.log(inputComment);
-    //console.log(getDataOfUser(currentUser().uid));
+    const inputStatus=document.querySelector('#private').checked;
+    console.log(inputStatus);
+    let status;
+    if(inputStatus){
+        status=true;
+    }else{
+        status=false;
+    }
     const idUser = currentUser().uid;
-    console.log(currentUser());
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser);
+    return addPostToCloudFirestore(inputComment, idUser,status);
 };
 
 const deletePostAfterClick = (e) => {
@@ -211,39 +216,22 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
 
     }
 };
-
-/*
- const editPostAfterClick = (e) =>{
-    const divContent=document.querySelector("#content-comment-div");
-    const saveBtn=document.querySelector("#btn-save-after-edit");
-    
-    console.log(divContent);
-     const currentUserId=currentUser().uid;
-     console.log(currentUserId);
-     console.log(e);
-     console.log(e.target);
-    const  userIdOfPost=e.target.dataset.uidPost;
-    console.log(userIdOfPost);
-    const  idOfPost=e.target.dataset.idPost
-    console.log(idOfPost);
-    if (currentUserId=== userIdOfPost){
-       divContent.setAttribute("contenteditable",true);
-       console.log("You can edit now");
-       saveBtn.addEventListener('click',()=>{
-        divContent.setAttribute("contenteditable",false);
-        const newContent=(divContent.textContent);
-        console.log(newContent);
-        editPostInCloudFireStore(idOfPost,userIdOfPost,newContent);
-    })
-    
-    }else{
-        alert("You cant edit a coment that was not published by you");
-    }
-    
-    
- };*/
-
-
+const getPostsInRealtime = (callback) => {
+    /* const form = document.querySelector('form').filterPost.value; */
+    //const selectElement = form.querySelector('input[name="filterPost"]');
+    /* const viewPost=myForm.selectElement.value; */
+    /* console.log(selectElement); */
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+        const arrOfPosts = [];
+        arrOfAllPosts.forEach((onePost) => {
+            console.log(onePost.data());
+            if(onePost.data().state==false){
+                    arrOfPosts.push({ id: onePost.id, ...onePost.data() })
+            }
+        })
+        callback(arrOfPosts)
+    });
+};
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
@@ -298,7 +286,5 @@ export {
     createPostInCloudFirestore,
     deletePostAfterClick,
     editPostInCloudFireStore,
-
-
-
+    getPostsInRealtime,
 };
