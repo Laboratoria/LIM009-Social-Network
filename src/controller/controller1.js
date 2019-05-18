@@ -174,6 +174,7 @@ const getDataOfUser = (uid) => {
 
 
 
+
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
@@ -272,24 +273,28 @@ const getUserActive = (callback) => { //printUserinfo()
             console.error("Error updating document: ", error);
         });
 };
-/*
-const editProfile = (postId, postText) => {
-    document.querySelector('#post-content').value = postText;
 
-    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
-    // Set the "capital" field of the city 'DC'
-    return collectionPost.update({
-        content: postText,
-
+const editProfile = (email1,name1,userId1) => {
+    
+        
+    dataBaseCloudFirestore().collection("users").doc(userId1).update({
+        email: email1,
+        name:name1,
+        
+        
     })
-        .then(function () {
-            console.log("Document successfully updated!");
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-};*/
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+
+
+
+
+};
 
 const likesForPosts = (postId, contador1) => {
  
@@ -327,5 +332,6 @@ export {
     getPostsInRealtime,
     likesForPosts,
     editPost,
+    editProfile,
     
 };

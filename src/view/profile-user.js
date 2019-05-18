@@ -1,5 +1,5 @@
 import { signOutUser, createPostInCloudFirestore, getDataOfUser,
-     deletePostAfterClick, editPostInCloudFireStore,likesForPosts,  } from "../controller/controller1.js";
+     deletePostAfterClick, editPostInCloudFireStore,likesForPosts} from "../controller/controller1.js";
 //import { currentUser } from "../services/firebase.js";
 const renderOnePost = (post, user,current) => {
     let label = document.createElement('div');
@@ -48,7 +48,7 @@ const renderOnePost = (post, user,current) => {
 
     });
     const likesButton = label.querySelector("#btn-likes");
-            
+             
     likesButton.addEventListener('click',(e)=>{
         const idPostAttributeOfDivContent = divCommentContent.dataset.idPost;
         const idPostAttributeOfLikesButton = e.target.dataset.idPost;
@@ -63,7 +63,7 @@ const renderOnePost = (post, user,current) => {
 
             
         }
-    })
+    });
 
     return label // que imprima una un post ,que se añada al ul element
 };

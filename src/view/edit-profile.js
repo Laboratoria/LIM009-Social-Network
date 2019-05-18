@@ -1,4 +1,4 @@
-import { signOutUser } from "../controller/controller1.js";
+import { signOutUser,editProfile } from "../controller/controller1.js";
 export default (user) => {
     console.log(user)
     const divElement = document.createElement("div");
@@ -45,6 +45,7 @@ export default (user) => {
 const newEmail=email.textContent;
 console.log(newFullName);
 console.log(newEmail);
+editProfile(newEmail,newFullName,user.userId);
   
 
     });
