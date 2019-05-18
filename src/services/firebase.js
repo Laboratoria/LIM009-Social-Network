@@ -30,11 +30,11 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser) =>
+const addPostToCloudFirestore = (inputComment, idUser,statusComment) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
-        state: false,
+        state: statusComment,
         likes: 0,
     }).then(function(docRef) {
         console.log(docRef);
@@ -44,13 +44,11 @@ const addPostToCloudFirestore = (inputComment, idUser) =>
         console.error("Error adding document: ", error);
     });
 
-
 const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
    
     const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
     console.log(uidOfCurrentUser); // id del usuario logueado actual 
     console.log(idUserOfPost); // id del usuario  dentro del objeto post
-  
     console.log(idPost); // id del post
     if(uidOfCurrentUser=== idUserOfPost){
     dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
@@ -59,47 +57,9 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
         console.error("Error removing document: ", error);
     });
 }else{ alert("You can not delete a comment which was not published by you");
-
 }
 };
 
-const editPostInCloudFireStore = (idPost,idUserOfPost,commentInputNewValue) => {
-   
-    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
-    console.log(uidOfCurrentUser); // id del usuario logueado actual 
-    console.log(idUserOfPost); // id del usuario  dentro del objeto post
-  
-    console.log(idPost); // id del post
-    if(uidOfCurrentUser=== idUserOfPost){
-    dataBaseCloudFirestore().collection("posts").doc(idPost).update({
-        content: commentInputNewValue,
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-
-
-}
-else{ alert("You can not edit a comment which was not published by you");
-
-}
-};
-    
-const getPostsInRealtime = (callback) => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-        const arrOfPosts = [];
-        arrOfAllPosts.forEach((onePost) => {
-            console.log(Object.keys(onePost));
-            arrOfPosts.push({ id: onePost.id, ...onePost.data() })
-        })
-        callback(arrOfPosts)
-    });
-
-};
 
 
 export {
@@ -111,7 +71,6 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    getPostsInRealtime,
+    
     deletePostInCloudFireStore,
-  editPostInCloudFireStore,
 };
