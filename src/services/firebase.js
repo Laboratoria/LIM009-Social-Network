@@ -44,13 +44,11 @@ const addPostToCloudFirestore = (inputComment, idUser) =>
         console.error("Error adding document: ", error);
     });
 
-
 const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
    
     const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
     console.log(uidOfCurrentUser); // id del usuario logueado actual 
     console.log(idUserOfPost); // id del usuario  dentro del objeto post
-  
     console.log(idPost); // id del post
     if(uidOfCurrentUser=== idUserOfPost){
     dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
@@ -59,7 +57,6 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
         console.error("Error removing document: ", error);
     });
 }else{ alert("You can not delete a comment which was not published by you");
-
 }
 };
 
@@ -100,7 +97,6 @@ const getPostsInRealtime = (callback) => {
     });
 
 };
-
 
 export {
     signUp,

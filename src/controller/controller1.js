@@ -164,7 +164,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function (doc) {
-            console.log(doc.data())
+           // console.log(doc.data()
             return doc.data(); // retorna una promesa
         }).catch(function (error) {
             console.log("Error getting document:", error);
@@ -184,11 +184,11 @@ const createPostInCloudFirestore = () => {
 };
 
  const deletePostAfterClick = (e) =>{
-    const postId=e.target.parentElement.getAttribute('data-id');
-   
-    const  userIdOfPost=e.target.getAttribute('data-uidPost');
-console.log(postId);
- deletePostInCloudFireStore(postId,userIdOfPost)};
+     console.log(e.target)
+    const postId=e.target.dataset.idPost;
+    const  userIdOfPost=e.target.dataset.uidPost;
+ deletePostInCloudFireStore(postId,userIdOfPost)
+};
 
 
 

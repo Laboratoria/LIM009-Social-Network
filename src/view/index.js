@@ -12,6 +12,7 @@ const components = {
     profile:Profile,
     editProfile:EditProfile,
     configuration:Configuration,
+    edit:EditProfile,
     error:Error404
 }
 
