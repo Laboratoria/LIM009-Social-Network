@@ -66,24 +66,7 @@ const renderOnePost = (post, user, current) => {
         }
         likesForPosts(post.id, likes);
     });
-    /*
-    const likesButton = label.querySelector("#btn-likes");
-             
-    likesButton.addEventListener('click',(e)=>{
-        const idPostAttributeOfDivContent = divCommentContent.dataset.idPost;
-        const idPostAttributeOfLikesButton = e.target.dataset.idPost;
-        const likesPostAttributeOfLikesButton = e.target.dataset.likesPost;
-       
-        if(idPostAttributeOfLikesButton===idPostAttributeOfDivContent){
-            console.log(likesPostAttributeOfLikesButton);
-          
-              let contador= parseInt(likesPostAttributeOfLikesButton) + 1;
-              label.querySelector("#btn-likes").textContent=contador;
-                likesForPosts(idPostAttributeOfLikesButton,contador);
 
-            
-        }
-    });*/
 
     return label;// que imprima una un post ,que se añada al ul element
 };
