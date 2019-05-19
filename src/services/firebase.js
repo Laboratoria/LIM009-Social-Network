@@ -109,9 +109,10 @@ const uploadImageToPost = (file, callback) => {
     //update file to fb storage
     const task = imageRef.put(file)
     return task.on('state_changed', (snapshot) => {
+        console.log (snapshot);
     }, (error) => {
     }, () => {
-      //get updated img url 
+    //get updated img url 
       const downloadImg = task.snapshot.ref.getDownloadURL()
       downloadImg.then(callback)
     })

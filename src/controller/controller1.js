@@ -182,7 +182,7 @@ const createPostInCloudFirestore = () => {
     const idUser = currentUser().uid;
     console.log(currentUser());
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser,null);
+    return addPostToCloudFirestore(inputComment, idUser,downloadURL);
 };
 
  const deletePostAfterClick = (e) =>{

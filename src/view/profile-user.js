@@ -62,7 +62,7 @@ export default (user, posts) => {
     try {
         new URL(user.photo);
         photoUrl = user.photo;
-    } catch (_) {
+    } catch {
         photoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
     }
 
