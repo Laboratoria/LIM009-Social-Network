@@ -27,21 +27,21 @@ export const signOut = () => {
   return firebase.auth().signOut()
 };
 
-export const getUserReady = (calback) => {
+export const getUserReady = (callback) => {
   var userCurrent = firebase.auth().currentUser;
   if (userCurrent) {
-    return calback(userCurrent)
+    return callback(userCurrent)
   } else {
     const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        return calback(user)
+        return callback(user)
         // User is signed in.
       } else {
         // No user is signed in.
-        return calback(null)
+        return callback(null)
 
       }
     });
-    unsubscribe()
+    //unsubscribe()
   }
 }

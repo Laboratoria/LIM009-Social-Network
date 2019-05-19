@@ -57,12 +57,13 @@ export default (user) => {
     const btnSignOut = document.querySelector('#sign-out');
     btnSignOut.addEventListener('click', logOut);
     const btnSharePost = document.querySelector('#btn-share');
-    const constentPost = document.querySelector('#content-post');
+    const contentPost = document.querySelector('#content-post');
     const imagePostView = document.querySelector('#image-post-view');
     const state = document.querySelector('#estado-post')
     const uploader = document.querySelector('#uploader');
     const fileButton = document.querySelector('#file-button');
     const fooView = document.querySelector('foo-View');
+    
 
     fileButton.onchange = (e) => {
         const imagePostView = document.querySelector('#image-post-view');
@@ -81,16 +82,17 @@ export default (user) => {
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         let selectImage = fileButton.files[0]
         let selectState = state.value;
+        let description = document.querySelector('#description').value;
+        let userID = document.querySelector('#user-id').textContent;
         if (selectImage === undefined && selectState === 'publico') {
-            createPost('publico', './image/image-post.png', fechaPost)
+            createPost('publico', './image/image-post.png', fechaPost,description,userID)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
-            createPost(selectState, './image/image-post.png', fechaPost)
+            createPost(selectState, './image/image-post.png', fechaPost,description,userID)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
-                createPost(selectState, image, fechaPost)
-
+                createPost(selectState, image, fechaPost,description,userID)
             }
             imagePost(selectImage, uploader, getImage)
         }
@@ -98,8 +100,7 @@ export default (user) => {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
-                createPost('publico', image, fechaPost)
-
+                createPost('publico', image, fechaPost,description,userID)
             }
             imagePost(selectImage, uploader, getImage)
         }
