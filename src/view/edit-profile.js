@@ -53,4 +53,3 @@ editProfile(newEmail,newFullName,user.userId);
    
     return divElement;
   };
-  

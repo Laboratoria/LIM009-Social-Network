@@ -214,6 +214,13 @@
     padding: 0 5% 5% 5%;
     height: auto;
 }
+.disabled{
+    opacity: 0.5;
+    position: relative;
+    float: left;
+    margin-left: 8%;
+    height: 35px;
+}
    
 @media(min-width:768px) {
     .sub-container {
