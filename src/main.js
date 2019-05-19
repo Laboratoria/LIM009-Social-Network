@@ -11,6 +11,7 @@ import { changeview } from './view-controller/router.js';
   };
   firebase.initializeApp(config);
 
+
 const init = () => {
   changeview(window.location.hash);
   window.addEventListener('hashchange', () => changeview(window.location.hash));

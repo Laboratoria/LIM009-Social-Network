@@ -8,6 +8,7 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
+    uploadImageToPost,
     //editPostInCloudFireStore,
 
 
@@ -164,7 +165,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function (doc) {
-            console.log(doc.data())
+           // console.log(doc.data()
             return doc.data(); // retorna una promesa
         }).catch(function (error) {
             console.log("Error getting document:", error);
@@ -175,20 +176,24 @@ const getDataOfUser = (uid) => {
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
+
     // console.log(inputComment);
     //console.log(getDataOfUser(currentUser().uid));
     const idUser = currentUser().uid;
     console.log(currentUser());
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser);
+    return addPostToCloudFirestore(inputComment, idUser,null);
 };
 
-const deletePostAfterClick = (e) => {
-    const postId = e.target.getAttribute('data-id-post');
-    const userIdOfPost = e.target.getAttribute('data-uid-post');
-    console.log(postId);
-    deletePostInCloudFireStore(postId, userIdOfPost)
+ const deletePostAfterClick = (e) =>{
+     console.log(e.target)
+    const postId=e.target.dataset.idPost;
+    const  userIdOfPost=e.target.dataset.uidPost;
+ deletePostInCloudFireStore(postId,userIdOfPost)
 };
+
+
+
 
 /*
  const editPostAfterClick = (e) =>{
@@ -265,6 +270,14 @@ export const editPost = (postId, postText) => {
 }
 
 
+const getImageToPost = (file) => {
+    uploadImageToPost(file, downloadURL => {
+      console.log('available at', downloadURL);
+  
+    })
+  }
+
+
 export {
     signInAfterClick,
     signUpAfterClick,
@@ -275,6 +288,7 @@ export {
     getUserActive,
     createPostInCloudFirestore,
     deletePostAfterClick,
+    getImageToPost,
    // editPostAfterClick,
 
 };

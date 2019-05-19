@@ -30,12 +30,13 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser) =>
+const addPostToCloudFirestore = (inputComment, idUser,photoUrl) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
         state: false,
         likes: 0,
+        photo: photoUrl,
     }).then(function(docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
@@ -44,13 +45,11 @@ const addPostToCloudFirestore = (inputComment, idUser) =>
         console.error("Error adding document: ", error);
     });
 
-
 const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
    
     const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
     console.log(uidOfCurrentUser); // id del usuario logueado actual 
     console.log(idUserOfPost); // id del usuario  dentro del objeto post
-  
     console.log(idPost); // id del post
     if(uidOfCurrentUser=== idUserOfPost){
     dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
@@ -59,7 +58,6 @@ const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
         console.error("Error removing document: ", error);
     });
 }else{ alert("You can not delete a comment which was not published by you");
-
 }
 };
 
@@ -102,6 +100,40 @@ const getPostsInRealtime = (callback) => {
 };
 
 
+
+const uploadImageToPost = (file, callback) => {
+    //create ref
+    const storageRef = firebase.storage().ref()
+    const imageRef = storageRef.child(`images/${file.name}`)
+  
+    //update file to fb storage
+    const task = imageRef.put(file)
+    return task.on('state_changed', (snapshot) => {
+    }, (error) => {
+    }, () => {
+      //get updated img url 
+      const downloadImg = task.snapshot.ref.getDownloadURL()
+      downloadImg.then(callback)
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export {
     signUp,
     signIn,
@@ -113,5 +145,6 @@ export {
     addPostToCloudFirestore,
     getPostsInRealtime,
     deletePostInCloudFireStore,
-  editPostInCloudFireStore,
+    editPostInCloudFireStore,
+    uploadImageToPost,
 };
