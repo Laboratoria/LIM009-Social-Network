@@ -30,107 +30,53 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser,photoUrl) =>
+const addPostToCloudFirestore = (inputComment, idUser, statusComment) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
-        state: false,
+        state: statusComment,
         likes: 0,
-        photo: photoUrl,
-    }).then(function(docRef) {
+    }).then(function (docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+        .catch(function (error) {
+            console.error("Error adding document: ", error);
+        });
 
-const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
-   
-    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
+const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
+
+    const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
     console.log(uidOfCurrentUser); // id del usuario logueado actual 
     console.log(idUserOfPost); // id del usuario  dentro del objeto post
     console.log(idPost); // id del post
-    if(uidOfCurrentUser=== idUserOfPost){
-    dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
-        alert("Document successfully deleted!");
-    }).catch((error)=>{
-        console.error("Error removing document: ", error);
-    });
-}else{ alert("You can not delete a comment which was not published by you");
-}
+    if (uidOfCurrentUser === idUserOfPost) {
+        dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    } else {
+        alert("You can not delete a comment which was not published by you");
+    }
 };
 
-const editPostInCloudFireStore = (idPost,idUserOfPost,commentInputNewValue) => {
-   
-    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
-    console.log(uidOfCurrentUser); // id del usuario logueado actual 
-    console.log(idUserOfPost); // id del usuario  dentro del objeto post
-  
-    console.log(idPost); // id del post
-    if(uidOfCurrentUser=== idUserOfPost){
-    dataBaseCloudFirestore().collection("posts").doc(idPost).update({
-        content: commentInputNewValue,
-    })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-
-
-}
-else{ alert("You can not edit a comment which was not published by you");
-
-}
-};
-    
-const getPostsInRealtime = (callback) => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-        const arrOfPosts = [];
-        arrOfAllPosts.forEach((onePost) => {
-            console.log(Object.keys(onePost));
-            arrOfPosts.push({ id: onePost.id, ...onePost.data() })
-        })
-        callback(arrOfPosts)
-    });
-
-};
-
-
-
-const uploadImageToPost = (file, callback) => {
+const upLoadImageToFirestore = (file, callback) => {
     //create ref
     const storageRef = firebase.storage().ref()
     const imageRef = storageRef.child(`images/${file.name}`)
-  
+
     //update file to fb storage
     const task = imageRef.put(file)
-    return task.on('state_changed', (snapshot) => {
-        console.log (snapshot);
-    }, (error) => {
-    }, () => {
-    //get updated img url 
-      const downloadImg = task.snapshot.ref.getDownloadURL()
-      downloadImg.then(callback)
+    return task.on('state_changed', (snapshot) => {},
+     (error) => {}, 
+     () => {
+        //get updated img url
+        const downloadImg = task.snapshot.ref.getDownloadURL()
+        downloadImg.then(callback)
+        return callback;
     })
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 
 
 
@@ -144,8 +90,6 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    getPostsInRealtime,
     deletePostInCloudFireStore,
-    editPostInCloudFireStore,
-    uploadImageToPost,
+    upLoadImageToFirestore
 };

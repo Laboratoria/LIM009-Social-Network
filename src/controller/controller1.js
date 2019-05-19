@@ -8,10 +8,8 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    uploadImageToPost,
     //editPostInCloudFireStore,
-
-
+    upLoadImageToFirestore,
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -165,7 +163,7 @@ const signOutUser = () => {
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
         .then(function (doc) {
-           // console.log(doc.data()
+            // console.log(doc.data()
             return doc.data(); // retorna una promesa
         }).catch(function (error) {
             console.log("Error getting document:", error);
@@ -176,57 +174,69 @@ const getDataOfUser = (uid) => {
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
-
-    // console.log(inputComment);
-    //console.log(getDataOfUser(currentUser().uid));
-    const idUser = currentUser().uid;
-    console.log(currentUser());
-    console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser,downloadURL);
-};
-
- const deletePostAfterClick = (e) =>{
-     console.log(e.target)
-    const postId=e.target.dataset.idPost;
-    const  userIdOfPost=e.target.dataset.uidPost;
- deletePostInCloudFireStore(postId,userIdOfPost)
-};
-
-
-
-
-/*
- const editPostAfterClick = (e) =>{
-    const divContent=document.querySelector("#content-comment-div");
-    const saveBtn=document.querySelector("#btn-save-after-edit");
-    
-    console.log(divContent);
-    const currentUserId = currentUser().uid;
-    console.log(currentUserId);
-    console.log(e);
-    console.log(e.target);
-    const userIdOfPost = e.target.dataset.uidPost;
-    console.log(userIdOfPost);
-    const idOfPost = e.target.dataset.idPost
-    console.log(idOfPost);
-    if (currentUserId === userIdOfPost) {
-        divContent.setAttribute("contenteditable", true);
-        console.log("You can edit now");
-        saveBtn.addEventListener('click', () => {
-            divContent.setAttribute("contenteditable", false);
-            const newContent = (divContent.textContent);
-            console.log(newContent);
-            editPostInCloudFireStore(idOfPost, userIdOfPost, newContent);
-        })
-
+    const inputStatus = document.querySelector('#private').checked;
+    console.log(inputStatus);
+    let status;
+    if (inputStatus) {
+        status = true;
     } else {
-        alert("You can't edit a coment that was not published by you");
+        status = false;
     }
-    
-    
- };*/
+    const idUser = currentUser().uid;
+    console.log(idUser);
+    return addPostToCloudFirestore(inputComment, idUser, status);
+};
 
+const deletePostAfterClick = (e) => {
+    console.log(e.target)
+    const postId = e.target.dataset.idPost;
+    const userIdOfPost = e.target.dataset.uidPost;
+    deletePostInCloudFireStore(postId, userIdOfPost)
+};
 
+const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) => {
+
+    const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual   
+    console.log(idPost); // id del post
+    if (uidOfCurrentUser === idUserOfPost) {
+        dataBaseCloudFirestore().collection("posts").doc(idPost).update({
+            content: commentInputNewValue,
+        })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+    }
+    else {
+        alert("You can not edit a comment which was not published by you");
+
+    }
+};
+const validar = () => {
+const e = document.querySelector('#privatePost');
+  try {
+    if (e.checked==true) {     
+        return 'myPosts';
+    }else if(e.checked==false){
+        return 'publicPost';
+    }
+  } catch(err){
+    return 'publicPost';
+  }
+};
+
+const getPostsInRealtime = (callback) => {
+        dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+            const arrOfPosts = [];
+            arrOfAllPosts.forEach((onePost) => {
+                    arrOfPosts.push({ id: onePost.id, ...onePost.data() })
+            })
+            callback(arrOfPosts);
+        });
+};
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
@@ -245,38 +255,62 @@ const getUserActive = (callback) => { //printUserinfo()
 
 };
 
-
-export const deletePost = (postId) => {
-    return dataBaseCloudFirestore().collection("posts").doc(postId).delete();
-}
-
-
-export const editPost = (postId, postText) => {
-    document.querySelector('#post-content').value = postText;
-
-    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
-    // Set the "capital" field of the city 'DC'
-    return collectionPost.update({
-        content: postText,
-
+const getImage = (file) => {
+    upLoadImageToFirestore(file, downloadURL => {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', downloadURL);
+        xhr.send();
+      
+        // Or inserted into an <img> element:
+        var img = document.document.querySelector('img-post');
+        img.src = downloadURL;
+      }).catch(function(error) {
+        // Handle any errors
+      });
+      console.log('available at', downloadURL);
+    
+    };
+      
+const editProfile = (email1,name1,userId1) => {
+    
+        
+    dataBaseCloudFirestore().collection("users").doc(userId1).update({
+        email: email1,
+        name:name1,
+        
+        
     })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+
+
+
+
+};
+
+
+const likesForPosts = (postId, contador1) => {
+    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
+    console.log(contador1)
+    return collectionPost.update({
+        likes: contador1,
+        })
         .then(function () {
             console.log("Document successfully updated!");
         })
         .catch(function (error) {
-            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-}
-
-
-const getImageToPost = (file) => {
-    uploadImageToPost(file, downloadURL => {
-      console.log('available at', downloadURL);
-  
-    })
-  }
-
+};
 
 export {
     signInAfterClick,
@@ -288,7 +322,10 @@ export {
     getUserActive,
     createPostInCloudFirestore,
     deletePostAfterClick,
-    getImageToPost,
-   // editPostAfterClick,
-
+    editPostInCloudFireStore,
+    getPostsInRealtime,
+    validar,
+    getImage,
+    editProfile,
+    likesForPosts,    
 };
