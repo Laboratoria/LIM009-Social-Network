@@ -266,12 +266,20 @@ const getImage = (file) => {
         xhr.send();
       
         // Or inserted into an <img> element:
-        var img = document.document.querySelector('img-post');
+        var img = document.querySelector('img-post');
         img.src = downloadURL;
-      }).catch(function(error) {
+      }).catch((error)=> {
         // Handle any errors
       });
       console.log('available at', downloadURL);
+    
+    
+    };
+
+
+
+
+
 
     
 const editProfile = (email1,name1,userId1) => {
