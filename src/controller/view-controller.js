@@ -205,6 +205,7 @@ export const setUpPost = data => {
 }
 
 export const getPosts = () => {
+let db = firebase.firestore();
   db.collection('posts').onSnapshot(snapshot => {
     //console.log(snapshot.docs)
     setUpPost(snapshot.docs);
