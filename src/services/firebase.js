@@ -30,36 +30,52 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser,statusComment) =>
+const addPostToCloudFirestore = (inputComment, idUser, statusComment) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
         state: statusComment,
         likes: 0,
-    }).then(function(docRef) {
+    }).then(function (docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+        .catch(function (error) {
+            console.error("Error adding document: ", error);
+        });
 
-const deletePostInCloudFireStore = (idPost,idUserOfPost) => {
-   
-    const uidOfCurrentUser=currentUser().uid; // id del usuario logueado actual 
+const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
+
+    const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
     console.log(uidOfCurrentUser); // id del usuario logueado actual 
     console.log(idUserOfPost); // id del usuario  dentro del objeto post
     console.log(idPost); // id del post
-    if(uidOfCurrentUser=== idUserOfPost){
-    dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(()=>{
-        console.log("Document successfully deleted!");
-    }).catch((error)=>{
-        console.error("Error removing document: ", error);
-    });
-}else{ alert("You can not delete a comment which was not published by you");
-}
+    if (uidOfCurrentUser === idUserOfPost) {
+        dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    } else {
+        alert("You can not delete a comment which was not published by you");
+    }
 };
 
+const upLoadImageToFirestore = (file, callback) => {
+    //create ref
+    const storageRef = firebase.storage().ref()
+    const imageRef = storageRef.child(`images/${file.name}`)
+
+    //update file to fb storage
+    const task = imageRef.put(file)
+    return task.on('state_changed', (snapshot) => {},
+     (error) => {}, 
+     () => {
+        //get updated img url
+        const downloadImg = task.snapshot.ref.getDownloadURL()
+        downloadImg.then(callback)
+    })
+};
 
 
 export {
@@ -71,6 +87,6 @@ export {
     dataBaseCloudFirestore,
     currentUser,
     addPostToCloudFirestore,
-    
     deletePostInCloudFireStore,
+    upLoadImageToFirestore
 };

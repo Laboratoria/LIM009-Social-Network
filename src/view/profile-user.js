@@ -1,11 +1,14 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar } from "../controller/controller1.js";
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar, likesForPosts, getImage  } from "../controller/controller1.js";
+
 const renderOnePost = (post, user, current) => {
+
     let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}</div>
-    <img src="./css/img/like-1.png" class="icons like" alt="icon like">
+  <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
+  <span id="counter-likes">${post.likes}</span>
   <img src="./css/img/paper-plane-1.png" class="icons edit" alt="icon edit" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}">
   <button id="btn-save-after-edit" class="boton share">Guardar</button>
   `;
@@ -37,14 +40,26 @@ const renderOnePost = (post, user, current) => {
             } else {
                 alert("You can not edit a comment which was not published by you");
                 divCommentContent.setAttribute("contenteditable", false);
-
             }
-
         } else {
             divCommentContent.setAttribute("contenteditable", false);
-
         }
-
+    });
+    const numberLikes = label.querySelector('#counter-likes');
+    const likesButton = label.querySelector("#btn-likes");
+    likesButton.addEventListener('click', (e) => {
+        let likes = post.likes;
+        if (likesButton.value) {
+            likes = likes - 1;
+            numberLikes.innerHTML = likes;
+            likesButton.setAttribute('value', '');
+        } else {
+            likes = likes + 1;
+            numberLikes.innerHTML = likes;
+            likesButton.setAttribute('value', 'true');
+            likesButton.setAttribute('class', 'disabled');
+        }
+        likesForPosts(post.id, likes);
     });
 
     return label // que imprima una un post ,que se añada al ul element
@@ -77,8 +92,7 @@ export default (user, posts) => {
 </header>
 <div class="sub-container">
     <aside class="user-name">
-        <div class="imagen-fondo"><img class="image"
-                src="./css/img/cell.jpg">
+        <div class="imagen-fondo"><img class="image" src="./css/img/cell.jpg">
             <div class="element"><img class="image-photo" id="image-user" src="${photoUrl}" alt="default photo">
                 <div class="nombre"><h2 id="name-user">${user.name}</h2><p>${user.email}</p></div>
             </div>
@@ -88,21 +102,18 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <img class="icon-photograph" src="./css/img/6799.png_860.png">
+                <input type="file" id="image-file" class="hidden"><img class="icon-photograph" src="./css/img/6799.png_860.png">
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter" id="valores"><fieldset>
  <legend>¿Que publicaciones deseo ver?</legend>
-<input type="radio" name="filterPost" id="allPost" value="publicPost"><label for="allPost">Todas</label>
-<input type="radio" name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
+<input type="radio" class='input-filter' name="filterPost" id="allPost" value="publicPost"><label for="allPost">Todas</label>
+<input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
 </fieldset></div>
         <div id="comment-list"></div>
     </main>
 </div>
 `;
-
-    const divCommentList = divElement.querySelector("#comment-list");
-
     const shareBtn = divElement.querySelector("#btn-share");
     shareBtn.addEventListener("click", () => {
         createPostInCloudFirestore();
@@ -110,20 +121,21 @@ export default (user, posts) => {
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
 
+    const divCommentList = divElement.querySelector("#comment-list");
+
     const viewComments = divElement.querySelector('#valores');
     viewComments.addEventListener("click", () => {
         console.log(validar())
-        divCommentList.innerHTML='';
+        divCommentList.innerHTML = '';
         switch (validar()) {
             case 'publicPost':
                 posts.forEach((onePost) => {
                     if (onePost.state === false) {
-                    getDataOfUser(onePost.userId)
-                        .then((userdata) => {
+                        getDataOfUser(onePost.userId)
+                            .then((userdata) => {
                                 const divPost = renderOnePost(onePost, userdata, user);
                                 divCommentList.appendChild(divPost);
-
-                        })
+                            })
                     }
                 });
                 break
@@ -132,9 +144,7 @@ export default (user, posts) => {
                     getDataOfUser(onePost.userId)
                         .then((userdata) => {
                             if (userdata.userId === user.userId) {
-                                console.log(onePost.userId);
-                                console.log(userdata.userId);
-                                const divPost = renderOnePost(onePost, userdata, user);    
+                                const divPost = renderOnePost(onePost, userdata, user);
                                 divCommentList.appendChild(divPost);
                             }
 
@@ -145,5 +155,4 @@ export default (user, posts) => {
     });
     return divElement;
 };
-
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha
