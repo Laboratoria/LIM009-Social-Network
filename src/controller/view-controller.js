@@ -157,11 +157,10 @@ export const setUpPost = data => {
           // console.log("Document data:", doc.data().name);
           const post = doc.data();
           const article = document.createElement('article');
-
           const li = `
     <article id = 'content-post' class= 'flex-container  margin-top border center'> 
     <div class = 'btn-post-edit-del'>
-    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit'>
+    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-${doc.id}'>
     <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
     </div>    
       <header class='header-post'>       
@@ -171,7 +170,7 @@ export const setUpPost = data => {
       </header>
       <section class='content-post'>     
       <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
-      <textarea id = 'description' class="textarea center">${post.description}</textarea>      
+      <textarea id = 'description-${doc.id}' class="textarea center">${post.description}</textarea>      
       </section>
       <footer class = 'margin-footer center'>
       <div class = 'style-color-header style-content-post-img'>
@@ -195,7 +194,7 @@ export const setUpPost = data => {
               deletePost(doc.id);
 
             } else {
-              alert('Permiso denegado paraeliminar este post')
+              alert('Permiso denegado para eliminar este post')
             }
 
           })
@@ -251,6 +250,21 @@ export const setUpPost = data => {
 
 
           })
+
+          let btnEdit = article.querySelector(`#btn-edit-${doc.id}`);
+          btnEdit.addEventListener('click', () => {
+            //console.log(post.user)
+            //console.log(idUserAuth.uid)
+            if (post.user === idUserAuth.uid) {
+              let editDescription = article.querySelector(`#description-${doc.id}`).value;
+              editPost(doc.id, editDescription);
+              alert('Post editado correctamente');
+
+            } else {
+              alert('Permiso denegado para editar este post');
+            }
+          });
+          // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
           return postList.appendChild(article);
         }
       })
@@ -262,9 +276,6 @@ export const setUpPost = data => {
 }
 
 
-
-
-
 const deletePost = id => {
   let db = firebase.firestore();
   db.collection("posts").doc(id).delete().then(() => {
@@ -272,6 +283,21 @@ const deletePost = id => {
   }).catch((error) => {
     console.error("Error removing document: ", error);
   });
+}
+
+const editPost = (id, description) => {
+  let db = firebase.firestore();
+  return db.collection("posts").doc(id).update({
+    description: description
+  })
+    .then(function () {
+      console.log("Document successfully updated!");
+    })
+    .catch(function (error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+    });
+
 }
 
 export const editPErfilUser = (idUser, name, email) => {
