@@ -9,6 +9,7 @@ import {
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
     //editPostInCloudFireStore,
+    upLoadImageToFirestore
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -228,15 +229,13 @@ const e = document.querySelector('#privatePost');
 };
 
 const getPostsInRealtime = (callback) => {
-
         dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
             const arrOfPosts = [];
             arrOfAllPosts.forEach((onePost) => {
                     arrOfPosts.push({ id: onePost.id, ...onePost.data() })
             })
-            callback(arrOfPosts)
+            callback(arrOfPosts);
         });
-
 };
 
 // usuario activo 
@@ -255,6 +254,12 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 
 };
+
+const getImage = (file) => {
+    upLoadImageToFirestore(file, downloadURL => {
+      console.log('available at', downloadURL);
+      return downloadURL;
+
 
 const editProfile = (email1,name1,userId1) => {
     
@@ -278,23 +283,23 @@ const editProfile = (email1,name1,userId1) => {
 
 };
 
-const likesForPosts = (postId, contador1) => {
- 
 
-    let collectionPost = dataBaseCloudFirestore().collection("posts").doc(postId);
-    // Set the "capital" field of the city 'DC'
+const likesForPosts = (postId, contador1) => {
+    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
+    console.log(contador1)
     return collectionPost.update({
         likes: contador1,
-
-    })
+        })
         .then(function () {
             console.log("Document successfully updated!");
         })
         .catch(function (error) {
-            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
 };
+
+
+
 
 
 
@@ -311,7 +316,11 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
+
+    getImage
+
     editProfile,
     likesForPosts,
     
+
 };
