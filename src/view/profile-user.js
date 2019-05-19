@@ -65,9 +65,9 @@ const renderOnePost = (post, user, current) => {
         }
         likesForPosts(post.id, likes);
     });
-    const likesButton = label.querySelector("#btn-likes");
+   /* const likesButton = label.querySelector("#btn-likes");*/
              
-    likesButton.addEventListener('click',(e)=>{
+/*     likesButton.addEventListener('click',(e)=>{
         const idPostAttributeOfDivContent = divCommentContent.dataset.idPost;
         const idPostAttributeOfLikesButton = e.target.dataset.idPost;
         const likesPostAttributeOfLikesButton = e.target.dataset.likesPost;
@@ -81,7 +81,7 @@ const renderOnePost = (post, user, current) => {
 
             
         }
-    });
+    }); */
 
     return label // que imprima una un post ,que se añada al ul element
 };

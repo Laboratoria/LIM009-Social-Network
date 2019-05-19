@@ -259,16 +259,14 @@ const getImage = (file) => {
     upLoadImageToFirestore(file, downloadURL => {
       console.log('available at', downloadURL);
       return downloadURL;
-
-
-const editProfile = (email1,name1,userId1) => {
+    })
+};
     
-        
+const editProfile = (email1,name1,userId1) => {
+         
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
         email: email1,
         name:name1,
-        
-        
     })
     .then(function() {
         console.log("Document successfully updated!");
@@ -277,9 +275,6 @@ const editProfile = (email1,name1,userId1) => {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
-
-
-
 
 };
 
@@ -316,11 +311,7 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
-
-    getImage
-
+    getImage,
     editProfile,
     likesForPosts,
-    
-
-};
+}
