@@ -1,6 +1,6 @@
 
 
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar,likesForPosts } from "../controller/controller1.js";
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar,likesForPosts, getImage } from "../controller/controller1.js";
 
 const renderOnePost = (post, user, current) => {
 
@@ -8,7 +8,9 @@ const renderOnePost = (post, user, current) => {
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
-  <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}</div>
+  <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
+  <img src="" id=img-post>
+  </div>
 
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
   <span id="counter-likes">${post.likes}</span>
@@ -17,7 +19,6 @@ const renderOnePost = (post, user, current) => {
   <button id="btn-save-after-edit" class="boton share">Guardar</button>
   `;
     label.setAttribute('class', "box");
-    label.setAttribute('data-id', `${post.id}`);
 
     const deleteButton = label.querySelector("#btn-delete");
     deleteButton.addEventListener('click', (e) => {
@@ -65,25 +66,9 @@ const renderOnePost = (post, user, current) => {
         }
         likesForPosts(post.id, likes);
     });
-   /* const likesButton = label.querySelector("#btn-likes");*/
-             
-/*     likesButton.addEventListener('click',(e)=>{
-        const idPostAttributeOfDivContent = divCommentContent.dataset.idPost;
-        const idPostAttributeOfLikesButton = e.target.dataset.idPost;
-        const likesPostAttributeOfLikesButton = e.target.dataset.likesPost;
-       
-        if(idPostAttributeOfLikesButton===idPostAttributeOfDivContent){
-            console.log(likesPostAttributeOfLikesButton);
-          
-              let contador= parseInt(likesPostAttributeOfLikesButton) + 1;
-              label.querySelector("#btn-likes").textContent=contador;
-                likesForPosts(idPostAttributeOfLikesButton,contador);
 
-            
-        }
-    }); */
 
-    return label // que imprima una un post ,que se añada al ul element
+    return label;// que imprima una un post ,que se añada al ul element
 };
 
 export default (user, posts) => {
@@ -91,7 +76,7 @@ export default (user, posts) => {
     try {
         new URL(user.photo);
         photoUrl = user.photo;
-    } catch (_) {
+    } catch {
         photoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
     }
     console.log(photoUrl)
@@ -135,6 +120,8 @@ export default (user, posts) => {
     </main>
 </div>
 `;
+    const imageFile = divElement.querySelector('#image-file');
+
     const shareBtn = divElement.querySelector("#btn-share");
     shareBtn.addEventListener("click", () => {
         createPostInCloudFirestore();
@@ -174,6 +161,13 @@ export default (user, posts) => {
                 break
         }
     });
+
+
+    imageFile.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        getImage(file)
+        console.log ( file);
+      })
     return divElement;
 };
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha

@@ -9,7 +9,7 @@ import {
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
     //editPostInCloudFireStore,
-    upLoadImageToFirestore
+    upLoadImageToFirestore,
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -257,10 +257,22 @@ const getUserActive = (callback) => { //printUserinfo()
 
 const getImage = (file) => {
     upLoadImageToFirestore(file, downloadURL => {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', downloadURL);
+        xhr.send();
+      
+        // Or inserted into an <img> element:
+        var img = document.document.querySelector('img-post');
+        img.src = downloadURL;
+      }).catch(function(error) {
+        // Handle any errors
+      });
       console.log('available at', downloadURL);
-      return downloadURL;
-    })
-};
+
     
 const editProfile = (email1,name1,userId1) => {
          
@@ -293,11 +305,6 @@ const likesForPosts = (postId, contador1) => {
         });
 };
 
-
-
-
-
-
 export {
     signInAfterClick,
     signUpAfterClick,
@@ -313,5 +320,6 @@ export {
     validar,
     getImage,
     editProfile,
-    likesForPosts,
-}
+    likesForPosts,    
+};
+

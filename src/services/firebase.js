@@ -74,6 +74,7 @@ const upLoadImageToFirestore = (file, callback) => {
         //get updated img url
         const downloadImg = task.snapshot.ref.getDownloadURL()
         downloadImg.then(callback)
+        return callback;
     })
 };
 
