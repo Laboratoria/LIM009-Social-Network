@@ -254,12 +254,36 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 
 };
+
 const getImage = (file) => {
     upLoadImageToFirestore(file, downloadURL => {
       console.log('available at', downloadURL);
       return downloadURL;
+
+
+const editProfile = (email1,name1,userId1) => {
+    
+        
+    dataBaseCloudFirestore().collection("users").doc(userId1).update({
+        email: email1,
+        name:name1,
+        
+        
     })
-  }
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+
+
+
+
+};
+
+
 const likesForPosts = (postId, contador1) => {
     let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
     console.log(contador1)
@@ -275,6 +299,10 @@ const likesForPosts = (postId, contador1) => {
 };
 
 
+
+
+
+
 export {
     signInAfterClick,
     signUpAfterClick,
@@ -288,6 +316,11 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
-    likesForPosts,
+
     getImage
+
+    editProfile,
+    likesForPosts,
+    
+
 };
