@@ -189,6 +189,9 @@ padding: 2%;
 .color-fecha{
 color: rgba(49, 53, 53, 0.514)
 }
+.textarea-coment{
+    height: 3rem;
+}
 
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {

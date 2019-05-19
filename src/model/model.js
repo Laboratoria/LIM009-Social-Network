@@ -32,13 +32,8 @@ export const dataBaseUser = (user) => {
         uid: user.uid,
         name: (user.displayName === null) ? 'Anónimo' : user.displayName,
         email: user.email,
-        photo: (user.photoURL === null) ? './image/image-post.png' : user.photoURL
-    }).then((docRef) => {
-        // return docRef;
-        console.log("Document written with ID: ", docRef);
-    }).catch((error) => {
-        console.error("Error adding document: ", error);
-    });
+        photo: (user.photoURL === null) ? './image/icono-login-user.png' : user.photoURL
+    })
 };
 export const getDataDoc = users => {
     let db = firebase.firestore();
@@ -47,15 +42,21 @@ export const getDataDoc = users => {
     return docRef.get()
 }
 
-export const deletePostModel = (userID) => {
+export const createComentPost = (idPost, user, comemt) => {
     let db = firebase.firestore();
-    // Create a reference to the cities collection
-    let citiesRef = db.collection("posts");
+    let comentPost = db.collection('posts').doc(`${idPost.id}`)
+        .collection('comemt').add({
+            user: user,
+            comment: comemt
 
-    // Create a query against the collection.
-    let query = citiesRef.where("user", "==", `${userID}`);
-    console.log(query._query)
+        })
+    return comentPost
 }
+export const getPost = (idPost) => {
+    let db = firebase.firestore();
+    return db.collection('posts').doc(`${idPost.id}`).collection('comemt')
+}
+// export editName
 
 
 // export const dataBaseUser = user => {
