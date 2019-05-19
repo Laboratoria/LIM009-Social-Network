@@ -252,8 +252,8 @@ const getUserActive = (callback) => { //printUserinfo()
         })
 
     }
-
 };
+
 const getImage = (file) => {
     upLoadImageToFirestore(file, downloadURL => {
       console.log('available at', downloadURL);
