@@ -121,13 +121,11 @@ export const logOut = () => {
 }
 
 //Crear post con IDs por defecto
-export const createPost = (state, imagePost, fechaPost, horaPost) => {
-  let description = document.querySelector('#description').value;
-  let userID = document.querySelector('#user-id').textContent;
-  console.log(fechaPost)
-  console.log(state)
+export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
+  //console.log(fechaPost)
+  //console.log(state)
   let db = firebase.firestore();
-  db.collection("posts").add({
+  return db.collection("posts").add({
     description: description,
     state: state,
     likes: 0,
@@ -143,7 +141,7 @@ export const createPost = (state, imagePost, fechaPost, horaPost) => {
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-  // })
+
 }
 
 export const setUpPost = data => {
@@ -441,10 +439,17 @@ export const setUpPost = data => {
   getUserReady(getUserIdView)
 }
 
+export const getPosts = () => {
+  let db = firebase.firestore();
+  db.collection('posts').onSnapshot(snapshot => {
+    //console.log(snapshot.docs)
+    setUpPost(snapshot.docs);
+  })
+};
 
 const deletePost = id => {
   let db = firebase.firestore();
-  db.collection("posts").doc(id).delete().then(() => {
+  return db.collection("posts").doc(id).delete().then(() => {
     console.log("Document successfully deleted!");
   }).catch((error) => {
     console.error("Error removing document: ", error);
