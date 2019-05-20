@@ -58,9 +58,13 @@ export const getPost = (idPost) => {
     return db.collection('posts').doc(`${idPost.id}`).collection('comemt')
 }
 
-export const viewListPost = (idUser) => {
+export const viewListPostPrivate = (idUser) => {
     let db = firebase.firestore();
     return db.collection('posts').where('state', '==', 'privado').where('user', '==', `${idUser}`).orderBy('fechaPost', 'desc')
+}
+export const viewListPostPublic = () => {
+    let db = firebase.firestore();
+    return db.collection('posts').orderBy("fechaPost", "desc")
 }
 export const likesPost = (id, like) => {
     let db = firebase.firestore();

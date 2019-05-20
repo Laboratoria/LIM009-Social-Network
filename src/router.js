@@ -22,14 +22,9 @@ import { getUserReady } from "./lib/lib-firebase.js";
 //   })
 // };
 const getUserActiv = (user) => {
-
-  let db = firebase.firestore();
-  db.collection('posts').where("state", "==", "publico").orderBy("fechaPost", "desc").onSnapshot(snapshot => {
-    console.log(snapshot.docs)
-    setUpPost(snapshot.docs)
-
-  })
   welcomeUser(user)
+  setUpPost(user)
+
 }
 
 const changeTmp = (hash) => {

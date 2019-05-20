@@ -10,7 +10,7 @@ export default (doc, getUser, post) => {
       <header class='header-post'>       
       <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
       <label id='name-user-post' class=''>${getUser.data().name}</label> 
-      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}  hora: ${post.horaPost}</label>            
+      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}-Hora: ${post.horaPost}</label>            
       </header>
        
       <select name="" id="estado-post-view-Post-${doc.id}" class = 'size-state-post btn-post-create'>
