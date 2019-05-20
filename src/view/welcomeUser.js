@@ -54,7 +54,10 @@ export default (user) => {
     
     <article id='post-list' class = 'margin-top'>    
     </article>
-    <article id='post-list-privados'></article>
+    <label class='center color-fecha'>Mis post :</label> 
+    <article id='post-list-privados'>
+     
+    </article>
     </div>
     </div>
     `;
