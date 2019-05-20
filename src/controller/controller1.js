@@ -9,7 +9,8 @@ import {
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
     //editPostInCloudFireStore,
-    upLoadImageToFirestore
+    //upLoadImageToFirestore,
+
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -26,7 +27,7 @@ const signInAfterClick = () => {
             .then((cred) => {
                 changeHash('#/user-profile');
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -54,9 +55,14 @@ const signUpAfterClick = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
-    const userPhoto = document.querySelector('#user-photo').value;
+    const userAge = document.querySelector('#age').value;
+    const userSex = document.querySelector('#sex').value;
+    const userBirthCountry = document.querySelector('#birth-country').value;
+    const userUrlPhoto = document.querySelector('#user-photo').value;
+    const userFilePhoto = document.querySelector("#user-photo2").value;
+
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userPhoto === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' || userAge === '' || userSex === '' || userBirthCountry === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
@@ -64,12 +70,16 @@ const signUpAfterClick = () => {
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
-                    name: userName,
-                    photo: userPhoto,
-                    userId: cred.user.uid,
-                    email: email2,
-                    // password: password2,
-                })
+                        name: userName,
+                        age: userAge,
+                        sex: userSex,
+                        country: userBirthCountry,
+                        photo: userUrlPhoto,
+                        photoFile: userFilePhoto,
+                        userId: cred.user.uid,
+                        email: email2,
+                        // password: password2,
+                    })
                     .then(() => {
                         const form = document.querySelector('#register-form');
                         form.reset();
@@ -85,7 +95,7 @@ const signInWithGoogleAfterClick = () => {
     signInWithGoogle()
         .then((result) => {
             changeHash('#/user-profile')
-            // This gives you a Google Access Token. You can use it to access the Google API.
+                // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user; // ...
@@ -103,7 +113,7 @@ const signInWithGoogleAfterClick = () => {
 
 
         })
-        .catch(function (error) {
+        .catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -136,7 +146,7 @@ const signInWithFacebookAfterClick = () => {
                 email: userEmail,
                 photo: userPhoto,
             });
-        }).catch(function (error) {
+        }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -152,7 +162,7 @@ const signInWithFacebookAfterClick = () => {
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
-        .catch(function (error) {
+        .catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log('Paso por aqui');
@@ -162,13 +172,16 @@ const signOutUser = () => {
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
-        .then(function (doc) {
+        .then(function(doc) {
             // console.log(doc.data()
             return doc.data(); // retorna una promesa
-        }).catch(function (error) {
+        }).catch(function(error) {
             console.log("Error getting document:", error);
         });
 };
+
+
+
 
 
 const createPostInCloudFirestore = () => {
@@ -200,8 +213,8 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
     console.log(idPost); // id del post
     if (uidOfCurrentUser === idUserOfPost) {
         dataBaseCloudFirestore().collection("posts").doc(idPost).update({
-            content: commentInputNewValue,
-        })
+                content: commentInputNewValue,
+            })
             .then(() => {
                 console.log("Document successfully updated!");
             })
@@ -209,8 +222,7 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
                 // The document probably doesn't exist.
                 console.error("Error updating document: ", error);
             });
-    }
-    else {
+    } else {
         alert("You can not edit a comment which was not published by you");
 
     }
@@ -238,7 +250,7 @@ const getPostsInRealtime = (callback) => {
     });
 };
 
-const getUsersAfterLikes = (postId,callback) => {
+/* const getUsersAfterLikes = (postId,callback) => {
     let subcollection = dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers');
     let arr = [];
     subcollection.onSnapshot((arrOfUsers) => {
@@ -248,7 +260,7 @@ const getUsersAfterLikes = (postId,callback) => {
         //console.log(arr[0].uidLikesUser)
         callback(arr);
     })
-};
+}; */
 
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
@@ -266,29 +278,7 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 };
 
-const getImage = (file) => {
-    upLoadImageToFirestore(file, downloadURL => {
-        console.log('available at', downloadURL);
-        return downloadURL;
-    })
-}
-
-const editProfile = (email1, name1, userId1) => {
-
-    dataBaseCloudFirestore().collection("users").doc(userId1).update({
-        email: email1,
-        name: name1,
-    })
-        .then(function () {
-            console.log("Document successfully updated!");
-        })
-        .catch(function (error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-};
-
-const likesForPosts = (postId, contador1) => {
+/* const likesForPosts = (postId, contador1) => {
     let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
     console.log(contador1)
     collectionPost.update({
@@ -297,9 +287,35 @@ const likesForPosts = (postId, contador1) => {
         .then(() => {
             console.log("Document successfully updated!");
         })
-        .catch((error) => {
+        .catch((error) => { */
+
+
+
+const getImage = () => {
+    const date = new Date();
+    const file = document.querySelector('#image-file').files[0];
+    return upLoadImageToFirestore(date, file)
+
+
+};
+
+const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
+
+    dataBaseCloudFirestore().collection("users").doc(userId1).update({
+
+            name: name1,
+            age: age1,
+            sex: sex1,
+            country: birthCountry,
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
+
 };
 const addClicksUsers = (postId, idOfUser) => {
     return dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers').add({
@@ -315,6 +331,20 @@ const addClicksUsers = (postId, idOfUser) => {
 }
 
 
+const likesForPosts = (postId, contador1) => {
+    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
+    console.log(contador1)
+    return collectionPost.update({
+            likes: contador1,
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            console.error("Error updating document: ", error);
+        });
+};
+
 export {
     signInAfterClick,
     signUpAfterClick,
@@ -328,9 +358,10 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
-    getImage,
-    editProfile,
-    likesForPosts,
+ /*    likesForPosts,
     getUsersAfterLikes,
-    addClicksUsers
-}
+    addClicksUsers */
+    //getImage,
+    editProfile,
+    getImage,
+};

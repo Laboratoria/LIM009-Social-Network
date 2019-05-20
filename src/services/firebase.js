@@ -60,6 +60,7 @@ const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
         alert("You can not delete a comment which was not published by you");
     }
 };
+/*
 
 const upLoadImageToFirestore = (file, callback) => {
     //create ref
@@ -74,8 +75,27 @@ const upLoadImageToFirestore = (file, callback) => {
         //get updated img url
         const downloadImg = task.snapshot.ref.getDownloadURL()
         downloadImg.then(callback)
+        return callback;
     })
-};
+};*/
+
+/*
+
+const upLoadImageToFirestore = (date, image) => {
+    const ref = firebase.storage().ref();
+   const task = ref.child(`images/${date}-${image.name}`);
+    const metadata = { contentType: image.type };
+    return task.put(image, metadata)
+   
+};*/
+
+
+
+
+
+
+
+
 
 
 export {
@@ -88,5 +108,5 @@ export {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    upLoadImageToFirestore,
+    // upLoadImageToFirestore,
 };
