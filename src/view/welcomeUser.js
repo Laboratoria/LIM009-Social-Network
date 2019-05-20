@@ -48,7 +48,7 @@ export default (user) => {
       <option value="publico" select>Público</option>
       <option value="privado" select>Privado</option>
       </select>
-        <button id ='btn-share' class='btn-post-create'>Compartir</button>
+        <button id ='btn-share' class='btn-post-create'>🌎Compartir</button>
       </footer>
     </article>  
     

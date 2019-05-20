@@ -72,6 +72,24 @@ export const likesPost = (id, like) => {
         likes: like
     })
 }
+export const deletePost = id => {
+    let db = firebase.firestore();
+    return db.collection("posts").doc(id).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
+export const getComent = (idPost, id) => {
+    let db = firebase.firestore();
+    return db.collection('posts').doc(`${idPost.id}`).collection('comemt').doc(id).then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
+
+
 // dbor()
 
 // export editName

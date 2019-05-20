@@ -1,9 +1,13 @@
 import { getDataDoc } from '../model/model.js'
-export default (post) => {
+export default (post, doc) => {
   const viewFormComent = document.createElement('form');
 
   const templateComent = `
       <div class= 'flex-container  margin-top  center'>    
+        <div class = 'btn-post-edit-del'>
+       <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-coment-${doc.id}'>
+       <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-coment-${doc.id}'>
+       </div> 
         <header class='header-post'>       
         <img id='photo-coment-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>                
         <label id='name-user-coment' class=''>nombre</label> 

@@ -1,4 +1,4 @@
-import { likesPost, getDataDoc, getPost, createComentPost } from '../model/model.js'
+import { likesPost, getDataDoc, getPost, createComentPost, getComent } from '../model/model.js'
 import { editPost, deletePost } from '../controller/view-controller.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js'
@@ -13,13 +13,13 @@ export default (doc, getUser, post, idUserAuth) => {
       <header class='header-post'>       
       <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
       <label id='name-user-post' class=''>${getUser.data().name}</label> 
-      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}-Hora: ${post.horaPost}</label>            
+      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}-Hora:⏲ ${post.horaPost}</label>            
       </header>
        
       <select name="" id="estado-post-view-Post-${doc.id}" class = 'size-state-post btn-post-create'>
       <option  value="${post.state}" class='color-fecha' select>👥${post.state}</option>
-      <option  value="publico">Público</option>
-      <option  value="privado">Privado</option>
+      <option  value="publico">👥Público</option>
+      <option  value="privado">🔐Privado</option>
       </select>
       <section class='content-post'>     
       <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
@@ -27,8 +27,8 @@ export default (doc, getUser, post, idUserAuth) => {
       </section>
       <footer class = 'margin-footer center'>
       <div class = 'style-color-header style-content-post-img'>
-      <button id ='btn-like-${doc.id}' class='btn-post-create'>Like</button>
-      <button id ='btn-love' class='btn-post-create'>Me encanta</button>
+      <button id ='btn-like-${doc.id}' class='btn-post-create'>${post.likes}👍</button>
+      <button id ='btn-love' class='btn-post-create'>❤️Me encanta</button>
       <button id ='btn-coment-${doc.id}' class='btn-post-create'>Comentar</button> 
       <div id = 'comment-form'></div>      
       </div >       
@@ -70,14 +70,20 @@ export default (doc, getUser, post, idUserAuth) => {
     // postList.innerHTML = ''
   })
   let btnLike = article.querySelector(`#btn-like-${doc.id}`)
-
-  btnLike.addEventListener('click', () => {
+  var listener = function (event) {
     let like = 0
     like = post.likes + 1
     likesPost(doc.id, like)
-    console.log(like)
-    // postList.innerHTML = ''
+    // e.target.removeEventListener(e.type, likeEvent,);
+
+
+  }
+  btnLike.addEventListener('click', () => {
+    listener()
+    btnLike.removeEventListener('click', listener);
   })
+
+
   let btnComent = article.querySelector(`#btn-coment-${doc.id}`)
   const coment = article.querySelector(`#cont-coment-${doc.id}`)
   const contComentList = article.querySelector(`#comment-form-list-${doc.id}`)
@@ -93,14 +99,16 @@ export default (doc, getUser, post, idUserAuth) => {
       const btnViewComentPost = document.querySelector(`#btn-coment-id-${doc.id}`)
 
       btnViewComentPost.addEventListener('click', () => {
+        // getComent(doc,)
         let fecha = new Date();
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         createComentPost(doc, idUserAuth.uid, textComentPost.value, fechaPost)
         getPost(doc).onSnapshot(snapshot => {
           contComentList.innerHTML = ''
           snapshot.forEach(function (result) {
+            // getComent(doc, result.id)
             console.log(result.id, " => ", result.data());
-            contComentList.appendChild(viewformComent(result.data()))
+            contComentList.appendChild(viewformComent(result.data(), doc))
           })
 
         })
@@ -109,7 +117,7 @@ export default (doc, getUser, post, idUserAuth) => {
       getPost(doc).get().then(function (querySnapshot) {
         contComentList.innerHTML = ''
         querySnapshot.forEach(function (idPost) {
-          contComentList.appendChild(viewformComent(idPost.data()))
+          contComentList.appendChild(viewformComent(idPost.data(), doc))
           // doc.data() is never undefined for query doc snapshots
           console.log(idPost.id, " => ", idPost.data());
         });

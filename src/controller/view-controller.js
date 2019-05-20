@@ -160,7 +160,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-
+          console.log(doc)
           postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
@@ -177,7 +177,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-
+          console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
@@ -186,95 +186,6 @@ export const setUpPost = (idUserAuth) => {
     })
 
   });
-
-
-
-
-  // let btnDelete = document.querySelector(`#btn-delete-${doc.id}`);
-  // let btnEdit = document.querySelector(`#btn-edit-${doc.id}`);
-  // btnEdit.addEventListener('click', () => {
-  //   let editDescription = document.querySelector(`#description-${doc.id}`).value;
-  //   const state = document.querySelector(`#estado-post-view-Post-${doc.id}`)
-  //   state.onchange = () => {
-
-  //     console.log(state.value)
-  //   }
-  //   if (post.user === idUserAuth.uid) {
-  //     editPost(doc.id, editDescription, state.value);
-  //     alert('Post editado correctamente');
-
-  //   } else {
-  //     alert('Permiso denegado para editar este post');
-  //   }
-  //   postList.innerHTML = ''
-  // });
-  // let btnLike = document.querySelector(`#btn-like-${doc.id}`)
-
-  // btnLike.addEventListener('click', () => {
-  //   let like = 0
-  //   like = post.likes + 1
-  //   likesPost(doc.id, like)
-  //   console.log(like)
-  //   postList.innerHTML = ''
-  // })
-  // btnDelete.addEventListener('click', () => {
-  //   // console.log(post.user)
-  //   // console.log(idUserAuth.uid)
-  //   if (post.user === idUserAuth.uid) {
-  //     alert('Post eliminado correctamente')
-  //     deletePost(doc.id);
-  //     postList.innerHTML = ''
-  //   } else {
-  //     alert('Permiso denegado para eliminar este post')
-  //   }
-  //   postList.innerHTML = ''
-  // })
-  //cometarios
-  // let btnComent = document.querySelector(`#btn-coment-${doc.id}`)
-  // const coment = document.querySelector(`#cont-coment-${doc.id}`)
-  // const contComentList = document.querySelector(`#comment-form-list-${doc.id}`)
-  // // console.log(coment)         
-
-  // btnComent.addEventListener('click', () => {
-  //   getDataDoc(idUserAuth.uid).then(result => {
-  //     console.log(result.data())
-  //     coment.innerHTML = formComent(doc.id, result)
-
-
-  //     const textComentPost = document.querySelector(`#text-coment-post-${doc.id}`)
-  //     const btnViewComentPost = document.querySelector(`#btn-coment-id-${doc.id}`)
-
-  //     btnViewComentPost.addEventListener('click', () => {
-  //       let fecha = new Date();
-  //       let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
-  //       createComentPost(doc, idUserAuth.uid, textComentPost.value, fechaPost)
-  //       getPost(doc).onSnapshot(snapshot => {
-  //         contComentList.innerHTML = ''
-  //         snapshot.forEach(function (result) {
-  //           console.log(result.id, " => ", result.data());
-  //           contComentList.appendChild(viewformComent(result.data()))
-  //         })
-
-  //       })
-  //     })
-
-  //     getPost(doc).get().then(function (querySnapshot) {
-  //       contComentList.innerHTML = ''
-  //       querySnapshot.forEach(function (idPost) {
-  //         contComentList.appendChild(viewformComent(idPost.data()))
-  //         // doc.data() is never undefined for query doc snapshots
-  //         console.log(idPost.id, " => ", idPost.data());
-  //       });
-  //     });
-  //   })
-  // }) comenta
-  //       }
-  //       //;
-
-  //     })
-  //   })
-  // });
-
   return postListPrivad
   // }
   // getUserReady(getUserIdView)
