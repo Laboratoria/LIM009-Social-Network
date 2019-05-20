@@ -1,16 +1,17 @@
 
 
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar,likesForPosts } from "../controller/controller1.js";
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar, likesForPosts, getUsersAfterLikes, addClicksUsers } from "../controller/controller1.js";
+import { currentUser } from "../services/firebase.js";
 
 const renderOnePost = (post, user, current) => {
-
     let label = document.createElement('div');
     label.innerHTML = `
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}</div>
-
-  <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
+<div class="icons like" id="boxLike">
+  <img src="./css/img/like-1.png" id="btn-likes" class="icons like" alt="icon like">
+  <img src="./css/img/like-1.png" id="btn-likes2" class="disabled" alt="icon dislike"></div>
   <span id="counter-likes">${post.likes}</span>
 
   <img src="./css/img/paper-plane-1.png" class="icons edit" alt="icon edit" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}">
@@ -49,40 +50,39 @@ const renderOnePost = (post, user, current) => {
             divCommentContent.setAttribute("contenteditable", false);
         }
     });
-    const numberLikes = label.querySelector('#counter-likes');
     const likesButton = label.querySelector("#btn-likes");
-    likesButton.addEventListener('click', (e) => {
-        let likes = post.likes;
-        if (likesButton.value) {
-            likes = likes - 1;
-            numberLikes.innerHTML = likes;
-            likesButton.setAttribute('value', '');
-        } else {
-            likes = likes + 1;
-            numberLikes.innerHTML = likes;
-            likesButton.setAttribute('value', 'true');
-            likesButton.setAttribute('class', 'disabled');
-        }
-        likesForPosts(post.id, likes);
-    });
-    const likesButton = label.querySelector("#btn-likes");
-             
-    likesButton.addEventListener('click',(e)=>{
-        const idPostAttributeOfDivContent = divCommentContent.dataset.idPost;
-        const idPostAttributeOfLikesButton = e.target.dataset.idPost;
-        const likesPostAttributeOfLikesButton = e.target.dataset.likesPost;
-       
-        if(idPostAttributeOfLikesButton===idPostAttributeOfDivContent){
-            console.log(likesPostAttributeOfLikesButton);
-          
-              let contador= parseInt(likesPostAttributeOfLikesButton) + 1;
-              label.querySelector("#btn-likes").textContent=contador;
-                likesForPosts(idPostAttributeOfLikesButton,contador);
+    // const likesButton2 = label.querySelector("#btn-likes2");
+    likesButton.addEventListener('click', () => {
+        getUsersAfterLikes(post.id, (arr) => {
+            arr.forEach((e) => {
+                if (e.hasOwnProperty(uidLikesUser) && e.uidLikesUser === current.userId) {
+                    addClicksUsers(post.id, '')
+                    post.likes = post.likes - 1
+                } else {
+                    addClicksUsers(post.id, current.userId)
+                    post.likes = post.likes + 1
+                }
+            })
+            likesForPosts(post.id, post.likes);
+        })
+    })
+    /*     likesButton2.addEventListener('click', () => {
+            if (user.userId === current.uid) {
+                likesButton2.style.display = 'none';
+                likesButton.style.display = 'block';
+                likesForPosts(post.id, post.likes - 1, currentUser.uid);
+            };
+        }); */
 
-            
-        }
-    });
-
+    /*      const changeLikes=label.querySelector("#boxLike");
+            const counterOfLikes=label.querySelector('#counter-likes');
+            changeLikes.addEventListener('change',(e)=>{
+                console.log(e);
+                let likes =post.likes;
+                e.target.setAttribute('value','true')
+                likesForPosts(post.id, likes+1)
+                counterOfLikes.innerHTML=likes+1;
+            })  */
     return label // que imprima una un post ,que se añada al ul element
 };
 
@@ -91,10 +91,9 @@ export default (user, posts) => {
     try {
         new URL(user.photo);
         photoUrl = user.photo;
-    } catch (_) {
+    } catch  {
         photoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjBhr15zxJ2Udj1pZ6S3ktJctBu51YukJOoetZc3VrKjxquwN";
     }
-    console.log(photoUrl)
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
     divElement.innerHTML = `
@@ -136,8 +135,10 @@ export default (user, posts) => {
 </div>
 `;
     const shareBtn = divElement.querySelector("#btn-share");
+    //const btnPublic= divElement.querySelector("#allPost");
     shareBtn.addEventListener("click", () => {
         createPostInCloudFirestore();
+        //btnPublic.setAttribute('checked','true');
     });
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
@@ -154,6 +155,7 @@ export default (user, posts) => {
                     if (onePost.state === false) {
                         getDataOfUser(onePost.userId)
                             .then((userdata) => {
+                                /*  if(onePost.likes) */
                                 const divPost = renderOnePost(onePost, userdata, user);
                                 divCommentList.appendChild(divPost);
                             })
@@ -168,7 +170,6 @@ export default (user, posts) => {
                                 const divPost = renderOnePost(onePost, userdata, user);
                                 divCommentList.appendChild(divPost);
                             }
-
                         })
                 });
                 break
@@ -176,4 +177,5 @@ export default (user, posts) => {
     });
     return divElement;
 };
+
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha

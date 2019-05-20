@@ -216,26 +216,38 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
     }
 };
 const validar = () => {
-const e = document.querySelector('#privatePost');
-  try {
-    if (e.checked==true) {     
-        return 'myPosts';
-    }else if(e.checked==false){
+    const e = document.querySelector('#privatePost');
+    try {
+        if (e.checked == true) {
+            return 'myPosts';
+        } else if (e.checked == false) {
+            return 'publicPost';
+        }
+    } catch (err) {
         return 'publicPost';
     }
-  } catch(err){
-    return 'publicPost';
-  }
 };
 
 const getPostsInRealtime = (callback) => {
-        dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-            const arrOfPosts = [];
-            arrOfAllPosts.forEach((onePost) => {
-                    arrOfPosts.push({ id: onePost.id, ...onePost.data() })
-            })
-            callback(arrOfPosts);
-        });
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+        let arrOfPosts = [];
+        arrOfAllPosts.forEach((onePost) => {
+            arrOfPosts.push({ id: onePost.id, ...onePost.data() });
+        })
+        callback(arrOfPosts);
+    });
+};
+
+const getUsersAfterLikes = (postId,callback) => {
+    let subcollection = dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers');
+    let arr = [];
+    subcollection.onSnapshot((arrOfUsers) => {
+        arrOfUsers.forEach((elem) => {
+            arr.push({ id: elem.id, ...elem.data() })
+        })
+        //console.log(arr[0].uidLikesUser)
+        callback(arr);
+    })
 };
 
 // usuario activo 
@@ -256,50 +268,51 @@ const getUserActive = (callback) => { //printUserinfo()
 
 const getImage = (file) => {
     upLoadImageToFirestore(file, downloadURL => {
-      console.log('available at', downloadURL);
-      return downloadURL;
+        console.log('available at', downloadURL);
+        return downloadURL;
+    })
+}
 
+const editProfile = (email1, name1, userId1) => {
 
-const editProfile = (email1,name1,userId1) => {
-    
-        
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
         email: email1,
-        name:name1,
-        
-        
+        name: name1,
     })
-    .then(function() {
-        console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    });
-
-
-
-
-};
-
-
-const likesForPosts = (postId, contador1) => {
-    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
-    console.log(contador1)
-    return collectionPost.update({
-        likes: contador1,
-        })
         .then(function () {
             console.log("Document successfully updated!");
         })
         .catch(function (error) {
+            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
 };
 
-
-
-
+const likesForPosts = (postId, contador1) => {
+    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
+    console.log(contador1)
+    collectionPost.update({
+        likes: contador1,
+    })
+        .then(() => {
+            console.log("Document successfully updated!");
+        })
+        .catch((error) => {
+            console.error("Error updating document: ", error);
+        });
+};
+const addClicksUsers = (postId, idOfUser) => {
+    return dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers').add({
+        uidLikesUser: idOfUser,
+    })
+        .then((docRef) => {
+            console.log(docRef)
+            console.log("users click successfully updated!");
+        })
+        .catch((error) => {
+            console.error("Error updating uid of users: ", error);
+        });
+}
 
 
 export {
@@ -315,11 +328,9 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
-
-    getImage
-
+    getImage,
     editProfile,
     likesForPosts,
-    
-
-};
+    getUsersAfterLikes,
+    addClicksUsers
+}

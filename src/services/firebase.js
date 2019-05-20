@@ -36,11 +36,11 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment) =>
         userId: idUser,
         state: statusComment,
         likes: 0,
-    }).then(function (docRef) {
+    }).then((docRef)=> {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
-        .catch(function (error) {
+        .catch((error) =>{
             console.error("Error adding document: ", error);
         });
 
@@ -78,8 +78,6 @@ const upLoadImageToFirestore = (file, callback) => {
 };
 
 
-
-
 export {
     signUp,
     signIn,
@@ -90,5 +88,5 @@ export {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    upLoadImageToFirestore
+    upLoadImageToFirestore,
 };
