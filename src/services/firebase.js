@@ -36,14 +36,13 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment ) =>
         userId: idUser,
         state: statusComment,
         likes: 0,
- 
-    }).then(function (docRef) {
+    }).then(function(docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
-        .catch(function (error) {
-            console.error("Error adding document: ", error);
-        });
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
 
 const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
@@ -61,6 +60,7 @@ const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
         alert("You can not delete a comment which was not published by you");
     }
 };
+/*
 
 const upLoadImageToFirestore = (file, callback) => {
     //create ref
@@ -76,7 +76,25 @@ const upLoadImageToFirestore = (file, callback) => {
         const downloadImg = task.snapshot.ref.getDownloadURL()
         downloadImg.then(callback);
     })
-};
+};*/
+
+/*
+
+const upLoadImageToFirestore = (date, image) => {
+    const ref = firebase.storage().ref();
+   const task = ref.child(`images/${date}-${image.name}`);
+    const metadata = { contentType: image.type };
+    return task.put(image, metadata)
+   
+};*/
+
+
+
+
+
+
+
+
 
 
 
@@ -91,5 +109,5 @@ export {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    upLoadImageToFirestore
+    // upLoadImageToFirestore,
 };
