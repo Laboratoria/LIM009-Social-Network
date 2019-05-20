@@ -10,6 +10,7 @@ import {
     deletePostInCloudFireStore,
     //editPostInCloudFireStore,
     upLoadImageToFirestore,
+    
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -54,9 +55,14 @@ const signUpAfterClick = () => {
     const email2 = document.querySelector('#email2').value;
     const password2 = document.querySelector('#password2').value;
     const userName = document.querySelector('#name').value;
-    const userPhoto = document.querySelector('#user-photo').value;
+    const userAge = document.querySelector('#age').value;
+    const userSex = document.querySelector('#sex').value;    
+    const userBirthCountry = document.querySelector('#birth-country').value;
+    const userUrlPhoto = document.querySelector('#user-photo').value;
+    const userFilePhoto = document.querySelector("#user-photo2").value;
+     
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userPhoto === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' || userAge === '' || userSex === '' || userBirthCountry === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
@@ -65,7 +71,11 @@ const signUpAfterClick = () => {
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
                     name: userName,
-                    photo: userPhoto,
+                    age:userAge,
+                    sex:userSex,
+                    country:userBirthCountry,
+                    photo: userUrlPhoto,
+                    photoFile:userFilePhoto,
                     userId: cred.user.uid,
                     email: email2,
                     // password: password2,
@@ -258,26 +268,19 @@ const getUserActive = (callback) => { //printUserinfo()
 
 };
 
-const getImage = (file) => {
-    upLoadImageToFirestore(file, downloadURL => {
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function(event) {
-          var blob = xhr.response;
-        };
-        xhr.open('GET', downloadURL);
-        xhr.send();
-      
-        // Or inserted into an <img> element:
-        var img = document.querySelector('img-post');
-        img.src = downloadURL;
-      }).catch((error)=> {
-        // Handle any errors
-      });
-      console.log('available at', downloadURL);
-    
-    
-    };
+
+
+
+const getImage=()=>{
+const date=new Date();
+const file = document.querySelector('#image-file').files[0];
+return upLoadImageToFirestore(date,file)
+
+
+};
+
+
+
 
 
 
@@ -285,11 +288,14 @@ const getImage = (file) => {
 
 
     
-const editProfile = (email1,name1,userId1) => {
+const editProfile = (name1,age1,sex1,birthCountry,userId1) => {
          
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
-        email: email1,
+        
         name:name1,
+        age:age1,
+        sex:sex1,
+        country:birthCountry,
     })
     .then(function() {
         console.log("Document successfully updated!");
@@ -300,6 +306,10 @@ const editProfile = (email1,name1,userId1) => {
     });
 
 };
+
+
+
+
 
 
 const likesForPosts = (postId, contador1) => {
@@ -329,8 +339,10 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
-    getImage,
+    //getImage,
     editProfile,
     likesForPosts,    
+    getImage,
+   
 };
 
