@@ -43,10 +43,10 @@ export default (user) => {
     fullName.setAttribute('contenteditable',false);
     email.setAttribute('contenteditable',false); 
     const newFullName=fullName.textContent;
-const newEmail=email.textContent;
+    const newEmail=email.textContent;
 console.log(newFullName);
 console.log(newEmail);
-editProfile(newEmail,newFullName,user.userId);
+editProfile(newFullName, user.userId);
   
 
     });

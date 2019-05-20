@@ -30,12 +30,13 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser, statusComment) =>
+const addPostToCloudFirestore = (inputComment, idUser, statusComment ) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
         state: statusComment,
         likes: 0,
+ 
     }).then(function (docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
@@ -73,8 +74,7 @@ const upLoadImageToFirestore = (file, callback) => {
      () => {
         //get updated img url
         const downloadImg = task.snapshot.ref.getDownloadURL()
-        downloadImg.then(callback)
-        return callback;
+        downloadImg.then(callback);
     })
 };
 

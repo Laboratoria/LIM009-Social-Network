@@ -9,9 +9,7 @@ const renderOnePost = (post, user, current) => {
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img src="" id=img-post>
   </div>
-
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
   <span id="counter-likes">${post.likes}</span>
 
@@ -125,7 +123,7 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <input type="file" id="image-file" class="hidden"><img class="icon-photograph" src="./css/img/6799.png_860.png">
+                <input type="file" accept="image/*"  id="image-file" class="hidden"><img class="icon-photograph" src="./css/img/6799.png_860.png">
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter" id="valores"><fieldset>
