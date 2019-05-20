@@ -192,6 +192,14 @@ color: rgba(49, 53, 53, 0.514)
 .textarea-coment{
     height: 3rem;
 }
+.color-menu-post{
+    background: rgba(101, 221, 53, 0.116)
+}
+.size-state-post{
+   margin-left: 75%;
+   margin-bottom: 3%;
+    width: 20%;
+}
 
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {
@@ -204,6 +212,14 @@ color: rgba(49, 53, 53, 0.514)
     .style-border{
         width: 100%;
     }
+    .header-post{
+        /* display: flex; */
+        text-align: center;
+        /* flex-direction: row; */
+        /* height: 3rem; */
+        /* justify-content: center;   */
+        /* align-content: center     */
+     }
  }
 
  @media screen and (min-width: 30em) {

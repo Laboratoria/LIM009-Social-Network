@@ -42,12 +42,13 @@ export const getDataDoc = users => {
     return docRef.get()
 }
 
-export const createComentPost = (idPost, user, comemt) => {
+export const createComentPost = (idPost, user, comemt, fechaComent) => {
     let db = firebase.firestore();
     let comentPost = db.collection('posts').doc(`${idPost.id}`)
         .collection('comemt').add({
             user: user,
-            comment: comemt
+            comment: comemt,
+            fecha: fechaComent
 
         })
     return comentPost
@@ -56,6 +57,19 @@ export const getPost = (idPost) => {
     let db = firebase.firestore();
     return db.collection('posts').doc(`${idPost.id}`).collection('comemt')
 }
+
+export const viewListPost = (idUser) => {
+    let db = firebase.firestore();
+    return db.collection('posts').where('state', '==', 'privado').where('user', '==', `${idUser}`).orderBy('fechaPost', 'desc')
+}
+export const likesPost = (id, like) => {
+    let db = firebase.firestore();
+    return db.collection("posts").doc(id).update({
+        likes: like
+    })
+}
+// dbor()
+
 // export editName
 
 

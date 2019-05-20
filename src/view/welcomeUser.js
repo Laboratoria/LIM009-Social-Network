@@ -19,9 +19,13 @@ export default (user) => {
     <p>E-mail</p>
     <span>${user.email}</span>
     <p>Foto</p>
-    <img src='${user.photoURL}'>   
+    <img src='${user.photoURL}'> 
+    <div class = 'color-menu-post center'>
+    <button id ='btn-view-post-public' class='btn-post-create'>Ver todos los post</button>
+    <button id ='btn-view-post-privad' class='btn-post-create'>Mis Post</button>
+    </div>  
     </div>
-    <div id = 'post' class='col-7 col-xs-12 center'>   
+    <div id = 'post' class='col-7 col-xs-12 center'>     
     <article id = 'content-post' class= 'flex-container  margin-top border center'>     
       <header class='header-post'>         
         <img id='photo-post-user' src='${user.photoURL}' alt='feminismo' class='img-perfil-post'>                
@@ -48,8 +52,9 @@ export default (user) => {
       </footer>
     </article>  
     
-    <div id='post-list' class = 'margin-top'>
-    </div>
+    <article id='post-list' class = 'margin-top'>    
+    </article>
+    <article id='post-list-privados'></article>
     </div>
     </div>
     `;
@@ -77,18 +82,19 @@ export default (user) => {
 
     btnSharePost.addEventListener('click', () => {
         let fecha = new Date();
-        let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
+        let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+        let horaPosr = `${fecha.getHours()}:${fecha.getMinutes()}`
         let selectImage = fileButton.files[0]
         let selectState = state.value;
         if (selectImage === undefined && selectState === 'publico') {
-            createPost('publico', './image/image-post.png', fechaPost)
+            createPost('publico', './image/image-post.png', fechaPost, horaPosr)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
-            createPost(selectState, './image/image-post.png', fechaPost)
+            createPost(selectState, './image/image-post.png', fechaPost, horaPosr)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
-                createPost(selectState, image, fechaPost)
+                createPost(selectState, image, fechaPost, horaPosr)
 
             }
             imagePost(selectImage, uploader, getImage)
@@ -97,7 +103,7 @@ export default (user) => {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
-                createPost('publico', image, fechaPost)
+                createPost('publico', image, fechaPost, horaPosr)
 
             }
             imagePost(selectImage, uploader, getImage)

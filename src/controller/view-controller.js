@@ -1,7 +1,8 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createComentPost, getPost } from '../model/model.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createComentPost, getPost, viewListPost, likesPost } from '../model/model.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js'
+import viewPostList from '../view/view-pos-list.js'
 const changeHash = (hash) => {
   location.hash = hash;
 }
@@ -120,7 +121,7 @@ export const logOut = () => {
 }
 
 //Crear post con IDs por defecto
-export const createPost = (state, imagePost, fechaPost) => {
+export const createPost = (state, imagePost, fechaPost, horaPost) => {
   let description = document.querySelector('#description').value;
   let userID = document.querySelector('#user-id').textContent;
   console.log(fechaPost)
@@ -132,7 +133,8 @@ export const createPost = (state, imagePost, fechaPost) => {
     likes: 0,
     user: userID,
     image: imagePost,
-    fechaPost: fechaPost
+    fechaPost: fechaPost,
+    horaPost: horaPost
   })
     .then(() => {
       //document.getElementById('create-post').reset();
@@ -145,129 +147,293 @@ export const createPost = (state, imagePost, fechaPost) => {
 }
 
 export const setUpPost = data => {
+
   const getUserIdView = (idUserAuth) => {
+
+    // changeHash('/welcomeUser')
     const postList = document.querySelector('#post-list');
-    postList.innerHTML = '';
+    const postListPrivad = document.querySelector('#btn-view-post-privad')
+    const postListPublic = document.querySelector('#btn-view-post-public')
+    postList.innerHTML = ''
+    postListPrivad.addEventListener('click', () => {
+      postList.innerHTML = ''
+      viewListPost(idUserAuth.uid).onSnapshot(snapshot => {
+        postList.innerHTML = ''
+        snapshot.forEach((doc) => {
+          getDataDoc(doc.data().user).then((getUser) => {
+            if (getUser.exists) {
+              const post = doc.data();
+
+              postList.appendChild(viewPostList(doc, getUser, post));
+              let btnDelete = document.querySelector(`#btn-delete-${doc.id}`);
+              let btnEdit = document.querySelector(`#btn-edit-${doc.id}`);
+              let btnLike = document.querySelector(`#btn-like-${doc.id}`)
+              btnLike.addEventListener('click', () => {
+                // let cont = 0;
+
+                console.log('hola')
+                postList.innerHTML = ''
+              })
+              btnDelete.addEventListener('click', () => {
+                // console.log(post.user)
+                // console.log(idUserAuth.uid)
+                if (post.user === idUserAuth.uid) {
+                  alert('Post eliminado correctamente')
+                  deletePost(doc.id);
+
+                } else {
+                  alert('Permiso denegado para eliminar este post')
+                }
+                postList.innerHTML = ''
+              })
+              btnEdit.addEventListener('click', () => {
+                let editDescription = document.querySelector(`#description-${doc.id}`).value;
+                const state = document.querySelector(`#estado-post-view-Post-${doc.id}`)
+                state.onchange = () => {
+                  console.log(state.value)
+                }
+                if (post.user === idUserAuth.uid) {
+                  editPost(doc.id, editDescription, state.value);
+                  alert('Post editado correctamente');
+                  postList.innerHTML = ' ';
+                } else {
+                  alert('Permiso denegado para editar este post');
+                }
+                postList.innerHTML = ''
+              });
+            } else {
+              alert('El usuario no existe')
+            }
+          })
+
+        })
+
+      })
+      // postListPrivad.innerHTML = 'Ver todos los post'
+    })
+    postListPublic.addEventListener('click', () => {
+      postList.innerHTML = ''
+
+      data.forEach(doc => {
+
+        getDataDoc(doc.data().user).then((getUser) => {
+          // console.log(getUser.data().name)
+          if (getUser.exists) {
+            const post = doc.data();
+
+            postList.appendChild(viewPostList(doc, getUser, post));
+            let btnDelete = document.querySelector(`#btn-delete-${doc.id}`);
+            // let btnLike = document.querySelector(`#btn-like-${doc.id}`)
+
+            // btnLike.addEventListener('click', () => {
+            //   // let cont = 0;
+            //   let like = 0
+            //   like = post.likes + 1
+            //   likesPost(doc.id, like)
+
+            //   // editPost(doc.id, editDescription, state.value, like)
+            //   console.log(like)
+            // })
+            let btnEdit = document.querySelector(`#btn-edit-${doc.id}`);
+            btnEdit.addEventListener('click', () => {
+              let editDescription = document.querySelector(`#description-${doc.id}`).value;
+              const state = document.querySelector(`#estado-post-view-Post-${doc.id}`)
+              state.onchange = () => {
+
+                console.log(state.value)
+              }
+              if (post.user === idUserAuth.uid) {
+                editPost(doc.id, editDescription, state.value);
+                alert('Post editado correctamente');
+
+              } else {
+                alert('Permiso denegado para editar este post');
+              }
+              postList.innerHTML = ''
+            });
+            let btnLike = document.querySelector(`#btn-like-${doc.id}`)
+
+            btnLike.addEventListener('click', () => {
+              // let cont = 0;
+              let like = 0
+              like = post.likes + 1
+              likesPost(doc.id, like)
+
+              // editPost(doc.id, editDescription, state.value, like)
+              console.log(like)
+              postList.innerHTML = ''
+            })
+            btnDelete.addEventListener('click', () => {
+              // console.log(post.user)
+              // console.log(idUserAuth.uid)
+              if (post.user === idUserAuth.uid) {
+                alert('Post eliminado correctamente')
+                deletePost(doc.id);
+
+              } else {
+                alert('Permiso denegado para eliminar este post')
+              }
+              postList.innerHTML = ''
+            })
+            let btnComent = document.querySelector(`#btn-coment-${doc.id}`)
+            const coment = document.querySelector(`#cont-coment-${doc.id}`)
+            const contComentList = document.querySelector(`#comment-form-list-${doc.id}`)
+            // coment.innerHTML = ''
+            // console.log(coment)
+            // coment.innerHTML = ''
+
+            btnComent.addEventListener('click', () => {
+              getDataDoc(idUserAuth.uid).then(result => {
+                console.log(result.data())
+                coment.innerHTML = formComent(doc.id, result)
+
+
+                const textComentPost = document.querySelector(`#text-coment-post-${doc.id}`)
+                const btnViewComentPost = document.querySelector(`#btn-coment-id-${doc.id}`)
+
+                btnViewComentPost.addEventListener('click', () => {
+                  let fecha = new Date();
+                  let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
+                  createComentPost(doc, idUserAuth.uid, textComentPost.value, fechaPost)
+                  getPost(doc).onSnapshot(snapshot => {
+                    contComentList.innerHTML = ''
+                    snapshot.forEach(function (result) {
+                      console.log(result.id, " => ", result.data());
+                      contComentList.appendChild(viewformComent(result.data()))
+                    })
+
+                  })
+                })
+
+                getPost(doc).get().then(function (querySnapshot) {
+                  contComentList.innerHTML = ''
+                  querySnapshot.forEach(function (idPost) {
+                    contComentList.appendChild(viewformComent(idPost.data()))
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(idPost.id, " => ", idPost.data());
+                  });
+                });
+              })
+            })
+
+            // return postList.appendChild(article);
+          }
+          //;
+
+        })
+
+      });
+    })
+    //auyiliooooooooooooooo
+
     data.forEach(doc => {
-      // console.log(doc)
+
       getDataDoc(doc.data().user).then((getUser) => {
-        // console.log(getUser.data())
+        // console.log(getUser.data().name)
         if (getUser.exists) {
-          // console.log(doc.id)
-          // console.log("Document data:", doc.data().name);
           const post = doc.data();
-          const article = document.createElement('article');
-          const li = `
-    <article id = 'content-post' class= 'flex-container  margin-top border center'> 
-    <div class = 'btn-post-edit-del'>
-    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-${doc.id}'>
-    <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
-    </div>    
-      <header class='header-post'>       
-      <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
-      <label id='name-user-post' class=''>${getUser.data().name}</label> 
-      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}</label>            
-      </header>
-      <section class='content-post'>     
-      <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
-      <textarea id = 'description-${doc.id}' class="textarea center">${post.description}</textarea>      
-      </section>
-      <footer class = 'margin-footer center'>
-      <div class = 'style-color-header style-content-post-img'>
-      <button id ='btn-like' class='btn-post-create'>Like</button>
-      <button id ='btn-love' class='btn-post-create'>Me encanta</button>
-      <button id ='btn-coment-${doc.id}' class='btn-post-create'>Comentar</button> 
-      <div id = 'comment-form'></div>      
-      </div >       
-      </footer>
-      <div id = 'cont-coment-${doc.id}'></div>
-      <div id = 'comment-form-list-${doc.id}'></div> 
-    </article>  
-        `
-          article.innerHTML = li;
-          let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
+
+          postList.appendChild(viewPostList(doc, getUser, post));
+          let btnDelete = document.querySelector(`#btn-delete-${doc.id}`);
+          // let btnLike = document.querySelector(`#btn-like-${doc.id}`)
+
+          // btnLike.addEventListener('click', () => {
+          //   // let cont = 0;
+          //   let like = 0
+          //   like = post.likes + 1
+          //   likesPost(doc.id, like)
+
+          //   // editPost(doc.id, editDescription, state.value, like)
+          //   console.log(like)
+          // })
+          let btnEdit = document.querySelector(`#btn-edit-${doc.id}`);
+          btnEdit.addEventListener('click', () => {
+            let editDescription = document.querySelector(`#description-${doc.id}`).value;
+            const state = document.querySelector(`#estado-post-view-Post-${doc.id}`)
+            state.onchange = () => {
+
+              console.log(state.value)
+            }
+            if (post.user === idUserAuth.uid) {
+              editPost(doc.id, editDescription, state.value);
+              alert('Post editado correctamente');
+
+            } else {
+              alert('Permiso denegado para editar este post');
+            }
+            postList.innerHTML = ''
+          });
+          let btnLike = document.querySelector(`#btn-like-${doc.id}`)
+
+          btnLike.addEventListener('click', () => {
+            // let cont = 0;
+            let like = 0
+            like = post.likes + 1
+            likesPost(doc.id, like)
+
+            // editPost(doc.id, editDescription, state.value, like)
+            console.log(like)
+            postList.innerHTML = ''
+          })
           btnDelete.addEventListener('click', () => {
             // console.log(post.user)
             // console.log(idUserAuth.uid)
             if (post.user === idUserAuth.uid) {
               alert('Post eliminado correctamente')
               deletePost(doc.id);
-
+              postList.innerHTML = ''
             } else {
               alert('Permiso denegado para eliminar este post')
             }
-
+            postList.innerHTML = ''
           })
-          let btnComent = article.querySelector(`#btn-coment-${doc.id}`)
-          const coment = article.querySelector(`#cont-coment-${doc.id}`)
-          const contComentList = article.querySelector(`#comment-form-list-${doc.id}`)
+          let btnComent = document.querySelector(`#btn-coment-${doc.id}`)
+          const coment = document.querySelector(`#cont-coment-${doc.id}`)
+          const contComentList = document.querySelector(`#comment-form-list-${doc.id}`)
           // coment.innerHTML = ''
-          console.log(coment)
+          // console.log(coment)
           // coment.innerHTML = ''
 
           btnComent.addEventListener('click', () => {
-
-            coment.innerHTML = formComent(doc.id)
-            const textComentPost = document.querySelector(`#text-coment-post-${doc.id}`)
-            const btnViewComentPost = document.querySelector(`#btn-coment-id-${doc.id}`)
-
-            btnViewComentPost.addEventListener('click', () => {
-
-              createComentPost(doc, idUserAuth.uid, textComentPost.value)
-              getPost(doc).onSnapshot(snapshot => {
-                contComentList.innerHTML = ''
-                snapshot.forEach(function (result) {
-                  // console.log(result.id, " => ", result.data());
+            getDataDoc(idUserAuth.uid).then(result => {
+              console.log(result.data())
+              coment.innerHTML = formComent(doc.id, result)
 
 
-                  contComentList.appendChild(viewformComent(result.data()))
+              const textComentPost = document.querySelector(`#text-coment-post-${doc.id}`)
+              const btnViewComentPost = document.querySelector(`#btn-coment-id-${doc.id}`)
+
+              btnViewComentPost.addEventListener('click', () => {
+                let fecha = new Date();
+                let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
+                createComentPost(doc, idUserAuth.uid, textComentPost.value, fechaPost)
+                getPost(doc).onSnapshot(snapshot => {
+                  contComentList.innerHTML = ''
+                  snapshot.forEach(function (result) {
+                    console.log(result.id, " => ", result.data());
+                    contComentList.appendChild(viewformComent(result.data()))
+                  })
 
                 })
               })
-            })
 
-            // if()
-            // btnViewComentPost.addEventListener('click', () => {
-            //   createComentPost(doc, idUserAuth.uid, textComentPost.value)
-            // })
-            getPost(doc).get().then(function (querySnapshot) {
-              contComentList.innerHTML = ''
-              querySnapshot.forEach(function (idPost) {
-                contComentList.appendChild(viewformComent(idPost.data()))
-                // doc.data() is never undefined for query doc snapshots
-                console.log(idPost.id, " => ", idPost.data());
+              getPost(doc).get().then(function (querySnapshot) {
+                contComentList.innerHTML = ''
+                querySnapshot.forEach(function (idPost) {
+                  contComentList.appendChild(viewformComent(idPost.data()))
+                  // doc.data() is never undefined for query doc snapshots
+                  console.log(idPost.id, " => ", idPost.data());
+                });
               });
-            });
-
-            // getPost(doc).onSnapshot(snapshot => {
-            //   snapshot.forEach(function (result) {
-            //     console.log(result.id, " => ", result.data());
-
-            //     coment.appendChild(viewformComent(result.data()))
-            // })
-            // })
-
-
-
+            })
           })
 
-          let btnEdit = article.querySelector(`#btn-edit-${doc.id}`);
-          btnEdit.addEventListener('click', () => {
-            //console.log(post.user)
-            //console.log(idUserAuth.uid)
-            if (post.user === idUserAuth.uid) {
-              let editDescription = article.querySelector(`#description-${doc.id}`).value;
-              editPost(doc.id, editDescription);
-              alert('Post editado correctamente');
-
-            } else {
-              alert('Permiso denegado para editar este post');
-            }
-          });
-          // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
-          return postList.appendChild(article);
+          // return postList.appendChild(article);
         }
+        //;
+
       })
+
     });
 
     return postList
@@ -285,10 +451,11 @@ const deletePost = id => {
   });
 }
 
-const editPost = (id, description) => {
+const editPost = (id, description, state) => {
   let db = firebase.firestore();
   return db.collection("posts").doc(id).update({
-    description: description
+    description: description,
+    state: state
   })
     .then(function () {
       console.log("Document successfully updated!");
@@ -320,3 +487,10 @@ export const editPErfilUser = (idUser, name, email) => {
     }
   });
 }
+
+/**
+ *  const btnSubir = document.createElement('img')
+            btnSubir.src = './image/subir.png'
+            btnSubir.classList = 'img-post-prev'
+            article.appendChild(btnSubir)
+ */

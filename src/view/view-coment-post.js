@@ -1,12 +1,13 @@
+import { getDataDoc } from '../model/model.js'
 export default (post) => {
-    const viewFormComent = document.createElement('form');
+  const viewFormComent = document.createElement('form');
 
-    const templateComent = `
+  const templateComent = `
       <div class= 'flex-container  margin-top  center'>    
         <header class='header-post'>       
-        <img id='photo-post-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>                
-        <label id='name-user-post' class=''>${post.user}</label> 
-        <label id='fecha-post' class='center color-fecha'>fecha</label>            
+        <img id='photo-coment-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>                
+        <label id='name-user-coment' class=''>nombre</label> 
+        <label id='fecha-post' class='center color-fecha'>${post.fecha}</label>            
         </header>
         <section class='content-post'>      
         <textarea id = 'description' class="textarea-coment center">${post.comment}</textarea>           
@@ -19,6 +20,12 @@ export default (post) => {
         </div>  
       
       `;
-    viewFormComent.innerHTML = templateComent;
-    return viewFormComent
+  viewFormComent.innerHTML = templateComent;
+  const userPhotoComent = viewFormComent.querySelector('#photo-coment-user')
+  const nameComent = viewFormComent.querySelector('#name-user-coment')
+  getDataDoc(post.user).then(result => {
+    userPhotoComent.src = result.data().photo
+    nameComent.innerHTML = result.data().name
+  })
+  return viewFormComent
 }

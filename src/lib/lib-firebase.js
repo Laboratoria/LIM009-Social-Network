@@ -41,7 +41,8 @@ export const getUserReady = (calback) => {
         return calback(null)
 
       }
+      unsubscribe()
     });
-    unsubscribe()
+
   }
 }
