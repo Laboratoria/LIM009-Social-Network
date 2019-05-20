@@ -11,6 +11,7 @@ import {
     //editPostInCloudFireStore,
     //upLoadImageToFirestore,
 
+
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -269,15 +270,42 @@ const getUserActive = (callback) => { //printUserinfo()
 
 
 
-
+/*
 const getImage = () => {
     const date = new Date();
     const file = document.querySelector('#image-file').files[0];
     return upLoadImageToFirestore(date, file)
 
 
+};*/
+
+
+let selectedFile;
+
+const handleFileUploadChange = (e) => {
+
+
+    selectedFile = e.target.files[0];
 };
 
+
+const handleFileUploadSubmit = (e) => {
+    const storageService = firebase.storage();
+    const storageRef1 = storageService.ref();
+    const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+
+
+    uploadTask.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+    }, (error) => {
+        // Handle unsuccessful uploads
+        console.log(error);
+    }, () => {
+        // Do something once upload is complete
+        console.log('success');
+    });
+
+};
 
 
 
@@ -342,7 +370,9 @@ export {
     //getImage,
     editProfile,
     likesForPosts,
-    getImage,
+    //getImage,
+    handleFileUploadChange,
+    handleFileUploadSubmit,
 
 
 };

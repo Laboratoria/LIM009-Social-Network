@@ -1,4 +1,4 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar, likesForPosts, /*getImage*/ } from "../controller/controller1.js";
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar, likesForPosts, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
 
 const renderOnePost = (post, user, current) => {
 
@@ -113,7 +113,8 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <input type="file" id="image-file" class="hidden"><img class="icon-photograph" src="./css/img/6799.png_860.png">
+                <input type="file" id="image-file" class="hidden" accept="image/*"/><img class="icon-photograph" src="./css/img/6799.png_860.png">
+                <button id="btn-share-image" >Compartir Imagen</button></div>     
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter" id="valores"><fieldset>
@@ -126,9 +127,12 @@ export default (user, posts) => {
 </div>
 `;
 
+    divElement.querySelector("#image-file").addEventListener('change', handleFileUploadChange);
+    divElement.querySelector("#btn-share-image").addEventListener('click', handleFileUploadSubmit);
 
     const shareBtn = divElement.querySelector("#btn-share");
     shareBtn.addEventListener("click", () => {
+
         createPostInCloudFirestore();
     });
     const signOutOption = divElement.querySelector("#sign-out");

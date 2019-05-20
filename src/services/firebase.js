@@ -83,11 +83,13 @@ const upLoadImageToFirestore = (file, callback) => {
 
 const upLoadImageToFirestore = (date, image) => {
     const ref = firebase.storage().ref();
-   const task = ref.child(`images/${date}-${image.name}`);
+    const task = ref.child(`images/${date}-${image.name}`);
     const metadata = { contentType: image.type };
     return task.put(image, metadata)
-   
+
 };*/
+
+
 
 
 
