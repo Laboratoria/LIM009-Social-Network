@@ -255,19 +255,30 @@ const getUserActive = (callback) => { //printUserinfo()
 
 };
 
-const getImage = (file) => {    
-    upLoadImageToFirestore(file, downloadURL => {    
-        console.log('available at', downloadURL);
+const getImage = (file) => {
+    upLoadImageToFirestore(file, downloadURL => {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', downloadURL);
+        xhr.send();
+      
+        // Or inserted into an <img> element:
+        var img = document.document.querySelector('img-post');
+        img.src = downloadURL;
+      }).catch(function(error) {
+        // Handle any errors
+      });
+      console.log('available at', downloadURL);
 
     
-    })
-};
-      
-
-const editProfile = (name1, userId1) => {
-            
+const editProfile = (email1,name1,userId1) => {
+         
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
-        name:name1,        
+        email: email1,
+        name:name1,
     })
     .then(function() {
         console.log("Document successfully updated!");
@@ -276,9 +287,6 @@ const editProfile = (name1, userId1) => {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
-
-
-
 
 };
 
@@ -314,3 +322,4 @@ export {
     editProfile,
     likesForPosts,    
 };
+
