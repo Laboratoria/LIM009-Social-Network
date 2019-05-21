@@ -1,6 +1,8 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, deletePostModel } from '../model/model.js'
-
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createComentPost, getPost, viewListPostPrivate, likesPost, viewListPostPublic } from '../model/model.js'
+import { getUserReady } from '../lib/comple-firebase.js';
+import viewformComent from '../view/view-coment-post.js'
+import viewPostList from '../view/view-pos-list.js'
 const changeHash = (hash) => {
   location.hash = hash;
 }
@@ -8,10 +10,23 @@ const changeHash = (hash) => {
 export const registerUser = () => {
   const emailRegister = document.querySelector('#email-register').value;
   const passwordRegister = document.querySelector('#password-register').value;
+
   return createEmailAndPassword(emailRegister, passwordRegister)
     .then((result) => {
-      dataBaseUser(result.user);
-      alert('Registro con éxito')
+      dataBaseUser(result.user).then((docRef) => {
+        alert('Registro con éxito')
+        changeHash('/welcomeUser')
+
+        console.log("Document written with ID: ", docRef);
+      }).catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+      // console.log(nameUserCreate.value)
+
+
+      // console.log(result)icono-login-user
+
+
     }).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
@@ -105,114 +120,63 @@ export const logOut = () => {
     });
 }
 
-//Crear post con IDs por defecto
-export const createPost = (state, imagePost, fechaPost, description, userID) => {
-  //console.log(fechaPost)
-  //console.log(state)
-  let db = firebase.firestore();
-  return db.collection("posts").add({
-    description: description,
-    state: state,
-    likes: 0,
-    user: userID,
-    image: imagePost,
-    fechaPost: fechaPost
-  })
-    .then(() => {
-      //document.getElementById('create-post').reset();
-      console.log("Document written succesfully");
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-  
-}
 
-export const setUpPost = data => {
-  const getUserIdEdit = idUserAuth => {
+export const setUpPost = (idUserAuth) => {
+
+  // const getUserIdView = (idUserAuth) => {
+
+  // changeHash('/welcomeUser')
   const postList = document.querySelector('#post-list');
-    postList.innerHTML = '';
+  const postListPrivad = document.querySelector('#post-list-privados')
+  // const postListPrivad = document.querySelector('#btn-view-post-privad')
+  const postListPublic = document.querySelector('#btn-view-post-public')
+  viewListPostPrivate(idUserAuth.uid).onSnapshot(data => {
+    postListPrivad.innerHTML = ''
     data.forEach(doc => {
-      //console.log(doc.data())
-      getDataDoc(doc.data().user).then(getUser => {
-        //console.log(getUser.data())
+      getDataDoc(doc.data().user).then((getUser) => {
+        // console.log(getUser.data().name)
         if (getUser.exists) {
-          //console.log(doc.id)
-          // console.log("Document data:", doc.data().name);
           const post = doc.data();
-          const article = document.createElement('article');
-          const li = `
-    <article id = 'content-post' class= 'flex-container  margin-top border center'> 
-    <div class = 'btn-post-edit-del'>
-    <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-${doc.id}'>
-    <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-${doc.id}'>
-    </div>    
-      <header class='header-post'>       
-      <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>                
-      <label id='name-user-post' class=''>${getUser.data().name}</label> 
-      <label id='fecha-post' class='center color-fecha'>${post.fechaPost}</label>            
-      </header>
-      <section class='content-post'>     
-      <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'> 
-      <textarea id = 'description-${doc.id}' class="textarea center">${post.description}</textarea>      
-      </section>
-      <footer class = 'margin-footer center'>
-      <div class = 'style-color-header style-content-post-img'>
-      <button id ='btn-like' class='btn-post-create'>Like</button>
-      <button id ='btn-love' class='btn-post-create'>Me encanta</button>
-      <button id ='btn-coment' class='btn-post-create'>Comentar</button>  
-      </div >       
-      </footer>
-    </article>  
-        `
-          article.innerHTML = li;
-          let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
-          btnDelete.addEventListener('click', () => {
-            //console.log(post.user)
-            //console.log(idUserAuth.uid)
-            if (post.user === idUserAuth.uid) {
-              alert('Post eliminado correctamente')
-              deletePost(doc.id);
-
-            } else {
-              alert('Permiso denegado para eliminar este post')
-            }
-
-          });
-          
-          let btnEdit = article.querySelector(`#btn-edit-${doc.id}`);
-          btnEdit.addEventListener('click', () => {
-            //console.log(post.user)
-            //console.log(idUserAuth.uid)
-            if (post.user === idUserAuth.uid) {
-            let editDescription = article.querySelector(`#description-${doc.id}`).value;
-              editPost(doc.id,editDescription);
-              alert('Post editado correctamente');
-
-            } else {
-              alert('Permiso denegado para editar este post');
-            }
-          });
-          // elemento_padre.replaceChild(nuevo_nodo,nodo_a_reemplazar);
-          return postList.appendChild(article);
+          console.log(doc)
+          postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-      })
-    });
+        //;
 
-    return postList
-  }
-  getUserReady(getUserIdEdit)
+      })
+    })
+
+  });
+
+  viewListPostPublic().onSnapshot(data => {
+    postList.innerHTML = ''
+    data.forEach(doc => {
+      getDataDoc(doc.data().user).then((getUser) => {
+        // console.log(getUser.data().name)
+        if (getUser.exists) {
+          const post = doc.data();
+          console.log(doc)
+          postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
+        }
+        //;
+
+      })
+    })
+
+  });
+  return postListPrivad
+  // }
+  // getUserReady(getUserIdView)
 }
 
 export const getPosts = () => {
-let db = firebase.firestore();
+  let db = firebase.firestore();
   db.collection('posts').onSnapshot(snapshot => {
     //console.log(snapshot.docs)
     setUpPost(snapshot.docs);
   })
 };
 
-const deletePost = id => {
+export const deletePost = id => {
   let db = firebase.firestore();
   return db.collection("posts").doc(id).delete().then(() => {
     console.log("Document successfully deleted!");
@@ -221,19 +185,20 @@ const deletePost = id => {
   });
 }
 
-const editPost = (id,description) => {
+export const editPost = (id, description, state) => {
   let db = firebase.firestore();
   return db.collection("posts").doc(id).update({
-      description: description
+    description: description,
+    state: state
   })
-  .then(function() {
+    .then(function () {
       console.log("Document successfully updated!");
-  })
-  .catch(function(error) {
+    })
+    .catch(function (error) {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
-  });
-  
+    });
+
 }
 
 export const editPErfilUser = (idUser, name, email) => {
@@ -256,3 +221,10 @@ export const editPErfilUser = (idUser, name, email) => {
     }
   });
 }
+
+/**
+ *  const btnSubir = document.createElement('img')
+            btnSubir.src = './image/subir.png'
+            btnSubir.classList = 'img-post-prev'
+            article.appendChild(btnSubir)
+ */

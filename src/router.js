@@ -1,29 +1,16 @@
 import login from "./view/login.js"
 import register from './view/pagesRegister.js'
 import welcomeUser from './view/welcomeUser.js'
-import { getPosts } from "./controller/view-controller.js";
+import { setUpPost } from "./controller/view-controller.js";
 import editPerfil from './view/edit-perfil.js'
 import error from './view/page-error.js'
-import { getUserReady } from "./lib/lib-firebase.js";
+import { getUserReady } from "./lib/comple-firebase.js";
 
 // const infoUser = () => {
 
-//   firebase.auth().onAuthStateChanged(user => {
-//     if (user) {
-//       let db = firebase.firestore();
-//       db.collection('posts').onSnapshot(snapshot => {
-//         console.log(snapshot.docs)
-//         setUpPost(snapshot.docs);
-//       });
-//       welcomeUser(user);
-//     } else {
-//       welcomeUser(null);
-//     }
-//   })
-// };
 const getUserActiv = (user) => {
-  getPosts();
   welcomeUser(user)
+  setUpPost(user)
 }
 
 const changeTmp = (hash) => {

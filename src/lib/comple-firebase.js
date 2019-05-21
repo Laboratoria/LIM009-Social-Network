@@ -1,4 +1,4 @@
-export default (file, uploader, calback) => {
+export const imageFirestore = (file, uploader, callback) => {
 
     let metadata = {
         contentType: 'image/jpeg'
@@ -39,7 +39,25 @@ export default (file, uploader, calback) => {
         }, () => {
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                calback(downloadURL)
+                callback(downloadURL)
             });
         });
+}
+export const getUserReady = (callback) => {
+    var userCurrent = firebase.auth().currentUser;
+    if (userCurrent) {
+        return callback(userCurrent)
+    } else {
+        const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                return callback(user)
+                // User is signed in.
+            } else {
+                // No user is signed in.
+                return callback(null)
+
+            }
+            unsubscribe()
+        });
+    }
 }
