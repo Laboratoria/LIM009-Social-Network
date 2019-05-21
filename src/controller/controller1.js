@@ -184,7 +184,7 @@ const getDataOfUser = (uid) => {
 
 
 
-
+/*
 const createPostInCloudFirestore = () => {
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
@@ -199,7 +199,7 @@ const createPostInCloudFirestore = () => {
     const idUser = currentUser().uid;
     console.log(idUser);
     return addPostToCloudFirestore(inputComment, idUser, status, "");
-};
+};*/
 
 const deletePostAfterClick = (e) => {
     console.log(e.target)
@@ -326,7 +326,7 @@ const handleFileUploadChange = (e) => {
 
 
 
-const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
+const handleFileUploadSubmit = (inputComment, idUser, statusComment,progress) => {
     const storageService = firebase.storage();
     const storageRef1 = storageService.ref();
     const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
@@ -334,17 +334,21 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
 
     uploadTask.on('state_changed', (snapshot) => {
         // Observe state change events such as progress, pause, and resume
+        var percentage=(snapshot.bytesTransferred/
+        snapshot.totalBytes)*100;
+        progress.value=percentage;
     }, (error) => {
         // Handle unsuccessful uploads
         console.log(error);
     }, () => {
         // Do something once upload is complete
         const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
-        downloadImg.then((url) => {
+        return downloadImg.then((url) => {
             console.log(url);
 
-
-            return addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+             addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+             
+           
 
 
 
@@ -384,6 +388,7 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
         });
 
 };
+/*
 const addClicksUsers = (postId, idOfUser) => {
     return dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers').add({
         uidLikesUser: idOfUser,
@@ -395,7 +400,7 @@ const addClicksUsers = (postId, idOfUser) => {
         .catch((error) => {
             console.error("Error updating uid of users: ", error);
         });
-}
+};*/
 
 
 const likesForPosts = (postId, contador1) => {
@@ -420,7 +425,7 @@ export {
     signOutUser,
     getDataOfUser,
     getUserActive,
-    createPostInCloudFirestore,
+    
     deletePostAfterClick,
     editPostInCloudFireStore,
     getPostsInRealtime,

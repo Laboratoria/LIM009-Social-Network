@@ -1,4 +1,4 @@
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar /* likesForPosts */, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
+import { signOutUser,  getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar /* likesForPosts */, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
 const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
@@ -6,7 +6,7 @@ const renderOnePost = (post, user, current) => {
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
 
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img src="" id="img-post" >
+  <img src="${post.photoPost}" id="img-post" >
   </div>
 
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
@@ -127,7 +127,7 @@ export default (user, posts) => {
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
                 <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">          
-                <button id="btn-share-image" class="inputfile2">Imagen</button>              
+                <progress value="0" max="100" id="uploader">0%</progress>              
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter" id="valores"><fieldset>
@@ -140,18 +140,35 @@ export default (user, posts) => {
     </main>
 </div>
 `;
-    divElement.querySelector("#image-file").addEventListener('change', handleFileUploadChange);
-    divElement.querySelector("#btn-share-image").addEventListener('click', () => {
-        const inputComment = divElement.querySelector("#input-comment").value;
-        const inputStatus = divElement.querySelector('#private').checked;
-        handleFileUploadSubmit(inputComment, inputStatus, user.userId);
+     const inputFile=divElement.querySelector("#image-file");
+     inputFile.addEventListener('change', 
+    (e)=>{
+        if (inputFile.value !== ""){
+            console.log("file selected!!");
+            handleFileUploadChange(e);
+        }else if(inputFile.files.length ===0){
+            console.log("no files selected");
+        }
+    
     });
+    /*divElement.querySelector("#btn-share-image").addEventListener('click', () => {
+        
+    });*/
 
     const shareBtn = divElement.querySelector("#btn-share");
     //const btnPublic= divElement.querySelector("#allPost");
     shareBtn.addEventListener("click", () => {
-
-        createPostInCloudFirestore();
+        const uploaderProgress = divElement.querySelector("#uploader");
+        const inputComment = divElement.querySelector("#input-comment").value;
+        const inputStatus = divElement.querySelector('#private').checked;
+        let status;
+        if (inputStatus) {
+            status = true;
+        } else {
+            status = false;
+        }
+        return handleFileUploadSubmit(inputComment,user.userId,status,uploaderProgress);
+       // createPostInCloudFirestore();
         //btnPublic.setAttribute('checked','true');
     });
     const signOutOption = divElement.querySelector("#sign-out");
