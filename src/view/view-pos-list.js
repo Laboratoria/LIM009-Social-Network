@@ -1,5 +1,5 @@
-import { likesPost, getDataDoc, getPost, createComentPost, deleteComment} from '../model/model.js'
-import {editPost, deletePost} from '../controller/view-controller.js'
+import { likesPost, getDataDoc, getPost, createCommentPost, deleteComment } from '../model/model.js'
+import { editPost, deletePost } from '../controller/view-controller.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js'
 
@@ -97,8 +97,8 @@ export default (doc, getUser, post, idUserAuth) => {
         // getComent(doc,)
         let fecha = new Date();
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
-        createComentPost(doc, idUserAuth.uid, textComentPost.value, fechaPost)
-        getPost(doc).onSnapshot(snapshot => {
+        createCommentPost(doc.id, idUserAuth.uid, textComentPost.value, fechaPost)
+        getPost(doc.id).onSnapshot(snapshot => {
           contComentList.innerHTML = ''
           snapshot.forEach(function (result) {
             deleteComment(doc, result.id)//poner a la vista de comentario
@@ -109,7 +109,7 @@ export default (doc, getUser, post, idUserAuth) => {
         })
       })
 
-      getPost(doc).get().then(function (querySnapshot) {
+      getPost(doc.id).get().then(function (querySnapshot) {
         contComentList.innerHTML = ''
         querySnapshot.forEach(function (idPost) {
           contComentList.appendChild(viewformComent(idPost.data(), doc))

@@ -46,7 +46,7 @@ export default (user) => {
       </div >       
       <select id="estado-post" class = 'btn-post-create'>
       <option value="publico" select>Público</option>
-      <option value="privado" select>Privado</option>
+      <option value="privado" >Privado</option>
       </select>
         <button id ='btn-share' class='btn-post-create'>🌎Compartir</button>
       </footer>
@@ -81,11 +81,12 @@ export default (user) => {
         };
         fr.readAsDataURL(e.target.files[0]);
     }
-    state.onchange = () => {
-        console.log(state.value)
-    }
+
 
     btnSharePost.addEventListener('click', () => {
+        state.onchange = () => {
+            console.log(state.value)
+        }
         let fecha = new Date();
         let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         let horaPost = `${fecha.getHours()}:${fecha.getMinutes()}`
@@ -132,9 +133,6 @@ export default (user) => {
         // }
 
     });
-
-
-
     return root;
 };
 
