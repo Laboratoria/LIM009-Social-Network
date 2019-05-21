@@ -321,12 +321,11 @@ const handleFileUploadChange = (e) => {
 
 
     selectedFile = e.target.files[0];
+
+
 };
 
-
-
-
-const handleFileUploadSubmit = (inputComment, idUser, statusComment,progress) => {
+const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress) => {
     const storageService = firebase.storage();
     const storageRef1 = storageService.ref();
     const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
@@ -334,9 +333,9 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment,progress) =>
 
     uploadTask.on('state_changed', (snapshot) => {
         // Observe state change events such as progress, pause, and resume
-        var percentage=(snapshot.bytesTransferred/
-        snapshot.totalBytes)*100;
-        progress.value=percentage;
+        var percentage = (snapshot.bytesTransferred /
+            snapshot.totalBytes) * 100;
+        progress.value = percentage;
     }, (error) => {
         // Handle unsuccessful uploads
         console.log(error);
@@ -346,9 +345,9 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment,progress) =>
         return downloadImg.then((url) => {
             console.log(url);
 
-             addPostToCloudFirestore(inputComment, idUser, statusComment, url);
-             
-           
+            addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+
+
 
 
 
@@ -425,23 +424,20 @@ export {
     signOutUser,
     getDataOfUser,
     getUserActive,
-    
+
     deletePostAfterClick,
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
- /*    likesForPosts,
-    getUsersAfterLikes,
-    addClicksUsers */
-    
+    /*    likesForPosts,
+       getUsersAfterLikes,
+       addClicksUsers */
+
     editProfile,
 
-   // getImage,
-  likesForPosts,
-   
+    // getImage,
+    likesForPosts,
+
     handleFileUploadChange,
     handleFileUploadSubmit,
 };
-
-    
-
