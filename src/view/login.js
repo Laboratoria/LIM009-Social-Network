@@ -3,7 +3,7 @@ import { email, google, facebook } from "../controller/view-controller.js";
 export default () => {
   const formLogin = document.createElement("div");
   const templateFormLogin = `
-  <div class= 'div-style col-xs-12'>
+  <div class= 'container col-xs-12'>
   <aside class = 'col-lg-6 col-xs-12 '>
   <header><img src="./image/portada1.jpeg" alt="educacion" class=''>
   </aside>

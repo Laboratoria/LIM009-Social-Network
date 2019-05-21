@@ -19,7 +19,7 @@ export default (user) => {
     <p>E-mail</p>
     <span>${user.email}</span>
     <p>Foto</p>
-    <img src='${user.photoURL}'> 
+    <img src='${user.photoURL}'>
     <div class = 'color-menu-post center'>
     <button id ='btn-view-post-public' class='btn-post-create'>Ver todos los post</button>
     <button id ='btn-view-post-privad' class='btn-post-create'>Mis Post</button>
