@@ -243,13 +243,26 @@ const validar = () => {
 
 const getPostsInRealtime = (callback) => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-        const arrOfPosts = [];
+        let arrOfPosts = [];
         arrOfAllPosts.forEach((onePost) => {
-            arrOfPosts.push({ id: onePost.id, ...onePost.data() })
+            arrOfPosts.push({ id: onePost.id, ...onePost.data() });
         })
         callback(arrOfPosts);
     });
 };
+
+
+/* const getUsersAfterLikes = (postId,callback) => {
+    let subcollection = dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers');
+    let arr = [];
+    subcollection.onSnapshot((arrOfUsers) => {
+        arrOfUsers.forEach((elem) => {
+            arr.push({ id: elem.id, ...elem.data() })
+        })
+        //console.log(arr[0].uidLikesUser)
+        callback(arr);
+    })
+}; */
 
 const getIdPostsInRealtime = () => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
@@ -261,6 +274,7 @@ const getIdPostsInRealtime = () => {
 
     });
 };
+
 
 
 // usuario activo 
@@ -277,9 +291,18 @@ const getUserActive = (callback) => { //printUserinfo()
         })
 
     }
-
 };
 
+/* const likesForPosts = (postId, contador1) => {
+    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
+    console.log(contador1)
+    collectionPost.update({
+        likes: contador1,
+    })
+        .then(() => {
+            console.log("Document successfully updated!");
+        })
+        .catch((error) => { */
 
 
 /*
@@ -299,6 +322,8 @@ const handleFileUploadChange = (e) => {
 
     selectedFile = e.target.files[0];
 };
+
+
 
 
 const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
@@ -340,6 +365,7 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
 
 
 
+
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
@@ -358,10 +384,18 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
         });
 
 };
-
-
-
-
+const addClicksUsers = (postId, idOfUser) => {
+    return dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers').add({
+        uidLikesUser: idOfUser,
+    })
+        .then((docRef) => {
+            console.log(docRef)
+            console.log("users click successfully updated!");
+        })
+        .catch((error) => {
+            console.error("Error updating uid of users: ", error);
+        });
+}
 
 
 const likesForPosts = (postId, contador1) => {
@@ -391,12 +425,18 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
-    //getImage,
+ /*    likesForPosts,
+    getUsersAfterLikes,
+    addClicksUsers */
+    
     editProfile,
-    likesForPosts,
-    //getImage,
+
+    getImage,
+  likesForPosts,
+   
     handleFileUploadChange,
     handleFileUploadSubmit,
-
-
 };
+
+    
+

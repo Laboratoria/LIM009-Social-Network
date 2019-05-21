@@ -36,15 +36,19 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) =>
         userId: idUser,
         state: statusComment,
         likes: 0,
+
+    
+
         photoPost: photo,
-    }).then(function(docRef) {
+  
+
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
 
     })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+        .catch((error) =>{
+            console.error("Error adding document: ", error);
+        });
 
 const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
@@ -90,8 +94,6 @@ const upLoadImageToFirestore = (date, image) => {
     return task.put(image, metadata)
 
 };*/
-
-
 
 
 
