@@ -1,10 +1,4 @@
-
-
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar, likesForPosts, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
-
-
-
-
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar /* likesForPosts */, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
 const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
@@ -12,7 +6,7 @@ const renderOnePost = (post, user, current) => {
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
 
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img src="${post.photoPost}" id="img-post" >
+  <img src="" id="img-post" >
   </div>
 
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
@@ -60,22 +54,22 @@ const renderOnePost = (post, user, current) => {
             divCommentContent.setAttribute("contenteditable", false);
         }
     });
-/*     const likesButton = label.querySelector("#btn-likes");
-    // const likesButton2 = label.querySelector("#btn-likes2");
-    likesButton.addEventListener('click', () => {
-        getUsersAfterLikes(post.id, (arr) => {
-            arr.forEach((e) => {
-                if (e.hasOwnProperty(uidLikesUser) && e.uidLikesUser === current.userId) {
-                    addClicksUsers(post.id, '')
-                    post.likes = post.likes - 1
-                } else {
-                    addClicksUsers(post.id, current.userId)
-                    post.likes = post.likes + 1
-                }
+    /*     const likesButton = label.querySelector("#btn-likes");
+        // const likesButton2 = label.querySelector("#btn-likes2");
+        likesButton.addEventListener('click', () => {
+            getUsersAfterLikes(post.id, (arr) => {
+                arr.forEach((e) => {
+                    if (e.hasOwnProperty(uidLikesUser) && e.uidLikesUser === current.userId) {
+                        addClicksUsers(post.id, '')
+                        post.likes = post.likes - 1
+                    } else {
+                        addClicksUsers(post.id, current.userId)
+                        post.likes = post.likes + 1
+                    }
+                })
+                likesForPosts(post.id, post.likes);
             })
-            likesForPosts(post.id, post.likes);
-        })
-    }) */
+        }) */
     /*     likesButton2.addEventListener('click', () => {
             if (user.userId === current.uid) {
                 likesButton2.style.display = 'none';
@@ -94,7 +88,7 @@ const renderOnePost = (post, user, current) => {
                 counterOfLikes.innerHTML=likes+1;
             })  */
     return label // que imprima una un post ,que se añada al ul element
-        }
+}
 
 export default (user, posts) => {
     let photoUrl = '';
@@ -132,23 +126,20 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-              
-
-                <input type="file" id="image-file" class="hidden" accept="image/*"/><img class="icon-photograph" src="./css/img/6799.png_860.png">
-                <button id="btn-share-image" >Compartir Imagen</button></div>     
-
+                <input type="file" id="image-file" class="inputfile"  accept="image/*"/><img class="icon-photograph" src="./css/img/6799.png_860.png">          
+                <button id="btn-share-image" class="inputfile2">Imagen</button>              
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter" id="valores"><fieldset>
  <legend>¿Que publicaciones desea ver?</legend>
 <input type="radio" class='input-filter' name="filterPost" id="allPost" checked value="publicPost"><label for="allPost">Todas</label>
 <input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
-</fieldset></div>
+</fieldset>
+<button class="orderBy">Ordenar por fecha</button></div>
         <div id="comment-list"></div>
     </main>
 </div>
 `;
-
     divElement.querySelector("#image-file").addEventListener('change', handleFileUploadChange);
     divElement.querySelector("#btn-share-image").addEventListener('click', () => {
         const inputComment = divElement.querySelector("#input-comment").value;
