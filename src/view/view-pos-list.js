@@ -1,5 +1,4 @@
-import { likesPost, getDataDoc, getPost, createComentPost, deleteComment } from '../model/model.js'
-import { editPost, deletePost } from '../controller/view-controller.js'
+import { likesPost, getDataDoc, getPost, createComentPost, deleteComment, editPost, deletePost } from '../model/model.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js'
 export default (doc, getUser, post, idUserAuth) => {
