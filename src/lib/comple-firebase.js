@@ -39,7 +39,7 @@ export const imageFirestore = (file, uploader, callback) => {
         }, () => {
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                callback(downloadURL)
+                return callback(downloadURL)
             });
         });
 }

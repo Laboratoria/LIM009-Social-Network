@@ -1,5 +1,5 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createComentPost, getPost, viewListPostPrivate, likesPost, viewListPostPublic } from '../model/model.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createCommentPost, getPost, viewListPostPrivate, likesPost, viewListPostPublic } from '../model/model.js'
 import { getUserReady } from '../lib/comple-firebase.js';
 import viewformComent from '../view/view-coment-post.js'
 import viewPostList from '../view/view-pos-list.js'
