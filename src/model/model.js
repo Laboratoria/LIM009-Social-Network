@@ -7,9 +7,6 @@ export const updatePerfilUser = (user, name) => {
     })
 }
 export const updateEmailUser = (user, email) => {
-    // var user = firebase.auth().currentUser;
-    // console.log(email, user)
-
     return user.updateEmail(`${email}`)
 }
 export const updatePhoto = (user, photo) => {
@@ -42,20 +39,20 @@ export const getDataDoc = users => {
     return docRef.get()
 }
 
-export const createComentPost = (idPost, user, comemt, fechaComent) => {
+export const createComentPost = (idPost, user, comment, fechaComment) => {
     let db = firebase.firestore();
     let comentPost = db.collection('posts').doc(`${idPost.id}`)
-        .collection('comemt').add({
+        .collection('comment').add({
             user: user,
-            comment: comemt,
-            fecha: fechaComent
+            comment: comment,
+            fecha: fechaComment
 
         })
     return comentPost
 }
 export const getPost = (idPost) => {
     let db = firebase.firestore();
-    return db.collection('posts').doc(`${idPost.id}`).collection('comemt')
+    return db.collection('posts').doc(`${idPost.id}`).collection('comment')
 }
 
 export const viewListPostPrivate = (idUser) => {
@@ -80,75 +77,30 @@ export const deletePost = id => {
         console.error("Error removing document: ", error);
     });
 }
-export const getComent = (idPost, id) => {
+export const deleteComment = (idPost, id) => {
+
     let db = firebase.firestore();
-    return db.collection('posts').doc(`${idPost.id}`).collection('comemt').doc(id).then(() => {
-        console.log("Document successfully deleted!");
-    }).catch((error) => {
-        console.error("Error removing document: ", error);
-    });
+    return db.collection('posts').doc(`${idPost.id}`).collection('comemt').doc(id).get()
+
+}
+//Crear post con IDs por defecto
+export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
+
+    let db = firebase.firestore();
+    return db.collection("posts").add({
+        description: description,
+        state: state,
+        likes: 0,
+        user: userID,
+        image: imagePost,
+        fechaPost: fechaPost,
+        horaPost: horaPost
+    })
+
 }
 
 
-// dbor()
 
-// export editName
-
-
-// export const dataBaseUser = user => {
-//     let db = firebase.firestore();
-//         return db.collection('users').doc(`${user.uid}`).set({
-//         uid: user.uid,
-//         name: user.displayName || '',
-//         email: user.email,
-//         photo: user.photoURL || './image/profile-padre.jpg'
-//     }).then((docRef) => {
-//         console.log("Document written with ID: ", docRef);
-//     }).catch((error) => {
-//         console.error("Error adding document: ", error);
-//     })
-// };
-
-// export const getDataDoc = (uid) => {
-//     let db = firebase.firestore();
-//     var docRef = db.collection("users").doc(`${uid}`);
-
-//     return docRef.get().then(function (doc) {
-//         if (doc.exists) {
-//             return doc.data();
-//         } else {
-//             console.log("No existe el documento");
-//         }
-//     }).catch(function (error) {
-//         console.log("Error getting document:", error);
-//     })
-// }
-
-// // Actualizar los datos del perfil
-
-
-// export const updateDatos = (user, name, email) => {
-//     let db = firebase.firestore();
-//     db.collection("users").doc(`${user.uid}`).update({
-//         name: name,
-//         email: email
-//     })
-//     .then(function () {
-//         alert('Tus datos fueron actualizados exitosamente!')
-//         console.log("Document successfully updated!");
-//     }).catch(error => alert('Upps hubo un error! '));
-// }
-
-// export const getUserUid = () => {
-//         var user = firebase.auth().currentUser;
-//         if (user) {
-//           return user.uid;
-//         } else {
-//           console.log('No user is signed in.');
-//         }
-//     }
-
-// setTimeout(() => {firebase.auth().currentUser != null}, 3000)
 
 
 

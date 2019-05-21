@@ -1,6 +1,6 @@
-import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut, getUserReady } from "../lib/lib-firebase.js";
+import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
 import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createComentPost, getPost, viewListPostPrivate, likesPost, viewListPostPublic } from '../model/model.js'
-import formComent from '../view/coment-post.js';
+import { getUserReady } from '../lib/comple-firebase.js';
 import viewformComent from '../view/view-coment-post.js'
 import viewPostList from '../view/view-pos-list.js'
 const changeHash = (hash) => {
@@ -120,29 +120,6 @@ export const logOut = () => {
     });
 }
 
-//Crear post con IDs por defecto
-export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
-  //console.log(fechaPost)
-  //console.log(state)
-  let db = firebase.firestore();
-  return db.collection("posts").add({
-    description: description,
-    state: state,
-    likes: 0,
-    user: userID,
-    image: imagePost,
-    fechaPost: fechaPost,
-    horaPost: horaPost
-  })
-    .then(() => {
-      //document.getElementById('create-post').reset();
-      console.log("Document written succesfully");
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-
-}
 
 export const setUpPost = (idUserAuth) => {
 

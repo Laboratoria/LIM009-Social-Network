@@ -1,4 +1,4 @@
-import { likesPost, getDataDoc, getPost, createComentPost, getComent } from '../model/model.js'
+import { likesPost, getDataDoc, getPost, createComentPost, deleteComment } from '../model/model.js'
 import { editPost, deletePost } from '../controller/view-controller.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js'
@@ -106,7 +106,7 @@ export default (doc, getUser, post, idUserAuth) => {
         getPost(doc).onSnapshot(snapshot => {
           contComentList.innerHTML = ''
           snapshot.forEach(function (result) {
-            // getComent(doc, result.id)
+            deleteComment(doc, result.id)//poner a la vista de comentario
             console.log(result.id, " => ", result.data());
             contComentList.appendChild(viewformComent(result.data(), doc))
           })

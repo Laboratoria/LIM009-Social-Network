@@ -4,7 +4,7 @@ import welcomeUser from './view/welcomeUser.js'
 import { setUpPost } from "./controller/view-controller.js";
 import editPerfil from './view/edit-perfil.js'
 import error from './view/page-error.js'
-import { getUserReady } from "./lib/lib-firebase.js";
+import { getUserReady } from "./lib/comple-firebase.js";
 
 // const infoUser = () => {
 

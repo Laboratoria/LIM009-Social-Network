@@ -1,6 +1,6 @@
-import { logOut, createPost } from '../controller/view-controller.js';
-import imagePost from '../lib/comple-firebase.js'
-// import {createPost} from '../model/model.js'
+import { logOut } from '../controller/view-controller.js';
+import { imageFirestore } from '../lib/comple-firebase.js'
+import { createPost } from '../model/model.js'
 
 export default (user) => {
     const root = document.getElementById('root')
@@ -103,7 +103,7 @@ export default (user) => {
                 imagePostView.src = image
                 createPost(selectState, image, fechaPost, description, userID, horaPost)
             }
-            imagePost(selectImage, uploader, getImage)
+            imageFirestore(selectImage, uploader, getImage)
         }
         else if (selectState === 'Amigos' && selectImage !== undefined) {
             const getImage = (image) => {
@@ -111,7 +111,7 @@ export default (user) => {
                 imagePostView.src = image
                 createPost('publico', image, fechaPost, description, userID, horaPost)
             }
-            imagePost(selectImage, uploader, getImage)
+            imageFirestore(selectImage, uploader, getImage)
         }
 
     })
