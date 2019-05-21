@@ -96,15 +96,19 @@ export default (user) => {
 
 
 
-        if(selectState === 'publico' || selectState === 'privado' && selectImage === undefined ) {
+        if(selectImage === undefined && selectState === 'publico') {
+            createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)
+        } else if(selectState === 'publico' || selectState === 'privado' && selectImage === undefined ) {
             createPost(selectState, './image/image-post.png', fechaPost, description, userID, horaPost)
         } else if(selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
-                // console.log(image)
+                //console.log(image)
                 imagePostView.src = image
                 createPost(selectState, image, fechaPost, description, userID, horaPost)
             }
             imageFirestore(selectImage, uploader, getImage)
+        } else {
+            createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)   
         }
 
         // if (selectImage === undefined && selectState === 'publico') {

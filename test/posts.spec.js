@@ -63,10 +63,10 @@ describe('createPost', () => {
       .then(() => {
         viewListPostPublic().get().then(result => {
           expect(result.data().description).toBe('Hola a todos');
-
         })
       })
   });
+  
   it('viewListPostPrivate deberia ser una funcion', () => {
     expect(typeof viewListPostPrivate).toBe('function')
   })

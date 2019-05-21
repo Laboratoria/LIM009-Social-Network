@@ -137,7 +137,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          console.log(doc)
+          //console.log(doc)
           postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
@@ -154,7 +154,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          console.log(doc)
+          //console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
