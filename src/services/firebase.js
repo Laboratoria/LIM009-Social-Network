@@ -30,20 +30,24 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser, statusComment) =>
+const addPostToCloudFirestore = (inputComment, idUser, statusComment) => {
+    const f = new Date();
+    let fecha =  f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
     dataBaseCloudFirestore().collection('posts').add({
+        hours: f.getHours() +":"+f.getMinutes(),
+        today: fecha,
         content: inputComment,
         userId: idUser,
         state: statusComment,
         likes: 0,
-    }).then((docRef)=> {
+    }).then((docRef) => {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
     })
-        .catch((error) =>{
+        .catch((error) => {
             console.error("Error adding document: ", error);
         });
-
+}
 const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
     const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
@@ -60,6 +64,9 @@ const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
         alert("You can not delete a comment which was not published by you");
     }
 };
+const orderByTime=()=>{
+    return dataBaseCloudFirestore().collection('posts').orderBy("today").orderBy("hours")
+}
 /*
 
 const upLoadImageToFirestore = (file, callback) => {
@@ -89,15 +96,6 @@ const upLoadImageToFirestore = (date, image) => {
    
 };*/
 
-
-
-
-
-
-
-
-
-
 export {
     signUp,
     signIn,
@@ -108,5 +106,6 @@ export {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
+    orderByTime
     // upLoadImageToFirestore,
 };

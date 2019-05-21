@@ -8,6 +8,7 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
+    orderByTime
     //editPostInCloudFireStore,
     //upLoadImageToFirestore,
 
@@ -27,7 +28,7 @@ const signInAfterClick = () => {
             .then((cred) => {
                 changeHash('#/user-profile');
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -70,16 +71,16 @@ const signUpAfterClick = () => {
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
                 return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
-                        name: userName,
-                        age: userAge,
-                        sex: userSex,
-                        country: userBirthCountry,
-                        photo: userUrlPhoto,
-                        photoFile: userFilePhoto,
-                        userId: cred.user.uid,
-                        email: email2,
-                        // password: password2,
-                    })
+                    name: userName,
+                    age: userAge,
+                    sex: userSex,
+                    country: userBirthCountry,
+                    photo: userUrlPhoto,
+                    photoFile: userFilePhoto,
+                    userId: cred.user.uid,
+                    email: email2,
+                    // password: password2,
+                })
                     .then(() => {
                         const form = document.querySelector('#register-form');
                         form.reset();
@@ -95,7 +96,7 @@ const signInWithGoogleAfterClick = () => {
     signInWithGoogle()
         .then((result) => {
             changeHash('#/user-profile')
-                // This gives you a Google Access Token. You can use it to access the Google API.
+            // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user; // ...
@@ -113,7 +114,7 @@ const signInWithGoogleAfterClick = () => {
 
 
         })
-        .catch(function(error) {
+        .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -146,7 +147,7 @@ const signInWithFacebookAfterClick = () => {
                 email: userEmail,
                 photo: userPhoto,
             });
-        }).catch(function(error) {
+        }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -162,7 +163,7 @@ const signInWithFacebookAfterClick = () => {
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
-        .catch(function(error) {
+        .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log('Paso por aqui');
@@ -172,17 +173,13 @@ const signOutUser = () => {
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return dataBaseCloudFirestore().collection('users').doc(uid).get()
-        .then(function(doc) {
+        .then(function (doc) {
             // console.log(doc.data()
             return doc.data(); // retorna una promesa
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("Error getting document:", error);
         });
 };
-
-
-
-
 
 const createPostInCloudFirestore = () => {
     event.preventDefault();
@@ -213,8 +210,8 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
     console.log(idPost); // id del post
     if (uidOfCurrentUser === idUserOfPost) {
         dataBaseCloudFirestore().collection("posts").doc(idPost).update({
-                content: commentInputNewValue,
-            })
+            content: commentInputNewValue,
+        })
             .then(() => {
                 console.log("Document successfully updated!");
             })
@@ -303,15 +300,15 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
 
-            name: name1,
-            age: age1,
-            sex: sex1,
-            country: birthCountry,
-        })
-        .then(function() {
+        name: name1,
+        age: age1,
+        sex: sex1,
+        country: birthCountry,
+    })
+        .then(function () {
             console.log("Document successfully updated!");
         })
-        .catch(function(error) {
+        .catch(function (error) {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
@@ -329,9 +326,36 @@ const addClicksUsers = (postId, idOfUser) => {
             console.error("Error updating uid of users: ", error);
         });
 }
+const orderOfPost = () => {
+    orderByTime
+}
+let selectedFile;
 
+const handleFileUploadChange = (e) => {
+    selectedFile = e.target.files[0];
+};
 
-const likesForPosts = (postId, contador1) => {
+const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
+    const storageService = firebase.storage();
+    const storageRef1 = storageService.ref();
+    const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+    uploadTask.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+    }, (error) => {
+        // Handle unsuccessful uploads
+        console.log(error);
+    }, () => {
+        // Do something once upload is complete
+        const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
+        downloadImg.then((url) => {
+            console.log(url);
+            addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+        });
+
+    });
+
+};
+/* const likesForPosts = (postId, contador1) => {
     let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
     console.log(contador1)
     return collectionPost.update({
@@ -343,7 +367,7 @@ const likesForPosts = (postId, contador1) => {
         .catch(function(error) {
             console.error("Error updating document: ", error);
         });
-};
+}; */
 
 export {
     signInAfterClick,
@@ -358,10 +382,13 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     validar,
- /*    likesForPosts,
-    getUsersAfterLikes,
-    addClicksUsers */
+    /*    likesForPosts,
+       getUsersAfterLikes,
+       addClicksUsers */
     //getImage,
     editProfile,
     getImage,
+    orderOfPost,
+    handleFileUploadChange,
+    handleFileUploadSubmit,
 };

@@ -1,13 +1,15 @@
+
 .header {
     background-color: #313a52;
     min-height: 70px;
-    width: 100%;
     color: white;
     padding-top: 1%;
     height: auto;
+    max-width: 100vw;
 }
 
 .sub-container {
+    max-width: 1000px;
     position: absolute;
     top: 10%;
     margin: auto;
@@ -222,16 +224,21 @@
 
 .filter fieldset {
     padding: 5%;
+   
 }
 
 .filter {
-    display: block;
-    width: 70%;
-    margin: auto;
-    padding: 0 5% 5% 5%;
+display:inline-block;
+    width: 50%;
+/*     margin: 0px auto auto 5% ;
+ */    padding: 0 5% 5% 5%;
     height: auto;
 }
 
+.orderBy{
+    display:inline-block;
+    width: 30%; 
+}
 /* .disabled{
     opacity: 0.5;
     position: relative;
@@ -242,13 +249,19 @@
 } */
 
 .inputfile {
-    opacity: 0; 
+    opacity: 0;  
     width: 30px;
     height: 30px;
     position: absolute;
-    top: 28%;
+    top: 16%;
     left: 19%;
     z-index: 10;
+}
+.inputfile2{
+    position: relative;
+    width: 15px;
+    float: left;
+    z-index: 20;
 }
 
 @media(min-width:760px) {
@@ -305,8 +318,8 @@
         display: none;
     }
     .inputfile {
-        opacity: 0;
-        top: 10%;
+       /*  opacity: 0; */
+        top: 5%;
         left: 19%;
     }
 }

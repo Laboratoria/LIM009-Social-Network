@@ -2,8 +2,6 @@ import { components } from '../view/index.js'
 import { getDataOfUser, getUserActive,getPostsInRealtime, /* getUsersAfterLikes */ } from '../controller/controller1.js'
 
 const changeview = (route) => {
-
-
     const root = document.getElementById("root");
     root.innerHTML = '';
     switch (route) {
