@@ -30,15 +30,17 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser, statusComment) =>
+const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
         state: statusComment,
         likes: 0,
+        photoPost: photo,
     }).then(function(docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
+
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);

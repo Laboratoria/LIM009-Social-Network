@@ -7,7 +7,7 @@ const renderOnePost = (post, user, current) => {
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img src="" id="img-post" >
+  <img src="${post.photoPost}" id="img-post" >
   </div>
 
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
@@ -128,7 +128,11 @@ export default (user, posts) => {
 `;
 
     divElement.querySelector("#image-file").addEventListener('change', handleFileUploadChange);
-    divElement.querySelector("#btn-share-image").addEventListener('click', handleFileUploadSubmit);
+    divElement.querySelector("#btn-share-image").addEventListener('click', () => {
+        const inputComment = divElement.querySelector("#input-comment").value;
+        const inputStatus = divElement.querySelector('#private').checked;
+        handleFileUploadSubmit(inputComment, inputStatus, user.userId);
+    });
 
     const shareBtn = divElement.querySelector("#btn-share");
     shareBtn.addEventListener("click", () => {

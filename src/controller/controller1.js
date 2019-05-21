@@ -198,7 +198,7 @@ const createPostInCloudFirestore = () => {
     }
     const idUser = currentUser().uid;
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser, status);
+    return addPostToCloudFirestore(inputComment, idUser, status, "");
 };
 
 const deletePostAfterClick = (e) => {
@@ -251,6 +251,18 @@ const getPostsInRealtime = (callback) => {
     });
 };
 
+const getIdPostsInRealtime = () => {
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+        const arrOfIdOfAllPost = [];
+        arrOfAllPosts.forEach((onePost) => {
+            arrOfIdOfAllPost.push(onePost.id);
+        })
+        return arrOfIdOfAllPost;
+
+    });
+};
+
+
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
     if (currentUser()) { // si el usuario ha iniciado sesion y existe un current user
@@ -289,7 +301,7 @@ const handleFileUploadChange = (e) => {
 };
 
 
-const handleFileUploadSubmit = (e) => {
+const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
     const storageService = firebase.storage();
     const storageRef1 = storageService.ref();
     const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
@@ -302,7 +314,19 @@ const handleFileUploadSubmit = (e) => {
         console.log(error);
     }, () => {
         // Do something once upload is complete
-        console.log('success');
+        const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
+        downloadImg.then((url) => {
+            console.log(url);
+
+
+            addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+
+
+
+
+
+        });
+
     });
 
 };
