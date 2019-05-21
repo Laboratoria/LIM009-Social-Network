@@ -154,7 +154,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          console.log(doc)
+          //console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
@@ -167,14 +167,6 @@ export const setUpPost = (idUserAuth) => {
   // }
   // getUserReady(getUserIdView)
 }
-
-export const getPosts = () => {
-  let db = firebase.firestore();
-  db.collection('posts').onSnapshot(snapshot => {
-    //console.log(snapshot.docs)
-    setUpPost(snapshot.docs);
-  })
-};
 
 export const deletePost = id => {
   let db = firebase.firestore();

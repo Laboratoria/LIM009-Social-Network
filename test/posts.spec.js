@@ -30,7 +30,6 @@ global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled
 
 import { createPost, viewListPostPublic, dataBaseUser, getDataDoc, updatePerfilUser } from "../src/model/model.js";
 import { getUserReady } from "../src/lib/comple-firebase.js"
-
 describe('Funciones para gestionar usuarios firestore', () => {
   it('dataBaseUser deberia ser una funcion ', () => {
     expect(typeof dataBaseUser).toBe('function')
@@ -42,8 +41,8 @@ describe('Funciones para gestionar usuarios firestore', () => {
         expect(result.data().name).toBe('nayruth')
       })
     })
-  });
 
+  })
   it('deberia poder editar mi nombre', () => {
 
     const activeUser = (user) => {
@@ -53,6 +52,7 @@ describe('Funciones para gestionar usuarios firestore', () => {
     }
     getUserReady(activeUser)
   })
+
 })
 
 describe('createPost', () => {
@@ -64,7 +64,8 @@ describe('createPost', () => {
       .then(() => {
         viewListPostPublic().get().then(result => {
           expect(result.data().description).toBe('Hola a todos');
+
         })
       })
-  })zz
+  })
 })
