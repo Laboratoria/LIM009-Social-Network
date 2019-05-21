@@ -7,7 +7,7 @@ const renderOnePost = (post, user, current) => {
   <div id="comment-author" class='encabezado'>Publicado por ${user.name}
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img src="" id="img-post" >
+  <div  id="photoUploaded" >
   </div>
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
   <span id="counter-likes">${post.likes}</span>
@@ -17,12 +17,8 @@ const renderOnePost = (post, user, current) => {
   `;
     label.setAttribute('class', "box");
 
-    /* getImage().then(snapshot => snapshot.ref.getDownloadURL())
-         .then((url) => {
-             console.log(url);
-             divElement.querySelector('#img-post').src = url;
-         })
-         .catch(console.error);*/
+   
+  
 
     const deleteButton = label.querySelector("#btn-delete");
     deleteButton.addEventListener('click', (e) => {
@@ -125,7 +121,11 @@ export default (user, posts) => {
 </div>
 `;
 
-
+   const imageFile = document.querySelector("#image-file");
+   imageFile.addEventListener('change', (event) => {
+    const file = event.target.files;
+    getImage(file)
+  })
     const shareBtn = divElement.querySelector("#btn-share");
     shareBtn.addEventListener("click", () => {
         createPostInCloudFirestore();
@@ -162,7 +162,7 @@ export default (user, posts) => {
                 break
         }
     };
-
+#
 
 
 
@@ -174,12 +174,8 @@ export default (user, posts) => {
         estadosDePosts(posts, user);
     });
     estadosDePosts(posts, user);
-    console.log("aaaaaaaaaaaaaaaaaaa");
-    /* imageFile.addEventListener('change', (event) => {
-         const file = event.target.files[0];
-         getImage(file)
-         console.log ( file);
-       })*/
+
+
     return divElement;
 };
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha

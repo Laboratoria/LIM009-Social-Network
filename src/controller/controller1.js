@@ -183,8 +183,7 @@ const getDataOfUser = (uid) => {
 
 
 
-
-const createPostInCloudFirestore = () => {
+const createPostInCloudFirestore = () => {    
     event.preventDefault();
     const inputComment = document.querySelector("#input-comment").value;
     const inputStatus = document.querySelector('#private').checked;
@@ -197,7 +196,9 @@ const createPostInCloudFirestore = () => {
     }
     const idUser = currentUser().uid;
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser, status);
+    return addPostToCloudFirestore(inputComment, idUser, status, 
+        //photoImg
+        );
 };
 
 const deletePostAfterClick = (e) => {
@@ -266,28 +267,6 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 
 };
-
-
-
-
-const getImage = () => {
-    const date = new Date();
-    const file = document.querySelector('#image-file').files[0];
-    return upLoadImageToFirestore(date, file)
-
-
-};
-
-
-
-
-
-
-
-
-
-
-
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
@@ -307,11 +286,6 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 
 };
 
-
-
-
-
-
 const likesForPosts = (postId, contador1) => {
     let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
     console.log(contador1)
@@ -325,6 +299,9 @@ const likesForPosts = (postId, contador1) => {
             console.error("Error updating document: ", error);
         });
 };
+
+
+
 
 export {
     signInAfterClick,
