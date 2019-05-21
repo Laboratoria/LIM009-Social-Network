@@ -38,20 +38,20 @@ export const getDataDoc = users => {
     return docRef.get()
 }
 
-export const createComentPost = (idPost, user, comment, fechaComment) => {
+export const createCommentPost = (idPost, user, comment, fechaComment) => {
     let db = firebase.firestore();
-    let comentPost = db.collection('posts').doc(`${idPost.id}`)
+    return db.collection('posts').doc(`${idPost}`)
         .collection('comment').add({
             user: user,
             comment: comment,
             fecha: fechaComment
 
         })
-    return comentPost
+    // return comentPost
 }
 export const getPost = (idPost) => {
     let db = firebase.firestore();
-    return db.collection('posts').doc(`${idPost.id}`).collection('comment')
+    return db.collection('posts').doc(`${idPost}`).collection('comment')
 }
 export const viewListPostPrivate = (idUser) => {
     let db = firebase.firestore();
@@ -69,11 +69,14 @@ export const likesPost = (id, like) => {
 }
 export const deletePost = id => {
     let db = firebase.firestore();
-    return db.collection("posts").doc(id).delete().then(() => {
-        console.log("Document successfully deleted!");
-    }).catch((error) => {
-        console.error("Error removing document: ", error);
-    });
+    return db.collection("posts").doc(id).delete()
+}
+export const editPost = (id, description, state) => {
+    let db = firebase.firestore();
+    return db.collection("posts").doc(id).update({
+        description: description,
+        state: state
+    })
 }
 export const deleteComment = (idPost, id) => {
     let db = firebase.firestore();

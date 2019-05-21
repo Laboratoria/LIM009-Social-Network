@@ -24,7 +24,6 @@ import { getUserReady } from "./lib/comple-firebase.js";
 const getUserActiv = (user) => {
   welcomeUser(user)
   setUpPost(user)
-
 }
 
 const changeTmp = (hash) => {
