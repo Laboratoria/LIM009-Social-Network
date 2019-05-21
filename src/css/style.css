@@ -22,7 +22,9 @@ body {
  .center{
     margin:auto;
   }
-
+.container {
+    margin: 10% auto;
+}
  .style-input{
     width: 60%;
     margin-bottom: 3%;
@@ -219,6 +221,9 @@ color: rgba(49, 53, 53, 0.514)
         /*margin-bottom: 3%;*/
      }
  }
+ .div-style{
+     display: flex;
+ }
 
  @media screen and (min-width: 30em) {
      .col-md-12 { 
@@ -237,7 +242,7 @@ color: rgba(49, 53, 53, 0.514)
         float: left; 
         width: 50%; 
      } 
-     .col-12 { width: 100% ;}
+     .col-12 { max-width: 100% ;}
     /* img{
         max-width: 100%;
     }*/
@@ -274,6 +279,9 @@ color: rgba(49, 53, 53, 0.514)
         width: 58.3333333333%;
         float: left;
         margin-left: 6%;
+    }
+    .img-portada {
+        width: 100%;
     }
  }
 

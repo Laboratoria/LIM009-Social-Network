@@ -132,9 +132,6 @@ export default (user) => {
         // }
 
     });
-
-
-
     return root;
 };
 
