@@ -135,7 +135,7 @@ export default (user, posts) => {
               
 
                 <input type="file" id="image-file" class="hidden" accept="image/*"/><img class="icon-photograph" src="./css/img/6799.png_860.png">
-                <button id="btn-share-image" >Compartir Imagen</button></div>     
+                <button id="btn-share-image" >Guardar Imagen en Storage</button></div>     
 
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
@@ -153,7 +153,7 @@ export default (user, posts) => {
     divElement.querySelector("#btn-share-image").addEventListener('click', () => {
         const inputComment = divElement.querySelector("#input-comment").value;
         const inputStatus = divElement.querySelector('#private').checked;
-        handleFileUploadSubmit(inputComment, inputStatus, user.userId);
+        handleFileUploadSubmit(inputComment,user.userId,inputStatus);
     });
 
     const shareBtn = divElement.querySelector("#btn-share");

@@ -1,41 +1,36 @@
 .header {
     background-color: #313a52;
     min-height: 70px;
-    width: 100%;
     color: white;
     padding-top: 1%;
     height: auto;
+    max-width: 100vw;
 }
-
 .sub-container {
+    max-width: 1000px;
     position: absolute;
     top: 10%;
     margin: auto;
     width: 100%;
 }
-
 .user-name {
     height: 200px;
     margin: 3% 5% 5% 5%;
     outline: 2px solid gray;
 }
-
 .encabezado {
     height: 20%;
     background: #313a52;
     color: white;
     padding-left: 2%;
 }
-
 .imagen-fondo {
     width: 100%;
     height: auto;
 }
-
 .image {
     display: none;
 }
-
 .image-photo {
     width: 30%;
     height: 30%;
@@ -45,51 +40,41 @@
     float: left;
     margin: 8%;
 }
-
 .element {
     width: 100%;
     font-size: 100%;
     height: auto;
 }
-
 .nombre {
     width: 50%;
     float: right;
     text-align: left;
     margin: 7% 1% 0% 0%;
 }
-
 .photo {
     padding-top: 6px;
 }
-
 .menu {
     width: 100%;
     text-align: center;
 }
-
 .menu .small {
     width: 24%;
 }
-
 .menu .title {
     width: 50%;
 }
-
 .menu>li {
     float: left;
 }
-
 .menu * {
     list-style: none;
 }
-
 .menu li {
     display: inline-block;
     line-height: 180%;
     position: relative;
 }
-
 .menu .interior {
     display: none;
     position: absolute;
@@ -97,31 +82,25 @@
     background: rgba(17, 55, 90, 0.555);
     z-index: 100;
 }
-
 .menu li a {
     color: #ffffff;
     text-decoration: none;
     text-align: left;
 }
-
 .menu label:before {
     content: "\025b8";
     margin-right: 4px;
 }
-
 .menu input[name="list"] {
     position: absolute;
     left: -1000em;
 }
-
 .menu input:checked~label:before {
     content: "\025be";
 }
-
 .menu input:checked~ul {
     display: block;
 }
-
 .box {
     margin: 0 10% 5% 10%;
     width: 80%;
@@ -129,37 +108,30 @@
     display: block;
     outline: 2px solid gray;
 }
-
 .post-zone {
     height: auto;
 }
-
 .edit-zone {
     height: auto;
     width: auto;
     margin: 50% 10% 0% 10%;
 }
-
 .text-write, .text-comment {
     width: 80%;
     min-height: 50px;
     margin: 3% 10%;
     height: auto;
 }
-
 .text-write {
     min-height: 80px;
     height: auto;
 }
-
 .text-comment {
     outline: 1px solid gray;
 }
-
 .like-post {
     height: 10%;
 }
-
 .icon-photograph {
     position: relative;
     float: left;
@@ -167,7 +139,6 @@
     height: 40px;
     width: 40px;
 }
-
 .icons {
     position: relative;
     float: left;
@@ -175,23 +146,18 @@
     height: 35px;
     cursor: pointer;
 }
-
 .edit {
     margin-left: 1%;
 }
-
 .cerrar {
     margin-left: 55%;
 }
-
 .nombre-menu {
     display: none;
 }
-
 .sign-out-list {
     display: block;
 }
-
 .share {
     position: relative;
     float: right;
@@ -200,38 +166,37 @@
     width: auto;
     padding: 1%;
 }
-
 .delete {
     padding: 0;
     margin: auto;
     cursor: pointer;
 }
-
 .btn-delete {
     position: relative;
     float: right;
     height: auto;
 }
-
 .privacity {
     display: inline-block;
     width: 45%;
     padding: 1%;
     margin-left: 3%;
 }
-
 .filter fieldset {
     padding: 5%;
+   
 }
-
 .filter {
-    display: block;
-    width: 70%;
-    margin: auto;
-    padding: 0 5% 5% 5%;
+display:inline-block;
+    width: 50%;
+/*     margin: 0px auto auto 5% ;
+ */    padding: 0 5% 5% 5%;
     height: auto;
 }
-
+.orderBy{
+    display:inline-block;
+    width: 30%; 
+}
 /* .disabled{
     opacity: 0.5;
     position: relative;
@@ -240,17 +205,21 @@
     height: 35px;
     display: none;
 } */
-
 .inputfile {
-    opacity: 0; 
+    opacity: 0;  
     width: 30px;
     height: 30px;
     position: absolute;
-    top: 28%;
+    top: 16%;
     left: 19%;
     z-index: 10;
 }
-
+.inputfile2{
+    position: relative;
+    width: 15px;
+    float: left;
+    z-index: 20;
+}
 @media(min-width:760px) {
     .sub-container {
         position: relative;
@@ -305,8 +274,8 @@
         display: none;
     }
     .inputfile {
-        opacity: 0;
-        top: 10%;
+       /*  opacity: 0; */
+        top: 5%;
         left: 19%;
     }
 }

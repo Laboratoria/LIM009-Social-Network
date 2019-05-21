@@ -263,7 +263,7 @@ const getPostsInRealtime = (callback) => {
         callback(arr);
     })
 }; */
-
+/*
 const getIdPostsInRealtime = () => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
         const arrOfIdOfAllPost = [];
@@ -273,7 +273,7 @@ const getIdPostsInRealtime = () => {
         return arrOfIdOfAllPost;
 
     });
-};
+};*/
 
 
 
