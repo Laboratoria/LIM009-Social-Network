@@ -128,11 +128,11 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <input type="file" id="image-file" class="hidden"><img class="icon-photograph" src="./css/img/6799.png_860.png">
+                <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter" id="valores"><fieldset>
- <legend>¿Que publicaciones deseo ver?</legend>
+ <legend>¿Que publicaciones desea ver?</legend>
 <input type="radio" class='input-filter' name="filterPost" id="allPost" checked value="publicPost"><label for="allPost">Todas</label>
 <input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
 </fieldset></div>
@@ -188,7 +188,6 @@ export default (user, posts) => {
         estadosDePosts(posts, user);
     });
     estadosDePosts(posts, user);
-    console.log("aaaaaaaaaaaaaaaaaaa");
     /* imageFile.addEventListener('change', (event) => {
          const file = event.target.files[0];
          getImage(file)

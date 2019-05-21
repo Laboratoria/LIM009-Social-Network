@@ -5,14 +5,13 @@
     color: white;
     padding-top: 1%;
     height: auto;
-
 }
 
 .sub-container {
     position: absolute;
     top: 10%;
     margin: auto;
-    width:100%;
+    width: 100%;
 }
 
 .user-name {
@@ -68,6 +67,7 @@
     width: 100%;
     text-align: center;
 }
+
 .menu .small {
     width: 24%;
 }
@@ -75,6 +75,7 @@
 .menu .title {
     width: 50%;
 }
+
 .menu>li {
     float: left;
 }
@@ -88,6 +89,7 @@
     line-height: 180%;
     position: relative;
 }
+
 .menu .interior {
     display: none;
     position: absolute;
@@ -132,6 +134,12 @@
     height: auto;
 }
 
+.edit-zone {
+    height: auto;
+    width: auto;
+    margin: 50% 10% 0% 10%;
+}
+
 .text-write, .text-comment {
     width: 80%;
     min-height: 50px;
@@ -142,7 +150,6 @@
 .text-write {
     min-height: 80px;
     height: auto;
-
 }
 
 .text-comment {
@@ -152,7 +159,6 @@
 .like-post {
     height: 10%;
 }
-
 
 .icon-photograph {
     position: relative;
@@ -169,18 +175,23 @@
     height: 35px;
     cursor: pointer;
 }
-.edit{
+
+.edit {
     margin-left: 1%;
 }
-.cerrar{
+
+.cerrar {
     margin-left: 55%;
 }
+
 .nombre-menu {
     display: none;
 }
-.sign-out-list{
+
+.sign-out-list {
     display: block;
 }
+
 .share {
     position: relative;
     float: right;
@@ -189,41 +200,58 @@
     width: auto;
     padding: 1%;
 }
-.delete{
-   padding: 0; 
-   margin: auto;
-   cursor: pointer;
+
+.delete {
+    padding: 0;
+    margin: auto;
+    cursor: pointer;
 }
-.btn-delete{
+
+.btn-delete {
     position: relative;
     float: right;
     height: auto;
 }
-.privacity{
+
+.privacity {
     display: inline-block;
     width: 45%;
     padding: 1%;
+    margin-left: 3%;
 }
-.filter fieldset{
+
+.filter fieldset {
     padding: 5%;
 }
-.filter{
+
+.filter {
     display: block;
     width: 70%;
     margin: auto;
     padding: 0 5% 5% 5%;
     height: auto;
 }
-.disabled{
+
+/* .disabled{
     opacity: 0.5;
     position: relative;
     float: left;
     margin-left: 8%;
     height: 35px;
     display: none;
+} */
+
+.inputfile {
+    opacity: 0; 
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 28%;
+    left: 19%;
+    z-index: 10;
 }
-   
-@media(min-width:768px) {
+
+@media(min-width:760px) {
     .sub-container {
         position: relative;
         float: none;
@@ -273,7 +301,12 @@
         width: 50%;
         margin-left: 25%;
     }
-    .sign-out-list{
+    .sign-out-list {
         display: none;
+    }
+    .inputfile {
+        opacity: 0;
+        top: 10%;
+        left: 19%;
     }
 }
