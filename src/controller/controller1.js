@@ -344,7 +344,7 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
             console.log(url);
 
 
-            addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+            return addPostToCloudFirestore(inputComment, idUser, statusComment, url);
 
 
 
