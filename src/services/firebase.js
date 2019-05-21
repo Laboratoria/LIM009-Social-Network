@@ -30,19 +30,17 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 
-const addPostToCloudFirestore = (inputComment, idUser, statusComment, 
-    //photoUrl
-    ) =>
+const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) =>
     dataBaseCloudFirestore().collection('posts').add({
         content: inputComment,
         userId: idUser,
         state: statusComment,
         likes: 0,
-    //    photo: photoUrl,
-   
+        photoPost: photo,
     }).then(function(docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
+
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
@@ -86,11 +84,13 @@ const upLoadImageToFirestore = (file, callback) => {
 
 const upLoadImageToFirestore = (date, image) => {
     const ref = firebase.storage().ref();
-   const task = ref.child(`images/${date}-${image.name}`);
+    const task = ref.child(`images/${date}-${image.name}`);
     const metadata = { contentType: image.type };
     return task.put(image, metadata)
-   
+
 };*/
+
+
 
 
 

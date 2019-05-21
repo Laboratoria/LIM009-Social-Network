@@ -11,6 +11,7 @@ import {
     //editPostInCloudFireStore,
     //upLoadImageToFirestore,
 
+
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -196,9 +197,7 @@ const createPostInCloudFirestore = () => {
     }
     const idUser = currentUser().uid;
     console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser, status, 
-        //photoImg
-        );
+    return addPostToCloudFirestore(inputComment, idUser, status, "");
 };
 
 const deletePostAfterClick = (e) => {
@@ -251,6 +250,18 @@ const getPostsInRealtime = (callback) => {
     });
 };
 
+const getIdPostsInRealtime = () => {
+    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+        const arrOfIdOfAllPost = [];
+        arrOfAllPosts.forEach((onePost) => {
+            arrOfIdOfAllPost.push(onePost.id);
+        })
+        return arrOfIdOfAllPost;
+
+    });
+};
+
+
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
     if (currentUser()) { // si el usuario ha iniciado sesion y existe un current user
@@ -267,6 +278,70 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 
 };
+<<<<<<< HEAD
+=======
+
+
+
+/*
+const getImage = () => {
+    const date = new Date();
+    const file = document.querySelector('#image-file').files[0];
+    return upLoadImageToFirestore(date, file)
+
+
+};*/
+
+
+let selectedFile;
+
+const handleFileUploadChange = (e) => {
+
+
+    selectedFile = e.target.files[0];
+};
+
+
+const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
+    const storageService = firebase.storage();
+    const storageRef1 = storageService.ref();
+    const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+
+
+    uploadTask.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+    }, (error) => {
+        // Handle unsuccessful uploads
+        console.log(error);
+    }, () => {
+        // Do something once upload is complete
+        const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
+        downloadImg.then((url) => {
+            console.log(url);
+
+
+            addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+
+
+
+
+
+        });
+
+    });
+
+};
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 3519433c99040efdc110212c3a13fdc46760f6f0
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
@@ -319,7 +394,9 @@ export {
     //getImage,
     editProfile,
     likesForPosts,
-    getImage,
+    //getImage,
+    handleFileUploadChange,
+    handleFileUploadSubmit,
 
 
 };
