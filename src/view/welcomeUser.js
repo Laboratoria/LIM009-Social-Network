@@ -44,7 +44,7 @@ export default (user) => {
       <progress value="0" max="100" id="uploader" class = 'progress'>0%</progress>
       <input type="file" value="upload" id="file-button" class='btn-image-post'/>        
       </div >       
-      <select name="" id="estado-post" class = 'btn-post-create'>
+      <select id="estado-post" class = 'btn-post-create'>
       <option value="publico" select>Público</option>
       <option value="privado" select>Privado</option>
       </select>
@@ -93,11 +93,12 @@ export default (user) => {
         let selectState = state.value;
         let description = document.querySelector('#description').value;
         let userID = document.querySelector('#user-id').textContent;
-        if (selectImage === undefined && selectState === 'publico') {
-            createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)
-        } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
+
+
+
+        if(selectState === 'publico' || selectState === 'privado' && selectImage === undefined ) {
             createPost(selectState, './image/image-post.png', fechaPost, description, userID, horaPost)
-        } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
+        } else if(selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
                 // console.log(image)
                 imagePostView.src = image
@@ -105,16 +106,28 @@ export default (user) => {
             }
             imageFirestore(selectImage, uploader, getImage)
         }
-        else if (selectState === 'Amigos' && selectImage !== undefined) {
-            const getImage = (image) => {
-                // console.log(image)
-                imagePostView.src = image
-                createPost('publico', image, fechaPost, description, userID, horaPost)
-            }
-            imageFirestore(selectImage, uploader, getImage)
-        }
 
-    })
+        // if (selectImage === undefined && selectState === 'publico') {
+        //     createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)             
+        // } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
+        //     createPost(selectState, './image/image-post.png', fechaPost, description, userID, horaPost)
+        // } else if  (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
+        //     const getImage = (image) => {
+        //         // console.log(image)
+        //         imagePostView.src = image
+        //         createPost(selectState, image, fechaPost, description, userID, horaPost)
+        //     }
+        //     imageFirestore(selectImage, uploader, getImage)
+        // } else if (selectState === 'publico' && selectImage !== undefined) {
+        //     const getImage = (image) => {
+        //         // console.log(image)
+        //         imagePostView.src = image
+        //         createPost('publico', image, fechaPost, description, userID, horaPost)
+        //     }
+        //     imageFirestore(selectImage, uploader, getImage)
+        // }
+
+    });
 
 
 

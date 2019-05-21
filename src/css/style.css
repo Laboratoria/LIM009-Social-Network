@@ -21,8 +21,7 @@ body {
 
  .center{
     margin:auto;
-    padding: 1.5%;
- }
+  }
 
  .style-input{
     width: 60%;
@@ -71,15 +70,12 @@ button:hover{
 .margin-top{
     margin-top : 3%;   
 }
-.style-color-header{
-    /* margin :2%; */
-    border: 0.7px solid rgba(37, 4, 90, 0.37);
+/*.style-color-header{
     padding: 1%;
     border-radius: 3%;
     margin: 1%;
-    /* background: rgba(0, 0, 0, 0.185); */
     color: rgb(100, 0, 0)
-}
+}*/
 
 .edit-perfil{
     display: flex;
@@ -101,9 +97,8 @@ a:hover{
     display: flex;
     flex-direction: column;
     /* box-shadow: 2px 6px 5px 5px rgba(16, 7, 36, 0.486); */
-    padding: 2%;
     background: white;
-    width:85%;
+    width:70%;
     /* color: rgb(24, 13, 13) */
 }
 .header-post{
@@ -115,9 +110,9 @@ a:hover{
     align-content: center    
  }
  .img-perfil-post{        
-    height: 2rem;
-    border-radius: 50%;
-    margin-right: 2%;       
+    height: 1rem;
+    /*border-radius: 50%;*/
+    margin: 3%;       
 }
 .img-post{ 
     width: 25%;
@@ -161,7 +156,6 @@ a:hover{
 }
 .style-content-footer{
     display: flex;
-    padding: 2%;
     height: 4rem;
     }
 
@@ -170,11 +164,11 @@ a:hover{
     margin: 2%;
 }
 .progress{
-    width: 15%;
+width: 15%;
   margin: 2%;
 }
 .margin-footer{
-    margin:auto 5% auto 5%;
+    margin:2% 5%;
 }
 .style-content-post-img{
 display: flex;
@@ -184,7 +178,9 @@ padding: 2%;
     opacity: 0;
 }
 .btn-post-edit-del{
-    padding-left: 80%;
+  display: inline-flex;
+  background-color: rgba(49, 172, 111, 0.719);
+  color: white;
 }
 .color-fecha{
 color: rgba(49, 53, 53, 0.514)
@@ -194,11 +190,6 @@ color: rgba(49, 53, 53, 0.514)
 }
 .color-menu-post{
     background: rgba(101, 221, 53, 0.116)
-}
-.size-state-post{
-   margin-left: 75%;
-   margin-bottom: 3%;
-    width: 20%;
 }
 
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
@@ -220,6 +211,13 @@ color: rgba(49, 53, 53, 0.514)
         /* justify-content: center;   */
         /* align-content: center     */
      }
+     .content-post {
+         margin-top: 2%;
+     }
+     .size-state-post{
+        margin-left: 40%;
+        /*margin-bottom: 3%;*/
+     }
  }
 
  @media screen and (min-width: 30em) {
@@ -240,9 +238,9 @@ color: rgba(49, 53, 53, 0.514)
         width: 50%; 
      } 
      .col-12 { width: 100% ;}
-     img{
+    /* img{
         max-width: 100%;
-    }    
+    }*/
     .style-border{
         /* width: 50%; */
         margin-top:3%;
@@ -260,6 +258,10 @@ color: rgba(49, 53, 53, 0.514)
         background-color: rgb(6, 129, 68, 0.60);
         color: white
     }
+    .size-state-post{
+        margin-left: 35%;
+        /*margin-bottom: 3%;*/
+     }
     .col-6{    
         width: 50%;  
         }
@@ -271,8 +273,10 @@ color: rgba(49, 53, 53, 0.514)
     .col-7{
         width: 58.3333333333%;
         float: left;
+        margin-left: 6%;
     }
  }
+
 
 
 
