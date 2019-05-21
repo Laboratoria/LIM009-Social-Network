@@ -7,7 +7,7 @@ export const imageFirestore = (file, uploader, callback) => {
     // Subir archivo
     let uploadTask = storageRef.put(file, metadata);
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         function (snapshot) {
 
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
