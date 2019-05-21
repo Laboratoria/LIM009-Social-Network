@@ -431,7 +431,7 @@ export {
     
     editProfile,
 
-    getImage,
+   // getImage,
   likesForPosts,
    
     handleFileUploadChange,
