@@ -237,7 +237,7 @@ const editPost = (id,description) => {
 }
 
 export const editPErfilUser = (idUser, name, email) => {
-  updatePerfilUser(idUser, name).then(() => {
+    updatePerfilUser(idUser, name).then(() => {
     // Update successful.
     alert('Nombre se actualizó correctamente')
     updateEmailUser(idUser, email).then(() => {

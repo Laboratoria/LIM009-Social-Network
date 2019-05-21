@@ -31,7 +31,7 @@ describe('createPost', () => {
     .then(() => getPosts(
       (data) => {
         const result = data.find((posts) => posts.description === 'Hola de nuevo');
-        expect(result.mensaje).toBe('Hola de nuevo');
+        expect(result.description).toBe('Hola de nuevo');
         done()
       }
     ))
