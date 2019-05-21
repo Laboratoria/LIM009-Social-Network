@@ -126,7 +126,7 @@ export default (user, posts) => {
         <div id="add-comment-form" class="write-post box">
             <textarea id="input-comment" class="text-write"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
-                <input type="file" id="image-file" class="inputfile"  accept="image/*"/><img class="icon-photograph" src="./css/img/6799.png_860.png">          
+                <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">          
                 <button id="btn-share-image" class="inputfile2">Imagen</button>              
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
@@ -144,7 +144,7 @@ export default (user, posts) => {
     divElement.querySelector("#btn-share-image").addEventListener('click', () => {
         const inputComment = divElement.querySelector("#input-comment").value;
         const inputStatus = divElement.querySelector('#private').checked;
-        handleFileUploadSubmit(inputComment,user.userId,inputStatus);
+        handleFileUploadSubmit(inputComment, inputStatus, user.userId);
     });
 
     const shareBtn = divElement.querySelector("#btn-share");
