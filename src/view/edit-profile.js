@@ -35,8 +35,13 @@ export default (user) => {
     </main>
     </div>
 `;
-/*   */
-//
+if (user.age === undefined|| user.sex === undefined || user.country === undefined) {
+   
+    divElement.querySelector('#user-age').style.display = 'none';
+    divElement.querySelector('#user-sex').style.display = 'none';
+    divElement.querySelector('#user-birth-country').style.display = 'none';
+
+}
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
     const btnSave=divElement.querySelector('#btn-save-profile');
