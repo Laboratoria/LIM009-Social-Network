@@ -190,7 +190,9 @@ padding: 2%;
 color: rgba(49, 53, 53, 0.514)
 }
 .textarea-coment{
-    height: 3rem;
+    height: 3
+    
+    rem;
 }
 .color-menu-post{
     background: rgba(101, 221, 53, 0.116)

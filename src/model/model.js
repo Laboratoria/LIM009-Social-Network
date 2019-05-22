@@ -80,12 +80,7 @@ export const editPost = (id, description, state) => {
         state: state
     })
 }
-export const deleteComment = (idPost, id) => {
 
-    let db = firebase.firestore();
-    return db.collection('posts').doc(`${idPost.id}`).collection('comemt').doc(id).get()
-
-}
 //Crear post con IDs por defecto
 export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
 

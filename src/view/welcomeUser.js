@@ -81,12 +81,12 @@ export default (user) => {
         };
         fr.readAsDataURL(e.target.files[0]);
     }
-
+    state.onchange = () => {
+        console.log('holaaaaaaaaa')
+    }
 
     btnSharePost.addEventListener('click', () => {
-        state.onchange = () => {
-            console.log(state.value)
-        }
+
         let fecha = new Date();
         let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         let horaPost = `${fecha.getHours()}:${fecha.getMinutes()}`
@@ -100,6 +100,7 @@ export default (user) => {
             createPost(selectState, './image/image-post.png', fechaPost, description, userID, horaPost)
         } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
+
                 // console.log(image)
                 imagePostView.src = image
                 createPost(selectState, image, fechaPost, description, userID, horaPost)

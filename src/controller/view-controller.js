@@ -200,6 +200,21 @@ export const editPost = (id, description, state) => {
     });
 
 }
+export const deleteComment = (idPost, id) => {
+  // var cityRef = db.collection('cities').doc('BJ');
+
+  // // Remove the 'capital' field from the document
+  // var removeCapital = cityRef.update({
+  //     capital: firebase.firestore.FieldValue.delete()
+  // });
+  let db = firebase.firestore();
+  let date = db.collection('posts').doc(`${idPost.id}`).collection('comemt').doc('sXdGmTVqFFzBA05DFU00').delete().then(() => {
+    console.log("Document successfully deleted!");
+  }).catch((error) => {
+    console.error("Error removing document: ", error);
+  });
+
+}
 
 export const editPErfilUser = (idUser, name, email) => {
   updatePerfilUser(idUser, name).then(() => {

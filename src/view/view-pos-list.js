@@ -1,4 +1,4 @@
-import { likesPost, getDataDoc, getPost, createCommentPost, deleteComment } from '../model/model.js'
+import { likesPost, getDataDoc, getPost, createCommentPost } from '../model/model.js'
 import { editPost, deletePost } from '../controller/view-controller.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js'
@@ -106,9 +106,9 @@ export default (doc, getUser, post, idUserAuth) => {
         getPost(doc.id).onSnapshot(snapshot => {
           contComentList.innerHTML = ''
           snapshot.forEach(function (result) {
-            deleteComment(doc, result.id)//poner a la vista de comentario
+            // deleteComment(doc, result.id)//poner a la vista de comentario
             console.log(result.id, " => ", result.data());
-            contComentList.appendChild(viewformComent(result.data(), doc))
+            contComentList.appendChild(viewformComent(result, doc, idUserAuth))
           })
 
         })
@@ -117,7 +117,7 @@ export default (doc, getUser, post, idUserAuth) => {
       getPost(doc.id).get().then(function (querySnapshot) {
         contComentList.innerHTML = ''
         querySnapshot.forEach(function (idPost) {
-          contComentList.appendChild(viewformComent(idPost.data(), doc))
+          contComentList.appendChild(viewformComent(idPost, doc, idUserAuth))
           // doc.data() is never undefined for query doc snapshots
           console.log(idPost.id, " => ", idPost.data());
         });

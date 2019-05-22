@@ -3,7 +3,7 @@ import { registerUser } from '../controller/view-controller.js'
 export default () => {
   const formRegister = document.createElement('div');
   const templateRegister = `
-    <div class= 'col-12 col-xs-12 style-border'>
+    <div class= ''>
     <div class= ' col-12 center'>
     <header><img src="./image/logo.png" alt="educacion" class='block center'>
        <h2 class='center'>  << Por una educación respetuosa >>  </h2>
