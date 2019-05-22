@@ -1,9 +1,9 @@
 import { signUpAfterClick } from "../controller/controller1.js";
 
 export default () => {
-  const divElement = document.createElement("div");
-  divElement.setAttribute("class", "container");
-  divElement.innerHTML = `
+    const divElement = document.createElement("div");
+    divElement.setAttribute("class", "container");
+    divElement.innerHTML = `
   <aside class="left ancho">
   <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
 </aside>
@@ -25,12 +25,19 @@ export default () => {
       <p class="parrafo">Si ya tienes una cuenta <a href="">Inicia sesión</a></p>
   </div>
 </main>`;
-  const registerClick = divElement.querySelector("#btn-sign-up");
-  registerClick.addEventListener("click", signUpAfterClick);
-  return divElement;
+    const registerClick = divElement.querySelector("#btn-sign-up");
+    const email2 = divElement.querySelector('#email2');
+    const password2 = divElement.querySelector('#password2');
+    const userName = divElement.querySelector('#name');
+    const userAge = divElement.querySelector('#age');
+    const userSex = divElement.querySelector('#sex');
+    const userBirthCountry = divElement.querySelector('#birth-country');
+    const userUrlPhoto = divElement.querySelector('#user-photo');
+    const userFilePhoto = divElement.querySelector("#user-photo2");
+    registerClick.addEventListener("click", () => {
+        signUpAfterClick(email2.value, password2.value, userName.value, userAge.value, userSex.value, userBirthCountry.value, userUrlPhoto.value, userFilePhoto.value);
+
+
+    });
+    return divElement;
 };
-
-
-
-
-

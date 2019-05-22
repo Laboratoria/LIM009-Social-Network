@@ -29,21 +29,34 @@ const dataBaseCloudFirestore = () => {
 const currentUser = () => {
     return firebase.auth().currentUser
 };
+const promiseOfSetFirebase = (nameCollection, docId, obj) => {
+    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).set(obj);
+}
+const promiseOfgetFirebase = (nameCollection, docId) => {
+    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).get();
+}
+const promiseOfdeleteFirebase = (nameCollection, docId) => {
+    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).delete();
+}
+const promiseOfUpdateFirebase = (nameCollection, docId, obj) => {
+    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).update(obj);
+}
+const promiseOnSnapshotFirebase = (nameCollection, callback) => {
+    return dataBaseCloudFirestore().collection(nameCollection).onSnapshot(callback);
+}
+const firebaseAuthState = (callback) => {
+    return firebase.auth().onAuthStateChanged(callback);
+}
+const promiseOfAddFirebase = (nameCollection, obj) => {
+    return dataBaseCloudFirestore().collection(nameCollection).add(obj);
+}
 
-const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) =>
-    dataBaseCloudFirestore().collection('posts').add({
-        content: inputComment,
-        userId: idUser,
-        state: statusComment,
-        likes: 0,
-        photoPost: photo,
-    }).then(function(docRef) {
-        console.log(docRef);
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+
+
+
+
+
+/*
 const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
     const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
@@ -60,7 +73,6 @@ const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
         alert("You can not delete a comment which was not published by you");
     }
 };
-/*
 
 const upLoadImageToFirestore = (file, callback) => {
     //create ref
@@ -108,7 +120,13 @@ export {
     signOut,
     dataBaseCloudFirestore,
     currentUser,
-    addPostToCloudFirestore,
-    deletePostInCloudFireStore,
+    //  deletePostInCloudFireStore,
+    promiseOfSetFirebase,
+    promiseOfgetFirebase,
+    promiseOfdeleteFirebase,
+    promiseOfUpdateFirebase,
+    promiseOnSnapshotFirebase,
+    firebaseAuthState,
+    promiseOfAddFirebase
     // upLoadImageToFirestore,
 };
