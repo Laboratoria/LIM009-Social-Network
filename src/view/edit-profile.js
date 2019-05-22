@@ -1,4 +1,4 @@
-import { signOutUser,editProfile, } from "../controller/controller1.js";
+import { signOutUser, editProfile, } from "../controller/controller1.js";
 export default (user) => {
     console.log(user)
     const divElement = document.createElement("div");
@@ -35,47 +35,47 @@ export default (user) => {
     </main>
     </div>
 `;
-if (user.age === undefined|| user.sex === undefined || user.country === undefined) {
-   
-    divElement.querySelector('#user-age').style.display = 'none';
-    divElement.querySelector('#user-sex').style.display = 'none';
-    divElement.querySelector('#user-birth-country').style.display = 'none';
+    if (user.age === undefined || user.sex === undefined || user.country === undefined) {
 
-}
+        divElement.querySelector('#user-age').textContent = '';
+        divElement.querySelector('#user-sex').textContent = '';
+        divElement.querySelector('#user-birth-country').textContent = '';
+
+    }
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
-    const btnSave=divElement.querySelector('#btn-save-profile');
-    const editProfileButton=divElement.querySelector('#btn-edit-profile'); 
-    const fullName=divElement.querySelector('#full-name');
-    const userAge=divElement.querySelector('#user-age');
-    const userSex=divElement.querySelector('#user-sex');
-    const userBirthCountry=divElement.querySelector('#user-birth-country');
-    editProfileButton.addEventListener('click',()=>{
-    fullName.setAttribute('contenteditable',true);
-    userAge.setAttribute('contenteditable',true);
-    userSex.setAttribute('contenteditable',true);
-    userBirthCountry.setAttribute('contenteditable',true);
+    const btnSave = divElement.querySelector('#btn-save-profile');
+    const editProfileButton = divElement.querySelector('#btn-edit-profile');
+    const fullName = divElement.querySelector('#full-name');
+    const userAge = divElement.querySelector('#user-age');
+    const userSex = divElement.querySelector('#user-sex');
+    const userBirthCountry = divElement.querySelector('#user-birth-country');
+    editProfileButton.addEventListener('click', () => {
+        fullName.setAttribute('contenteditable', true);
+        userAge.setAttribute('contenteditable', true);
+        userSex.setAttribute('contenteditable', true);
+        userBirthCountry.setAttribute('contenteditable', true);
 
-});
-
-  btnSave.addEventListener('click',()=>{
-    fullName.setAttribute('contenteditable',false);
-    userAge.setAttribute('contenteditable',false);
-    userSex.setAttribute('contenteditable',false);
-    userBirthCountry.setAttribute('contenteditable',false);
-const newFullName=fullName.textContent;
-
-const newAge=userAge.textContent;
-const newSex=userSex.textContent;
-const newBirthCountry=userBirthCountry.textContent;
-
-console.log(newFullName);
-console.log(newAge);
-console.log(newSex);
-console.log(newBirthCountry);
-editProfile(newFullName,newAge,newSex,newBirthCountry,user.userId);
     });
 
-   
+    btnSave.addEventListener('click', () => {
+        fullName.setAttribute('contenteditable', false);
+        userAge.setAttribute('contenteditable', false);
+        userSex.setAttribute('contenteditable', false);
+        userBirthCountry.setAttribute('contenteditable', false);
+        const newFullName = fullName.textContent;
+
+        const newAge = userAge.textContent;
+        const newSex = userSex.textContent;
+        const newBirthCountry = userBirthCountry.textContent;
+
+        console.log(newFullName);
+        console.log(newAge);
+        console.log(newSex);
+        console.log(newBirthCountry);
+        editProfile(newFullName, newAge, newSex, newBirthCountry, user.userId);
+    });
+
+
     return divElement;
-  };
+};
