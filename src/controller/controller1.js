@@ -1,4 +1,3 @@
-
 import {
     signIn,
     signUp,
@@ -14,7 +13,8 @@ import {
     promiseOnSnapshotFirebase,
     firebaseAuthState,
     promiseOfAddFirebase,
-    promiseGetSubcollection
+    promiseGetSubcollection,
+    getUrlImageFromStorage,
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -29,7 +29,7 @@ const signInAfterClick = (email, password) => {
             .then((cred) => {
                 changeHash('#/user-profile');
             })
-            .catch((error)=> {
+            .catch((error) => {
                 // Handle Errors here.
                 let errorCode = error.code;
                 let errorMessage = error.message;
@@ -100,7 +100,7 @@ const signInWithGoogleAfterClick = () => {
                 photo: userPhoto,
             });
         })
-        .catch((error)=> {
+        .catch((error) => {
             // Handle Errors here.
             let errorCode = error.code;
             let errorMessage = error.message;
@@ -148,7 +148,7 @@ const signInWithFacebookAfterClick = () => {
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
-        .catch((error)=> {
+        .catch((error) => {
             let errorCode = error.code;
             let errorMessage = error.message;
             console.log('Paso por aqui');
@@ -158,10 +158,10 @@ const signOutUser = () => {
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return promiseOfgetFirebase('users', uid)
-        .then((doc)=> {
+        .then((doc) => {
             // console.log(doc.data()
             return doc.data(); // retorna una promesa
-        }).catch((error)=> {
+        }).catch((error) => {
             console.log("Error getting document:", error);
         });
 };
@@ -238,25 +238,25 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
             state: statusComment,
             likes: 0,
             photoPost: photo,
-        }).then((docRef)=> {
+        }).then((docRef) => {
             console.log(docRef);
             console.log("Document written with ID: ", docRef.id);
         })
-        .catch((error)=>{
+        .catch((error) => {
             console.error("Error adding document: ", error);
         });
 
 };
 
 const generateSubcollections = (postId, idUser, name) => {
-    promiseOfSubcollection('posts',postId,'usersOfLikes', {
+    promiseOfSubcollection('posts', postId, 'usersOfLikes', {
             userId: idUser,
             nameOfUser: name,
-        }).then((docRef) =>{
+        }).then((docRef) => {
             //console.log(docRef);
             console.log("El id del usuario que dio click es: ", docRef.id);
         })
-        .catch((error)=> {
+        .catch((error) => {
             console.error("Error adding document of likes: ", error);
         });
 
@@ -264,24 +264,9 @@ const generateSubcollections = (postId, idUser, name) => {
 
 const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, selectedFile) => {
     if (selectedFile !== undefined) {
-        const storageService = firebase.storage().ref();
-        const uploadTask = storageService.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
-        uploadTask.on('state_changed', (snapshot) => {
-            // Observe state change events such as progress, pause, and resume
-            let percentage = (snapshot.bytesTransferred /
-                snapshot.totalBytes) * 100;
-            progress.value = percentage;
-        }, (error) => {
-            // Handle unsuccessful uploads
-            console.log(error);
-        }, () => {
-            // Do something once upload is complete
-            const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
-            return downloadImg.then((url) => {
-                console.log(url);
-                addPostToCloudFirestore(inputComment, idUser, statusComment, url);
-            });
-        });
+        getUrlImageFromStorage(selectedFile, progress, (url) => {
+            addPostToCloudFirestore(inputComment, idUser, statusComment, url)
+        })
     } else {
         addPostToCloudFirestore(inputComment, idUser, statusComment, '');
     }
@@ -294,16 +279,16 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
             sex: sex1,
             country: birthCountry,
         })
-        .then(()=> {
+        .then(() => {
             console.log("Document successfully updated!");
         })
-        .catch((error)=> {
+        .catch((error) => {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
 };
-const getUsersLikesInRealtime = (postId,callback) => {
-   promiseGetSubcollection('posts',postId,'usersOfLikes', (arrAllOfUsers) => {
+const getUsersLikesInRealtime = (postId, callback) => {
+    promiseGetSubcollection('posts', postId, 'usersOfLikes', (arrAllOfUsers) => {
         let arrOfUsers = [];
         arrAllOfUsers.forEach((data) => {
             arrOfUsers.push({ id: data.id, ...data.data() });
@@ -316,10 +301,10 @@ const likesForPosts = (postId, contador1) => {
     promiseOfUpdateFirebase('posts', postId, {
             likes: contador1,
         })
-        .then(()=>{
+        .then(() => {
             console.log("Document successfully updated!");
         })
-        .catch((error)=> {
+        .catch((error) => {
             console.error("Error updating document: ", error);
         });
 };

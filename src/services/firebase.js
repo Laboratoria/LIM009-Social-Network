@@ -55,50 +55,27 @@ const promiseOfSubcollection = (name, postId, subName, obj) => {
 const promiseGetSubcollection = (nameCollection, docId, subName, callback) => {
     return dataBaseCloudFirestore().collection(nameCollection).doc(docId).collection(subName).onSnapshot(callback);
 }
-/*
-const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
-    const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
-    console.log(uidOfCurrentUser); // id del usuario logueado actual 
-    console.log(idUserOfPost); // id del usuario  dentro del objeto post
-    console.log(idPost); // id del post
-    if (uidOfCurrentUser === idUserOfPost) {
-        dataBaseCloudFirestore().collection("posts").doc(idPost).delete().then(() => {
-            console.log("Document successfully deleted!");
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
+const getUrlImageFromStorage = (selectedFile, progress, callback) => {
+    const storageService = firebase.storage().ref().child(`images/${selectedFile.name}`).put(selectedFile);
+    storageService.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        var percentage = (snapshot.bytesTransferred /
+            snapshot.totalBytes) * 100;
+        progress.value = percentage;
+    }, (error) => {
+        // Handle unsuccessful uploads
+        console.log(error);
+    }, () => {
+        // Do something once upload is complete
+        storageService.snapshot.ref.getDownloadURL().then((url) => {
+            console.log(url);
+            callback(url);
         });
-    } else {
-        alert("You can not delete a comment which was not published by you");
-    }
-};
+    });
 
-const upLoadImageToFirestore = (file, callback) => {
-    //create ref
-    const storageRef = firebase.storage().ref()
-    const imageRef = storageRef.child(`images/${file.name}`)
+}
 
-    //update file to fb storage
-    const task = imageRef.put(file)
-    return task.on('state_changed', (snapshot) => {},
-     (error) => {}, 
-     () => {
-        //get updated img url
-        const downloadImg = task.snapshot.ref.getDownloadURL()
-        downloadImg.then(callback)
-        return callback;
-    })
-};*/
-
-/*
-
-const upLoadImageToFirestore = (date, image) => {
-    const ref = firebase.storage().ref();
-    const task = ref.child(`images/${date}-${image.name}`);
-    const metadata = { contentType: image.type };
-    return task.put(image, metadata)
-
-};*/
 
 export {
     signUp,
@@ -115,5 +92,6 @@ export {
     firebaseAuthState,
     promiseOfAddFirebase,
     promiseOfSubcollection,
-    promiseGetSubcollection
+    promiseGetSubcollection,
+    getUrlImageFromStorage
 };
