@@ -8,19 +8,13 @@ import {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    //editPostInCloudFireStore,
-    //upLoadImageToFirestore,
-
-
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
     location.hash = hash;
 };
 
-const signInAfterClick = () => {
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
+const signInAfterClick = (email, password) => {
     if (email === '' || password === '') {
         alert('Completa tus datos para ingresar');
     } else {
@@ -49,19 +43,8 @@ const signInAfterClick = () => {
     }
 };
 
-
-
 // cambiar nombre de la funcion **********
-const signUpAfterClick = () => {
-    const email2 = document.querySelector('#email2').value;
-    const password2 = document.querySelector('#password2').value;
-    const userName = document.querySelector('#name').value;
-    const userAge = document.querySelector('#age').value;
-    const userSex = document.querySelector('#sex').value;
-    const userBirthCountry = document.querySelector('#birth-country').value;
-    const userUrlPhoto = document.querySelector('#user-photo').value;
-    const userFilePhoto = document.querySelector("#user-photo2").value;
-
+const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBirthCountry, userUrlPhoto, userFilePhoto) => {
     // cambios *******
     if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' || userAge === '' || userSex === '' || userBirthCountry === '') {
         alert('Completa tus datos para registrarte');
@@ -70,7 +53,7 @@ const signUpAfterClick = () => {
             .then((cred) => { // afinar nombres *********
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
-                return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
+                return dataBaseCloudFirestore('users', cred.user.uid).set({
                         name: userName,
                         age: userAge,
                         sex: userSex,
@@ -87,7 +70,6 @@ const signUpAfterClick = () => {
                         alert('Registrado exitosamente');
                     })
                     .then(() => changeHash(''))
-
             })
     }
 };
@@ -105,14 +87,12 @@ const signInWithGoogleAfterClick = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const idUser = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
+            return dataBaseCloudFirestore('users', idUser).set({
                 name: userName,
                 userId: idUser,
                 email: userEmail,
                 photo: userPhoto,
             });
-
-
         })
         .catch(function(error) {
             // Handle Errors here.
@@ -141,7 +121,7 @@ const signInWithFacebookAfterClick = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const idUser = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
+            return dataBaseCloudFirestore('users', idUser).set({
                 name: userName,
                 userId: idUser,
                 email: userEmail,
@@ -181,35 +161,10 @@ const getDataOfUser = (uid) => {
         });
 };
 
-
-
-
-/*
-const createPostInCloudFirestore = () => {
-    event.preventDefault();
-    const inputComment = document.querySelector("#input-comment").value;
-    const inputStatus = document.querySelector('#private').checked;
-    console.log(inputStatus);
-    let status;
-    if (inputStatus) {
-        status = true;
-    } else {
-        status = false;
-    }
-    const idUser = currentUser().uid;
-    console.log(idUser);
-    return addPostToCloudFirestore(inputComment, idUser, status, "");
-};*/
-
-const deletePostAfterClick = (e) => {
-    console.log(e.target)
-    const postId = e.target.dataset.idPost;
-    const userIdOfPost = e.target.dataset.uidPost;
+const deletePostAfterClick = (postId, userIdOfPost) => {
     deletePostInCloudFireStore(postId, userIdOfPost)
 };
-
 const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) => {
-
     const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual   
     console.log(idPost); // id del post
     if (uidOfCurrentUser === idUserOfPost) {
@@ -228,18 +183,6 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
 
     }
 };
-const validar = () => {
-    const e = document.querySelector('#privatePost');
-    try {
-        if (e.checked == true) {
-            return 'myPosts';
-        } else if (e.checked == false) {
-            return 'publicPost';
-        }
-    } catch (err) {
-        return 'publicPost';
-    }
-};
 
 const getPostsInRealtime = (callback) => {
     dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
@@ -250,33 +193,6 @@ const getPostsInRealtime = (callback) => {
         callback(arrOfPosts);
     });
 };
-
-
-/* const getUsersAfterLikes = (postId,callback) => {
-    let subcollection = dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers');
-    let arr = [];
-    subcollection.onSnapshot((arrOfUsers) => {
-        arrOfUsers.forEach((elem) => {
-            arr.push({ id: elem.id, ...elem.data() })
-        })
-        //console.log(arr[0].uidLikesUser)
-        callback(arr);
-    })
-}; */
-/*
-const getIdPostsInRealtime = () => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
-        const arrOfIdOfAllPost = [];
-        arrOfAllPosts.forEach((onePost) => {
-            arrOfIdOfAllPost.push(onePost.id);
-        })
-        return arrOfIdOfAllPost;
-
-    });
-};*/
-
-
-
 // usuario activo 
 const getUserActive = (callback) => { //printUserinfo()
     if (currentUser()) { // si el usuario ha iniciado sesion y existe un current user
@@ -293,86 +209,34 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 };
 
-/* const likesForPosts = (postId, contador1) => {
-    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
-    console.log(contador1)
-    collectionPost.update({
-        likes: contador1,
-    })
-        .then(() => {
-            console.log("Document successfully updated!");
-        })
-        .catch((error) => { */
-
-
-/*
-const getImage = () => {
-    const date = new Date();
-    const file = document.querySelector('#image-file').files[0];
-    return upLoadImageToFirestore(date, file)
-
-
-};*/
-
-
-let selectedFile;
-
-const handleFileUploadChange = (e) => {
-
-
-    selectedFile = e.target.files[0];
-
-
-};
-
-const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress) => {
-    const storageService = firebase.storage();
-    const storageRef1 = storageService.ref();
-    const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
-
-
-    uploadTask.on('state_changed', (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        var percentage = (snapshot.bytesTransferred /
-            snapshot.totalBytes) * 100;
-        progress.value = percentage;
-    }, (error) => {
-        // Handle unsuccessful uploads
-        console.log(error);
-    }, () => {
-        // Do something once upload is complete
-        const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
-        return downloadImg.then((url) => {
-            console.log(url);
-
-            addPostToCloudFirestore(inputComment, idUser, statusComment, url);
-
-
-
-
-
-
-
+const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, selectedFile) => {
+    if (selectedFile !== undefined) {
+        const storageService = firebase.storage();
+        const storageRef1 = storageService.ref();
+        const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+        uploadTask.on('state_changed', (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            var percentage = (snapshot.bytesTransferred /
+                snapshot.totalBytes) * 100;
+            progress.value = percentage;
+        }, (error) => {
+            // Handle unsuccessful uploads
+            console.log(error);
+        }, () => {
+            // Do something once upload is complete
+            const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
+            return downloadImg.then((url) => {
+                console.log(url);
+                addPostToCloudFirestore(inputComment, idUser, statusComment, url);
+            });
         });
-
-    });
-
+    } else {
+        addPostToCloudFirestore(inputComment, idUser, statusComment, '');
+    }
 };
-
-
-
-
-
-
-
-
-
-
 
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
-
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
-
             name: name1,
             age: age1,
             sex: sex1,
@@ -385,22 +249,7 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-
 };
-/*
-const addClicksUsers = (postId, idOfUser) => {
-    return dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers').add({
-        uidLikesUser: idOfUser,
-    })
-        .then((docRef) => {
-            console.log(docRef)
-            console.log("users click successfully updated!");
-        })
-        .catch((error) => {
-            console.error("Error updating uid of users: ", error);
-        });
-};*/
-
 
 const likesForPosts = (postId, contador1) => {
     let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
@@ -424,20 +273,10 @@ export {
     signOutUser,
     getDataOfUser,
     getUserActive,
-
     deletePostAfterClick,
     editPostInCloudFireStore,
     getPostsInRealtime,
-    validar,
-    /*    likesForPosts,
-       getUsersAfterLikes,
-       addClicksUsers */
-
     editProfile,
-
-    // getImage,
     likesForPosts,
-
-    handleFileUploadChange,
     handleFileUploadSubmit,
 };

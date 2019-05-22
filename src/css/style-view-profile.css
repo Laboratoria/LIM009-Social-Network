@@ -270,6 +270,11 @@ p {
     z-index: 20;
 }
 
+.img-post {
+    height: 70px;
+    width: 70px;
+}
+
 @media(min-width:760px) {
     .sub-container {
         position: relative;

@@ -1,4 +1,4 @@
-import { signOutUser, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar /* likesForPosts */ , handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
+import { signOutUser, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, /* likesForPosts */ handleFileUploadSubmit } from "../controller/controller1.js";
 const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
@@ -6,7 +6,7 @@ const renderOnePost = (post, user, current) => {
   <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
 
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img src="${post.photoPost}" id="img-post" >
+  <img class="img-post" src="${post.photoPost}" id="img-post" >
   </div>
 
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
@@ -17,16 +17,15 @@ const renderOnePost = (post, user, current) => {
   `;
     label.setAttribute('class', "box");
 
-    /* getImage().then(snapshot => snapshot.ref.getDownloadURL())
-         .then((url) => {
-             console.log(url);
-             divElement.querySelector('#img-post').src = url;
-         })
-         .catch(console.error);*/
-
+    if (post.photoPost === '' || post.photoPost === null) {
+        label.querySelector('#img-post').style.display = 'none';
+    }
     const deleteButton = label.querySelector("#btn-delete");
     deleteButton.addEventListener('click', (e) => {
-        deletePostAfterClick(e);
+        console.log(e.target)
+        const postId = e.target.dataset.idPost;
+        const userIdOfPost = e.target.dataset.uidPost;
+        deletePostAfterClick(postId, userIdOfPost);
     });
 
     const divCommentContent = label.querySelector("#content-comment-div");
@@ -54,39 +53,7 @@ const renderOnePost = (post, user, current) => {
             divCommentContent.setAttribute("contenteditable", false);
         }
     });
-    /*     const likesButton = label.querySelector("#btn-likes");
-        // const likesButton2 = label.querySelector("#btn-likes2");
-        likesButton.addEventListener('click', () => {
-            getUsersAfterLikes(post.id, (arr) => {
-                arr.forEach((e) => {
-                    if (e.hasOwnProperty(uidLikesUser) && e.uidLikesUser === current.userId) {
-                        addClicksUsers(post.id, '')
-                        post.likes = post.likes - 1
-                    } else {
-                        addClicksUsers(post.id, current.userId)
-                        post.likes = post.likes + 1
-                    }
-                })
-                likesForPosts(post.id, post.likes);
-            })
-        }) */
-    /*     likesButton2.addEventListener('click', () => {
-            if (user.userId === current.uid) {
-                likesButton2.style.display = 'none';
-                likesButton.style.display = 'block';
-                likesForPosts(post.id, post.likes - 1, currentUser.uid);
-            };
-        }); */
 
-    /*      const changeLikes=label.querySelector("#boxLike");
-            const counterOfLikes=label.querySelector('#counter-likes');
-            changeLikes.addEventListener('change',(e)=>{
-                console.log(e);
-                let likes =post.likes;
-                e.target.setAttribute('value','true')
-                likesForPosts(post.id, likes+1)
-                counterOfLikes.innerHTML=likes+1;
-            })  */
     return label // que imprima una un post ,que se añada al ul element
 }
 
@@ -134,17 +101,20 @@ export default (user, posts) => {
  <legend>¿Que publicaciones desea ver?</legend>
 <input type="radio" class='input-filter' name="filterPost" id="allPost" checked value="publicPost"><label for="allPost">Todas</label>
 <input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
-</fieldset>
+</fieldset></div>
         <div id="comment-list"></div>
     </main>
 </div>
 `;
+
+    let selectedFile;
     const inputFile = divElement.querySelector("#image-file");
     inputFile.addEventListener('change',
         (e) => {
+
             if (inputFile.value !== "") {
                 console.log("file selected!!");
-                handleFileUploadChange(e)
+                selectedFile = e.target.files[0];
 
             } else if (inputFile.files.length === 0) {
                 alert("Por favor selecciona la image que quieres compartir")
@@ -154,9 +124,6 @@ export default (user, posts) => {
             }
 
         });
-    /*divElement.querySelector("#btn-share-image").addEventListener('click', () => {
-        
-    });*/
 
     const shareBtn = divElement.querySelector("#btn-share");
     //const btnPublic= divElement.querySelector("#allPost");
@@ -171,18 +138,25 @@ export default (user, posts) => {
         } else {
             status = false;
         }
-
-
-
-
-        return handleFileUploadSubmit(inputComment, user.userId, status, uploaderProgress);
-        // createPostInCloudFirestore();
-        //btnPublic.setAttribute('checked','true');
+        return handleFileUploadSubmit(inputComment, user.userId, status, uploaderProgress, selectedFile);
     });
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);
 
     const divCommentList = divElement.querySelector("#comment-list");
+
+    const validar = () => {
+        const e = divElement.querySelector('#privatePost');
+        try {
+            if (e.checked == true) {
+                return 'myPosts';
+            } else if (e.checked == false) {
+                return 'publicPost';
+            }
+        } catch (err) {
+            return 'publicPost';
+        }
+    };
 
     const estadosDePosts = (posts, user) => {
         switch (validar()) {
@@ -219,11 +193,6 @@ export default (user, posts) => {
         estadosDePosts(posts, user);
     });
     estadosDePosts(posts, user);
-    /* imageFile.addEventListener('change', (event) => {
-         const file = event.target.files[0];
-         getImage(file)
-         console.log ( file);
-       })*/
     return divElement;
 };
 

@@ -1,11 +1,12 @@
-import {     signInAfterClick,
-  signInWithGoogleAfterClick,
-  signInWithFacebookAfterClick
+import {
+    signInAfterClick,
+    signInWithGoogleAfterClick,
+    signInWithFacebookAfterClick
 } from "../controller/controller1.js";
 export default () => {
-  const divElement = document.createElement("div");
-  divElement.setAttribute("class", "container");
-  divElement.innerHTML = `
+    const divElement = document.createElement("div");
+    divElement.setAttribute("class", "container");
+    divElement.innerHTML = `
     <aside class="left ancho">
       <img src="./css/img/day.jpg" alt="cargando imagen" class="img">
     </aside>
@@ -26,17 +27,19 @@ export default () => {
               </li>
             </ul>
           </div>
-          <p>¿No tienes una cuenta? <a href="#/registro" id="register-link">Regístrate</a></p>
+          <p1>¿No tienes una cuenta? <a href="#/registro" id="register-link">Regístrate</a></p1>
       </div>
     </main>`;
-  const btnSignIn = divElement.querySelector('#btn-sign-in');
-  btnSignIn.addEventListener('click', signInAfterClick);
-  const iconGoogle = divElement.querySelector("#icon-google");
-  iconGoogle.addEventListener("click",signInWithGoogleAfterClick );
-  const iconFacebook = divElement.querySelector("#icon-facebook");
-  iconFacebook.addEventListener("click", signInWithFacebookAfterClick );
+    const email = divElement.querySelector('#email');
+    const password = divElement.querySelector('#password');
+    const btnSignIn = divElement.querySelector('#btn-sign-in');
+    btnSignIn.addEventListener('click', () => {
+        signInAfterClick(email.value, password.value);
+    });
+    const iconGoogle = divElement.querySelector("#icon-google");
+    iconGoogle.addEventListener("click", signInWithGoogleAfterClick);
+    const iconFacebook = divElement.querySelector("#icon-facebook");
+    iconFacebook.addEventListener("click", signInWithFacebookAfterClick);
 
-  return divElement;
+    return divElement;
 };
-
-
