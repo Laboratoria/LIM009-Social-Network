@@ -12,9 +12,7 @@ const fixtureData = {
           likes: 0,
           state: 'publico',
           user: 'xyz',
-        }
-      },
-      __doc__: {
+        },
         abc124: {
           description: 'Hola a todos',
           fechaPost: '19/05/2019',
@@ -106,15 +104,18 @@ describe('createPost', () => {
     expect(typeof editPost).toBe('function')
   });
 
-  // it('deberia poder editar un post', () => {
-  //   return editPost('abc123', 'hola a todos post editado', 'publico').then(() => {
-  //     viewListPostPublic().get().then(result => {
-  //       expect(result).toBe(true)
-  //     })
-  //   }).catch((error) => {
-  //     console.error("Error removing document: ", error);
-  //   })
-  // })
+  it.only('deberia poder editar un post', () => {
+    return editPost('abc123', 'hola a todos post editado', 'publico').then(() => {
+      viewListPostPublic().get().then(result => {
+        expect(result).toBe(true)
+      })
+    }).catch((error) => {
+      console.error("Error removing document: ", error);
+    })
+  })
+
+
+
   it('likesPost deberia ser una funcion', () => {
     expect(typeof likesPost).toBe('function')
   })
