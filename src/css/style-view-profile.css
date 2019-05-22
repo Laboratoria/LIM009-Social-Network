@@ -3,10 +3,12 @@
     min-height: 70px;
     color: white;
     padding-top: 1%;
-    height: auto;
     max-width: 100vw;
 }
 
+.height-auto{
+    height: auto;
+}
 .sub-container {
     max-width: 1000px;
     position: absolute;
@@ -16,17 +18,9 @@
 }
 
 .user-name {
-    height: 200px;
+    min-height: 200px;
     margin: 3% 5% 5% 5%;
     outline: 2px solid gray;
-}
-
-.encabezado {
-    min-height: 48px;
-    background: #313a52;
-    color: white;
-    padding-left: 2%;
-    height: auto;
 }
 
 .imagen-fondo {
@@ -124,36 +118,40 @@
     display: block;
 }
 
-.box {
-    margin: 0 10% 5% 10%;
+.box, .box2 {
+    margin: 0 10% 8% 10%;
     width: 80%;
-    min-height: 180px;
+    min-height: 210px;
     display: block;
     outline: 2px solid gray;
     height: auto;
 }
-
-.post-zone {
+.box2{
+    display: grid;
+    grid-template-columns:repeat(3,1fr) repeat(2,4fr) 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-row-gap: 10px;
     height: auto;
 }
-
-.edit-zone {
-    height: auto;
-    width: auto;
-    margin: 50% 10% 0% 10%;
+.encabezado {
+    grid-column: 1/7;
+    background: #313a52;
+    color: white;
 }
-
-.text-write,
+.like{
+    grid-column: 2/3;
+}
 .text-comment {
-    width: 80%;
-    min-height: 50px;
-    margin: 3% 10%;
+    outline: 1px solid gray;
+    grid-column: 2/6;
+    grid-row: 2/3;
     height: auto;
 }
 
-.text-write {
-    min-height: 70px;
-    height: auto;
+.text-write{
+    width: 80%;
+    min-height: 80px;
+    margin: 3% 10%;
 }
 
 .img-post {
@@ -161,8 +159,9 @@
     width: 100px;
 }
 
-.text-comment {
-    outline: 1px solid gray;
+.edit {
+    grid-column: 3/4;
+    grid-row: 3/4;
 }
 
 .like-post {
@@ -172,21 +171,15 @@
 .icon-photograph {
     position: relative;
     float: left;
-    margin-left: 10%;
-    height: 40px;
-    width: 40px;
+    margin:5% 0% 0% 8%; 
+    height: 45px;
+    width: 45px;
 }
 
 .icons {
-    position: relative;
-    float: left;
     margin-left: 8%;
-    height: 30px;
+    height: 35px;
     cursor: pointer;
-}
-
-.edit {
-    margin-left: 1%;
 }
 
 .cerrar {
@@ -204,8 +197,8 @@
 .share {
     position: relative;
     float: right;
-    margin-right: 10%;
-    height: 30px;
+    margin: 2%;
+    height: 35px;
     width: auto;
     padding: 1%;
 }
@@ -241,12 +234,10 @@ p {
 }
 
 .filter {
-    display: inline-block;
+    display:block;
     width: 60%;
-    /*     margin: 0px auto auto 5% ;
- */
     padding: 0 5% 5% 5%;
-    height: auto;
+    margin: auto;
 }
 
 .orderBy {
@@ -256,12 +247,11 @@ p {
 }
 
 .inputfile {
-    /*opacity: 0;*/
-    width: 30px;
-    height: 30px;
+    opacity: 0; 
+    width: 40px;
     position: absolute;
-    top: 315px;
-    left: 19%;
+    top: 375px;
+    left: 17%;
     z-index: 10;
 }
 
@@ -277,7 +267,7 @@ p {
     width: 70px;
 }
 
-@media(min-width:760px) {
+@media(min-width:650px) {
     .sub-container {
         position: relative;
         float: none;
@@ -307,12 +297,7 @@ p {
         position: relative;
         float: right;
     }
-    .box {
-        min-height: 175px;
-        height: auto;
-    }
-    .text-write,
-    .text-comment {
+    .text-write{
         min-height: 70px;
     }
     .check {
@@ -333,8 +318,7 @@ p {
         display: none;
     }
     .inputfile {
-        opacity: 0;
-        top: 100px;
-        left: 19%;
+        opacity: 0; 
+        top: 135px;
     }
 }

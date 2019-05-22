@@ -17,13 +17,11 @@ const renderOnePost = (post, user, current) => {
   <img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}"><p>${post.hours}, ${post.today}</p> 
   </div>
 
-  <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
+  <div class="text-comment height-auto" id="content-comment-div" data-id-post="${post.id}" >${post.content}
   <img class="img-post" src="${post.photoPost}" id="img-post" ><div id="eliminarPost"></div>
   </div>
-
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
   <span id="counter-likes">${post.likes}</span>
-
   <img src="./css/img/paper-plane-1.png" class="icons edit" alt="icon edit" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}">
   <button id="btn-save-after-edit" class="boton share">Guardar</button>
   `;
@@ -33,7 +31,7 @@ const renderOnePost = (post, user, current) => {
     variable.innerHTML=`<img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}">` 
     return conditionDelete.appendChild(variable)
     } */
-    label.setAttribute('class', "box");
+    label.setAttribute('class', "box2 height-auto");
 
     if (post.photoPost === '' || post.photoPost === null) {
         label.querySelector('#img-post').style.display = 'none';
@@ -117,7 +115,7 @@ export default (user, posts) => {
     const divElement = document.createElement("div");
     divElement.setAttribute("class", "container-view-profile");
     divElement.innerHTML = `
-    <header class="header">
+    <header class="header height-auto">
     <ul class="menu">
         <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
             <ul class="interior">
@@ -130,23 +128,23 @@ export default (user, posts) => {
         <li id="sign-out" class="small sign-out"><a><img class="icons cerrar" src="./css/img/exit-2.png">Cerrar sesión</a></li>
     </ul>
 </header>
-<div class="sub-container">
-    <aside class="user-name">
+<div class="sub-container height-auto">
+    <aside class="user-name height-auto">
         <div class="imagen-fondo"><img class="image" src="./css/img/cell.jpg">
             <div class="element"><img class="image-photo" id="image-user" src="${photoUrl}" alt="default photo">
                 <div class="nombre"><h2 id="name-user">${user.name}</h2><p>${user.email}</p></div>
             </div>
         </div>
     </aside>
-    <main class="post-zone">
-        <div id="add-comment-form" class="write-post box">
-            <textarea id="input-comment" class="text-write"
+    <main class="post-zone height-auto">
+        <div id="add-comment-form" class="write-post box height-auto">
+            <textarea id="input-comment" class="text-write height-auto"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
                 <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">          
                 <progress value="0" max="100" id="uploader">0%</progress>              
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
             <button id="btn-share" class="share boton">Compartir</button></div>          
-    <div class="filter" id="valores"><fieldset>
+    <div class="filter height-auto" id="valores"><fieldset>
  <legend>¿Que publicaciones desea ver?</legend>
 <input type="radio" class='input-filter' name="filterPost" id="allPost" checked value="publicPost"><label for="allPost">Todas</label>
 <input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
@@ -214,7 +212,6 @@ export default (user, posts) => {
                     if (onePost.state === false) {
                         getDataOfUser(onePost.userId)
                             .then((userdata) => {
-                                /*  if(onePost.likes) */
                                 const divPost = renderOnePost(onePost, userdata, user);
                                 divCommentList.appendChild(divPost);
                             })

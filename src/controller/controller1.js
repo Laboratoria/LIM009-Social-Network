@@ -69,7 +69,6 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
                         photoFile: userFilePhoto,
                         userId: cred.user.uid,
                         email: email2,
-                        // password: password2,
                     })
                     .then(() => {
                         const form = document.querySelector('#register-form');
