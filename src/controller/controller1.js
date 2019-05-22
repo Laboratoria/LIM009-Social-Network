@@ -6,8 +6,14 @@ import {
     signOut,
     dataBaseCloudFirestore,
     currentUser,
-    addPostToCloudFirestore,
-    deletePostInCloudFireStore,
+    //   deletePostInCloudFireStore,
+    promiseOfSetFirebase,
+    promiseOfgetFirebase,
+    promiseOfdeleteFirebase,
+    promiseOfUpdateFirebase,
+    promiseOnSnapshotFirebase,
+    firebaseAuthState,
+    promiseOfAddFirebase
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -53,7 +59,7 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
             .then((cred) => { // afinar nombres *********
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
-                return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
+                return promiseOfSetFirebase('users', cred.user.uid, {
                         name: userName,
                         age: userAge,
                         sex: userSex,
@@ -87,7 +93,7 @@ const signInWithGoogleAfterClick = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const idUser = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
+            return promiseOfSetFirebase('users', idUser, {
                 name: userName,
                 userId: idUser,
                 email: userEmail,
@@ -116,12 +122,11 @@ const signInWithFacebookAfterClick = () => {
             console.log(token);
             // The signed-in user info.
             var user = result.user;
-
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const idUser = user.uid;
-            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
+            return promiseOfSetFirebase('users', idUser, {
                 name: userName,
                 userId: idUser,
                 email: userEmail,
@@ -152,7 +157,7 @@ const signOutUser = () => {
 
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
-    return dataBaseCloudFirestore().collection('users').doc(uid).get()
+    return promiseOfgetFirebase('users', uid)
         .then(function(doc) {
             // console.log(doc.data()
             return doc.data(); // retorna una promesa
@@ -161,14 +166,28 @@ const getDataOfUser = (uid) => {
         });
 };
 
-const deletePostAfterClick = (postId, userIdOfPost) => {
-    deletePostInCloudFireStore(postId, userIdOfPost)
+const deletePostAfterClick = (idPost, idUserOfPost) => {
+    const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
+    console.log(uidOfCurrentUser); // id del usuario logueado actual 
+    console.log(idUserOfPost); // id del usuario  dentro del objeto post
+    console.log(idPost); // id del post
+    if (uidOfCurrentUser === idUserOfPost) {
+        promiseOfdeleteFirebase("posts", idPost)
+            .then(() => {
+                console.log("Document successfully deleted!");
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+    } else {
+        alert("You can not delete a comment which was not published by you");
+    }
 };
+
 const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) => {
     const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual   
     console.log(idPost); // id del post
     if (uidOfCurrentUser === idUserOfPost) {
-        dataBaseCloudFirestore().collection("posts").doc(idPost).update({
+        promiseOfUpdateFirebase("posts", idPost, {
                 content: commentInputNewValue,
             })
             .then(() => {
@@ -185,7 +204,7 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
 };
 
 const getPostsInRealtime = (callback) => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+    promiseOnSnapshotFirebase('posts', (arrOfAllPosts) => {
         let arrOfPosts = [];
         arrOfAllPosts.forEach((onePost) => {
             arrOfPosts.push({ id: onePost.id, ...onePost.data() });
@@ -198,7 +217,7 @@ const getUserActive = (callback) => { //printUserinfo()
     if (currentUser()) { // si el usuario ha iniciado sesion y existe un current user
         callback(currentUser()) // printUserinfo() recibe al usuario actual
     } else { // si el usuario recarga la pagina ,se activa un observador para saber el estado del usuario
-        const unsuscribe = firebase.auth().onAuthStateChanged((user) => {
+        const unsuscribe = firebaseAuthState((user) => {
             if (user) { // si se verifica que existe un current user
                 callback(user) // printUserInfo recibe al usuario actual
             } else { // si no existe un current user
@@ -208,12 +227,33 @@ const getUserActive = (callback) => { //printUserinfo()
 
     }
 };
+const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => {
+    const f = new Date();
+    let fecha = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
+    promiseOfAddFirebase('posts', {
+            hours: f.getHours() + ":" + f.getMinutes(),
+            today: fecha,
+            content: inputComment,
+            userId: idUser,
+            state: statusComment,
+            likes: 0,
+            photoPost: photo,
+        }).then(function(docRef) {
+            console.log(docRef);
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+
+};
+
+
 
 const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, selectedFile) => {
     if (selectedFile !== undefined) {
-        const storageService = firebase.storage();
-        const storageRef1 = storageService.ref();
-        const uploadTask = storageRef1.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+        const storageService = firebase.storage().ref();
+        const uploadTask = storageService.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
         uploadTask.on('state_changed', (snapshot) => {
             // Observe state change events such as progress, pause, and resume
             var percentage = (snapshot.bytesTransferred /
@@ -236,7 +276,7 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, s
 };
 
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
-    dataBaseCloudFirestore().collection("users").doc(userId1).update({
+    promiseOfUpdateFirebase("users", userId1, {
             name: name1,
             age: age1,
             sex: sex1,
@@ -252,9 +292,7 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 };
 
 const likesForPosts = (postId, contador1) => {
-    let collectionPost = dataBaseCloudFirestore().collection('posts').doc(postId);
-    console.log(contador1)
-    return collectionPost.update({
+    promiseOfUpdateFirebase('posts', postId, {
             likes: contador1,
         })
         .then(function() {
