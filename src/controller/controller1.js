@@ -29,7 +29,7 @@ const signInAfterClick = (email, password) => {
             .then((cred) => {
                 changeHash('#/user-profile');
             })
-            .catch((error) => {
+            .catch((error)=> {
                 // Handle Errors here.
                 let errorCode = error.code;
                 let errorMessage = error.message;
@@ -61,16 +61,16 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
                 return promiseOfSetFirebase('users', cred.user.uid, {
-                    name: userName,
-                    age: userAge,
-                    sex: userSex,
-                    country: userBirthCountry,
-                    photo: userUrlPhoto,
-                    photoFile: userFilePhoto,
-                    userId: cred.user.uid,
-                    email: email2,
-                    // password: password2,
-                })
+                        name: userName,
+                        age: userAge,
+                        sex: userSex,
+                        country: userBirthCountry,
+                        photo: userUrlPhoto,
+                        photoFile: userFilePhoto,
+                        userId: cred.user.uid,
+                        email: email2,
+                        // password: password2,
+                    })
                     .then(() => {
                         const form = document.querySelector('#register-form');
                         form.reset();
@@ -85,10 +85,10 @@ const signInWithGoogleAfterClick = () => {
     signInWithGoogle()
         .then((result) => {
             changeHash('#/user-profile')
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            SVGAnimatedLengthList token = result.credential.accessToken;
+                // This gives you a Google Access Token. You can use it to access the Google API.
+            let token = result.credential.accessToken;
             // The signed-in user info.
-            SVGAnimatedLengthList user = result.user; // ...
+            let user = result.user; // ...
             console.log(token);
             const userName = user.displayName;
             const userEmail = user.email;
@@ -101,10 +101,10 @@ const signInWithGoogleAfterClick = () => {
                 photo: userPhoto,
             });
         })
-        .catch((error) => {
+        .catch((error)=> {
             // Handle Errors here.
-            SVGAnimatedLengthList errorCode = error.code;
-            SVGAnimatedLengthList errorMessage = error.message;
+            let errorCode = error.code;
+            let errorMessage = error.message;
             if (errorCode == 'auth/weak-password') {
                 alert('The password is too weak.');
             } else {
@@ -119,7 +119,7 @@ const signInWithFacebookAfterClick = () => {
         .then((result) => {
             changeHash('#/user-profile');
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            SVGAnimatedLengthList token = result.credential.accessToken;
+            let token = result.credential.accessToken;
             console.log(token);
             // The signed-in user info.
             let user = result.user;
@@ -133,7 +133,7 @@ const signInWithFacebookAfterClick = () => {
                 email: userEmail,
                 photo: userPhoto,
             });
-        }).catch(function (error) {
+        }).catch(function(error) {
             // Handle Errors here.
             let errorCode = error.code;
             let errorMessage = error.message;
@@ -149,7 +149,7 @@ const signInWithFacebookAfterClick = () => {
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
-        .catch((error) => {
+        .catch((error)=> {
             let errorCode = error.code;
             let errorMessage = error.message;
             console.log('Paso por aqui');
@@ -159,10 +159,10 @@ const signOutUser = () => {
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return promiseOfgetFirebase('users', uid)
-        .then((doc) => {
+        .then((doc)=> {
             // console.log(doc.data()
             return doc.data(); // retorna una promesa
-        }).catch((error) => {
+        }).catch((error)=> {
             console.log("Error getting document:", error);
         });
 };
@@ -189,8 +189,8 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
     console.log(idPost); // id del post
     if (uidOfCurrentUser === idUserOfPost) {
         promiseOfUpdateFirebase("posts", idPost, {
-            content: commentInputNewValue,
-        })
+                content: commentInputNewValue,
+            })
             .then(() => {
                 console.log("Document successfully updated!");
             })
@@ -232,32 +232,32 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
     const f = new Date();
     let fecha = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
     promiseOfAddFirebase('posts', {
-        hours: f.getHours() + ":" + f.getMinutes(),
-        today: fecha,
-        content: inputComment,
-        userId: idUser,
-        state: statusComment,
-        likes: 0,
-        photoPost: photo,
-    }).then((docRef) => {
-        console.log(docRef);
-        console.log("Document written with ID: ", docRef.id);
-    })
-        .catch((error) => {
+            hours: f.getHours() + ":" + f.getMinutes(),
+            today: fecha,
+            content: inputComment,
+            userId: idUser,
+            state: statusComment,
+            likes: 0,
+            photoPost: photo,
+        }).then((docRef)=> {
+            console.log(docRef);
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error)=>{
             console.error("Error adding document: ", error);
         });
 
 };
 
 const generateSubcollections = (postId, idUser, name) => {
-    promiseOfSubcollection('posts', postId, 'usersOfLikes', {
-        userId: idUser,
-        nameOfUser: name,
-    }).then((docRef) => {
-        //console.log(docRef);
-        console.log("El id del usuario que dio click es: ", docRef.id);
-    })
-        .catch((error) => {
+    promiseOfSubcollection('posts',postId,'usersOfLikes', {
+            userId: idUser,
+            nameOfUser: name,
+        }).then((docRef) =>{
+            //console.log(docRef);
+            console.log("El id del usuario que dio click es: ", docRef.id);
+        })
+        .catch((error)=> {
             console.error("Error adding document of likes: ", error);
         });
 
@@ -290,21 +290,21 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, s
 
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
     promiseOfUpdateFirebase("users", userId1, {
-        name: name1,
-        age: age1,
-        sex: sex1,
-        country: birthCountry,
-    })
-        .then(() => {
+            name: name1,
+            age: age1,
+            sex: sex1,
+            country: birthCountry,
+        })
+        .then(()=> {
             console.log("Document successfully updated!");
         })
-        .catch((error) => {
+        .catch((error)=> {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
 };
-const getUsersLikesInRealtime = (postId, callback) => {
-    promiseGetSubcollection('posts', postId, 'usersOfLikes', (arrAllOfUsers) => {
+const getUsersLikesInRealtime = (postId,callback) => {
+   promiseGetSubcollection('posts',postId,'usersOfLikes', (arrAllOfUsers) => {
         let arrOfUsers = [];
         arrAllOfUsers.forEach((data) => {
             arrOfUsers.push({ id: data.id, ...data.data() });
@@ -315,12 +315,12 @@ const getUsersLikesInRealtime = (postId, callback) => {
 
 const likesForPosts = (postId, contador1) => {
     promiseOfUpdateFirebase('posts', postId, {
-        likes: contador1,
-    })
-        .then(() => {
+            likes: contador1,
+        })
+        .then(()=>{
             console.log("Document successfully updated!");
         })
-        .catch((error) => {
+        .catch((error)=> {
             console.error("Error updating document: ", error);
         });
 };
