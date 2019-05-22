@@ -53,7 +53,7 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
             .then((cred) => { // afinar nombres *********
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
-                return dataBaseCloudFirestore('users', cred.user.uid).set({
+                return dataBaseCloudFirestore().collection('users').doc(cred.user.uid).set({
                         name: userName,
                         age: userAge,
                         sex: userSex,
@@ -87,7 +87,7 @@ const signInWithGoogleAfterClick = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const idUser = user.uid;
-            return dataBaseCloudFirestore('users', idUser).set({
+            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
                 name: userName,
                 userId: idUser,
                 email: userEmail,
@@ -121,7 +121,7 @@ const signInWithFacebookAfterClick = () => {
             const userEmail = user.email;
             const userPhoto = user.photoURL;
             const idUser = user.uid;
-            return dataBaseCloudFirestore('users', idUser).set({
+            return dataBaseCloudFirestore().collection('users').doc(idUser).set({
                 name: userName,
                 userId: idUser,
                 email: userEmail,

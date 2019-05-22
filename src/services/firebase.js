@@ -29,6 +29,16 @@ const dataBaseCloudFirestore = () => {
 const currentUser = () => {
     return firebase.auth().currentUser
 };
+const promiseOfSetFirebase = () => {
+    return
+}
+
+
+
+
+
+
+
 
 const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => {
 
