@@ -1,5 +1,5 @@
 import { components } from '../view/index.js'
-import { getDataOfUser, getUserActive, getPostsInRealtime, orderAfterClick, /* getUsersAfterLikes */ } from '../controller/controller1.js'
+import { getDataOfUser, getUserActive, getPostsInRealtime, /* getUsersAfterLikes */ } from '../controller/controller1.js'
 
 const changeview = (route) => {
     const root = document.getElementById("root");

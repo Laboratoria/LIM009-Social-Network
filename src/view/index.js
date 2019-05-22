@@ -8,11 +8,11 @@ import EditProfile from '../view/edit-profile.js';
 const components = {
     login: Login,
     registro: Register,
-    profile:Profile,
-    editProfile:EditProfile,
-    configuration:Configuration,
-    edit:EditProfile,
-    error:Error404
+    profile: Profile,
+    editProfile: EditProfile,
+    configuration: Configuration,
+    edit: EditProfile,
+    error: Error404
 }
 
 export { components }
