@@ -1,10 +1,10 @@
 
-import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar /* likesForPosts */, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
+import { signOutUser, createPostInCloudFirestore, getDataOfUser, deletePostAfterClick, editPostInCloudFireStore, validar /* orderAfterClick *//* likesForPosts */, handleFileUploadChange, handleFileUploadSubmit } from "../controller/controller1.js";
 const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'>Publicado por ${user.name}
-  <img src="./css/img/error.png" id="btn-delete" class="share delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
+  <div id="comment-author" class='encabezado'><div class="publicFor"><p>Publicado por ${user.name}</p><p class="fecha"> ${post.hours} , ${post.today}</p></div>
+  <img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}"></div>
 
   <div class="text-comment" id="content-comment-div" data-id-post="${post.id}" >${post.content}
   <img src="" id="img-post" >
@@ -135,8 +135,8 @@ export default (user, posts) => {
  <legend>¿Que publicaciones desea ver?</legend>
 <input type="radio" class='input-filter' name="filterPost" id="allPost" checked value="publicPost"><label for="allPost">Todas</label>
 <input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
-</fieldset>
-<button class="orderBy">Ordenar por fecha</button></div>
+</fieldset></div>
+<input type="image" class="orderBy" id="orderByDay" src="./css/img/ordenar.png"></input>
         <div id="comment-list"></div>
     </main>
 </div>
@@ -151,7 +151,6 @@ export default (user, posts) => {
     const shareBtn = divElement.querySelector("#btn-share");
     //const btnPublic= divElement.querySelector("#allPost");
     shareBtn.addEventListener("click", () => {
-
         createPostInCloudFirestore();
         //btnPublic.setAttribute('checked','true');
     });
@@ -159,6 +158,17 @@ export default (user, posts) => {
     signOutOption.addEventListener("click", signOutUser);
 
     const divCommentList = divElement.querySelector("#comment-list");
+/*     const booleanFunction = (boolean) => {
+        if (boolean === true) {
+            return true;
+        } else {
+            return false;
+        }
+    } */
+    const idToOrderPosts = divElement.querySelector('#orderByDay');
+    idToOrderPosts.addEventListener('click', () => {
+        divElement.querySelector("#orderByDay").setAttribute("value", "true");
+    })
 
     const estadosDePosts = (posts, user) => {
         switch (validar()) {
@@ -195,12 +205,9 @@ export default (user, posts) => {
         estadosDePosts(posts, user);
     });
     estadosDePosts(posts, user);
-    /* imageFile.addEventListener('change', (event) => {
-         const file = event.target.files[0];
-         getImage(file)
-         console.log ( file);
-       })*/
+
+
+
     return divElement;
 };
-
 //Creando una funcion que reciba  [{}]como parametro con sus propiedades id,authorName,content ...fecha

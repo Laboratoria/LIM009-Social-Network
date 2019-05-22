@@ -236,15 +236,23 @@ const validar = () => {
         return 'publicPost';
     }
 };
-
-const getPostsInRealtime = (callback) => {
-    dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+const orderAfterClick=()=>{
+    orderByTime().onSnapshot((arrOfAllPosts) => {
         let arrOfPosts = [];
         arrOfAllPosts.forEach((onePost) => {
             arrOfPosts.push({ id: onePost.id, ...onePost.data() });
         })
         callback(arrOfPosts);
-    });
+    })
+}
+const getPostsInRealtime = (callback) => {
+        dataBaseCloudFirestore().collection('posts').onSnapshot((arrOfAllPosts) => {
+            let arrOfPosts = [];
+            arrOfAllPosts.forEach((onePost) => {
+                arrOfPosts.push({ id: onePost.id, ...onePost.data() });
+            })
+            callback(arrOfPosts);
+        });
 };
 
 /* const getUsersAfterLikes = (postId,callback) => {
@@ -292,14 +300,10 @@ const getImage = () => {
     const date = new Date();
     const file = document.querySelector('#image-file').files[0];
     return upLoadImageToFirestore(date, file)
-
-
 };
 
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
-
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
-
         name: name1,
         age: age1,
         sex: sex1,
@@ -314,7 +318,7 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
         });
 
 };
-const addClicksUsers = (postId, idOfUser) => {
+/* const addClicksUsers = (postId, idOfUser) => {
     return dataBaseCloudFirestore().collection('posts').doc(postId).collection('clicksUsers').add({
         uidLikesUser: idOfUser,
     })
@@ -325,10 +329,8 @@ const addClicksUsers = (postId, idOfUser) => {
         .catch((error) => {
             console.error("Error updating uid of users: ", error);
         });
-}
-const orderOfPost = () => {
-    orderByTime
-}
+} */
+
 let selectedFile;
 
 const handleFileUploadChange = (e) => {
@@ -388,7 +390,7 @@ export {
     //getImage,
     editProfile,
     getImage,
-    orderOfPost,
     handleFileUploadChange,
     handleFileUploadSubmit,
+    orderAfterClick
 };

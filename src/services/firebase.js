@@ -65,7 +65,7 @@ const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
     }
 };
 const orderByTime=()=>{
-    return dataBaseCloudFirestore().collection('posts').orderBy("today").orderBy("hours")
+    return dataBaseCloudFirestore().collection('posts').orderBy("hours")
 }
 /*
 
