@@ -8,9 +8,9 @@
     text-align: center;
     box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/
 }
-/* html {
+ /*html {
     height: 100%;
-} */
+}*/
 body {
     height: 100%;
     display: flex;
@@ -221,9 +221,6 @@ color: rgba(49, 53, 53, 0.514)
         /*margin-bottom: 3%;*/
      }
  }
- .div-style{
-     display: flex;
- }
 
  @media screen and (min-width: 30em) {
      .col-md-12 { 
@@ -242,10 +239,13 @@ color: rgba(49, 53, 53, 0.514)
         float: left; 
         width: 50%; 
      } 
-     .col-12 { max-width: 100% ;}
-    /* img{
+     .col-12 { 
+         max-width: 100% ;
+    }
+    
+     img{
         max-width: 100%;
-    }*/
+    }
     .style-border{
         /* width: 50%; */
         margin-top:3%;
