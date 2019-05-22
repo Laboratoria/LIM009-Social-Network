@@ -40,12 +40,10 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) =>
     }).then(function(docRef) {
         console.log(docRef);
         console.log("Document written with ID: ", docRef.id);
-
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
-
 const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
     const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual 
@@ -62,7 +60,7 @@ const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
         alert("You can not delete a comment which was not published by you");
     }
 };
-
+/*
 
 const upLoadImageToFirestore = (file, callback) => {
     //create ref
@@ -76,9 +74,10 @@ const upLoadImageToFirestore = (file, callback) => {
      () => {
         //get updated img url
         const downloadImg = task.snapshot.ref.getDownloadURL()
-        downloadImg.then(callback);
+        downloadImg.then(callback)
+        return callback;
     })
-};
+};*/
 
 /*
 
@@ -101,8 +100,6 @@ const upLoadImageToFirestore = (date, image) => {
 
 
 
-
-
 export {
     signUp,
     signIn,
@@ -113,5 +110,5 @@ export {
     currentUser,
     addPostToCloudFirestore,
     deletePostInCloudFireStore,
-    upLoadImageToFirestore,
+    // upLoadImageToFirestore,
 };

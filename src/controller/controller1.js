@@ -212,7 +212,8 @@ const editPostInCloudFireStore = (idPost, idUserOfPost, commentInputNewValue) =>
     const uidOfCurrentUser = currentUser().uid; // id del usuario logueado actual   
     console.log(idPost); // id del post
     if (uidOfCurrentUser === idUserOfPost) {
-        dataBaseCloudFirestore().collection("posts").doc(idPost).update({
+        dataBaseCloudFirestore().collection("posts").doc(idPost).update(
+            {
                 content: commentInputNewValue,
             })
             .then(() => {
@@ -278,8 +279,6 @@ const getUserActive = (callback) => { //printUserinfo()
     }
 
 };
-<<<<<<< HEAD
-=======
 
 
 
@@ -296,8 +295,6 @@ const getImage = () => {
 let selectedFile;
 
 const handleFileUploadChange = (e) => {
-
-
     selectedFile = e.target.files[0];
 };
 
@@ -318,14 +315,7 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
         const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
         downloadImg.then((url) => {
             console.log(url);
-
-
             addPostToCloudFirestore(inputComment, idUser, statusComment, url);
-
-
-
-
-
         });
 
     });
@@ -341,7 +331,6 @@ const handleFileUploadSubmit = (inputComment, idUser, statusComment) => {
 
 
 
->>>>>>> 3519433c99040efdc110212c3a13fdc46760f6f0
 const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
 
     dataBaseCloudFirestore().collection("users").doc(userId1).update({
