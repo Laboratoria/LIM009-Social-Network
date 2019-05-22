@@ -10,7 +10,6 @@ const signIn = (email, password) => firebase.auth().signInWithEmailAndPassword(e
 const signInWithGoogle = () => {
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithPopup(googleProvider);
-
 };
 
 // Inicio de sesión con  cuenta de facebook y contraseña de facebook
@@ -42,7 +41,7 @@ const promiseOfUpdateFirebase = (nameCollection, docId, obj) => {
     return dataBaseCloudFirestore().collection(nameCollection).doc(docId).update(obj);
 }
 const promiseOnSnapshotFirebase = (nameCollection, callback) => {
-    return dataBaseCloudFirestore().collection(nameCollection).onSnapshot(callback);
+    return dataBaseCloudFirestore().collection(nameCollection).orderBy('hours').onSnapshot(callback);
 }
 const firebaseAuthState = (callback) => {
     return firebase.auth().onAuthStateChanged(callback);
@@ -50,12 +49,12 @@ const firebaseAuthState = (callback) => {
 const promiseOfAddFirebase = (nameCollection, obj) => {
     return dataBaseCloudFirestore().collection(nameCollection).add(obj);
 }
-
-
-
-
-
-
+const promiseOfSubcollection = (name, postId, subName, obj) => {
+    return dataBaseCloudFirestore().collection(name).doc(postId).collection(subName).add(obj)
+}
+const promiseGetSubcollection = (nameCollection, docId, subName, callback) => {
+    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).collection(subName).onSnapshot(callback);
+}
 /*
 const deletePostInCloudFireStore = (idPost, idUserOfPost) => {
 
@@ -101,32 +100,20 @@ const upLoadImageToFirestore = (date, image) => {
 
 };*/
 
-
-
-
-
-
-
-
-
-
-
-
 export {
     signUp,
     signIn,
     signInWithGoogle,
     signInWithFacebook,
     signOut,
-    dataBaseCloudFirestore,
     currentUser,
-    //  deletePostInCloudFireStore,
     promiseOfSetFirebase,
     promiseOfgetFirebase,
     promiseOfdeleteFirebase,
     promiseOfUpdateFirebase,
     promiseOnSnapshotFirebase,
     firebaseAuthState,
-    promiseOfAddFirebase
-    // upLoadImageToFirestore,
+    promiseOfAddFirebase,
+    promiseOfSubcollection,
+    promiseGetSubcollection
 };

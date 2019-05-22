@@ -3,7 +3,7 @@ export default (user) => {
     console.log(user)
     const divElement = document.createElement("div");
     divElement.innerHTML = ` 
-    <header class="header">
+    <header class="header height-auto">
     <ul class="menu">
         <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
             <ul class="interior">
@@ -16,24 +16,21 @@ export default (user) => {
         <li id="sign-out" class="small sign-out"><a><img class="icons cerrar" src="./css/img/exit-2.png">Cerrar sesión</a></li>
         </ul>
     </header>
-    <div class="container edit-body">
-    <aside class="left ancho height-auto">
+    <div class="sub-container edit-body">
+    <aside class="ancho aside-edit">
         <div class="image-left"><img class="image" src="./css/img/edit.jpg">
-        <div class="element-photo"><img id="user-image" class="image-photo-edit " src="${user.photo}" alt="default photo">
-        <img src="./css/img/photo-camera.png" class="change-photo" alt="Edit Image"></div>
         </div>       
     </aside>
-    <main class="right edit-right">
-    <div class="formulario1" id="edit-form">
+    <main class="edit-right">
+    <div class="formulario1 " id="edit-form">
     <div class="element-photo2"><img id="user-image" class="image-photo-edit " src="${user.photo}" alt="default photo">
     <img src="./css/img/photo-camera.png" class="photograph" alt="Edit Image"></div>
-    </div>
-    <div id="full-name" class="input2 redondear">${user.name}</div>
-    <div id="user-age"   class="input2 redondear">${user.age}</div>
-    <div id="user-sex"   class="input2 redondear">${user.sex}</div>
-    <div id="user-birth-country"  class="input2 redondear">${user.country}</div>
-    <button type="button" class="button-acceder redondear boton duo" id="btn-edit-profile">Editar Datos</button>
-    <button type="button" class="button-acceder redondear boton duo" id="btn-save-profile">Guardar Datos</button>
+    <div id="full-name" class="input2 width-all redondear">${user.name}</div>
+    <div id="user-age"   class="input2  width-all redondear">${user.age}</div>
+    <div id="user-sex"   class="input2 width-all redondear">${user.sex}</div>
+    <div id="user-birth-country"  class="input2 width-all redondear">${user.country}</div>
+    <button type="button" class="button-acceder redondear boton duo editar width-all" id="btn-edit-profile">Editar Datos</button>
+    <button type="button" class="button-acceder redondear boton duo guardar width-all" id="btn-save-profile">Guardar Datos</button>
     </div>
     </main>
     </div>
