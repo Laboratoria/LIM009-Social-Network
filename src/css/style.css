@@ -103,7 +103,7 @@ a:hover{
     /* box-shadow: 2px 6px 5px 5px rgba(16, 7, 36, 0.486); */
     padding: 2%;
     background: white;
-    width:85%;
+    width:70%;
     /* color: rgb(24, 13, 13) */
 }
 .header-post{
@@ -116,8 +116,8 @@ a:hover{
  }
  .img-perfil-post{        
     height: 2rem;
-    border-radius: 50%;
-    margin-right: 2%;       
+    /*border-radius: 50%;*/
+    margin: 3%;       
 }
 .img-post{ 
     width: 25%;
@@ -170,7 +170,7 @@ a:hover{
     margin: 2%;
 }
 .progress{
-    width: 15%;
+width: 15%;
   margin: 2%;
 }
 .margin-footer{
@@ -184,7 +184,9 @@ padding: 2%;
     opacity: 0;
 }
 .btn-post-edit-del{
-    padding-left: 80%;
+  display: inline-flex;
+  background-color: rgba(49, 172, 111, 0.719);
+  color: white;
 }
 .color-fecha{
 color: rgba(49, 53, 53, 0.514)
@@ -196,9 +198,8 @@ color: rgba(49, 53, 53, 0.514)
     background: rgba(101, 221, 53, 0.116)
 }
 .size-state-post{
-   margin-left: 75%;
+   margin-left: 30%;
    margin-bottom: 3%;
-    width: 20%;
 }
 
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
@@ -271,6 +272,7 @@ color: rgba(49, 53, 53, 0.514)
     .col-7{
         width: 58.3333333333%;
         float: left;
+        margin-left: 6%;
     }
  }
 
