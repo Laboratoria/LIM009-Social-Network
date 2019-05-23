@@ -4,8 +4,8 @@ import {
     signInWithGoogle,
     signInWithFacebook,
     signOut,
-    dataBaseCloudFirestore,
     currentUser,
+    promiseOfSubcollection,
     promiseOfSetFirebase,
     promiseOfgetFirebase,
     promiseOfdeleteFirebase,
@@ -13,7 +13,8 @@ import {
     promiseOnSnapshotFirebase,
     firebaseAuthState,
     promiseOfAddFirebase,
-    getUrlImageFromStorage
+    promiseGetSubcollection,
+    getUrlImageFromStorage,
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -28,10 +29,10 @@ const signInAfterClick = (email, password) => {
             .then((cred) => {
                 changeHash('#/user-profile');
             })
-            .catch(function(error) {
+            .catch((error) => {
                 // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorCode = error.code;
+                let errorMessage = error.message;
                 console.log(errorMessage);
                 if (errorCode == 'auth/weak-password') {
                     alert('El nivel de seguridad de la contraseña es : débil.');
@@ -68,7 +69,6 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
                         photoFile: userFilePhoto,
                         userId: cred.user.uid,
                         email: email2,
-                        // password: password2,
                     })
                     .then(() => {
                         const form = document.querySelector('#register-form');
@@ -85,9 +85,9 @@ const signInWithGoogleAfterClick = () => {
         .then((result) => {
             changeHash('#/user-profile')
                 // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
+            let token = result.credential.accessToken;
             // The signed-in user info.
-            var user = result.user; // ...
+            let user = result.user; // ...
             console.log(token);
             const userName = user.displayName;
             const userEmail = user.email;
@@ -100,10 +100,10 @@ const signInWithGoogleAfterClick = () => {
                 photo: userPhoto,
             });
         })
-        .catch(function(error) {
+        .catch((error) => {
             // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            let errorCode = error.code;
+            let errorMessage = error.message;
             if (errorCode == 'auth/weak-password') {
                 alert('The password is too weak.');
             } else {
@@ -118,10 +118,10 @@ const signInWithFacebookAfterClick = () => {
         .then((result) => {
             changeHash('#/user-profile');
             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            var token = result.credential.accessToken;
+            let token = result.credential.accessToken;
             console.log(token);
             // The signed-in user info.
-            var user = result.user;
+            let user = result.user;
             const userName = user.displayName;
             const userEmail = user.email;
             const userPhoto = user.photoURL;
@@ -134,8 +134,8 @@ const signInWithFacebookAfterClick = () => {
             });
         }).catch(function(error) {
             // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            let errorCode = error.code;
+            let errorMessage = error.message;
             if (errorCode == 'auth/weak-password') {
                 alert('The password is too weak.');
             } else {
@@ -148,9 +148,9 @@ const signInWithFacebookAfterClick = () => {
 const signOutUser = () => {
     signOut()
         .then(() => changeHash(''))
-        .catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
+        .catch((error) => {
+            let errorCode = error.code;
+            let errorMessage = error.message;
             console.log('Paso por aqui');
         })
 };
@@ -158,10 +158,10 @@ const signOutUser = () => {
 //Funcion que retorna la data del usuario (documento con el id del usuario)
 const getDataOfUser = (uid) => {
     return promiseOfgetFirebase('users', uid)
-        .then(function(doc) {
+        .then((doc) => {
             // console.log(doc.data()
             return doc.data(); // retorna una promesa
-        }).catch(function(error) {
+        }).catch((error) => {
             console.log("Error getting document:", error);
         });
 };
@@ -239,23 +239,35 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
             state: statusComment,
             likes: 0,
             photoPost: photo,
-        }).then(function(docRef) {
+        }).then((docRef) => {
             console.log(docRef);
             console.log("Document written with ID: ", docRef.id);
         })
-        .catch(function(error) {
+        .catch((error) => {
             console.error("Error adding document: ", error);
         });
 
 };
 
+const generateSubcollections = (postId, idUser, name) => {
+    promiseOfSubcollection('posts', postId, 'usersOfLikes', {
+            userId: idUser,
+            nameOfUser: name,
+        }).then((docRef) => {
+            //console.log(docRef);
+            console.log("El id del usuario que dio click es: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document of likes: ", error);
+        });
 
+};
 
 const handleFileUploadSubmit = ( inputComment, idUser, statusComment, progress, selectedFile) => {
     if (selectedFile !== undefined) {
-     
-    getUrlImageFromStorage(selectedFile, progress, (url) => {
-        addPostToCloudFirestore(inputComment, idUser, statusComment,url) })
+        getUrlImageFromStorage(selectedFile, progress, (url) => {
+            addPostToCloudFirestore(inputComment, idUser, statusComment, url)
+        })
     } else {
         addPostToCloudFirestore(inputComment, idUser, statusComment, '');
     }
@@ -268,28 +280,35 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
             sex: sex1,
             country: birthCountry,
         })
-        .then(function() {
+        .then(() => {
             console.log("Document successfully updated!");
         })
-        .catch(function(error) {
+        .catch((error) => {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
+};
+const getUsersLikesInRealtime = (postId, callback) => {
+    promiseGetSubcollection('posts', postId, 'usersOfLikes', (arrAllOfUsers) => {
+        let arrOfUsers = [];
+        arrAllOfUsers.forEach((data) => {
+            arrOfUsers.push({ id: data.id, ...data.data() });
+        })
+        callback(arrOfUsers);
+    });
 };
 
 const likesForPosts = (postId, contador1) => {
     promiseOfUpdateFirebase('posts', postId, {
             likes: contador1,
         })
-        .then(function() {
+        .then(() => {
             console.log("Document successfully updated!");
         })
-        .catch(function(error) {
+        .catch((error) => {
             console.error("Error updating document: ", error);
         });
 };
-
-
 
 
 export {
@@ -306,4 +325,6 @@ export {
     editProfile,
     likesForPosts,
     handleFileUploadSubmit,
+    generateSubcollections,
+    getUsersLikesInRealtime
 };

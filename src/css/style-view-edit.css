@@ -1,29 +1,45 @@
-.edit-body {
-    margin: auto;
-}
 
+.formulario1 {
+    display: grid;
+    grid-template-columns: 1fr 5fr 5fr 1fr;
+    grid-template-rows:repeat(6,2fr);
+    max-height: 400px;
+    margin:auto;
+}
+.element-photo2 {
+    grid-column: 2/4;
+    height: 100%;
+}
 .image-left, .element-photo {
     height: auto;
     width: 100%;
 }
+.input2 {
+    grid-column: 2/4;
+    border: 1px solid rgb(136, 135, 135);
+height: 70%;
+}
+.width-all{
+    width: 100%;
+}
+.duo {
+grid-row: 6/7;
+height: 70%;
 
- .element-photo {
-    display: block;
+}
+.editar{
+    grid-column: 2/3
+}
+.guardar{
+    grid-column: 3/4
 }
 
-.element-photo2 {
-    display: none;
-} 
-.height-auto{
-    height: auto;
-}
 .image-photo-edit {
-    width: 35%;
-    height: 35%;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    margin: 5% auto auto 1%;
 }
 
 .change-photo {
@@ -35,45 +51,26 @@
     z-index: 10;
 }
 
-.formulario1 {
-    height: auto;
-    margin: auto;
-    width: 70%;
-}
-
-.input2 {
-    width: 70%;
-    margin: 4% auto;
-    border: 1px solid rgb(136, 135, 135);
-    height: 30px;
-}
-
-.duo {
-    display: inline-block;
-    height: 40px;
+.photograph {
+    height: 50px;
+    width: 50px;
+    z-index: 10;
 }
 
 @media(min-width:768px) {
-    .element-photo {
-        display: none;
+    .edit-body{
+        display: grid;
+        grid-template-columns: 6fr 6fr;
+        grid-template-rows: 12fr;
     }
-    .element-photo2 {
-        display: block;
-        height: 10%;
-        z-index: 10;
-    
+    .aside-edit{
+        grid-column: 1/2;
     }
     .photograph {
         height: 50px;
         width: 50px;
-        z-index: 10;
-
     }
     .edit-right {
-        padding: 0px;
-        margin: 0px;
-    }
-    .formulario1 {
-        height: 100%;
+        grid-column: 2/3;
     }
 }

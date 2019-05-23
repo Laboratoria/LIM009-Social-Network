@@ -1,8 +1,8 @@
 //import {  signOutUser } from "../controller/controller1.js"
 export default (user) => {
-  const elemento = document.createElement("div");
-  elemento.setAttribute("class", "container");
-  elemento.innerHTML = `
+    const elemento = document.createElement("div");
+    elemento.setAttribute("class", "container");
+    elemento.innerHTML = `
   <header class="header">
   <ul class="menu">
       <li class="small"><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1">${user.name}</label>
@@ -22,8 +22,8 @@ export default (user) => {
 <main class="post-zone">
 </main>
 </div> `;
-//const signOutOption = divElement.querySelector("#sign-out");
-//signOutOption.addEventListener("click", signOutUser);
-return elemento;
+    //const signOutOption = divElement.querySelector("#sign-out");
+    //signOutOption.addEventListener("click", signOutUser);
+    return elemento;
 };
 
