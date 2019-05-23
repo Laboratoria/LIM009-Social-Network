@@ -104,7 +104,7 @@ export default (doc, getUser, post, idUserAuth) => {
           contComentList.innerHTML = ''
           snapshot.forEach((result) => {
             //console.log(result.data());
-             contComentList.appendChild(viewformComent(result, doc))
+             contComentList.appendChild(viewformComent(result, doc,idUserAuth))
              //doc es la data de cada post por lo tanto doc.id es el ID de cada post.
             //result es la data de cada comentario por lo tanto result.id es el ID de cada comentario.
           })
@@ -114,7 +114,7 @@ export default (doc, getUser, post, idUserAuth) => {
       getPost(doc.id).get().then(function (querySnapshot) {
         contComentList.innerHTML = ''
         querySnapshot.forEach(function (idPost) {
-          contComentList.appendChild(viewformComent(idPost, doc))
+          contComentList.appendChild(viewformComent(idPost, doc,idUserAuth))
           // doc.data() is never undefined for query doc snapshots
           //console.log(idPost.id, " => ", idPost.data());
         });

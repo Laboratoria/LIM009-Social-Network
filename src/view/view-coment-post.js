@@ -1,6 +1,6 @@
 import { getDataDoc, deleteComment } from '../model/model.js'
 
-export default (com, doc) => {
+export default (com, doc,idUserAuth) => {
   const viewFormComent = document.createElement('form');
 
   const templateComent = `
@@ -37,8 +37,15 @@ export default (com, doc) => {
   console.log(doc.id,com.id);
   const btnDeleteComment = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}-${com.id}`)
             btnDeleteComment.addEventListener('click',() => {
-              console.log(`${doc.id},${com.id}`)
-              deleteComment(doc.id, com.id)
+              //console.log(`${doc.id},${com.id}`)
+              if (com.data().user === idUserAuth.uid) {
+                alert('Comentario eliminado correctamente')
+                deleteComment(doc.id, com.id);
+                // postList.innerHTML = ''
+              } else {
+                alert('Permiso denegado para eliminar este comentario')
+              }
+              
             });
             
             //poner a la vista de comentario
