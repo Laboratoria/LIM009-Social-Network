@@ -45,7 +45,6 @@ export const createCommentPost = (idPost, user, comment, fechaComment) => {
             user: user,
             comment: comment,
             fecha: fechaComment
-
         })
     // return comentPost
 }
@@ -73,6 +72,7 @@ export const deletePost = id => {
 }
 export const editPost = (id, description, state) => {
     let db = firebase.firestore();
+    console.log(db.collection("posts"))
     return db.collection("posts").doc(id).update({
         description: description,
         state: state

@@ -12,7 +12,7 @@ export const registerUser = () => {
   const passwordRegister = document.querySelector('#password-register').value;
 
   return createEmailAndPassword(emailRegister, passwordRegister)
-    .then((result) => {
+    .then(result => {
       dataBaseUser(result.user).then((docRef) => {
         alert('Registro con éxito')
         changeHash('/welcomeUser')
@@ -122,10 +122,6 @@ export const logOut = () => {
 
 
 export const setUpPost = (idUserAuth) => {
-
-  // const getUserIdView = (idUserAuth) => {
-
-  // changeHash('/welcomeUser')
   const postList = document.querySelector('#post-list');
   const postListPrivad = document.querySelector('#post-list-privados')
   // const postListPrivad = document.querySelector('#btn-view-post-privad')
@@ -168,55 +164,6 @@ export const setUpPost = (idUserAuth) => {
   // getUserReady(getUserIdView)
 }
 
-export const getPosts = () => {
-  let db = firebase.firestore();
-  db.collection('posts').onSnapshot(snapshot => {
-    //console.log(snapshot.docs)
-    setUpPost(snapshot.docs);
-  })
-};
-
-export const deletePost = id => {
-  let db = firebase.firestore();
-  return db.collection("posts").doc(id).delete().then(() => {
-    console.log("Document successfully deleted!");
-  }).catch((error) => {
-    console.error("Error removing document: ", error);
-  });
-}
-
-export const editPost = (id, description, state) => {
-  let db = firebase.firestore();
-  return db.collection("posts").doc(id).update({
-    description: description,
-    state: state
-  })
-    .then(function () {
-      console.log("Document successfully updated!");
-    })
-    .catch(function (error) {
-      // The document probably doesn't exist.
-      console.error("Error updating document: ", error);
-    });
-
-}
-export const deleteComment = () => {
-  // var cityRef = db.collection('cities').doc('BJ');
-
-  // // Remove the 'capital' field from the document
-  // var removeCapital = cityRef.update({
-  //     capital: firebase.firestore.FieldValue.delete()
-  // });
-  console.log('hola')
-  let db = firebase.firestore();
-  return db.collection('posts').doc('qBSNwVr2xELtCkUxPsqS').collection('comment').doc('Vlf0isy6OccUBlPWiv2S').delete().then(() => {
-    console.log("Document successfully deleted!");
-  }).catch((error) => {
-    console.error("Error removing document: ", error);
-  });
-
-}
-
 export const editPErfilUser = (idUser, name, email) => {
   updatePerfilUser(idUser, name).then(() => {
     // Update successful.
@@ -238,9 +185,3 @@ export const editPErfilUser = (idUser, name, email) => {
   });
 }
 
-/**
- *  const btnSubir = document.createElement('img')
-            btnSubir.src = './image/subir.png'
-            btnSubir.classList = 'img-post-prev'
-            article.appendChild(btnSubir)
- */

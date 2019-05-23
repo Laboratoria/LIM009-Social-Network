@@ -1,5 +1,5 @@
 import { likesPost, getDataDoc, getPost, createCommentPost } from '../model/model.js'
-import { editPost, deletePost } from '../controller/view-controller.js'
+import { editPost, deletePost } from '../model/model.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js';
 
@@ -85,18 +85,19 @@ export default (doc, getUser, post, idUserAuth) => {
   const contComentList = article.querySelector(`#comment-form-list-${doc.id}`)
   // console.log(coment)         
 
+  /*Realiza click en el botón de comentar.Obtiene datos del usuario logeado y ID del post.
+   muestra el formulario de comentar */
+
   btnComent.addEventListener('click', () => {
     debugger
     getDataDoc(idUserAuth.uid).then(result => {
-      console.log(result.data())
+      //console.log(result.data())
       coment.innerHTML = formComent(doc.id, result)
-
 
       const textComentPost = document.querySelector(`#text-coment-post-${doc.id}`)
       const btnViewComentPost = document.querySelector(`#btn-coment-id-${doc.id}`)
 
       btnViewComentPost.addEventListener('click', () => {
-        // getComent(doc,)
         let fecha = new Date();
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         createCommentPost(doc.id, idUserAuth.uid, textComentPost.value, fechaPost)
@@ -112,16 +113,16 @@ export default (doc, getUser, post, idUserAuth) => {
 
       })
 
-      // getPost(doc.id).get().then(function (querySnapshot) {
-      //   contComentList.innerHTML = ''
-      //   querySnapshot.forEach(function (idPost) {
-      //     contComentList.appendChild(viewformComent(idPost, doc, idUserAuth))
-      //     // doc.data() is never undefined for query doc snapshots
-      //     console.log(idPost.id, " => ", idPost.data());
-      //   });
-      // });
+      getPost(doc.id).get().then(function (querySnapshot) {
+        contComentList.innerHTML = ''
+        querySnapshot.forEach(function (idPost) {
+          contComentList.appendChild(viewformComent(idPost, doc, idUserAuth))
+          // doc.data() is never undefined for query doc snapshots
+          console.log(idPost.id, " => ", idPost.data());
+        });
+      });
     })
-  })
+  });
 
   return article
 }

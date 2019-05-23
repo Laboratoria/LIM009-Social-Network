@@ -1,21 +1,20 @@
 import { getDataDoc } from '../model/model.js'
-import { deleteComment } from '../controller/view-controller.js'
-export default (comment, doc, idUserAuth) => {
+export default (com, doc, idUserAuth) => {
   const viewFormComent = document.createElement('form');
 
   const templateComent = `
       <div class= 'flex-container  margin-top  center'>    
         <div class = 'btn-post-edit-del'>
-       <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-coment-${doc.id}'>
-       <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-coment-${doc.id}'>
+       <img class ='img-perfil-post' src='./image/editar.png' alt ='boton de editar' id='btn-edit-coment-${doc.id}-${com.id}'>
+       <img class ='img-perfil-post' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-coment-${doc.id}-${com.id}'>
        </div> 
         <header class='header-post'>       
         <img id='photo-coment-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>                
         <label id='name-user-coment' class=''>nombre</label> 
-        <label id='fecha-post' class='center color-fecha'>${comment.data().fecha}</label>            
+        <label id='fecha-post' class='center color-fecha'>${com.data().fecha}</label>            
         </header>
         <section class='content-post'>      
-        <textarea id = 'description' class="textarea-coment center">${comment.data().comment}</textarea>           
+        <textarea id = 'description' class="textarea-coment center">${com.data().comment}</textarea>           
         </section>
         <footer class = 'margin-footer center'>
         <div class = 'style-color-header style-content-post-img'>
@@ -30,12 +29,19 @@ export default (comment, doc, idUserAuth) => {
   const nameComment = viewFormComent.querySelector('#name-user-coment')
   const deleteCommentEvent = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}`)
   const editComment = viewFormComent.querySelector(`#btn-edit-coment-${doc.id}`)
-  getDataDoc(comment.data().user).then(result => {
+  getDataDoc(com.data().user).then(result => {
     userPhotoComent.src = result.data().photo
     nameComment.innerHTML = result.data().name
   })
-  deleteCommentEvent.addEventListener('click', () => {
-    deleteComment()
-  })
+
+  console.log(doc.id, com.id);
+  const btnDeleteComment = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}-${com.id}`)
+  btnDeleteComment.addEventListener('click', () => {
+    console.log(`${doc.id},${com.id}`)
+    // deleteComment(doc.id, com.id)
+  });
+
+  //poner a la vista de comentario
+  //console.log(result.id, " => ", result.data());
   return viewFormComent
 }
