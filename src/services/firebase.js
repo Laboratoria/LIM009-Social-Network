@@ -51,7 +51,26 @@ const promiseOfAddFirebase = (nameCollection, obj) => {
     return dataBaseCloudFirestore().collection(nameCollection).add(obj);
 }
 
+const getUrlImageFromStorage = (selectedFile, progress, callback) =>{
+    const storageService = firebase.storage().ref().child(`images/${selectedFile.name}`).put(selectedFile);
+    storageService.on('state_changed', (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        var percentage = (snapshot.bytesTransferred /
+            snapshot.totalBytes) * 100;
+        progress.value = percentage;   
+    },(error) => {
+        // Handle unsuccessful uploads
+        console.log(error);
+    },() => {
+        // Do something once upload is complete
+        storageService.snapshot.ref.getDownloadURL().then((url) => {
+            console.log(url);
+            callback(url);
+        });
+    });
+  //  return uploadTask.snapshot.ref.getDownloadURL();
 
+}
 
 
 
@@ -127,6 +146,6 @@ export {
     promiseOfUpdateFirebase,
     promiseOnSnapshotFirebase,
     firebaseAuthState,
-    promiseOfAddFirebase
-    // upLoadImageToFirestore,
+    promiseOfAddFirebase,
+    getUrlImageFromStorage
 };

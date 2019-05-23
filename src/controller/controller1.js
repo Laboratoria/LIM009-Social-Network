@@ -6,14 +6,14 @@ import {
     signOut,
     dataBaseCloudFirestore,
     currentUser,
-    //   deletePostInCloudFireStore,
     promiseOfSetFirebase,
     promiseOfgetFirebase,
     promiseOfdeleteFirebase,
     promiseOfUpdateFirebase,
     promiseOnSnapshotFirebase,
     firebaseAuthState,
-    promiseOfAddFirebase
+    promiseOfAddFirebase,
+    getUrlImageFromStorage
 } from "../services/firebase.js";
 
 const changeHash = (hash) => {
@@ -251,26 +251,11 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
 
 
 
-const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, selectedFile) => {
+const handleFileUploadSubmit = ( inputComment, idUser, statusComment, progress, selectedFile) => {
     if (selectedFile !== undefined) {
-        const storageService = firebase.storage().ref();
-        const uploadTask = storageService.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
-        uploadTask.on('state_changed', (snapshot) => {
-            // Observe state change events such as progress, pause, and resume
-            var percentage = (snapshot.bytesTransferred /
-                snapshot.totalBytes) * 100;
-            progress.value = percentage;
-        }, (error) => {
-            // Handle unsuccessful uploads
-            console.log(error);
-        }, () => {
-            // Do something once upload is complete
-            const downloadImg = uploadTask.snapshot.ref.getDownloadURL();
-            return downloadImg.then((url) => {
-                console.log(url);
-                addPostToCloudFirestore(inputComment, idUser, statusComment, url);
-            });
-        });
+     
+    getUrlImageFromStorage(selectedFile, progress, (url) => {
+        addPostToCloudFirestore(inputComment, idUser, statusComment,url) })
     } else {
         addPostToCloudFirestore(inputComment, idUser, statusComment, '');
     }
