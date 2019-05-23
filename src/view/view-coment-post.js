@@ -1,4 +1,4 @@
-import { getDataDoc, deleteComment } from '../model/model.js'
+import { getDataDoc, deleteComment, editComment } from '../model/model.js'
 
 export default (com, doc,idUserAuth) => {
   const viewFormComent = document.createElement('form');
@@ -15,7 +15,7 @@ export default (com, doc,idUserAuth) => {
         <label id='fecha-post' class='center color-fecha'>${com.data().fecha}</label>            
         </header>
         <section class='content-post'>      
-        <textarea id = 'description' class="textarea-coment center">${com.data().comment}</textarea>           
+        <textarea id = 'description-${doc.id}-${com.id}' class="textarea-coment center">${com.data().comment}</textarea>           
         </section>
         <footer class = 'margin-footer center'>
         <div class = 'style-color-header style-content-post-img'>
@@ -27,28 +27,33 @@ export default (com, doc,idUserAuth) => {
       `;
   viewFormComent.innerHTML = templateComent;
   const userPhotoComent = viewFormComent.querySelector('#photo-coment-user')
-  const nameComent = viewFormComent.querySelector('#name-user-coment')
-  // const nameComent = viewFormComent.querySelector('#name-user-coment')
-  // const nameComent = viewFormComent.querySelector('#name-user-coment')
+  const nameComment = viewFormComent.querySelector('#name-user-coment')
+  const btnEditComment = viewFormComent.querySelector(`#btn-edit-coment-${doc.id}-${com.id}`)
+  const btnDeleteComment = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}-${com.id}`)
   getDataDoc(com.data().user).then(result => {
     userPhotoComent.src = result.data().photo
-    nameComent.innerHTML = result.data().name
+    nameComment.innerHTML = result.data().name
   })
-  console.log(doc.id,com.id);
-  const btnDeleteComment = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}-${com.id}`)
-            btnDeleteComment.addEventListener('click',() => {
-              //console.log(`${doc.id},${com.id}`)
-              if (com.data().user === idUserAuth.uid) {
-                alert('Comentario eliminado correctamente')
-                deleteComment(doc.id, com.id);
-                // postList.innerHTML = ''
-              } else {
-                alert('Permiso denegado para eliminar este comentario')
-              }
-              
-            });
-            
-            //poner a la vista de comentario
-            //console.log(result.id, " => ", result.data());
-  return viewFormComent
+
+  //console.log(doc.id, com.id);
+  btnDeleteComment.addEventListener('click',() => {
+     if (com.data().user === idUserAuth.uid) {
+      deleteComment(doc.id, com.id);
+      alert('Comentario eliminado correctamente')
+      } else {
+      alert('Permiso denegado para eliminar este comentario')
+      }   
+  });
+
+  btnEditComment.addEventListener('click',() => {
+    const editDescriptionComment = viewFormComent.querySelector(`#description-${doc.id}-${com.id}`).value;
+    if (com.data().user === idUserAuth.uid) {
+      //console.log(editDescriptionComment);
+      editComment(doc.id, com.id,editDescriptionComment);
+      alert('Comentario editado correctamente')
+      } else {
+      alert('Permiso denegado para editar este comentario')
+      }  
+  }) 
+return viewFormComent
 }

@@ -77,16 +77,19 @@ export const editPost = (id, description, state) => {
         state: state
     })
 }
-// export const deleteComment = (idPost,id) => {
-//     let db = firebase.firestore();
-//     return db.collection('posts').doc(idPost).collection('comment').doc(id).delete().then(result => console.log(result));
-// }
-
 
 export const deleteComment = (idPost,id) => {
     const db = firebase.firestore();
     return db.collection('posts').doc(idPost).collection('comment').doc(id).delete()
 }
+
+export const editComment = (idPost,id,comment) => {
+    const db = firebase.firestore();
+    return db.collection('posts').doc(idPost).collection('comment').doc(id).update({
+        comment: comment
+    })
+}
+
 //Crear post con IDs por defecto
 export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
 
@@ -100,7 +103,6 @@ export const createPost = (state, imagePost, fechaPost, description, userID, hor
         fechaPost: fechaPost,
         horaPost: horaPost
     })
-
 }
 
 

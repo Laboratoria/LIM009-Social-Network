@@ -1,7 +1,8 @@
-import { likesPost, getDataDoc, getPost, createCommentPost, deleteComment } from '../model/model.js'
-import { editPost, deletePost } from '../model/model.js'
+import { likesPost, getDataDoc, getPost, createCommentPost } from '../model/model.js'
+import { editPost, deletePost} from '../model/model.js'
 import formComent from '../view/coment-post.js';
-import viewformComent from '../view/view-coment-post.js'
+import viewformComent from '../view/view-coment-post.js';
+
 
 export default (doc, getUser, post, idUserAuth) => {
   const article = document.createElement('article');
@@ -45,12 +46,11 @@ export default (doc, getUser, post, idUserAuth) => {
     if (post.user === idUserAuth.uid) {
       editPost(doc.id, editDescription, state.value);
       alert('Post editado correctamente');
-
     } else {
       alert('Permiso denegado para editar este post');
     }
-    // postList.innerHTML = ''
-  });
+   });
+
   let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
   btnDelete.addEventListener('click', () => {
     // console.log(post.user)
@@ -58,12 +58,11 @@ export default (doc, getUser, post, idUserAuth) => {
     if (post.user === idUserAuth.uid) {
       alert('Post eliminado correctamente')
       deletePost(doc.id);
-      // postList.innerHTML = ''
-    } else {
+     } else {
       alert('Permiso denegado para eliminar este post')
     }
-    // postList.innerHTML = ''
   })
+
   let btnLike = article.querySelector(`#btn-like-${doc.id}`)
   var listener = function (event) {
     let like = 0
@@ -86,8 +85,9 @@ export default (doc, getUser, post, idUserAuth) => {
 
   /*Realiza click en el botón de comentar.Obtiene datos del usuario logeado y ID del post.
    muestra el formulario de comentar */
-  
+
   btnComent.addEventListener('click', () => {
+    debugger
     getDataDoc(idUserAuth.uid).then(result => {
       //console.log(result.data())
       coment.innerHTML = formComent(doc.id, result)
@@ -110,13 +110,11 @@ export default (doc, getUser, post, idUserAuth) => {
           })
         })
       })
-
       getPost(doc.id).get().then(function (querySnapshot) {
         contComentList.innerHTML = ''
         querySnapshot.forEach(function (idPost) {
           contComentList.appendChild(viewformComent(idPost, doc,idUserAuth))
-          // doc.data() is never undefined for query doc snapshots
-          //console.log(idPost.id, " => ", idPost.data());
+           //console.log(idPost.id, " => ", idPost.data());
         });
       });
     })

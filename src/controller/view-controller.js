@@ -1,7 +1,5 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createCommentPost, getPost, viewListPostPrivate, likesPost, viewListPostPublic } from '../model/model.js'
-import { getUserReady } from '../lib/comple-firebase.js';
-import viewformComent from '../view/view-coment-post.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic } from '../model/model.js'
 import viewPostList from '../view/view-pos-list.js'
 const changeHash = (hash) => {
   location.hash = hash;
@@ -21,12 +19,6 @@ export const registerUser = () => {
       }).catch((error) => {
         console.error("Error adding document: ", error);
       });
-      // console.log(nameUserCreate.value)
-
-
-      // console.log(result)icono-login-user
-
-
     }).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
@@ -136,11 +128,8 @@ export const setUpPost = (idUserAuth) => {
           //console.log(doc)
           postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-        //;
-
       })
     })
-
   });
 
   viewListPostPublic().onSnapshot(data => {
@@ -153,15 +142,10 @@ export const setUpPost = (idUserAuth) => {
           //console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-        //;
-
       })
     })
-
   });
   return postListPrivad
-  // }
-  // getUserReady(getUserIdView)
 }
 
 export const editPErfilUser = (idUser, name, email) => {
