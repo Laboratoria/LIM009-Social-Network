@@ -12,6 +12,19 @@ const fixtureData = {
           likes: 0,
           state: 'publico',
           user: 'xyz',
+          __collection__: {
+            comment: {
+              __doc__: {
+                comment_post_123: {
+                  reference: '__ref__:posts/abc123',
+                  user: 'xyz',
+                  comment: 'hola es un comentario',
+                  fecha: '19/05/2019'
+
+                }
+              }
+            }
+          }
         },
         abc124: {
           description: 'Hola a todos',
@@ -46,7 +59,7 @@ const postPrivad = {
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
-import { createPost, viewListPostPublic, dataBaseUser, getDataDoc, viewListPostPrivate, deletePost, editPost, createCommentPost, getPost, likesPost } from "../src/model/model.js";
+import { createPost, viewListPostPublic, dataBaseUser, getDataDoc, viewListPostPrivate, deletePost, editPost, createCommentPost, getComentPost, likesPost ,editComment,deleteComment} from "../src/model/model.js";
 
 describe('Funciones para gestionar usuarios firestore', () => {
   it('dataBaseUser deberia ser una funcion ', () => {
@@ -107,7 +120,7 @@ describe('createPost', () => {
   it.only('deberia poder editar un post', () => {
     return editPost('abc123', 'hola a todos post editado', 'publico').then(() => {
       viewListPostPublic().get().then(result => {
-        expect(result).toBe(true)
+        expect(result._data[0].data().description).toBe('hola a todos post editado')
       })
     }).catch((error) => {
       console.error("Error removing document: ", error);
@@ -119,14 +132,14 @@ describe('createPost', () => {
   it('likesPost deberia ser una funcion', () => {
     expect(typeof likesPost).toBe('function')
   })
-  // it('deberia poder agregar un like', () => {
-  //   return likesPost('abc123', 1).then(() => {
-  //     getPost('abc123').get().then(result => {
-  //       expect(result._data[0]._data.likes).toBe(1);
+  it('deberia poder agregar un like', () => {
+    return likesPost('abc123', 1).then(() => {
+      getComentPost('abc123').get().then(result => {
+        expect(result._data[0]._data.likes).toBe(1);
 
-  //     })
-  //   })
-  // })
+      })
+    })
+  })
 
 })
 describe('test para comentarios', () => {
@@ -135,10 +148,21 @@ describe('test para comentarios', () => {
   })
   it('deberia crear un comentario', () => {
     return createCommentPost('abc123', 'user123', 'esto esun comentario', '21/05/2019').then(() => {
-      getPost('abc123').get().then(result => {
+      getComentPost('abc123').get().then(result => {
         expect(result._data[0]._data.comment).toBe('esto esun comentario');
 
       })
     })
   })
+  it('deberia ser una funcion',()=>{
+    expect(typeof editComment).toBe('function')
+  })
+  it('deberia poder editar un comentario',()=>{
+    return editComment('abc123','comment_post_123','edite comentario').then(()=>{
+      getPost(abc123).get().then(result => {
+        expect(result).toBe('hola')
+      })      
+    })
+  })
+  
 })

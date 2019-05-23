@@ -48,7 +48,7 @@ export const createCommentPost = (idPost, user, comment, fechaComment) => {
         })
     // return comentPost
 }
-export const getPost = (idPost) => {
+export const getComentPost = (idPost) => {
     let db = firebase.firestore();
     return db.collection('posts').doc(`${idPost}`).collection('comment')
 }

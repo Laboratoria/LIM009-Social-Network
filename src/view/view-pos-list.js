@@ -1,4 +1,4 @@
-import { likesPost, getDataDoc, getPost, createCommentPost } from '../model/model.js'
+import { likesPost, getDataDoc, getComentPost, createCommentPost } from '../model/model.js'
 import { editPost, deletePost} from '../model/model.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js';
@@ -105,7 +105,7 @@ export default (doc, getUser, post, idUserAuth) => {
         //   const formDescription = document.querySelector(`form-${result.id}`)
         //   formDescription.reset();
         // });
-        getPost(doc.id).onSnapshot(snapshot => {
+        getComentPost(doc.id).onSnapshot(snapshot => {
           //console.log(snapshot.docs);
           contComentList.innerHTML = ''
           snapshot.forEach((result) => {
@@ -116,7 +116,7 @@ export default (doc, getUser, post, idUserAuth) => {
           })
         })
       })
-      getPost(doc.id).get().then(querySnapshot => {
+      getComentPost(doc.id).get().then(querySnapshot => {
         contComentList.innerHTML = ''
         querySnapshot.forEach(idPost => {
           contComentList.appendChild(viewformComent(idPost, doc,idUserAuth))
