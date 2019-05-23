@@ -18,7 +18,7 @@ const fixtureData = {
                 comment_post_123: {
                   reference: '__ref__:posts/abc123',
                   user: 'xyz',
-                  comment: 'hola es un comentario',
+                  comment: 'esto esun comentario',
                   fecha: '19/05/2019'
 
                 }
@@ -117,7 +117,7 @@ describe('createPost', () => {
     expect(typeof editPost).toBe('function')
   });
 
-  it.only('deberia poder editar un post', () => {
+  it('deberia poder editar un post', () => {
     return editPost('abc123', 'hola a todos post editado', 'publico').then(() => {
       viewListPostPublic().get().then(result => {
         expect(result._data[0].data().description).toBe('hola a todos post editado')
@@ -127,15 +127,13 @@ describe('createPost', () => {
     })
   })
 
-
-
   it('likesPost deberia ser una funcion', () => {
     expect(typeof likesPost).toBe('function')
   })
   it('deberia poder agregar un like', () => {
     return likesPost('abc123', 1).then(() => {
       getComentPost('abc123').get().then(result => {
-        expect(result._data[0]._data.likes).toBe(1);
+        expect(result._data[0]._ref._firestore._data.__collection__.posts.__doc__.abc123.likes).toBe(1);
 
       })
     })
@@ -159,10 +157,9 @@ describe('test para comentarios', () => {
   })
   it('deberia poder editar un comentario',()=>{
     return editComment('abc123','comment_post_123','edite comentario').then(()=>{
-      getPost(abc123).get().then(result => {
-        expect(result).toBe('hola')
+      getComentPost('abc123').get().then(result => {
+        expect(result._data[0]._data.comment).toBe('edite comentario')
       })      
     })
   })
-  
 })
