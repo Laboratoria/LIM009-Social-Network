@@ -137,7 +137,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          console.log(doc)
+          //console.log(doc)
           postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
@@ -154,7 +154,7 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          console.log(doc)
+          //console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
         //;
@@ -200,15 +200,16 @@ export const editPost = (id, description, state) => {
     });
 
 }
-export const deleteComment = (idPost, id) => {
+export const deleteComment = () => {
   // var cityRef = db.collection('cities').doc('BJ');
 
   // // Remove the 'capital' field from the document
   // var removeCapital = cityRef.update({
   //     capital: firebase.firestore.FieldValue.delete()
   // });
+  console.log('hola')
   let db = firebase.firestore();
-  let date = db.collection('posts').doc(`${idPost.id}`).collection('comemt').doc('sXdGmTVqFFzBA05DFU00').delete().then(() => {
+  return db.collection('posts').doc('qBSNwVr2xELtCkUxPsqS').collection('comment').doc('Vlf0isy6OccUBlPWiv2S').delete().then(() => {
     console.log("Document successfully deleted!");
   }).catch((error) => {
     console.error("Error removing document: ", error);

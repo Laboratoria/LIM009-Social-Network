@@ -35,7 +35,7 @@ export default (comment, doc, idUserAuth) => {
     nameComment.innerHTML = result.data().name
   })
   deleteCommentEvent.addEventListener('click', () => {
-    deleteComment(doc, comment.id)
+    deleteComment()
   })
   return viewFormComent
 }

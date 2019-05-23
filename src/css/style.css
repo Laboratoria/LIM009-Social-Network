@@ -3,10 +3,10 @@
     padding: 0px;
     list-style: none;
     text-decoration: none;
-    font-family: bold;
-    font-size: 16px;
+    /* font-size: 16px; */
     text-align: center;
     box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/
+   
 }
 /* html {
     height: 100%;
@@ -71,15 +71,9 @@ button:hover{
 .margin-top{
     margin-top : 3%;   
 }
-.style-color-header{
-    /* margin :2%; */
-    border: 0.7px solid rgba(37, 4, 90, 0.37);
-    padding: 1%;
-    border-radius: 3%;
-    margin: 1%;
-    /* background: rgba(0, 0, 0, 0.185); */
-    color: rgb(100, 0, 0)
-}
+.style-color-header{   
+    border: 0.7px solid rgba(122, 48, 48, 0.31);  
+  }
 
 .edit-perfil{
     display: flex;
@@ -90,21 +84,20 @@ button:hover{
     color: white;
     padding: 1%;
 }
-a:hover{
-    font-size: 30px;
+a{
+    color: white
 }
+
 .col-12{
     width: 100%;
     padding-bottom: 5rem;
 }
 .flex-container{
     display: flex;
-    flex-direction: column;
-    /* box-shadow: 2px 6px 5px 5px rgba(16, 7, 36, 0.486); */
-    padding: 2%;
-    background: white;
+    flex-direction: column;    
+    padding: 2%;    
     width:85%;
-    /* color: rgb(24, 13, 13) */
+   
 }
 .header-post{
     display: flex;
@@ -115,9 +108,10 @@ a:hover{
     align-content: center    
  }
  .img-perfil-post{        
-    height: 2rem;
-    border-radius: 50%;
-    margin-right: 2%;       
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;    
+    border: 2px solid rgba(25, 84, 107, 0.089);
 }
 .img-post{ 
     width: 25%;
@@ -131,10 +125,9 @@ a:hover{
         box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
     }
     .textarea{
-    width: 70%;
-    height: 7rem;
-    box-shadow: 1px 3px 3px 3px rgba(13, 14, 13, 0.233); 
-    border-radius: 5%;   
+    border:1px solid white;    
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.45)
     }
 .color{
     background: rgba(102, 4, 28, 0.048);
@@ -157,7 +150,7 @@ a:hover{
     background: rgba(119, 8, 26, 0.082);
     border: 0.5px solid rgba(119, 8, 26, 0);
     padding: 1%;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
 }
 .style-content-footer{
     display: flex;
@@ -190,9 +183,7 @@ padding: 2%;
 color: rgba(49, 53, 53, 0.514)
 }
 .textarea-coment{
-    height: 3
-    
-    rem;
+    height: 3rem;
 }
 .color-menu-post{
     background: rgba(101, 221, 53, 0.116)
@@ -202,6 +193,50 @@ color: rgba(49, 53, 53, 0.514)
    margin-bottom: 3%;
     width: 20%;
 }
+.color-content{
+    background: rgba(229, 229, 229, 0.295);
+}
+.color-perfil{
+    background:rgba(255, 255, 255, 0.692) ;
+    /* height: 5rem; */
+}
+.img-perfil-aside{
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;  
+    border: 2px solid rgba(25, 84, 107, 0.089);
+}
+.conte-flex-perfil{    
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+.cont-flex-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 3%;
+}
+.size-perfil{
+     background:rgba(25, 84, 107, 0.089);    
+    border: 0.5px solid rgba(25, 84, 107, 0.089);
+}
+.flex-header-post{
+    display: flex;
+    justify-content: start;
+    padding: 1%;
+    background: rgba(231, 175, 175, 0.13);
+    color: rgba(17, 5, 5, 0.637)
+
+}
+.style-cont-text-area{
+   background: white;
+   border: 0.2px solid rgba(159, 49, 49, 0.13)
+}
+
+
 
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {
@@ -241,7 +276,7 @@ color: rgba(49, 53, 53, 0.514)
         float: left; 
         width: 50%; 
      } 
-     .col-12 { width: 100% ;}
+     /* .col-12 { width: 100% ;} */
      img{
         max-width: 100%;
     }    
@@ -254,12 +289,17 @@ color: rgba(49, 53, 53, 0.514)
 
          }
     .header {
+        font-family: 'Changa One', cursive;
+        font-family: 'Aclonica', sans-serif;
+        font-family: 'Shrikhand', cursive;
+        font-family: 'Chonburi', cursive;
+        font-size: 20px;
         display:inline-flex;
         justify-content : space-around;
         height: 50px;
         align-content: flex-start;
         width: 100%;
-        background-color: rgb(6, 129, 68, 0.60);
+        background-color:rgba(12, 83, 98, 1);
         color: white
     }
     .col-6{    
@@ -268,12 +308,15 @@ color: rgba(49, 53, 53, 0.514)
     .col-4{  
         width: 33.3333333333%;   
         float: left;
+        margin-left: 3%;
     }
     
     .col-7{
         width: 58.3333333333%;
         float: left;
     }
+   
+    
  }
 
 

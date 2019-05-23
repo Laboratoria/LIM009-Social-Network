@@ -35,7 +35,6 @@ export const dataBaseUser = (user) => {
 export const getDataDoc = users => {
     let db = firebase.firestore();
     var docRef = db.collection("users").doc(`${users}`);
-
     return docRef.get()
 }
 
@@ -54,7 +53,6 @@ export const getPost = (idPost) => {
     let db = firebase.firestore();
     return db.collection('posts').doc(`${idPost}`).collection('comment')
 }
-
 export const viewListPostPrivate = (idUser) => {
     let db = firebase.firestore();
     return db.collection('posts').where('state', '==', 'privado').where('user', '==', `${idUser}`).orderBy('fechaPost', 'desc')
@@ -80,7 +78,6 @@ export const editPost = (id, description, state) => {
         state: state
     })
 }
-
 //Crear post con IDs por defecto
 export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
 

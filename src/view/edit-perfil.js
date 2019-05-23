@@ -1,6 +1,7 @@
 import { editPErfilUser } from '../controller/view-controller.js'
 import { updatePhoto } from '../model/model.js';
 import { imageFirestore, getUserReady } from '../lib/comple-firebase.js'
+
 export default () => {
     const formPerfil = document.createElement('form');
     const templateEditPerf = `
