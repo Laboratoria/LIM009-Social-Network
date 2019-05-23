@@ -46,8 +46,8 @@ export default (user) => {
       <input type="file" value="upload" id="file-button" class='btn-image-post'/>        
       </div >       
       <select name="" id="estado-post" class = 'btn-post-create'>
-      <option selected="true" disabled="disabled">Amigos</option>
-      <option value="publico">Público</option>
+      
+      <option value="publico"select>Público</option>
       <option value="privado" select>Privado</option>
       </select>
         <button id ='btn-share' class=''>Compartir</button>
@@ -84,7 +84,7 @@ export default (user) => {
         fr.readAsDataURL(e.target.files[0]);
     }
     state.onchange = () => {
-        console.log('holaaaaaaaaa')
+        console.log(state.value)
     }
 
     btnSharePost.addEventListener('click', () => {
@@ -94,25 +94,18 @@ export default (user) => {
         let selectImage = fileButton.files[0]
         let selectState = state.value;
         let description = document.querySelector('#description').value;
-
+        console.log(selectImage)
+        console.log(selectState)
         console.log(fechaPost, horaPost, selectImage, selectState, description, user.uid)
-        if (selectImage === undefined && selectState === 'Amigos') {
-            createPost('publico', './image/image-post.png', fechaPost, description, user.uid, horaPost)
-        } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
+        if (selectImage === undefined) {
+            console.log('./image/image-post.png')
             createPost(selectState, './image/image-post.png', fechaPost, description, user.uid, horaPost)
-        } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
+        } else {
+            console.log('paso')
             const getImage = (image) => {
                 //console.log(image)
                 imagePostView.src = image
                 createPost(selectState, image, fechaPost, description, user.uid, horaPost)
-            }
-            imageFirestore(selectImage, uploader, getImage)
-        }
-        else if (selectState === 'Amigos' && selectImage !== undefined) {
-            const getImage = (image) => {
-                console.log(image)
-                imagePostView.src = image
-                createPost('publico', image, fechaPost, description, user.uid, horaPost)
             }
             imageFirestore(selectImage, uploader, getImage)
         }
