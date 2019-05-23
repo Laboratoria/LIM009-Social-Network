@@ -22,9 +22,9 @@ body {
  .center{
     margin:auto;
   }
-.container {
+/*.container {
     margin: 10% auto;
-}
+}*/
  .style-input{
     width: 60%;
     margin-bottom: 3%;
@@ -124,7 +124,8 @@ a:hover{
     margin-right: 0.5%;
     border: 1px solid rgba(0, 0, 0, 0.322);
 }
-    #image-post:hover{
+
+#image-post:hover{
         box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
     }
     .textarea{

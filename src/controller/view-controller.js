@@ -1,7 +1,5 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, createCommentPost, getPost, viewListPostPrivate, likesPost, viewListPostPublic } from '../model/model.js'
-import { getUserReady } from '../lib/comple-firebase.js';
-import viewformComent from '../view/view-coment-post.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic } from '../model/model.js'
 import viewPostList from '../view/view-pos-list.js'
 const changeHash = (hash) => {
   location.hash = hash;
@@ -12,7 +10,7 @@ export const registerUser = () => {
   const passwordRegister = document.querySelector('#password-register').value;
 
   return createEmailAndPassword(emailRegister, passwordRegister)
-    .then((result) => {
+    .then(result => {
       dataBaseUser(result.user).then((docRef) => {
         alert('Registro con éxito')
         changeHash('/welcomeUser')
@@ -21,12 +19,6 @@ export const registerUser = () => {
       }).catch((error) => {
         console.error("Error adding document: ", error);
       });
-      // console.log(nameUserCreate.value)
-
-
-      // console.log(result)icono-login-user
-
-
     }).catch(error => {
       // Handle Errors here.
       var errorCode = error.code;
@@ -122,10 +114,6 @@ export const logOut = () => {
 
 
 export const setUpPost = (idUserAuth) => {
-
-  // const getUserIdView = (idUserAuth) => {
-
-  // changeHash('/welcomeUser')
   const postList = document.querySelector('#post-list');
   const postListPrivad = document.querySelector('#post-list-privados')
   // const postListPrivad = document.querySelector('#btn-view-post-privad')
@@ -140,11 +128,8 @@ export const setUpPost = (idUserAuth) => {
           //console.log(doc)
           postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-        //;
-
       })
     })
-
   });
 
   viewListPostPublic().onSnapshot(data => {
@@ -157,48 +142,10 @@ export const setUpPost = (idUserAuth) => {
           //console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-        //;
-
       })
     })
-
   });
   return postListPrivad
-  // }
-  // getUserReady(getUserIdView)
-}
-
-export const getPosts = () => {
-  let db = firebase.firestore();
-  db.collection('posts').onSnapshot(snapshot => {
-    //console.log(snapshot.docs)
-    setUpPost(snapshot.docs);
-  })
-};
-
-export const deletePost = id => {
-  let db = firebase.firestore();
-  return db.collection("posts").doc(id).delete().then(() => {
-    console.log("Document successfully deleted!");
-  }).catch((error) => {
-    console.error("Error removing document: ", error);
-  });
-}
-
-export const editPost = (id, description, state) => {
-  let db = firebase.firestore();
-  return db.collection("posts").doc(id).update({
-    description: description,
-    state: state
-  })
-    .then(function () {
-      console.log("Document successfully updated!");
-    })
-    .catch(function (error) {
-      // The document probably doesn't exist.
-      console.error("Error updating document: ", error);
-    });
-
 }
 
 export const editPErfilUser = (idUser, name, email) => {
@@ -222,9 +169,3 @@ export const editPErfilUser = (idUser, name, email) => {
   });
 }
 
-/**
- *  const btnSubir = document.createElement('img')
-            btnSubir.src = './image/subir.png'
-            btnSubir.classList = 'img-post-prev'
-            article.appendChild(btnSubir)
- */
