@@ -29,6 +29,7 @@ const currentUser = () => {
     return firebase.auth().currentUser
 };
 const promiseOfSetFirebase = (nameCollection, docId, obj) => {
+
     return dataBaseCloudFirestore().collection(nameCollection).doc(docId).set(obj);
 }
 const promiseOfgetFirebase = (nameCollection, docId) => {
