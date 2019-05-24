@@ -45,21 +45,20 @@ body {
      width: 30%;
      border-radius: 7px;
 }
-.btn-rss, .btn-post{
+.btn-rss{
     margin-top: 2%;
     margin-right: 3%;
     height: 36px;
     width: 36px
 }
 
-.btn-post {
-    margin-top: 1%;
-    margin-right: 1%
+.btn-post {   
+    margin: 0% 4% 0% 2%;
 }
 
-button:hover{
+button:hover,select:hover{
     color: rgb(7, 7, 7);
-    background:rgba(49, 172, 111, 0.719);
+    background: rgba(231, 175, 175, 0.233);
 }
 .style-register{
     display: inline;
@@ -69,7 +68,7 @@ button:hover{
     color:rgba(24, 23, 23, 0.822);
     }
 .margin-top{
-    margin-top : 3%;   
+    margin-top : 4%;   
 }
 .style-color-header{   
     border: 0.7px solid rgba(122, 48, 48, 0.31);  
@@ -103,13 +102,13 @@ a{
     display: flex;
     text-align: center;
     flex-direction: row;
-    height: 3rem;
+    /* height: 3rem;
     justify-content: center;  
-    align-content: center    
+    align-content: center     */
  }
  .img-perfil-post{        
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     border-radius: 50%;    
     border: 2px solid rgba(25, 84, 107, 0.089);
 }
@@ -124,11 +123,14 @@ a{
     #image-post:hover{
         box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
     }
-    .textarea{
-    border:1px solid white;    
-    font-size: 25px;
-    color: rgba(0, 0, 0, 0.45)
-    }
+ .textarea{
+ resize:both;
+width: 100%;
+height: 7rem;
+font-size: 25px;
+color: rgba(0, 0, 0, 0.45);
+border:1px solid white;
+}
 .color{
     background: rgba(102, 4, 28, 0.048);
     color: rgb(24, 13, 13);
@@ -173,6 +175,7 @@ a{
 display: flex;
 padding: 2%;
 }
+/*gdgg*/
 .opacity{
     opacity: 0;
 }
@@ -200,17 +203,10 @@ color: rgba(49, 53, 53, 0.514)
     background:rgba(255, 255, 255, 0.692) ;
     /* height: 5rem; */
 }
-.img-perfil-aside{
-    height: 7rem;
-    width: 7rem;
-    border-radius: 50%;  
-    border: 2px solid rgba(25, 84, 107, 0.089);
-}
+
 .conte-flex-perfil{    
     display: flex;
-    flex-direction: row;
-    
-    
+    flex-direction: row;   
 }
 .cont-flex-column{
     display: flex;
@@ -226,22 +222,62 @@ color: rgba(49, 53, 53, 0.514)
 .flex-header-post{
     display: flex;
     justify-content: start;
-    padding: 1%;
-    background: rgba(231, 175, 175, 0.13);
-    color: rgba(17, 5, 5, 0.637)
-
+    padding: 1%;   
+    color: rgba(17, 5, 5, 0.637);
+    background: white;
 }
 .style-cont-text-area{
    background: white;
    border: 0.2px solid rgba(159, 49, 49, 0.13)
 }
+.img-btn-post{
+    height: 2.4rem;
+}
+.size-btn-img{
+    width: 33.3333333333%; 
+    display: flex;    
+    justify-content: center;
+    align-content: center;
+}
+/*color del contenedor de footer*/
+.border-white{
+    border:1px solid rgba(233, 210, 223, 0.452);
+    background: rgba(231, 175, 175, 0.13);
+    width: 40%;
 
+}
+/* estilo btn file*/
+.btn-file{
+    width:100%;
+    height: 2rem;
+    opacity: 0.3;
+}
+.color-head-pink{
+    background: rgba(231, 175, 175, 0.13);
+}
+.icono{
+    width: 1rem;
+    height: 1rem;
+    margin-left: 2%;
+}
+.size-view-pos-list{
+    display: flex;
+     width: 50%;
+     flex-direction: row;
+     margin-left: 15%;
+}
+.header-post-btn-view{
+    display: flex;
+    flex-direction: row;
+    margin-left: 60%;
+    /* justify-content: start; */
+}
 
 
 /*Considero que es mejor utilizar pixiles ya que al realizar zoom se distorsiona el layout*/
  @media screen and (min-width: 20em)/*360px*/ {
      .col-xs-12 { 
-         width: 100% ;      
+      width: 100% ;      
     }
     img{
         max-width: 30%;
@@ -249,20 +285,27 @@ color: rgba(49, 53, 53, 0.514)
     .style-border{
         width: 100%;
     }
-    .header-post{
-        /* display: flex; */
-        text-align: center;
-        /* flex-direction: row; */
-        /* height: 3rem; */
-        /* justify-content: center;   */
-        /* align-content: center     */
-     }
+    .header-post{        
+        text-align: center;       
+     } 
+        
  }
 
  @media screen and (min-width: 30em) {
      .col-md-12 { 
          width: 100% ;
     }
+    .header {
+        font-family: 'Chonburi', cursive;
+       font-size: 20px;
+       display:inline-flex;
+       justify-content : space-around;
+       height: 50px;
+       align-content: flex-start;
+       width: 100%;
+       background-color:rgba(12, 83, 98, 1);
+       color: white
+   }
  }
  @media screen and (min-width :37.5em) {
     .col-md-12 { 
@@ -270,7 +313,7 @@ color: rgba(49, 53, 53, 0.514)
     }
  }
 
- @media screen and (min-width: 64em) /*1024px*/ {
+ @media screen and (min-width: 78em) /*1024px*/ {
     
      .col-lg-6{
         float: left; 
@@ -288,20 +331,7 @@ color: rgba(49, 53, 53, 0.514)
         box-shadow: 2px 6px 5px 5px rgba(16, 7, 36, 0.486);
 
          }
-    .header {
-        font-family: 'Changa One', cursive;
-        font-family: 'Aclonica', sans-serif;
-        font-family: 'Shrikhand', cursive;
-        font-family: 'Chonburi', cursive;
-        font-size: 20px;
-        display:inline-flex;
-        justify-content : space-around;
-        height: 50px;
-        align-content: flex-start;
-        width: 100%;
-        background-color:rgba(12, 83, 98, 1);
-        color: white
-    }
+    
     .col-6{    
         width: 50%;  
         }
@@ -316,6 +346,11 @@ color: rgba(49, 53, 53, 0.514)
         float: left;
     }
    
+    .img-perfil-aside{
+        width:70%;
+        border-radius: 50%;  
+        border: 2px solid rgba(25, 84, 107, 0.089);
+    }
     
  }
 
@@ -363,3 +398,4 @@ width: 16.6666666667%;
  .col-1{
 width: 8.33333333333%;
  } */
+
