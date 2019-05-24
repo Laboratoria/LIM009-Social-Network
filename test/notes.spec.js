@@ -67,13 +67,11 @@ describe('lista de notas', () => {
         }))
     })
     it('Debería porder agregar una nota', (done) => {
-        return promiseOfdeleteFirebase('posts', 'ABC4GH4f')
+        return promiseOfgetFirebase('posts', 'ABC4GH4f')
             .then((post) => {
-                console.log(post)
                 const postId = post.id
-                promiseOfgetFirebase('posts', postId).then((data) => {
-                    console.log(data)
-                    expect(post).toEqual(undefined);
+                promiseOfdeleteFirebase('posts', postId).then((data) => {
+                    expect(data).toEqual(undefined);
                     done()
                 })
             })
