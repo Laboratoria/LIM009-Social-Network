@@ -150,7 +150,6 @@ export const setUpPost = (idUserAuth) => {
 
 export const editPErfilUser = (idUser, name, email) => {
   updatePerfilUser(idUser, name).then(() => {
-    // Update successful.
     alert('Nombre se actualizó correctamente')
     updateEmailUser(idUser, email).then(() => {
       // Update successful.

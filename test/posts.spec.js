@@ -77,7 +77,6 @@ describe('Funciones para gestionar usuarios firestore', () => {
         expect(result.data().name).toBe('nayruth')
       })
     })
-
   })
 })
 
@@ -170,10 +169,10 @@ describe('test para comentarios', () => {
   it('deberia ser una funcion',()=>{
     expect(typeof deleteComment).toBe('function')
   })
-  it('deberia poder editar un comentario',() => {
+  it('deberia poder eliminar un comentario',() => {
     return deleteComment('abc123','comment_post_124').then(() => {
       getComentPost('abc123').get().then(result => {
-        expect(result._data[0]._ref._firestore._data.__collection__.posts.__doc__.abc123.__collection__).toBe(true)
+        expect(result._data[0]._ref._firestore._data.__collection__.posts.__doc__.abc123.__collection__.comment.__doc__.comment_post_124.__isDeleted__).toBe(true)
       })      
     })
   })

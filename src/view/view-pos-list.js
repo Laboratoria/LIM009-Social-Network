@@ -106,7 +106,7 @@ export default (doc, getUser, post, idUserAuth) => {
         //   formDescription.reset();
         // });
         getComentPost(doc.id).onSnapshot(snapshot => {
-          //console.log(snapshot.docs);
+          console.log(snapshot);
           contComentList.innerHTML = ''
           snapshot.forEach((result) => {
             //console.log(result.data());

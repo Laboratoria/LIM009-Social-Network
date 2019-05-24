@@ -38,7 +38,7 @@ export default (com, doc,idUserAuth) => {
   //console.log(doc.id, com.id);
   btnDeleteComment.addEventListener('click',() => {
      if (com.data().user === idUserAuth.uid) {
-      deleteComment(doc.id, com.id);
+      deleteComment(doc.id, com.id)
       alert('Comentario eliminado correctamente')
       } else {
       alert('Permiso denegado para eliminar este comentario')

@@ -1,9 +1,7 @@
 
 export const updatePerfilUser = (user, name) => {
-
     return user.updateProfile({
         displayName: `${name}`
-
     })
 }
 export const updateEmailUser = (user, email) => {
@@ -13,15 +11,8 @@ export const updatePhoto = (user, photo) => {
     // console.log(user, photo)
     return user.updateProfile({
         // displayName: "Jane Q. User",
-
         photoURL: `${photo}`
-
-    }).then(function () {
-        console.log(user, photo)
-        alert('exito')
-    }).catch(function (error) {
-        alert('no exito')
-    });
+    })
 }
 export const dataBaseUser = (user) => {
     let db = firebase.firestore();
