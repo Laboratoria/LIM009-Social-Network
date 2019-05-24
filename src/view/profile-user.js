@@ -1,13 +1,9 @@
-
 import {
     signOutUser,
     getDataOfUser,
     deletePostAfterClick,
     editPostInCloudFireStore,
-    generateSubcollections,
     handleFileUploadSubmit,
-    getUsersLikesInRealtime,
-    likesForPosts
 } from "../controller/controller1.js";
 
 const renderOnePost = (post, user, current) => {
@@ -67,37 +63,6 @@ const renderOnePost = (post, user, current) => {
             }
         } else {
             divCommentContent.setAttribute("contenteditable", false);
-        }
-    });
-    label.querySelector('#btn-likes').addEventListener('click', () => {
-        try {
-            getUsersLikesInRealtime(post.id, (arr) => {
-                let valor;
-                arr.forEach((e) => {
-                    if (e.userId === current.userId) {
-                        valor = true;
-                    } else {
-                        valor = false;
-                    }
-                });
-                console.log(valor)
-                switch (valor) {
-                    case true:
-                        console.log(post.likes - 1)
-                        likesForPosts(post.id, post.likes - 1);
-                        //generateSubcollections('','','');                   
-                        break;
-                    case false:
-                        likesForPosts(post.id, post.likes + 1);
-                        //generateSubcollections(post.id, current.userId, current.name);
-                        break;
-                    default:
-                        generateSubcollections(post.id, current.userId, current.name);
-                        break
-                }
-            })
-        } catch{
-            generateSubcollections(post.id, current.userId, current.name);
         }
     });
 

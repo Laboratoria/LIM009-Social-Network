@@ -1,5 +1,5 @@
 // importamos la funcion que vamos a testear
-import { signUp, signIn, signInWithGoogle, signInWithFacebook,currentUser,signOut,firebaseAuthState} from "../src/services/firebase.js";
+import { signUp, signIn, signInWithGoogle, signInWithFacebook, currentUser, signOut, firebaseAuthState } from "../src/services/firebase.js";
 
 const firebasemock = require('firebase-mock');
 const mockauth = new firebasemock.MockFirebase();
@@ -45,18 +45,15 @@ describe('signInWithGoogle', () => {
     it('Debería poder iniciar sesion con Google', () => {
         return signInWithGoogle()
             .then((obj) => {
-               
-                 
-                 const providerData=obj.providerData;
-                 const isAnonymous=obj.isAnonymous;
-                 const userProviderByGoogle=providerData[0].providerId;
-               // console.log(providerData[0].providerId);
-               // console.log(mockauth.getAuth());
-               // console.log(providerData);
-               // console.log(isAnonymous);
+                const providerData = obj.providerData;
+                const isAnonymous = obj.isAnonymous;
+                const userProviderByGoogle = providerData[0].providerId;
+                // console.log(providerData[0].providerId);
+                // console.log(mockauth.getAuth());
+                // console.log(providerData);
+                // console.log(isAnonymous);
                 expect(mockauth.getAuth().providerData[0].providerId).toBe(userProviderByGoogle);
-                expect(mockauth.getAuth().isAnonymous).toBe(isAnonymous);
-                ;
+                expect(mockauth.getAuth().isAnonymous).toBe(isAnonymous);;
             });
     });
 });
@@ -68,13 +65,12 @@ describe('signInWithFacebook', () => {
     it('Debería poder iniciar sesion con Facebook', () => {
         return signInWithFacebook()
             .then((obj) => {
-                const providerData=obj.providerData;
-                 const isAnonymous=obj.isAnonymous;
-                 const userProviderByFacebook=providerData[0].providerId;
-               // console.log(obj);
+                const providerData = obj.providerData;
+                const isAnonymous = obj.isAnonymous;
+                const userProviderByFacebook = providerData[0].providerId;
+                // console.log(obj);
                 expect(mockauth.getAuth().providerData[0].providerId).toBe(userProviderByFacebook);
-                expect(mockauth.getAuth().isAnonymous).toBe(isAnonymous);
-                ;
+                expect(mockauth.getAuth().isAnonymous).toBe(isAnonymous);;
             });
     });
 });
@@ -87,13 +83,13 @@ describe('Current User', () => {
     it('deberia de existir usuario ', () => {
         return signIn('abc@gmail.com', '123456')
             .then((user) => {
-               // console.log(user);
+                // console.log(user);
                 // console.log(user.email)
-                const userLogueado=user.email;
+                const userLogueado = user.email;
                 const userCurrent = currentUser();
                 expect(userCurrent.email).toBe(userLogueado);
             })
-        
+
     });
 });
 
@@ -103,17 +99,17 @@ describe('Cerrar Sesión', () => {
     });
 
     it('Deberia poder cerrar sesion', () => {
-        return  signIn('abc@gmail.com', '123456')
+        return signIn('abc@gmail.com', '123456')
             .then((user1) => {
-               // console.log(user1)
-                return signOut().then((user1)=>{
-                   // console.log(user1);
-                   
+                // console.log(user1)
+                return signOut().then((user1) => {
+                    // console.log(user1);
+
                     expect(user1).toBe(undefined);
-                    
+
 
                 })
-                
+
             });
     });
 });
@@ -123,21 +119,19 @@ describe('Active User', () => {
         expect(typeof firebaseAuthState).toBe('function')
     });
     it('deberia de existir usuario activo', (done) => {
-    
-        return signIn('abc@gmail.com', '123456').then((user)=>{
-          //  console.log(user);
+
+        return signIn('abc@gmail.com', '123456').then((user) => {
+            //  console.log(user);
             const callback = (user1) => {
                 //console.log(user1)
                 expect(user1.email).toEqual('abc@gmail.com')
-                
+
             };
             firebaseAuthState(callback(user));
             done();
-            
+
         })
-      
-        
+
+
     })
 });
-
-

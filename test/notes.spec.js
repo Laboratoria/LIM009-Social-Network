@@ -34,9 +34,39 @@ const fixtureData = {
                     userId: 'wksG1ocO25dUtEHQHZB6 ',
                 },
             }
+        },
+        users: {
+            __doc__: {
+                AO68SwmRrYPO6qjaCorCGgWFaSX2: {
+                    email: 'maytezhou14@gmail.com',
+                    name: "Mayte Zhou",
+                    photo: "https://lh5.googleusercontent.com/-YP5U6_hihMY/AAAAAAAAAAI/AAAAAAAAAK8/6kckjTKHUJc/photo.jpg",
+                    userId: 'AO68SwmRrYPO6qjaCorCGgWFaSX2',
+
+                },
+                AeC4tzlg9tNq4kcugc1u7y7ThIz2: {
+                    email: 'liz@gmail.com',
+                    name: "Liz Escobar",
+                    photo: "https://lh6.googleusercontent.com/-LkJ8uR2PVvI/AAAAAAAAAAI/AAAAAAAAJxU/f6kiRxpusts/photo.jpg",
+                    userId: 'AeC4tzlg9tNq4kcugc1u7y7ThIz2',
+
+                },
+                E5NDXeIZrZbOCfMKyPJPmOJ5BQG2: {
+                    email: 'ana@gmail.com',
+                    name: "Ana Souza",
+                    photo: "https://diariojudio.com/files/2018/03/Gal-Gadot.jpg",
+                    userId: 'E5NDXeIZrZbOCfMKyPJPmOJ5BQG2',
+
+
+                },
+            }
+
         }
+
     }
 };
+
+
 
 global.firebase = new MockFirebase(fixtureData, {
     isNaiveSnapshotListenerEnabled: true
@@ -48,6 +78,8 @@ import {
     promiseOfUpdateFirebase,
     promiseOfAddFirebase,
     promiseOnSnapshotFirebase,
+    promiseOfSetFirebase,
+    signUp
 } from "../src/services/firebase.js";
 
 
@@ -69,17 +101,15 @@ describe('lista de notas', () => {
             done()
         }))
     })
-    it('Debería poder eliminar una publicación ', (done) => {
-        return promiseOfgetFirebase('posts', 'ABC4GH4f').then((post1)=>{
+    it('Debería poder eliminar una publicación ', ( /* done */ ) => {
+        return promiseOfgetFirebase('posts', 'ABC4GH4f').then((post1) => {
             return promiseOfdeleteFirebase('posts', post1.id).then((resolved) => {
                 expect(resolved).toEqual(undefined);
-                done(); 
-               
-        })  
-       
-    })
-         
-                        
+            })
+
+        })
+
+
     })
     it('Debería poder actualizar una publicación', () => {
         return promiseOfgetFirebase('posts', 'OP8v45TS')
@@ -100,19 +130,32 @@ describe('lista de notas', () => {
             })
     })
     it('Debería poder obtener todas las publicaciones en tiempo real', (done) => {
-        return promiseOnSnapshotFirebase('posts',(arrOfAllPosts) => {
-            //console.log(arrOfAllPosts); //
-           // console.log(arrOfAllPosts._data); // array de objetos array de documetns snapshots
+        return promiseOnSnapshotFirebase('posts', (arrOfAllPosts) => {
             let arrOfPosts = [];
-            arrOfAllPosts._data.forEach((docSnapshot)=>{
+            arrOfAllPosts._data.forEach((docSnapshot) => {
                 arrOfPosts.push(docSnapshot);
             })
-            console.log(arrOfPosts);
             expect(arrOfPosts.length).toBe(3);
             done();
         })
     })
-                       
-           
+});
 
+describe('lista de usuarios', () => {
+    it('Debería agregar un usuario', (done) => {
+        return promiseOfSetFirebase('users', 'E5NDXeIZrZbOCfMKyPJPmOJ5BQG2', {
+            email: 'shawn@gmail.com',
+            name: "Shawn Zhou",
+            photo: "https://www.rollingstone.com/wp-content/uploads/2019/03/shutterstock_10101008ss.jpg",
+            userId: 'E5NDXeIZrZbOCfMKyPJPmOJ5BQG2'
+        }).then(() => {
+            promiseOfgetFirebase('users', 'E5NDXeIZrZbOCfMKyPJPmOJ5BQG2')
+                .then((doc) => {
+                    console.log(doc.data());
+                    const result = doc.data().name;
+                    expect(result).toEqual('Shawn Zhou');
+                    done();
+                })
+        })
+    });
 })
