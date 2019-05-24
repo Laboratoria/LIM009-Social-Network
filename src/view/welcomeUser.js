@@ -116,14 +116,10 @@ export default (user) => {
                 console.log(image)
 
                 createPost(selectState, image, fechaPost, description, user.uid, horaPost)
-
             }
             imageFirestore(selectImage, uploader, getImage)
         }
     })
-
-
-
     return root;
 };
 

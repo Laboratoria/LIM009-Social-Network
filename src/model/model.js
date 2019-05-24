@@ -48,7 +48,7 @@ export const createCommentPost = (idPost, user, comment, fechaComment) => {
         })
     // return comentPost
 }
-export const getPost = (idPost) => {
+export const getComentPost = (idPost) => {
     let db = firebase.firestore();
     return db.collection('posts').doc(`${idPost}`).collection('comment')
 }
@@ -58,7 +58,7 @@ export const viewListPostPrivate = (idUser) => {
 }
 export const viewListPostPublic = () => {
     let db = firebase.firestore();
-    return db.collection('posts').where('state', '==', 'publico').orderBy("fechaPost", "desc")
+    return db.collection('posts').where('state', '==', 'publico').orderBy('fechaPost', 'desc')
 }
 export const likesPost = (id, like) => {
     let db = firebase.firestore();
@@ -72,12 +72,24 @@ export const deletePost = id => {
 }
 export const editPost = (id, description, state) => {
     let db = firebase.firestore();
-    console.log(db.collection("posts"))
     return db.collection("posts").doc(id).update({
         description: description,
         state: state
     })
 }
+
+export const deleteComment = (idPost,id) => {
+    const db = firebase.firestore();
+    return db.collection('posts').doc(idPost).collection('comment').doc(id).delete()
+}
+
+export const editComment = (idPost,id,comment) => {
+    const db = firebase.firestore();
+    return db.collection('posts').doc(idPost).collection('comment').doc(id).update({
+        comment: comment
+    })
+}
+
 //Crear post con IDs por defecto
 export const createPost = (state, imagePost, fechaPost, description, userID, horaPost) => {
 
@@ -91,7 +103,6 @@ export const createPost = (state, imagePost, fechaPost, description, userID, hor
         fechaPost: fechaPost,
         horaPost: horaPost
     })
-
 }
 
 

@@ -1,4 +1,4 @@
-import { likesPost, getDataDoc, getPost, createCommentPost } from '../model/model.js'
+import { likesPost, getDataDoc, getComentPost, createCommentPost } from '../model/model.js'
 import { editPost, deletePost } from '../model/model.js'
 import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js';
@@ -68,12 +68,11 @@ export default (doc, getUser, post, idUserAuth) => {
     if (post.user === idUserAuth.uid) {
       editPost(doc.id, editDescription, state.value);
       alert('Post editado correctamente');
-
     } else {
       alert('Permiso denegado para editar este post');
     }
-    // postList.innerHTML = ''
   });
+
   let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
   btnDelete.addEventListener('click', () => {
     // console.log(post.user)
@@ -81,12 +80,11 @@ export default (doc, getUser, post, idUserAuth) => {
     if (post.user === idUserAuth.uid) {
       alert('Post eliminado correctamente')
       deletePost(doc.id);
-      // postList.innerHTML = ''
     } else {
       alert('Permiso denegado para eliminar este post')
     }
-    // postList.innerHTML = ''
   })
+
   let btnLike = article.querySelector(`#btn-like-${doc.id}`)
   var listener = function (event) {
     let like = 0
@@ -111,7 +109,6 @@ export default (doc, getUser, post, idUserAuth) => {
    muestra el formulario de comentar */
 
   btnComent.addEventListener('click', () => {
-    debugger
     getDataDoc(idUserAuth.uid).then(result => {
       //console.log(result.data())
       coment.innerHTML = formComent(doc.id, result)
@@ -123,24 +120,29 @@ export default (doc, getUser, post, idUserAuth) => {
         let fecha = new Date();
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         createCommentPost(doc.id, idUserAuth.uid, textComentPost.value, fechaPost)
-
-      })
-      getPost(doc.id).onSnapshot(snapshot => {
-        contComentList.innerHTML = ''
-        snapshot.forEach(function (result) {
-          // deleteComment(doc, result.id)//poner a la vista de comentario
-          console.log(result.id, " => ", result.data());
-          contComentList.appendChild(viewformComent(result, doc, idUserAuth))
+        // const formDescription = document.querySelector(`form-comment`);
+        // formDescription.reset();
+        // .then(result => {
+        //   console.log(result)
+        //   const formDescription = document.querySelector(`form-${result.id}`)
+        //   formDescription.reset();
+        // });
+        getComentPost(doc.id).onSnapshot(snapshot => {
+          //console.log(snapshot.docs);
+          contComentList.innerHTML = ''
+          snapshot.forEach((result) => {
+            //console.log(result.data());
+            contComentList.appendChild(viewformComent(result, doc, idUserAuth))
+            //doc es la data de cada post por lo tanto doc.id es el ID de cada post.
+            //result es la data de cada comentario por lo tanto result.id es el ID de cada comentario.
+          })
         })
-
       })
-
-      getPost(doc.id).get().then(function (querySnapshot) {
+      getComentPost(doc.id).get().then(querySnapshot => {
         contComentList.innerHTML = ''
-        querySnapshot.forEach(function (idPost) {
+        querySnapshot.forEach(idPost => {
           contComentList.appendChild(viewformComent(idPost, doc, idUserAuth))
-          // doc.data() is never undefined for query doc snapshots
-          console.log(idPost.id, " => ", idPost.data());
+          //console.log(idPost.id, " => ", idPost.data());
         });
       });
     })
