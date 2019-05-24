@@ -1,10 +1,10 @@
-import { editPErfilUser } from '../controller/view-controller.js'
+import { editPErfilUser } from '../controller/view-controller.js';
 import { updatePhoto } from '../model/model.js';
-import { imageFirestore, getUserReady } from '../lib/comple-firebase.js'
+import { imageFirestore, getUserReady } from '../lib/comple-firebase.js';
 
 export default () => {
-    const formPerfil = document.createElement('form');
-    const templateEditPerf = `
+  const formPerfil = document.createElement('form');
+  const templateEditPerf = `
     <div class = 'edit-perfil'>
     <header>
     <ul class = 'header style-header-perfil'>
@@ -38,26 +38,25 @@ export default () => {
     </div>
         `
         ;
-    formPerfil.innerHTML = templateEditPerf;
-    const name = formPerfil.querySelector('#name-user-edit');
-    const email = formPerfil.querySelector('#email-email-edit');
-    const btnEdit = formPerfil.querySelector('#btn-edit');
-    const uploader = formPerfil.querySelector('#uploader');
-    const fileButton = formPerfil.querySelector('#file-button');
-    const getUserIdEdit = (idUser) => {
-        btnEdit.addEventListener('click', () => {
-            editPErfilUser(idUser, name.value, email.value)
-        })
-        fileButton.addEventListener('change', (e) => {
-            //Obtener archivo
-            let file = e.target.files[0];
-            const getImage = (image) => {
+  formPerfil.innerHTML = templateEditPerf;
+  const name = formPerfil.querySelector('#name-user-edit');
+  const email = formPerfil.querySelector('#email-email-edit');
+  const btnEdit = formPerfil.querySelector('#btn-edit');
+  const uploader = formPerfil.querySelector('#uploader');
+  const fileButton = formPerfil.querySelector('#file-button');
+  const getUserIdEdit = (idUser) => {
+    btnEdit.addEventListener('click', () => {
+      editPErfilUser(idUser, name.value, email.value);
+    });
+    fileButton.addEventListener('change', (e) => {
+      let file = e.target.files[0];
+      const getImage = (image) => {
 
-                updatePhoto(idUser, image)
-            }
-            imageFirestore(file, uploader, getImage)
-        });
-    }
-    getUserReady(getUserIdEdit);
-    return formPerfil
-}
+        updatePhoto(idUser, image);
+      };
+      imageFirestore(file, uploader, getImage);
+    });
+  };
+  getUserReady(getUserIdEdit);
+  return formPerfil;
+};

@@ -25,7 +25,7 @@ export default () => {
   </div>
   `;
   formLogin.innerHTML = templateFormLogin;
-  //formLogin.classList.add('page-login');
+  // formLogin.classList.add('page-login');
   const btnSingIn = formLogin.querySelector("#btn-sing-in");
   const btnFacebook = formLogin.querySelector('#btn-facebook');
   const btnGoogle = formLogin.querySelector('#btn-google');

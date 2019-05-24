@@ -1,4 +1,4 @@
-import { registerUser } from '../controller/view-controller.js'
+import { registerUser } from '../controller/view-controller.js';
 
 export default () => {
   const formRegister = document.createElement('div');
@@ -22,6 +22,6 @@ export default () => {
    `;
   formRegister.innerHTML = templateRegister;
   const btnRegister = formRegister.querySelector('#btn-register');
-  btnRegister.addEventListener('click', registerUser)
+  btnRegister.addEventListener('click', registerUser);
   return formRegister;
 };

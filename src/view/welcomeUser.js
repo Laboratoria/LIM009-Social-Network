@@ -1,10 +1,10 @@
 import { logOut } from '../controller/view-controller.js';
-import { imageFirestore } from '../lib/comple-firebase.js'
-import { createPost } from '../model/model.js'
+import { imageFirestore } from '../lib/comple-firebase.js';
+import { createPost } from '../model/model.js';
 
 export default (user) => {
-    const root = document.getElementById('root')
-    const templateWelcome = `
+  const root = document.getElementById('root');
+  const templateWelcome = `
     <div class = 'col-12 '>
     <header>
         <ul class = 'header'>
@@ -68,59 +68,52 @@ export default (user) => {
     </div>
     </div>
     `;
-    root.innerHTML = templateWelcome;
-    const btnSignOut = document.querySelector('#sign-out');
-    btnSignOut.addEventListener('click', logOut);
-    const btnSharePost = document.querySelector('#btn-share');
-    const btnPhotoPost = document.querySelector('#btn-phot-post');
-    const state = document.querySelector('#estado-post')
-    const uploader = document.querySelector('#uploader');
-    const imagePostView = document.querySelector('#image-post-view');
-    const fileButton = document.querySelector('#file-button');
-    const viewPhoto = document.querySelector('#view-photo');
+  root.innerHTML = templateWelcome;
+  const btnSignOut = document.querySelector('#sign-out');
+  btnSignOut.addEventListener('click', logOut);
+  const btnSharePost = document.querySelector('#btn-share');
+  const btnPhotoPost = document.querySelector('#btn-phot-post');
+  const state = document.querySelector('#estado-post');
+  const uploader = document.querySelector('#uploader');
+  const imagePostView = document.querySelector('#image-post-view');
+  const fileButton = document.querySelector('#file-button');
+  const viewPhoto = document.querySelector('#view-photo');
 
+  fileButton.onchange = (e) => {
+    let fr = new FileReader();
+    fr.onload = () => {
+      // imagePostView.src = fr.result;
+    };
+    fr.readAsDataURL(e.target.files[0]);
+  };
 
+  btnSharePost.addEventListener('click', () => {
+    state.onchange = () => {
+      console.log(state.value);
+    };
+    let fecha = new Date();
+    let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+    let horaPost = `${fecha.getHours()}:${fecha.getMinutes()}`;
+    let selectImage = fileButton.files[0];
+    let selectState = state.value;
+    let description = document.querySelector('#description').value;
+    console.log(selectImage);
+    console.log(selectState);
+    console.log(fechaPost, horaPost, selectImage, selectState, description, user.uid);
+    if (selectImage === undefined) {
+      console.log('./image/image-post.png');
+      createPost(selectState, './image/image-post.png', fechaPost, description, user.uid, horaPost);
+    } else {
+      console.log('paso');
+      const getImage = (image) => {
+        console.log(image);
 
-
-
-
-    fileButton.onchange = (e) => {
-
-        let fr = new FileReader();
-        fr.onload = () => {
-            // imagePostView.src = fr.result;
-        };
-        fr.readAsDataURL(e.target.files[0]);
+        createPost(selectState, image, fechaPost, description, user.uid, horaPost);
+      };
+      imageFirestore(selectImage, uploader, getImage);
     }
-
-    btnSharePost.addEventListener('click', () => {
-
-        state.onchange = () => {
-            console.log(state.value)
-        }
-        let fecha = new Date();
-        let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-        let horaPost = `${fecha.getHours()}:${fecha.getMinutes()}`
-        let selectImage = fileButton.files[0]
-        let selectState = state.value;
-        let description = document.querySelector('#description').value;
-        console.log(selectImage)
-        console.log(selectState)
-        console.log(fechaPost, horaPost, selectImage, selectState, description, user.uid)
-        if (selectImage === undefined) {
-            console.log('./image/image-post.png')
-            createPost(selectState, './image/image-post.png', fechaPost, description, user.uid, horaPost)
-        } else {
-            console.log('paso')
-            const getImage = (image) => {
-                console.log(image)
-
-                createPost(selectState, image, fechaPost, description, user.uid, horaPost)
-            }
-            imageFirestore(selectImage, uploader, getImage)
-        }
-    })
-    return root;
+  });
+  return root;
 };
 
 

@@ -1,6 +1,6 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
 import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic } from '../model/model.js'
-import viewPostList from '../view/view-pos-list.js'
+import viewPostList from '../view/view-pos-list.js';
 const changeHash = (hash) => {
   location.hash = hash;
 }
@@ -12,17 +12,16 @@ export const registerUser = () => {
   return createEmailAndPassword(emailRegister, passwordRegister)
     .then(result => {
       dataBaseUser(result.user).then((docRef) => {
-        alert('Registro con éxito')
-        changeHash('/welcomeUser')
-
+        alert('Registro con éxito');
+        changeHash('/welcomeUser');
         console.log("Document written with ID: ", docRef);
       }).catch((error) => {
         console.error("Error adding document: ", error);
       });
     }).catch(error => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      let errorCode = error.code;
+      let errorMessage = error.message;
       if (errorCode == 'auth/invalid-email') {
         alert('El correo es inválido');
       } else if (errorCode == 'auth/email-already-in-use') {
@@ -45,14 +44,14 @@ export const email = () => {
     }
     ).catch(error => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      let errorCode = error.code;
+      let errorMessage = error.message;
       if (errorCode == 'auth/user-not-found') {
         alert('El correo no ha sido registrado');
-      } else if (errorCode == 'auth/invalid-email') {
-        alert('El correo es inválido')
-      } else if (errorCode == 'auth/wrong-password') {
-        alert('La contraseña es equivocada.')
+      } else if (errorCode === 'auth/invalid-email') {
+        alert('El correo es inválido');
+      } else if (errorCode === 'auth/wrong-password') {
+        alert('La contraseña es equivocada.');
       } else {
         alert(errorMessage);
       }
@@ -61,12 +60,12 @@ export const email = () => {
 
 export const google = () => {
   return signInWithGoogle().then((result) => {
-    dataBaseUser(result.user)
-    changeHash('/welcomeUser')
+    dataBaseUser(result.user);
+    changeHash('/welcomeUser');
   })
     .catch(error => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      let errorCode = error.code;
+      let errorMessage = error.message;
       if (errorCode == 'auth/cancelled-popup-request') {
         alert('Sólo se permite una solicitud emergente a la vez.');
       } else if (errorCode == 'auth/invalid-email') {
@@ -87,15 +86,15 @@ export const facebook = () => {
     changeHash('/welcomeUser')
   }
   ).catch(error => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorCode == 'auth/cancelled-popup-request') {
+    let errorCode = error.code;
+    let errorMessage = error.message;
+    if (errorCode === 'auth/cancelled-popup-request') {
       alert('Sólo se permite una solicitud emergente a la vez.');
-    } else if (errorCode == 'auth/invalid-email') {
-      alert('El correo es inválido')
-    } else if (errorCode == 'auth/wrong-password') {
-      alert('La contraseña es equivocada.')
-    } else if (errorCode == 'auth/account-exists-with-different-credential') {
+    } else if (errorCode === 'auth/invalid-email') {
+      alert('El correo es inválido');
+    } else if (errorCode ==='auth/wrong-password') {
+      alert('La contraseña es equivocada.');
+    } else if (errorCode === 'auth/account-exists-with-different-credential') {
       alert('La cuenta ya ha sido utilizada con una credencial diferente')
     } else {
       alert(errorMessage);
@@ -119,17 +118,17 @@ export const setUpPost = (idUserAuth) => {
   // const postListPrivad = document.querySelector('#btn-view-post-privad')
   const postListPublic = document.querySelector('#btn-view-post-public')
   viewListPostPrivate(idUserAuth.uid).onSnapshot(data => {
-    postListPrivad.innerHTML = ''
+    postListPrivad.innerHTML = '';
     data.forEach(doc => {
       getDataDoc(doc.data().user).then((getUser) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          //console.log(doc)
+          // console.log(doc)
           postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-      })
-    })
+      });
+    });
   });
 
   viewListPostPublic().onSnapshot(data => {
@@ -139,13 +138,13 @@ export const setUpPost = (idUserAuth) => {
         // console.log(getUser.data().name)
         if (getUser.exists) {
           const post = doc.data();
-          //console.log(doc)
+          // console.log(doc)
           postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
         }
-      })
-    })
+      });
+    });
   });
-  return postListPrivad
+  return postListPrivad;
 }
 
 export const editPErfilUser = (idUser, name, email) => {

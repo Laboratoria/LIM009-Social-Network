@@ -1,5 +1,4 @@
 export default (idPost, user) => {
-  // const formComent = document.createElement('form');
   const templateComent = `
     <div class= 'flex-container  margin-top  center'>    
       <header class='header-post'>       
@@ -14,5 +13,5 @@ export default (idPost, user) => {
     </div>  
     
     `;
-  return templateComent
+  return templateComent;
 }

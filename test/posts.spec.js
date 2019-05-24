@@ -88,23 +88,23 @@ describe('createPost', () => {
     return createPost('publico', './image/image-post.png', '19/05/2019', 'Hola a todos', 'xyz', '12:05')
       .then(() => {
         viewListPostPublic().get().then(result => {
-          expect(result.data().description).toBe('Hola a todos');
-        })
-      })
+          expect(result._data[0].data().description).toBe('Hola a todos');
+        });
+      });
   });
   
   it('viewListPostPrivate deberia ser una funcion', () => {
-    expect(typeof viewListPostPrivate).toBe('function')
+    expect(typeof viewListPostPrivate).toBe('function');
   })
   it('deberia crear un post privado y visualizarlo', () => {
     return createPost('privado', './image/image-post.png', '21/05/2019', 'Hola a todos post privado', 'abc', '13:05').then((result) => {
       viewListPostPrivate(postPrivad.user).get().then(result => {
-        expect(result._data[0].data().description).toBe('Hola a todos post privado')
+        expect(result._data[0].data().description).toBe('Hola a todos post privado');
       })
     })
   });
   it('deletePost deberia ser una funcion', () => {
-    expect(typeof deletePost).toBe('function')
+    expect(typeof deletePost).toBe('function');
   });
   it('deberia poder eliminar un post', () => {
     return deletePost('abc124').then(() => {
@@ -118,13 +118,13 @@ describe('createPost', () => {
   });
 
   it('editPost deberia ser una funcion', () => {
-    expect(typeof editPost).toBe('function')
+    expect(typeof editPost).toBe('function');
   });
 
   it('deberia poder editar un post', () => {
     return editPost('abc123', 'hola a todos post editado', 'publico').then(() => {
       viewListPostPublic().get().then(result => {
-        expect(result._data[0].data().description).toBe('hola a todos post editado')
+        expect(result._data[0].data().description).toBe('hola a todos post editado');
       })
     }).catch((error) => {
       console.error("Error removing document: ", error);
@@ -132,7 +132,7 @@ describe('createPost', () => {
   })
 
   it('likesPost deberia ser una funcion', () => {
-    expect(typeof likesPost).toBe('function')
+    expect(typeof likesPost).toBe('function');
   })
   it('deberia poder agregar un like', () => {
     return likesPost('abc123', 1).then(() => {
@@ -157,9 +157,9 @@ describe('test para comentarios', () => {
     })
   })
     it('deberia ser una funcion',()=>{
-    expect(typeof editComment).toBe('function')
+    expect(typeof editComment).toBe('function');
   })
-  it('deberia poder editar un comentario',()=>{
+  it('deberia poder editar un comentario',() =>{
     return editComment('abc123','comment_post_123','edite comentario').then(() => {
       getComentPost('abc123').get().then(result => {
         expect(result._data[0]._data.comment).toBe('edite comentario')
