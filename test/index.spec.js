@@ -14,6 +14,7 @@ global.firebase = firebasemock.MockFirebaseSdk(
     () => mockfirestore
 );
 
+
 describe('signUp', () => {
     it('debería ser una función', () => {
         expect(typeof signUp).toBe('function');
@@ -61,7 +62,7 @@ describe('signInWithFacebook', () => {
     });
 });
 
-
+/* 
 
 describe('addPostToCloudFirestore', () => {
     it('debería ser una función', () => {
@@ -92,4 +93,4 @@ describe('promiseOfAddFirebase', () => {
                 expect().toEqual();
             });
     });
-});
+}); */
