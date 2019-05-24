@@ -21,6 +21,11 @@ const fixtureData = {
                   comment: 'esto esun comentario',
                   fecha: '19/05/2019'
 
+                }, comment_post_124: {
+                  reference: '__ref__:posts/abc123',
+                  user: 'xyz',
+                  comment: 'este comentario será eliminado',
+                  fecha: '20/05/2019'
                 }
               }
             }
@@ -152,13 +157,23 @@ describe('test para comentarios', () => {
       })
     })
   })
-  it('deberia ser una funcion',()=>{
+    it('deberia ser una funcion',()=>{
     expect(typeof editComment).toBe('function')
   })
   it('deberia poder editar un comentario',()=>{
-    return editComment('abc123','comment_post_123','edite comentario').then(()=>{
+    return editComment('abc123','comment_post_123','edite comentario').then(() => {
       getComentPost('abc123').get().then(result => {
         expect(result._data[0]._data.comment).toBe('edite comentario')
+      })      
+    })
+  })
+  it('deberia ser una funcion',()=>{
+    expect(typeof deleteComment).toBe('function')
+  })
+  it('deberia poder editar un comentario',() => {
+    return deleteComment('abc123','comment_post_124').then(() => {
+      getComentPost('abc123').get().then(result => {
+        expect(result._data[0]._ref._firestore._data.__collection__.posts.__doc__.abc123.__collection__).toBe(true)
       })      
     })
   })
