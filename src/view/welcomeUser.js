@@ -14,7 +14,7 @@ export default (user) => {
         </ul>
     </header>
     <div class = 'col-4 margin-top size-perfil'> 
-        <div class='conte-flex-perfil color-perfil'>    
+        <div class='conte-flex-perfil color-perfil flex-xl-cont'>    
            <div class ='cont-flex-column'>
                 <img src='${user.photoURL}' class = 'img-perfil-aside'>    
             </div>    
@@ -25,7 +25,7 @@ export default (user) => {
     </div>
     <div id = 'post' class='col-7'>     
     <article id = 'content-post' class= 'flex-container margin-top'>               
-      <header class='style-color-header flex-header-post'>
+      <header class='style-color-header flex-header-post color-head-pink'>
       <h3>Crear Publicación</h3>
       </header>      
       <section class='conte-flex-perfil style-cont-text-area'>
@@ -37,28 +37,33 @@ export default (user) => {
       </div>     
       </section>
       <footer class = 'style-cont-text-area' id = 'foo-View'>
-      <section class=''>     
-      <span id = 'user-id' class = '' ></span>                
-      </section>
-      <img id='image-post-view' src="./image/image-post.png" alt="imagen-post" class='img-post-prev'> 
-      <div class = ' style-content-post-img'>
-      <progress value="0" max="100" id="uploader" class = 'progress'>0%</progress>
-      <input type="file" value="upload" id="file-button" class='btn-image-post'/>        
-      </div >       
-      <select name="" id="estado-post" class = 'btn-post-create'>
-      
-      <option value="publico"select>Público</option>
-      <option value="privado" select>Privado</option>
-      </select>
-        <button id ='btn-share' class=''>Compartir</button>
+        <article class ='conte-flex-perfil style-color-header'>
+        <div class ='size-btn-img'>        
+        <img id='btn-image-post' src="./image/icons8-foto-64.png" alt="imagen-post" class='img-btn-post'>
+        <button id='btn-phot-post'  class = 'border-white'>Foto<input type="file" value="upload" id="file-button" class='btn-file'/></button>
+        <p value="0" max="100" id="uploader"></p>
+              
+        </div>
+        <div class ='size-btn-img'>        
+        <img id='btn-image-post' src="./image/publico.png" alt="imagen-post" class='img-btn-post'>        
+        <select name="" id="estado-post"  class = 'border-white btn-post'>       
+        <option value="publico" select>Público</option>
+        <option value="privado" select>Privado</option>
+        </select>
+        </div>
+        <div class ='size-btn-img'>        
+        <img  src="./image/publicar.png" alt="imagen-post" class='img-btn-post'>
+        <button id ='btn-share' class = 'border-white btn-post'>Compartir</button>        
+        </div>
+        </article>      
       </footer>
-    </article>  
-    
+      <div id = 'view-photo'>    
+      </div>
+    </article>     
     <article id='post-list' class = ''>    
     </article>
     <label class=''>Mis post :</label> 
-    <article id='post-list-privados'>
-     
+    <article id='post-list-privados'>            
     </article>
     </div>
     </div>
@@ -67,27 +72,32 @@ export default (user) => {
     const btnSignOut = document.querySelector('#sign-out');
     btnSignOut.addEventListener('click', logOut);
     const btnSharePost = document.querySelector('#btn-share');
-    const contentPost = document.querySelector('#content-post');
-    const imagePostView = document.querySelector('#image-post-view');
+    const btnPhotoPost = document.querySelector('#btn-phot-post');
     const state = document.querySelector('#estado-post')
     const uploader = document.querySelector('#uploader');
+    const imagePostView = document.querySelector('#image-post-view');
     const fileButton = document.querySelector('#file-button');
-    const fooView = document.querySelector('foo-View');
+    const viewPhoto = document.querySelector('#view-photo');
 
-    console.log(user.uid)
+
+
+
+
+
     fileButton.onchange = (e) => {
-        const imagePostView = document.querySelector('#image-post-view');
+
         let fr = new FileReader();
         fr.onload = () => {
-            imagePostView.src = fr.result;
+            // imagePostView.src = fr.result;
         };
         fr.readAsDataURL(e.target.files[0]);
     }
-    state.onchange = () => {
-        console.log(state.value)
-    }
 
     btnSharePost.addEventListener('click', () => {
+
+        state.onchange = () => {
+            console.log(state.value)
+        }
         let fecha = new Date();
         let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         let horaPost = `${fecha.getHours()}:${fecha.getMinutes()}`
@@ -103,8 +113,8 @@ export default (user) => {
         } else {
             console.log('paso')
             const getImage = (image) => {
-                //console.log(image)
-                imagePostView.src = image
+                console.log(image)
+
                 createPost(selectState, image, fechaPost, description, user.uid, horaPost)
             }
             imageFirestore(selectImage, uploader, getImage)
