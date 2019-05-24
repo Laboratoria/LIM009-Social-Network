@@ -22,11 +22,11 @@ export const registerUser = () => {
       // Handle Errors here.
       let errorCode = error.code;
       let errorMessage = error.message;
-      if (errorCode == 'auth/invalid-email') {
+      if (errorCode === 'auth/invalid-email') {
         alert('El correo es inválido');
-      } else if (errorCode == 'auth/email-already-in-use') {
+      } else if (errorCode === 'auth/email-already-in-use') {
         alert('El correo ya ha sido utilizado');
-      } else if (errorCode == 'auth/weak-password') {
+      } else if (errorCode === 'auth/weak-password') {
         alert('La contraseña no es lo suficientemente fuerte')
       } else {
         alert(errorMessage);
@@ -66,13 +66,13 @@ export const google = () => {
     .catch(error => {
       let errorCode = error.code;
       let errorMessage = error.message;
-      if (errorCode == 'auth/cancelled-popup-request') {
+      if (errorCode === 'auth/cancelled-popup-request') {
         alert('Sólo se permite una solicitud emergente a la vez.');
-      } else if (errorCode == 'auth/invalid-email') {
-        alert('El correo es inválido')
-      } else if (errorCode == 'auth/wrong-password') {
-        alert('La contraseña es equivocada.')
-      } else if (errorCode == 'auth/account-exists-with-different-credential') {
+      } else if (errorCode === 'auth/invalid-email') {
+        alert('El correo es inválido');
+      } else if (errorCode === 'auth/wrong-password') {
+        alert('La contraseña es equivocada.');
+      } else if (errorCode === 'auth/account-exists-with-different-credential') {
         alert('La cuenta ya ha sido utilizada con una credencial diferente')
       } else {
         alert(errorMessage);
@@ -114,9 +114,7 @@ export const logOut = () => {
 
 export const setUpPost = (idUserAuth) => {
   const postList = document.querySelector('#post-list');
-  const postListPrivad = document.querySelector('#post-list-privados')
-  // const postListPrivad = document.querySelector('#btn-view-post-privad')
-  const postListPublic = document.querySelector('#btn-view-post-public')
+  const postListPrivad = document.querySelector('#post-list-privados');
   viewListPostPrivate(idUserAuth.uid).onSnapshot(data => {
     postListPrivad.innerHTML = '';
     data.forEach(doc => {
@@ -132,7 +130,7 @@ export const setUpPost = (idUserAuth) => {
   });
 
   viewListPostPublic().onSnapshot(data => {
-    postList.innerHTML = ''
+    postList.innerHTML = '';
     data.forEach(doc => {
       getDataDoc(doc.data().user).then((getUser) => {
         // console.log(getUser.data().name)

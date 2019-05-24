@@ -6,8 +6,8 @@ export default (com, doc, idUserAuth) => {
   const templateComent = `
     <div class= 'flex-container  margin-top  center'>    
       <div class = 'btn-post-edit-del'>
-        <img class ='btn-options' src='./image/editar.png' alt ='boton de editar' id='btn-edit-coment-${doc.id}-${com.id}'>
-        <img class ='btn-options' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-coment-${doc.id}-${com.id}'>
+        ${(com.data().user === idUserAuth.uid) ? `<img class ='btn-options' src='./image/editar.png' alt ='boton de editar' id='btn-edit-coment-${doc.id}-${com.id}'/>` : ''}
+        ${(com.data().user === idUserAuth.uid) ? `<img class ='btn-options' src='./image/boton-cancelar.png' alt ='boton para eliminar' id='btn-delete-coment-${doc.id}-${com.id}'>` : ''}
       </div> 
       <header class='header-post'>       
         <img id='photo-coment-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>                
@@ -28,32 +28,25 @@ export default (com, doc, idUserAuth) => {
   viewFormComent.innerHTML = templateComent;
   const userPhotoComent = viewFormComent.querySelector('#photo-coment-user');
   const nameComment = viewFormComent.querySelector('#name-user-coment');
-  const btnEditComment = viewFormComent.querySelector(`#btn-edit-coment-${doc.id}-${com.id}`);
-  const btnDeleteComment = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}-${com.id}`);
   getDataDoc(com.data().user).then(result => {
     userPhotoComent.src = result.data().photo;
     nameComment.innerHTML = result.data().name;
   });
 
-  // console.log(doc.id, com.id);
-  btnDeleteComment.addEventListener('click', () => {
-    if (com.data().user === idUserAuth.uid) {
+  // console.log(doc.id, com.id);  
+  if (com.data().user === idUserAuth.uid) {
+    const btnDeleteComment = viewFormComent.querySelector(`#btn-delete-coment-${doc.id}-${com.id}`);
+    btnDeleteComment.addEventListener('click', () => {
       deleteComment(doc.id, com.id);
       alert('Comentario eliminado correctamente');
-    } else {
-      alert('Permiso denegado para eliminar este comentario');
-    }   
-  });
-
-  btnEditComment.addEventListener('click', () => {
-    const editDescriptionComment = viewFormComent.querySelector(`#description-${doc.id}-${com.id}`).value;
-    if (com.data().user === idUserAuth.uid) {
+    });
+    const btnEditComment = viewFormComent.querySelector(`#btn-edit-coment-${doc.id}-${com.id}`);
+    btnEditComment.addEventListener('click', () => {
+      const editDescriptionComment = viewFormComent.querySelector(`#description-${doc.id}-${com.id}`).value;
       // console.log(editDescriptionComment);
-      editComment(doc.id, com.id,editDescriptionComment);
+      editComment(doc.id, com.id, editDescriptionComment);
       alert('Comentario editado correctamente');
-    } else {
-      alert('Permiso denegado para editar este comentario');
-    }  
-  }); 
+    });
+  }; 
   return viewFormComent;
 };

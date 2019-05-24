@@ -11,21 +11,21 @@ export default (doc, getUser, post, idUserAuth) => {
   <header class='style-color-header flex-header-post'>
     <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>  
     <div class='cont-flex-column'>  
-    <div>  
-  <label id='name-user-post' class=''>${getUser.data().name}</label> 
-  </div>
-  <div class = 'header-post'>
-    <label id='fecha-post' class=''>${post.fechaPost}</label>
-    <img id='photo-post-user' src='./image/state.png' alt='feminismo' class='icono'> 
-    <img class ='btn-options' src='./image/editar_lapiz.png' alt ='boton de editar' id='btn-edit-${doc.id}'>
-    <img class='btn-options' src="./image/boton-cancelar.png" alt =' eliminar-post' id='btn-delete-${doc.id}'/>
-  </div>
+      <div>  
+        <label id='name-user-post' class=''>${getUser.data().name}</label> 
+      </div>
+      <div class = 'header-post'>
+        <label id='fecha-post' class=''>${post.fechaPost}</label>
+        <img id='photo-post-user' src='./image/state.png' alt='feminismo' class='icono'> 
+       ${(post.user === idUserAuth.uid) ? `<img class ='btn-options' src='./image/editar_lapiz.png' alt ='boton de editar' id='btn-edit-${doc.id}'/>` : ''}
+       ${(post.user === idUserAuth.uid) ? `<img class='btn-options' src="./image/boton-cancelar.png" alt ='boton de eliminar' id='btn-delete-${doc.id}'/>` : ''}
+      </div>
   </header>      
   <section class='conte-flex-perfil style-cont-text-area'>
   <div class= 'cont-flex-column'>
-  <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>  
+    <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>  
   </div>
-  <div class= 'cont-flex-column'>       
+  <div class= 'cont-flex-column'>
   <textarea id = 'description-${doc.id}' class="textarea" placeholder='¿Qué estás pensando,?'>${post.description}</textarea>
   </div>     
   </section>
@@ -56,37 +56,29 @@ export default (doc, getUser, post, idUserAuth) => {
     <div id = 'comment-form-list-${doc.id}'></div>
 </article>  
     `;
-
+  // console.log(post.user);
+  // console.log(idUserAuth.uid);
   article.innerHTML = li;
-  let btnEdit = article.querySelector(`#btn-edit-${doc.id}`);
-  btnEdit.addEventListener('click', () => {
-    let editDescription = article.querySelector(`#description-${doc.id}`).value;
-    const state = article.querySelector(`#estado-post-view-Post-${doc.id}`);
-    state.onchange = () => {
-      console.log(state.value);
-    };
-    if (post.user === idUserAuth.uid) {
-      editPost(doc.id, editDescription, state.value);
-      alert('Post editado correctamente');
-    } else {
-      alert('Permiso denegado para editar este post');
-    }
-  });
-
-  let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
-  btnDelete.addEventListener('click', () => {
-    // console.log(post.user)
-    // console.log(idUserAuth.uid)
-    if (post.user === idUserAuth.uid) {
+  if (post.user === idUserAuth.uid) {
+    let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
+    btnDelete.addEventListener('click', () => {
       deletePost(doc.id);
       alert('Post eliminado correctamente');
-    } else {
-      alert('Permiso denegado para eliminar este post');
-    }
-  });
+    });
+    let btnEdit = article.querySelector(`#btn-edit-${doc.id}`);
+    btnEdit.addEventListener('click', () => {
+      let editDescription = article.querySelector(`#description-${doc.id}`).value;
+      const state = article.querySelector(`#estado-post-view-Post-${doc.id}`);
+      state.onchange = () => {
+        console.log(state.value);
+      };
+      editPost(doc.id, editDescription, state.value);
+      alert('Post editado correctamente');
+    });
+  };
 
   let btnLike = article.querySelector(`#btn-like-${doc.id}`);
-  let listener = (event) => {
+  let listener = () => {
     let like = 0;
     like = post.likes + 1;
     likesPost(doc.id, like);
@@ -118,15 +110,8 @@ export default (doc, getUser, post, idUserAuth) => {
         let fecha = new Date();
         let fechaPost = `Fecha: ${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}  hora: ${fecha.getHours()}:${fecha.getMinutes()} `;
         createCommentPost(doc.id, idUserAuth.uid, textComentPost.value, fechaPost);
-        // const formDescription = document.querySelector(`form-comment`);
-        // formDescription.reset();
-        // .then(result => {
-        //   console.log(result)
-        //   const formDescription = document.querySelector(`form-${result.id}`)
-        //   formDescription.reset();
-        // });
         getComentPost(doc.id).onSnapshot(snapshot => {
-          console.log(snapshot);
+          // console.log(snapshot);
           contComentList.innerHTML = '';
           snapshot.forEach((result) => {
             // console.log(result.data());
