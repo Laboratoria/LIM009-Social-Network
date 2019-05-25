@@ -5,11 +5,11 @@ export default () => {
   const templateFormLogin = `
   <div class= 'container col-xs-12'>
   <aside class = 'col-lg-6 col-xs-12 '>
-  <header><img src="./image/portada1.jpeg" alt="educacion" class=''>
+  <header><img src="./image/portada1.jpeg" class = 'img-login' alt="educacion" class=''>
   </aside>
   <form class= 'col-lg-6 col-xs-12 '>
-  <img src="./image/logo.png" alt="educacion" class='block center'>
-  <h2 class='center'>"La infancia es fugaz. Que nuestra obsesión por corregirla no nos impida disfrutarla."</h2></header>
+  <img src="./image/logo.png" class = 'img-login' alt="educacion" class='block center'>
+  <h2 class='center font-size-16'>"La infancia es fugaz. Que nuestra obsesión por corregirla no nos impida disfrutarla."</h2></header>
   <article>
     <input type="email" id="email-id" class='style-input center block border' placeholder ='Email'/>
     <input type="password" id="password-id" class='style-input center block border' placeholder ='Password'/>

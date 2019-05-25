@@ -21,12 +21,12 @@ export default (doc, getUser, post, idUserAuth) => {
        ${(post.user === idUserAuth.uid) ? `<img class='btn-options' src="./image/boton-cancelar.png" alt ='boton de eliminar' id='btn-delete-${doc.id}'/>` : ''}
       </div>
   </header>      
-  <section class='conte-flex-perfil style-cont-text-area'>
+  <section class='style-cont-text-area'>
   <div class= 'cont-flex-column'>
     <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>  
   </div>
   <div class= 'cont-flex-column'>
-  <textarea id = 'description-${doc.id}' class="textarea" placeholder='¿Qué estás pensando,?'>${post.description}</textarea>
+  <textarea id = 'description-${doc.id}' class="textarea font-size-16" placeholder='¿Qué estás pensando,?'>${post.description}</textarea>
   </div>     
   </section>
   <footer class = 'style-cont-text-area' id = 'foo-View'>
