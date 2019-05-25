@@ -21,49 +21,42 @@ const signInWithFacebook = () => {
 // Cerrar seión
 const signOut = () => {
     return firebase.auth().signOut();
-};
-const dataBaseCloudFirestore = () => {
-    return firebase.firestore();
-};
+}; //
+
 const currentUser = () => {
     return firebase.auth().currentUser
-};
+}; //
+
 const promiseOfSetFirebase = (nameCollection, docId, obj) => {
-
-    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).set(obj);
+    return firebase.firestore().collection(nameCollection).doc(docId).set(obj);
 }
+
 const promiseOfgetFirebase = (nameCollection, docId) => {
-    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).get();
-}
+        return firebase.firestore().collection(nameCollection).doc(docId).get();
+    } //
 const promiseOfdeleteFirebase = (nameCollection, docId) => {
-    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).delete();
-}
+        return firebase.firestore().collection(nameCollection).doc(docId).delete();
+    } //
 const promiseOfUpdateFirebase = (nameCollection, docId, obj) => {
-    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).update(obj);
-}
+        return firebase.firestore().collection(nameCollection).doc(docId).update(obj);
+    } //
 const promiseOnSnapshotFirebase = (nameCollection, callback) => {
-    return dataBaseCloudFirestore().collection(nameCollection).orderBy('hours').onSnapshot(callback);
-}
+        return firebase.firestore().collection(nameCollection).orderBy('hours').onSnapshot(callback);
+    } //
 const firebaseAuthState = (callback) => {
-    return firebase.auth().onAuthStateChanged(callback);
-}
+        return firebase.auth().onAuthStateChanged(callback);
+    } //
 const promiseOfAddFirebase = (nameCollection, obj) => {
-    return dataBaseCloudFirestore().collection(nameCollection).add(obj);
-}
-const promiseOfSubcollection = (name, postId, subName, obj) => {
-    return dataBaseCloudFirestore().collection(name).doc(postId).collection(subName).add(obj)
-}
-const promiseGetSubcollection = (nameCollection, docId, subName, callback) => {
-    return dataBaseCloudFirestore().collection(nameCollection).doc(docId).collection(subName).onSnapshot(callback);
-}
+        return firebase.firestore().collection(nameCollection).add(obj);
+    } //
 
-const getUrlImageFromStorage = (selectedFile, progress, callback) => {
+const getUrlImageFromStorage = (selectedFile, /* progress, */ callback) => {
     const storageService = firebase.storage().ref().child(`images/${selectedFile.name}`).put(selectedFile);
-    storageService.on('state_changed', (snapshot) => {
+    storageService.on('state_changed', () => {
         // Observe state change events such as progress, pause, and resume
-        var percentage = (snapshot.bytesTransferred /
-            snapshot.totalBytes) * 100;
-        progress.value = percentage;
+        /*         var percentage = (snapshot.bytesTransferred /
+                    snapshot.totalBytes) * 100;
+                progress.value = percentage; */
     }, (error) => {
         // Handle unsuccessful uploads
         console.log(error);
@@ -92,7 +85,7 @@ export {
     promiseOnSnapshotFirebase,
     firebaseAuthState,
     promiseOfAddFirebase,
-    promiseOfSubcollection,
-    promiseGetSubcollection,
+    /*promiseOfSubcollection,
+    promiseGetSubcollection,*/
     getUrlImageFromStorage
 };

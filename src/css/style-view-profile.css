@@ -6,9 +6,10 @@
     max-width: 100vw;
 }
 
-.height-auto{
+.height-auto {
     height: auto;
 }
+
 .sub-container {
     max-width: 1000px;
     position: absolute;
@@ -118,7 +119,8 @@
     display: block;
 }
 
-.box, .box2 {
+.box,
+.box2 {
     margin: 0 10% 8% 10%;
     width: 80%;
     min-height: 210px;
@@ -126,21 +128,26 @@
     outline: 2px solid gray;
     height: auto;
 }
-.box2{
+
+.box2 {
     display: grid;
-    grid-template-columns:repeat(3,1fr) repeat(2,4fr) 1fr;
+    grid-template-columns: repeat(3, 1fr) repeat(2, 4fr) 1fr;
     grid-template-rows: 1fr 2fr 1fr;
     grid-row-gap: 10px;
     height: auto;
 }
+
 .encabezado {
     grid-column: 1/7;
     background: #313a52;
     color: white;
+    height: 70px;
 }
-.like{
+
+.like {
     grid-column: 2/3;
 }
+
 .text-comment {
     outline: 1px solid gray;
     grid-column: 2/6;
@@ -148,7 +155,7 @@
     height: auto;
 }
 
-.text-write{
+.text-write {
     width: 80%;
     min-height: 80px;
     margin: 3% 10%;
@@ -171,7 +178,7 @@
 .icon-photograph {
     position: relative;
     float: left;
-    margin:5% 0% 0% 8%; 
+    margin: 5% 0% 0% 8%;
     height: 45px;
     width: 45px;
 }
@@ -203,15 +210,17 @@
     padding: 1%;
 }
 
-p{
+p {
     display: inline-block;
-    width:85%;
+    width: 85%;
 }
+
 .delete {
     display: inline-block;
     height: 35px;
     cursor: pointer;
     width: 10%;
+    padding-top: 5px;
 }
 
 .publicFor {
@@ -219,9 +228,11 @@ p{
     width: 90%;
     height: 100%;
 }
+
 p {
     text-align: left;
 }
+
 .privacity {
     display: inline-block;
     width: 45%;
@@ -234,7 +245,7 @@ p {
 }
 
 .filter {
-    display:block;
+    display: block;
     width: 60%;
     padding: 0 5% 5% 5%;
     margin: auto;
@@ -247,7 +258,7 @@ p {
 }
 
 .inputfile {
-    opacity: 0; 
+    opacity: 0;
     width: 40px;
     position: absolute;
     top: 375px;
@@ -297,7 +308,7 @@ p {
         position: relative;
         float: right;
     }
-    .text-write{
+    .text-write {
         min-height: 70px;
     }
     .check {
@@ -318,7 +329,7 @@ p {
         display: none;
     }
     .inputfile {
-        opacity: 0; 
+        opacity: 0;
         top: 135px;
     }
 }

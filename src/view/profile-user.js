@@ -1,13 +1,9 @@
-
 import {
     signOutUser,
     getDataOfUser,
     deletePostAfterClick,
     editPostInCloudFireStore,
-    generateSubcollections,
     handleFileUploadSubmit,
-    getUsersLikesInRealtime,
-    likesForPosts
 } from "../controller/controller1.js";
 
 const renderOnePost = (post, user, current) => {
@@ -69,37 +65,6 @@ const renderOnePost = (post, user, current) => {
             divCommentContent.setAttribute("contenteditable", false);
         }
     });
-    label.querySelector('#btn-likes').addEventListener('click', () => {
-        try {
-            getUsersLikesInRealtime(post.id, (arr) => {
-                let valor;
-                arr.forEach((e) => {
-                    if (e.userId === current.userId) {
-                        valor = true;
-                    } else {
-                        valor = false;
-                    }
-                });
-                console.log(valor)
-                switch (valor) {
-                    case true:
-                        console.log(post.likes - 1)
-                        likesForPosts(post.id, post.likes - 1);
-                        //generateSubcollections('','','');                   
-                        break;
-                    case false:
-                        likesForPosts(post.id, post.likes + 1);
-                        //generateSubcollections(post.id, current.userId, current.name);
-                        break;
-                    default:
-                        generateSubcollections(post.id, current.userId, current.name);
-                        break
-                }
-            })
-        } catch{
-            generateSubcollections(post.id, current.userId, current.name);
-        }
-    });
 
     return label // que imprima una un post ,que se añada al ul element
 }
@@ -141,7 +106,7 @@ export default (user, posts) => {
             <textarea id="input-comment" class="text-write height-auto"
                 name="comment" type="text" placeholder="Escribe un comentario"></textarea>
                 <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">          
-                <progress value="0" max="100" id="uploader">0%</progress>              
+        
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
                <div class="filter" id="valores"><fieldset>
             <legend>¿Que publicaciones desea ver?</legend>
@@ -159,7 +124,7 @@ export default (user, posts) => {
     </main>
 </div>
 `;
-
+    /*                 <progress value="0" max="100" id="uploader">0%</progress>       */
     let selectedFile;
     const inputFile = divElement.querySelector("#image-file");
     inputFile.addEventListener('change',
@@ -181,7 +146,12 @@ export default (user, posts) => {
     const shareBtn = divElement.querySelector("#btn-share");
     //const btnPublic= divElement.querySelector("#allPost");
     shareBtn.addEventListener("click", () => {
+<<<<<<< HEAD
         const uploaderProgress = divElement.querySelector("#uploader");
+=======
+
+        // const uploaderProgress = divElement.querySelector("#uploader");
+>>>>>>> b2e9351b66f67992d729096aa48fe01cffa3f660
         const inputComment = divElement.querySelector("#input-comment").value;
         const inputStatus = divElement.querySelector('#private').checked;
         let status;
@@ -190,7 +160,7 @@ export default (user, posts) => {
         } else {
             status = false;
         }
-        return handleFileUploadSubmit(inputComment, user.userId, status, uploaderProgress, selectedFile);
+        return handleFileUploadSubmit(inputComment, user.userId, status, /* uploaderProgress, */ selectedFile);
     });
     const signOutOption = divElement.querySelector("#sign-out");
     signOutOption.addEventListener("click", signOutUser);

@@ -5,7 +5,6 @@ import {
     signInWithFacebook,
     signOut,
     currentUser,
-    promiseOfSubcollection,
     promiseOfSetFirebase,
     promiseOfgetFirebase,
     promiseOfdeleteFirebase,
@@ -13,7 +12,6 @@ import {
     promiseOnSnapshotFirebase,
     firebaseAuthState,
     promiseOfAddFirebase,
-    promiseGetSubcollection,
     getUrlImageFromStorage,
 } from "../services/firebase.js";
 
@@ -249,23 +247,14 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
 
 };
 
-const generateSubcollections = (postId, idUser, name) => {
-    promiseOfSubcollection('posts', postId, 'usersOfLikes', {
-            userId: idUser,
-            nameOfUser: name,
-        }).then((docRef) => {
-            //console.log(docRef);
-            console.log("El id del usuario que dio click es: ", docRef.id);
-        })
-        .catch((error) => {
-            console.error("Error adding document of likes: ", error);
-        });
 
-};
-
+<<<<<<< HEAD
 const handleFileUploadSubmit = ( inputComment, idUser, statusComment, progress, selectedFile) => {
+=======
+const handleFileUploadSubmit = (inputComment, idUser, statusComment, /* progress, */ selectedFile) => {
+>>>>>>> b2e9351b66f67992d729096aa48fe01cffa3f660
     if (selectedFile !== undefined) {
-        getUrlImageFromStorage(selectedFile, progress, (url) => {
+        getUrlImageFromStorage(selectedFile, /* progress, */ (url) => {
             addPostToCloudFirestore(inputComment, idUser, statusComment, url)
         })
     } else {
@@ -288,17 +277,9 @@ const editProfile = (name1, age1, sex1, birthCountry, userId1) => {
             console.error("Error updating document: ", error);
         });
 };
-const getUsersLikesInRealtime = (postId, callback) => {
-    promiseGetSubcollection('posts', postId, 'usersOfLikes', (arrAllOfUsers) => {
-        let arrOfUsers = [];
-        arrAllOfUsers.forEach((data) => {
-            arrOfUsers.push({ id: data.id, ...data.data() });
-        })
-        callback(arrOfUsers);
-    });
-};
 
-const likesForPosts = (postId, contador1) => {
+
+/* const likesForPosts = (postId, contador1) => {
     promiseOfUpdateFirebase('posts', postId, {
             likes: contador1,
         })
@@ -308,7 +289,7 @@ const likesForPosts = (postId, contador1) => {
         .catch((error) => {
             console.error("Error updating document: ", error);
         });
-};
+}; */
 
 
 export {
@@ -323,8 +304,9 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     editProfile,
-    likesForPosts,
+    /*     likesForPosts,
+     */
     handleFileUploadSubmit,
-    generateSubcollections,
-    getUsersLikesInRealtime
+    /*     generateSubcollections,
+        getUsersLikesInRealtime */
 };
