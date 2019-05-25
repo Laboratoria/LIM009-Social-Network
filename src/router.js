@@ -9,7 +9,7 @@ import { getUserReady } from "./lib/comple-firebase.js";
 // const infoUser = () => {
 
 const getUserActiv = (user) => {
-  welcomeUser(user)
+  welcomeUser(user);
   setUpPost(user)
 }
 

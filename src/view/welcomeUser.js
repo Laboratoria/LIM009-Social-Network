@@ -44,9 +44,9 @@ export default (user) => {
       <progress value="0" max="100" id="uploader" class = 'progress'>0%</progress>
       <input type="file" value="upload" id="file-button" class='btn-image-post'/>        
       </div >       
-      <select name="" id="estado-post" class = 'btn-post-create'>
+      <select id="estado-post" class = 'btn-post-create'>
       <option value="publico" select>Público</option>
-      <option value="privado" select>Privado</option>
+      <option value="privado" >Privado</option>
       </select>
         <button id ='btn-share' class='btn-post-create'>🌎Compartir</button>
       </footer>
@@ -81,11 +81,12 @@ export default (user) => {
         };
         fr.readAsDataURL(e.target.files[0]);
     }
-    state.onchange = () => {
-        console.log(state.value)
-    }
+
 
     btnSharePost.addEventListener('click', () => {
+        state.onchange = () => {
+            console.log(state.value)
+        }
         let fecha = new Date();
         let fechaPost = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         let horaPost = `${fecha.getHours()}:${fecha.getMinutes()}`
@@ -93,31 +94,45 @@ export default (user) => {
         let selectState = state.value;
         let description = document.querySelector('#description').value;
         let userID = document.querySelector('#user-id').textContent;
-        if (selectImage === undefined && selectState === 'publico') {
+
+
+
+        if(selectImage === undefined && selectState === 'publico') {
             createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)
-        } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
+        } else if(selectState === 'publico' || selectState === 'privado' && selectImage === undefined ) {
             createPost(selectState, './image/image-post.png', fechaPost, description, userID, horaPost)
-        } else if (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
+        } else if(selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
             const getImage = (image) => {
-                // console.log(image)
+                //console.log(image)
                 imagePostView.src = image
                 createPost(selectState, image, fechaPost, description, userID, horaPost)
             }
             imageFirestore(selectImage, uploader, getImage)
-        }
-        else if (selectState === 'Amigos' && selectImage !== undefined) {
-            const getImage = (image) => {
-                // console.log(image)
-                imagePostView.src = image
-                createPost('publico', image, fechaPost, description, userID, horaPost)
-            }
-            imageFirestore(selectImage, uploader, getImage)
+        } else {
+            createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)   
         }
 
-    })
+        // if (selectImage === undefined && selectState === 'publico') {
+        //     createPost('publico', './image/image-post.png', fechaPost, description, userID, horaPost)             
+        // } else if (selectState === 'publico' || selectState === 'privado' && selectImage === undefined) {
+        //     createPost(selectState, './image/image-post.png', fechaPost, description, userID, horaPost)
+        // } else if  (selectState === 'publico' || selectState === 'privado' && selectImage !== undefined) {
+        //     const getImage = (image) => {
+        //         // console.log(image)
+        //         imagePostView.src = image
+        //         createPost(selectState, image, fechaPost, description, userID, horaPost)
+        //     }
+        //     imageFirestore(selectImage, uploader, getImage)
+        // } else if (selectState === 'publico' && selectImage !== undefined) {
+        //     const getImage = (image) => {
+        //         // console.log(image)
+        //         imagePostView.src = image
+        //         createPost('publico', image, fechaPost, description, userID, horaPost)
+        //     }
+        //     imageFirestore(selectImage, uploader, getImage)
+        // }
 
-
-
+    });
     return root;
 };
 

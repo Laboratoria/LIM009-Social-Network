@@ -7,7 +7,7 @@ export const imageFirestore = (file, uploader, callback) => {
     // Subir archivo
     let uploadTask = storageRef.put(file, metadata);
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         function (snapshot) {
 
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
@@ -39,7 +39,7 @@ export const imageFirestore = (file, uploader, callback) => {
         }, () => {
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                callback(downloadURL)
+                return callback(downloadURL)
             });
         });
 }
@@ -55,7 +55,6 @@ export const getUserReady = (callback) => {
             } else {
                 // No user is signed in.
                 return callback(null)
-
             }
             unsubscribe()
         });
