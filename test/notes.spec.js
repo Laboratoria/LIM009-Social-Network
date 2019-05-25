@@ -72,6 +72,8 @@ global.firebase = new MockFirebase(fixtureData, {
     isNaiveSnapshotListenerEnabled: true
 });
 
+
+
 import {
     promiseOfgetFirebase,
     promiseOfdeleteFirebase,

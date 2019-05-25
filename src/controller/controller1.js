@@ -247,9 +247,9 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
 };
 
 
-const handleFileUploadSubmit = (inputComment, idUser, statusComment, progress, selectedFile) => {
+const handleFileUploadSubmit = (inputComment, idUser, statusComment, /* progress, */ selectedFile) => {
     if (selectedFile !== undefined) {
-        getUrlImageFromStorage(selectedFile, progress, (url) => {
+        getUrlImageFromStorage(selectedFile, /* progress, */ (url) => {
             addPostToCloudFirestore(inputComment, idUser, statusComment, url)
         })
     } else {
@@ -299,8 +299,9 @@ export {
     editPostInCloudFireStore,
     getPostsInRealtime,
     editProfile,
-    likesForPosts,
+    /*     likesForPosts,
+     */
     handleFileUploadSubmit,
-    generateSubcollections,
-    getUsersLikesInRealtime
+    /*     generateSubcollections,
+        getUsersLikesInRealtime */
 };
