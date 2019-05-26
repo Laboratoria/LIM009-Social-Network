@@ -7,7 +7,8 @@
     text-decoration: none;
     /* font-size: 16px; */
     text-align: center;
-    box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/
+    box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/    
+    font-family: 'PT Serif', serif;
    
 }
 html {
@@ -20,11 +21,15 @@ body {
     align-content: center;
     justify-content: center  
 }
-
 .height-100 {
     height: 100%;
 }
-
+.width-100 {
+    width: 100%;
+}
+.display-flex{
+    display: flex;
+}
 .display-flexcenter{
     display: flex;
     justify-content: center;
@@ -93,8 +98,8 @@ button:hover,select:hover{
     color: white;
     padding: 1%;
 }
-a{
-    color: white
+.color-white{
+    color: white;
 }
 
 .col-12{
@@ -137,7 +142,7 @@ a{
   resize:both;
   width: 100%;
   height: 7rem;
-  font-size: 25px;
+  font-size: 16px;
   color: rgba(0, 0, 0, 0.45);
   border:1px solid white;
 }
@@ -218,6 +223,10 @@ color: rgba(49, 53, 53, 0.514)
 .conte-flex-perfil{    
     display: flex;
     flex-direction: row;   
+}
+
+.space-around {
+    justify-content: space-around;
 }
 .cont-flex-column{
     display: flex;
@@ -300,7 +309,7 @@ color: rgba(49, 53, 53, 0.514)
     .font-size-16 {
         font-size: 16px;
     }
-    .img-login {
+    .img-login, .img-logo {
         width: 30%;
     }
     .btn-options {
@@ -319,7 +328,6 @@ color: rgba(49, 53, 53, 0.514)
          width: 100% ;
     }
     .header {
-        font-family: 'PT Serif', serif;
        font-size: 20px;
        display:inline-flex;
        justify-content : space-around;
@@ -330,8 +338,8 @@ color: rgba(49, 53, 53, 0.514)
        color: white
    }
    .btn-options {
-        height: 2rem;
-        width: 2rem;
+        height: 1.5rem;
+        width: 1.5rem;
     }
     .container-options {
         display: flex;
@@ -355,6 +363,9 @@ color: rgba(49, 53, 53, 0.514)
     .img-login{
         width: 100%;
     }
+    .img-logo {
+        width: 70%;
+    }
     .style-border{
         /* width: 50%; */
         margin-top:3%;
@@ -371,9 +382,9 @@ color: rgba(49, 53, 53, 0.514)
         margin: 3%;
     }    
     .col-7{
-        width: 45%;
+        width: 40%;
         float: left;
-        margin-left: 8%;
+        margin-left: 10%;
     }   
     .img-perfil-aside{
         width:70%;

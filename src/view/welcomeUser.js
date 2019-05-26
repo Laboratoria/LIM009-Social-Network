@@ -8,7 +8,7 @@ export default (user) => {
     <div class = 'col-12 height-100 '>
     <header>
         <ul class = 'header'>
-            <li><a id = 'edit-perfil' href='#/edit-perfil'>${user.displayName}</a></li>
+            <li><a id = 'edit-perfil' href='#/edit-perfil' class = 'color-white'>${user.displayName}</a></li>
             <li> < Crianza Respetuosa > </li>
             <li><a id='sign-out'>Cerrar Sesión</a></li>
         </ul>

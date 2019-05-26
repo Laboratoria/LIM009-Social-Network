@@ -8,56 +8,53 @@ export default (doc, getUser, post, idUserAuth) => {
   const article = document.createElement('article');
   const li = `
   <article id = 'content-post' class= 'flex-container margin-top'>               
-  <header class='style-color-header flex-header-post'>
-    <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>  
-    <div class='cont-flex-column'>  
-      <div>  
-        <label id='name-user-post' class=''>${getUser.data().name}</label> 
+    <header class='style-color-header flex-header-post'>
+      <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>  
+      <div class='cont-flex-column'>  
+        <div>  
+          <label id='name-user-post' class=''>${getUser.data().name}</label> 
+        </div>
+        <div class = 'header-post'>
+          <label id='fecha-post' class=''>${post.fechaPost}</label>
+        </div>
       </div>
-      <div class = 'header-post'>
-        <label id='fecha-post' class=''>${post.fechaPost}</label>
+      <img id='photo-post-user' src='./image/state.png' alt='feminismo' class='btn-options'> 
+      <div class = 'container-options'>
+        ${(post.user === idUserAuth.uid) ? `<img class ='btn-options' src='./image/editar_lapiz.png' alt ='boton de editar' id='btn-edit-${doc.id}'/>` : ''}
+        ${(post.user === idUserAuth.uid) ? `<img class='btn-options' src="./image/boton-cancelar.png" alt ='boton de eliminar' id='btn-delete-${doc.id}'/>` : ''}
       </div>
-    </div>
-    <img id='photo-post-user' src='./image/state.png' alt='feminismo' class='btn-options'> 
-    <div class = 'container-options'>
-      ${(post.user === idUserAuth.uid) ? `<img class ='btn-options' src='./image/editar_lapiz.png' alt ='boton de editar' id='btn-edit-${doc.id}'/>` : ''}
-      ${(post.user === idUserAuth.uid) ? `<img class='btn-options' src="./image/boton-cancelar.png" alt ='boton de eliminar' id='btn-delete-${doc.id}'/>` : ''}
-    </div>
-  </header>      
-  <section class='style-cont-text-area'>
-  <div class= 'cont-flex-column'>
-    <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>  
-  </div>
-  <div class= 'cont-flex-column'>
-  <textarea id = 'description-${doc.id}' class="textarea font-size-16" placeholder='¿Qué estás pensando,?'>${post.description}</textarea>
-  </div>     
-  </section>
-  <footer class = 'style-cont-text-area' id = 'foo-View'>
-    <article class ='conte-flex-perfil style-color-header'>    
-    <div class ='size-view-pos-list'>        
-    <img id='btn-image-post' src="./image/me-gusta.png" alt="imagen-post" class='img-btn-post'> 
-    <button id ='btn-like-${doc.id}' class = 'border-white '>Me gusta</button>
-    <div class = 'size-view-pos-list'>
-    <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
-    <option value="publico" select>Público</option>
-    <option value="privado" select>Privado</option>
-    </select>
-    </div>
-    </div>
-    <div class ='size-view-pos-list'>        
-    <img  src="./image/comentarios.png" alt="imagen-post" class='img-btn-post'>
-    <button id ='btn-coment-${doc.id}' class = 'border-white btn-post'>Comentar</button>        
-    </div>
-    </article>      
-    <div class='header-post-btn-view'>
- 
-  </div>
-  </footer>
-  <div id = 'view-photo'>    
-  </div>
-  <div id = 'cont-coment-${doc.id}'></div>
+    </header>      
+    <section class='style-cont-text-area'>
+      <div class= 'cont-flex-column'>
+        <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>  
+      </div>
+      <div class= 'cont-flex-column'>
+        <textarea id = 'description-${doc.id}' class="textarea font-size-16" placeholder='¿Qué estás pensando,?'>${post.description}</textarea>
+      </div>     
+    </section>
+    <footer class = 'style-cont-text-area' id = 'foo-View'>
+      <article class ='conte-flex-perfil style-color-header space-around'>    
+        <div class ='display-flex'>        
+          <img id='btn-image-post' src="./image/me-gusta.png" alt="imagen-post" class='img-btn-post'> 
+          <button id ='btn-like-${doc.id}' class = 'border-white '>Me gusta</button>
+        </div>
+        <div class = 'display-flex'>
+          <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
+          <option value="publico" select>Público</option>
+          <option value="privado" select>Privado</option>
+          </select>
+        </div>
+        <div class ='display-flex'>        
+          <img  src="./image/comentarios.png" alt="imagen-post" class='img-btn-post'>
+          <button id ='btn-coment-${doc.id}' class = 'border-white btn-post'>Comentar</button>        
+        </div>
+      </article>      
+      <div class='header-post-btn-view'></div>
+    </footer>
+    <div id = 'view-photo'></div>
+    <div id = 'cont-coment-${doc.id}'></div>
     <div id = 'comment-form-list-${doc.id}'></div>
-</article>  
+  </article>  
     `;
   // console.log(post.user);
   // console.log(idUserAuth.uid);

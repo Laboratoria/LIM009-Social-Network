@@ -5,15 +5,15 @@ import { imageFirestore, getUserReady } from '../lib/comple-firebase.js';
 export default () => {
   const formPerfil = document.createElement('form');
   const templateEditPerf = `
-    <div class = 'edit-perfil'>
+  <div>
     <header>
-    <ul class = 'header style-header-perfil'>
-        <li><a id = 'edit-perfil' href='#/welcomeUser'>Home</a></li>
-        <li><img src=""></li>
-        <li><a id='sign-out'>Cerrar Sesión</a></li>
-    </ul>
-</header>
- <div  class = 'col-6 container col-xs-12 center'>
+      <ul class = 'header style-header-perfil'>
+          <li><a id = 'edit-perfil' href='#/welcomeUser' class='color-white'>Home</a></li>
+          <li><img src=""></li>
+          <li><a id='sign-out'>Cerrar Sesión</a></li>
+      </ul>
+    </header>
+    <div  class = 'col-6 container col-xs-12 center'>
         <aside class=''>          
          <article class = ''>
             <section class = 'header-perfil center'>
@@ -34,11 +34,12 @@ export default () => {
            </section>           
          </article>
         </aside>           
-    </div>
+      </div>
     </div>
         `
         ;
   formPerfil.innerHTML = templateEditPerf;
+  formPerfil.classList.add("width-100", "height-100");
   const name = formPerfil.querySelector('#name-user-edit');
   const email = formPerfil.querySelector('#email-email-edit');
   const btnEdit = formPerfil.querySelector('#btn-edit');
