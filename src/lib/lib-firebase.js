@@ -22,7 +22,7 @@ export const signInWithFacebook = () => {
   const providerFacebook = new firebase.auth.FacebookAuthProvider();
   return firebase.auth().signInWithPopup(providerFacebook)
 };
-//Cerrar sesión
+// Cerrar sesión
 export const signOut = () => {
   return firebase.auth().signOut()
 };
