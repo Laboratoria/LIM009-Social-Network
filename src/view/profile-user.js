@@ -111,12 +111,8 @@ export default (user, posts) => {
                <div class="filter" id="valores"><fieldset>
             <legend>¿Que publicaciones desea ver?</legend>
             <button id="btn-share" class="share boton">Compartir</button></div>          
-<<<<<<< HEAD
-
-=======
     <div class="filter height-auto" id="valores"><fieldset>
  <legend>¿Que publicaciones desea ver?</legend>
->>>>>>> 311f91b3c1cf11bc5d7cfa8b4a6641cdb853d583
 <input type="radio" class='input-filter' name="filterPost" id="allPost" checked value="publicPost"><label for="allPost">Todas</label>
 <input type="radio" class='input-filter' name="filterPost" id="privatePost" value="myPosts"><label for="privatePost">Solo mías</label>
 </fieldset></div>
@@ -146,12 +142,8 @@ export default (user, posts) => {
     const shareBtn = divElement.querySelector("#btn-share");
     //const btnPublic= divElement.querySelector("#allPost");
     shareBtn.addEventListener("click", () => {
-<<<<<<< HEAD
-        const uploaderProgress = divElement.querySelector("#uploader");
-=======
 
         // const uploaderProgress = divElement.querySelector("#uploader");
->>>>>>> b2e9351b66f67992d729096aa48fe01cffa3f660
         const inputComment = divElement.querySelector("#input-comment").value;
         const inputStatus = divElement.querySelector('#private').checked;
         let status;

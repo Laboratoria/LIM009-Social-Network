@@ -49,9 +49,9 @@ const signInAfterClick = (email, password) => {
 };
 
 // cambiar nombre de la funcion **********
-const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBirthCountry, userUrlPhoto, userFilePhoto) => {
+const signUpAfterClick = (email2, password2, userName, userUrlPhoto) => {
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' || userAge === '' || userSex === '' || userBirthCountry === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' ) {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
@@ -59,12 +59,8 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
                 return promiseOfSetFirebase('users', cred.user.uid, {
-                        name: userName,
-                        age: userAge,
-                        sex: userSex,
-                        country: userBirthCountry,
+                        name: userName,                     
                         photo: userUrlPhoto,
-                        photoFile: userFilePhoto,
                         userId: cred.user.uid,
                         email: email2,
                     })
@@ -248,11 +244,7 @@ const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => 
 };
 
 
-<<<<<<< HEAD
-const handleFileUploadSubmit = ( inputComment, idUser, statusComment, progress, selectedFile) => {
-=======
 const handleFileUploadSubmit = (inputComment, idUser, statusComment, /* progress, */ selectedFile) => {
->>>>>>> b2e9351b66f67992d729096aa48fe01cffa3f660
     if (selectedFile !== undefined) {
         getUrlImageFromStorage(selectedFile, /* progress, */ (url) => {
             addPostToCloudFirestore(inputComment, idUser, statusComment, url)
