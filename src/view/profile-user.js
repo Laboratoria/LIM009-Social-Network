@@ -9,12 +9,15 @@ import {
 const renderOnePost = (post, user, current) => {
     let label = document.createElement('div');
     label.innerHTML = `
-  <div id="comment-author" class='encabezado'><p>Publicado por ${user.name}</p>
-  <img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}"><p>${post.hours}, ${post.today}</p> 
-  </div>
+  <div id="comment-author" class='encabezado'>
+  <img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}">
+  <p>Publicado por ${user.name}</p>
+  <p>${post.hours}, ${post.today}</p> 
+</div>
+ 
 
   <div class="text-comment height-auto" id="content-comment-div" data-id-post="${post.id}" >${post.content}
-  <img class="img-post" src="${post.photoPost}" id="img-post" ><div id="eliminarPost"></div>
+  <img class="img-post" src="${post.photoPost}" id="img-post" >
   </div>
   <img src="./css/img/like-1.png" class="icons like"id="btn-likes" alt="icon like">
   <span id="counter-likes">${post.likes}</span>
@@ -108,8 +111,6 @@ export default (user, posts) => {
                 <input type="file" id="image-file" class="inputfile"><img class="icon-photograph" src="./css/img/6799.png_860.png">          
         
                 <fieldset class="privacity"><legend>¿Desea que sea público?</legend><input type="checkbox" id="private" value="true"><label for="private">No,solo para mi</label></fieldset>
-               <div class="filter" id="valores"><fieldset>
-            <legend>¿Que publicaciones desea ver?</legend>
             <button id="btn-share" class="share boton">Compartir</button></div>          
     <div class="filter height-auto" id="valores"><fieldset>
  <legend>¿Que publicaciones desea ver?</legend>

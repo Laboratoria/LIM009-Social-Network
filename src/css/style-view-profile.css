@@ -142,6 +142,7 @@
     background: #313a52;
     color: white;
     height: 70px;
+    padding: 10px;
 }
 
 .like {
@@ -211,16 +212,16 @@
 }
 
 p {
-    display: inline-block;
+    /*display: inline-block;*/
     width: 85%;
 }
 
 .delete {
-    display: inline-block;
+    float: right;
     height: 35px;
     cursor: pointer;
     width: 10%;
-    padding-top: 5px;
+    /*     margin: 8px 8px auto auto; */
 }
 
 .publicFor {
