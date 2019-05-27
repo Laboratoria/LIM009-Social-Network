@@ -66,7 +66,7 @@ export const editPost = (id, description, state) => {
     state: state
   });
 };
-export const deleteComment = (idPost,id) => {
+export const deleteComment = (idPost, id) => {
   const db = firebase.firestore();
   return db.collection('posts').doc(idPost).collection('comment').doc(id).delete();
 };
