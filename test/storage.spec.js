@@ -11,12 +11,14 @@ const storageMock = {
                                     resolve(`https://storage.firebaseapp.com/${file}`);
                                 });
                             }
-                        }
+                        
+                        },
 
                     },
                     on: (changeEvent, progress, error, callback) => {
                         callback()
-                    }
+                        error
+                    }, 
                 })
             })
         })

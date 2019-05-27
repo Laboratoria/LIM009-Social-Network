@@ -49,9 +49,9 @@ const signInAfterClick = (email, password) => {
 };
 
 // cambiar nombre de la funcion **********
-const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBirthCountry, userUrlPhoto, userFilePhoto) => {
+const signUpAfterClick = (email2, password2, userName, userUrlPhoto) => {
     // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' || userAge === '' || userSex === '' || userBirthCountry === '') {
+    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' ) {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
@@ -59,12 +59,8 @@ const signUpAfterClick = (email2, password2, userName, userAge, userSex, userBir
                 console.log(cred.user);
                 // cambiar el llamado de firebase ********
                 return promiseOfSetFirebase('users', cred.user.uid, {
-                        name: userName,
-                        age: userAge,
-                        sex: userSex,
-                        country: userBirthCountry,
+                        name: userName,                     
                         photo: userUrlPhoto,
-                        photoFile: userFilePhoto,
                         userId: cred.user.uid,
                         email: email2,
                     })
@@ -205,7 +201,7 @@ const getPostsInRealtime = (callback) => {
     promiseOnSnapshotFirebase('posts', (arrOfAllPosts) => {
         let arrOfPosts = [];
         arrOfAllPosts.forEach((onePost) => {
-            arrOfPosts.push({ id: onePost.id, ...onePost.data() });
+            arrOfPosts.push({ id: onePost.id, ...onePost.data() })
         })
         callback(arrOfPosts);
     });
@@ -224,6 +220,7 @@ const getUserActive = (callback) => { //printUserinfo()
         })
 
     }
+
 };
 const addPostToCloudFirestore = (inputComment, idUser, statusComment, photo) => {
     const f = new Date();
