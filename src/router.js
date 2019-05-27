@@ -14,7 +14,7 @@ const getUserActiv = (user) => {
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return getRoute('#/login');
-  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash == '#/edit-perfil' || hash == '#/login') {
+  } else if (hash === '#/registerUser' || hash === '#/welcomeUser' || hash === '#/edit-perfil' || hash === '#/login') {
     return getRoute(hash);
   } else {
     return getRoute('#/page-error');
