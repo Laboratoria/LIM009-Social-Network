@@ -38,11 +38,11 @@ export default (doc, getUser, post, idUserAuth) => {
     </section>
     <footer class = 'style-cont-text-area' id = 'foo-View'>
       <article class ='conte-flex-perfil style-color-header space-around'>    
-        <div class ='display-flex'>        
+        <div class ='display-flexcenter'>
+          <span>${post.likes}</span>
           <img id='btn-image-post' src="./image/me-gusta.png" alt="imagen-post" class='img-btn-post'> 
           <button id ='btn-like-${doc.id}' class = 'border-white '>Me gusta</button>
-        </div>
-        
+        </div>        
         <div class ='display-flex'>        
           <img  src="./image/comentarios.png" alt="imagen-post" class='img-btn-post'>
           <button id ='btn-coment-${doc.id}' class = 'border-white btn-post'>Comentar</button>        
@@ -115,7 +115,6 @@ export default (doc, getUser, post, idUserAuth) => {
   };
   btnLike.addEventListener('click', () => {
     listener();
-    btnLike.removeEventListener('click', listener);
   });
 
   let btnComent = article.querySelector(`#btn-coment-${doc.id}`);

@@ -2,9 +2,10 @@ import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPa
 import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic, updatePhoto } from '../model/model.js';
 import { getUserReady } from '../lib/comple-firebase.js'
 import viewPostList from '../view/view-pos-list.js';
+
 const changeHash = (hash) => {
   location.hash = hash;
-}
+};
 
 export const registerUser = () => {
   const emailRegister = document.querySelector('#email-register').value;
@@ -46,8 +47,8 @@ export const email = () => {
   const password = document.querySelector("#password-id").value;
   return signInWithEmail(valueEmail, password)
     .then((result) => {
-      dataBaseUser(result.user)
-      changeHash('/welcomeUser')
+      dataBaseUser(result.user);
+      changeHash('/welcomeUser');
     }
     ).catch(error => {
       // Handle Errors here.
@@ -85,12 +86,12 @@ export const google = () => {
         alert(errorMessage);
       }
     });
-}
+};
 
 export const facebook = () => {
   return signInWithFacebook().then((result) => {
     dataBaseUser(result.user);
-    changeHash('/welcomeUser')
+    changeHash('/welcomeUser');
   }
   ).catch(error => {
     let errorCode = error.code;
@@ -154,13 +155,13 @@ export const setUpPost = (idUserAuth) => {
 
 export const editPErfilUser = (idUser, name, email) => {
   updatePerfilUser(idUser, name).then(() => {
-    alert('Nombre se actualizó correctamente')
+    alert('Nombre se actualizó correctamente');
     updateEmailUser(idUser, email).then(() => {
       // Update successful.
-      alert('Email se actualizó correctamente')
+      alert('Email se actualizó correctamente');
     }).catch((error) => {
       // An error happened.
-      alert(error + 'Actualización Ha ocurrido un error. en email..')
+      alert(error + 'Actualización Ha ocurrido un error. en email..');
     });
   }).catch((error) => {
     // An error happened.
@@ -170,5 +171,5 @@ export const editPErfilUser = (idUser, name, email) => {
       alert('Actualización Ha ocurrido un error. en nombre..')
     }
   });
-}
+};
 
