@@ -25,11 +25,10 @@ export default (doc, getUser, post, idUserAuth) => {
       </div>
     </header>      
     <section class='style-cont-text-area'>
-      <div class= 'cont-flex-column'>
-        <img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>  
+      <div class= 'cont-flex-column' id='cont-imag-post'>          
       </div>
       <div class= 'cont-flex-column'>
-        <textarea id = 'description-${doc.id}' class="textarea font-size-16" placeholder='¿Qué estás pensando,?'>${post.description}</textarea>
+        <p id = 'description-${doc.id}' class="textarea font-size-16" placeholder='¿Qué estás pensando,?'>${post.description}</p>
       </div>     
     </section>
     <footer class = 'style-cont-text-area' id = 'foo-View'>
@@ -58,7 +57,16 @@ export default (doc, getUser, post, idUserAuth) => {
     `;
   // console.log(post.user);
   // console.log(idUserAuth.uid);
+  //
   article.innerHTML = li;
+  const contImagePost = article.querySelector('#cont-imag-post')
+  if (post.image !== null) {
+    const image = `<img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>`
+    contImagePost.innerHTML = image;
+  } else {
+
+  }
+
   if (post.user === idUserAuth.uid) {
     let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);
     btnDelete.addEventListener('click', () => {
@@ -88,7 +96,6 @@ export default (doc, getUser, post, idUserAuth) => {
     listener();
     btnLike.removeEventListener('click', listener);
   });
-
 
   let btnComent = article.querySelector(`#btn-coment-${doc.id}`);
   const coment = article.querySelector(`#cont-coment-${doc.id}`);
