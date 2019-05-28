@@ -278,6 +278,10 @@ color: rgba(49, 53, 53, 0.514)
     flex-direction: row;
     margin-left: 60%;
 }
+.style-cont-text-area-color{
+    border: 1px solid white;
+
+}
  @media screen and (min-width: 320px)/*360px-20em*/ {
      .col-xs-12 { 
       width: 100% ;      
@@ -304,6 +308,16 @@ color: rgba(49, 53, 53, 0.514)
         flex-direction: row;
         margin-left: 30%
     }   
+    .img-perfil-aside{
+        width: 70%;
+        border-radius: 50%;  
+        border: 2px solid rgba(25, 84, 107, 0.089);
+    }
+    .header {
+        
+        background-color:rgba(12, 83, 98, 1);
+        color: white
+    }
  }
 
  @media screen and (min-width: 600px ) {

@@ -18,8 +18,13 @@ export default (doc, getUser, post, idUserAuth) => {
           <label id='fecha-post' class=''>${post.fechaPost}</label>
         </div>
       </div>
-      <img id='photo-post-user' src='./image/state.png' alt='feminismo' class='btn-options'> 
-      <div class = 'container-options'>
+      <div class = 'display-flex' id = 'btn-state-footer'>
+          <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
+          <option value="publico" select>Público</option>
+          <option value="privado" select>Privado</option>
+          </select>
+        </div>      
+         <div class = 'container-options'>
         ${(post.user === idUserAuth.uid) ? `<img class ='btn-options' src='./image/editar_lapiz.png' alt ='boton de editar' id='btn-edit-${doc.id}'/>` : ''}
         ${(post.user === idUserAuth.uid) ? `<img class='btn-options' src="./image/boton-cancelar.png" alt ='boton de eliminar' id='btn-delete-${doc.id}'/>` : ''}
       </div>
@@ -28,7 +33,7 @@ export default (doc, getUser, post, idUserAuth) => {
       <div class= 'cont-flex-column' id='cont-imag-post'>          
       </div>
       <div class= 'cont-flex-column'>
-        <p id = 'description-${doc.id}' class="textarea font-size-16" placeholder='¿Qué estás pensando,?'>${post.description}</p>
+        <textarea id = 'description-${doc.id}' class="textarea font-size-16" >${post.description}</textarea>
       </div>     
     </section>
     <footer class = 'style-cont-text-area' id = 'foo-View'>
@@ -37,12 +42,7 @@ export default (doc, getUser, post, idUserAuth) => {
           <img id='btn-image-post' src="./image/me-gusta.png" alt="imagen-post" class='img-btn-post'> 
           <button id ='btn-like-${doc.id}' class = 'border-white '>Me gusta</button>
         </div>
-        <div class = 'display-flex'>
-          <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
-          <option value="publico" select>Público</option>
-          <option value="privado" select>Privado</option>
-          </select>
-        </div>
+        
         <div class ='display-flex'>        
           <img  src="./image/comentarios.png" alt="imagen-post" class='img-btn-post'>
           <button id ='btn-coment-${doc.id}' class = 'border-white btn-post'>Comentar</button>        
@@ -57,15 +57,36 @@ export default (doc, getUser, post, idUserAuth) => {
     `;
   // console.log(post.user);
   // console.log(idUserAuth.uid);
-  //
+  /**
+   * 
+   * <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
+          <option value="publico" select>🌎Público</option>
+          <option value="privado" select>🔐Privado</option>
+          </select>
+   */
   article.innerHTML = li;
   const contImagePost = article.querySelector('#cont-imag-post')
+  const btnStateFooter = article.querySelector('#btn-state-footer')
+  const templateState = `<select name="" id='estado-post-view-Post-${doc.id}' class = 'style-cont-text-area-color'>       
+  <option value="publico" select>🌎</option>
+  <option value="privado" select>🔐</option>
+  </select>`;
+  const templateStatePrivado = `<select name="" id='estado-post-view-Post-${doc.id}' class = 'style-cont-text-area-color'>       
+  <option value="privado" select>🔐</option>
+  <option value="publico" select>🌎</option>
+  </select>`;
   if (post.image !== null) {
     const image = `<img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>`
     contImagePost.innerHTML = image;
-  } else {
-
   }
+  if (post.state === 'publico') {
+    btnStateFooter.innerHTML = templateState;
+  }
+  else if (post.state === 'privado') {
+    btnStateFooter.innerHTML = templateStatePrivado;
+  }
+
+
 
   if (post.user === idUserAuth.uid) {
     let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);

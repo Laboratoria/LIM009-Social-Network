@@ -10,7 +10,7 @@ export default () => {
       <ul class = 'header style-header-perfil'>
           <li><a id = 'edit-perfil' href='#/welcomeUser' class='color-white'>Home</a></li>
           <li><img src=""></li>
-          <li><a id='sign-out'>Cerrar Sesión</a></li>
+          
       </ul>
     </header>
     <div  class = 'col-6 container col-xs-12 center'>
@@ -37,7 +37,7 @@ export default () => {
       </div>
     </div>
         `
-        ;
+    ;
   formPerfil.innerHTML = templateEditPerf;
   formPerfil.classList.add("width-100", "height-100");
   const name = formPerfil.querySelector('#name-user-edit');

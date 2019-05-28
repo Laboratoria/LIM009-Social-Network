@@ -1,5 +1,6 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
-import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic } from '../model/model.js'
+import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic, updatePhoto } from '../model/model.js';
+import { getUserReady } from '../lib/comple-firebase.js'
 import viewPostList from '../view/view-pos-list.js';
 const changeHash = (hash) => {
   location.hash = hash;
@@ -11,10 +12,16 @@ export const registerUser = () => {
 
   return createEmailAndPassword(emailRegister, passwordRegister)
     .then(result => {
-      dataBaseUser(result.user).then((docRef) => {
+      console.log(result.user)
+      dataBaseUser(result.user).then(() => {
+        const updateUSer = (user) => {
+          updatePerfilUser(user, 'Aninimo');
+          updatePhoto(user, './image/icono-login-user.png')
+        }
+        getUserReady(updateUSer)
         alert('Registro con éxito');
-        changeHash('/welcomeUser');
-        console.log("Document written with ID: ", docRef);
+        // changeHash('/welcomeUser');
+        console.log("Document written with ID: ");
       }).catch((error) => {
         console.error("Error adding document: ", error);
       });
@@ -92,7 +99,7 @@ export const facebook = () => {
       alert('Sólo se permite una solicitud emergente a la vez.');
     } else if (errorCode === 'auth/invalid-email') {
       alert('El correo es inválido');
-    } else if (errorCode ==='auth/wrong-password') {
+    } else if (errorCode === 'auth/wrong-password') {
       alert('La contraseña es equivocada.');
     } else if (errorCode === 'auth/account-exists-with-different-credential') {
       alert('La cuenta ya ha sido utilizada con una credencial diferente')
