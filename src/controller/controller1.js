@@ -48,18 +48,18 @@ const signInAfterClick = (email, password) => {
     }
 };
 
-// cambiar nombre de la funcion **********
+
 const signUpAfterClick = (email2, password2, userName, userUrlPhoto) => {
-    // cambios *******
-    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '' ) {
+
+    if (email2 === '' || password2 === '' || userName === '' || userUrlPhoto === '') {
         alert('Completa tus datos para registrarte');
     } else {
         signUp(email2, password2)
-            .then((cred) => { // afinar nombres *********
+            .then((cred) => {
                 console.log(cred.user);
-                // cambiar el llamado de firebase ********
+
                 return promiseOfSetFirebase('users', cred.user.uid, {
-                        name: userName,                     
+                        name: userName,
                         photo: userUrlPhoto,
                         userId: cred.user.uid,
                         email: email2,
@@ -215,7 +215,7 @@ const getUserActive = (callback) => { //printUserinfo()
             if (user) { // si se verifica que existe un current user
                 callback(user) // printUserInfo recibe al usuario actual
             } else { // si no existe un current user
-                unsuscribe(); //entonces se desactiva el observador  // se deberia poner el unsuscribe en esta posicion 
+                unsuscribe(); //entonces se desactiva el observador  // 
             }
         })
 

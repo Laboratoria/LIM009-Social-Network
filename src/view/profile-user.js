@@ -24,12 +24,7 @@ const renderOnePost = (post, user, current) => {
   <img src="./css/img/paper-plane-1.png" class="icons edit" alt="icon edit" id="btn-edit" data-uid-post="${post.userId}" data-id-post="${post.id}">
   <button id="btn-save-after-edit" class="boton share">Guardar</button>
   `;
-    /* if(current.userId===post.userId){
-    const conditionDelete=label.querySelector('#comment-author');
-    const variable=label.querySelector('#eliminarPost')
-    variable.innerHTML=`<img src="./css/img/error.png" id="btn-delete" class="delete" data-uid-post="${post.userId}" data-id-post="${post.id}">` 
-    return conditionDelete.appendChild(variable)
-    } */
+
     label.setAttribute('class', "box2 height-auto");
 
     if (post.photoPost === '' || post.photoPost === null) {
@@ -69,7 +64,7 @@ const renderOnePost = (post, user, current) => {
         }
     });
 
-    return label // que imprima una un post ,que se añada al ul element
+    return label
 }
 
 export default (user, posts) => {
@@ -131,11 +126,6 @@ export default (user, posts) => {
                 console.log("file selected!!");
                 selectedFile = e.target.files[0];
 
-            } else if (inputFile.files.length === 0) {
-                alert("Por favor selecciona la image que quieres compartir")
-                console.log("no files selected");
-            } else {
-                alert("Por favor selecciona la image que quieres compartir")
             }
 
         });
@@ -202,10 +192,12 @@ export default (user, posts) => {
 
     const viewComments = divElement.querySelector('#valores');
     viewComments.addEventListener("click", () => {
-        console.log(validar())
+        console.log(validar());
         divCommentList.innerHTML = '';
         estadosDePosts(posts, user);
     });
+
+
     estadosDePosts(posts, user);
     return divElement;
 };
