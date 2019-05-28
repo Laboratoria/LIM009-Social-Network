@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Serif&display=swap');
-
 *{
     margin: 0px;
     padding: 0px;
@@ -39,27 +38,23 @@ body {
     margin:auto;
     padding: 1.5%;
  }
-
  .style-input{
     width: 60%;
     margin-bottom: 3%;
     border-radius: 6px;
-    }
-
+}
  .border{
     border-radius: 5px;
     box-shadow: 2px 6px 5px 5px rgba(231, 175, 175, 0.13);
     border : 1px solid rgba(0, 0, 0, 0.164);
  }
-
  .block{    
     display:block;
  }
-
  .style-btn-login {
-     margin-bottom: 5%;
-     width: 30%;
-     border-radius: 7px;
+    margin-bottom: 5%;
+    width: 30%;
+    border-radius: 7px;
 }
 .btn-rss{
     margin-top: 2%;
@@ -70,7 +65,6 @@ body {
 .btn-post {   
     margin: 0% 4% 0% 2%;
 }
-
 button:hover,select:hover{
     color: rgb(7, 7, 7);
     background: rgba(231, 175, 175, 0.233);
@@ -88,7 +82,6 @@ button:hover,select:hover{
 .style-color-header{   
     border: 0.7px solid rgba(122, 48, 48, 0.31);  
   }
-
 .edit-perfil{
     display: flex;
     flex-direction: column;
@@ -101,7 +94,6 @@ button:hover,select:hover{
 .color-white{
     color: white;
 }
-
 .col-12{
     width: 100%;
     padding-bottom: 5rem;
@@ -111,23 +103,22 @@ button:hover,select:hover{
     flex-direction: column;    
     padding: 2%;    
     /*width:85%;*/
-   
 }
-.header-post{
+.header-post {
     display: flex;
     text-align: center;
     flex-direction: row;
     /* height: 3rem;
     justify-content: center;  
     align-content: center     */
- }
- .img-perfil-post{        
+}
+ .img-perfil-post {        
     height: 4rem;
     width: 4rem;
     border-radius: 50%;    
     border: 2px solid rgba(25, 84, 107, 0.089);
 }
-.img-post{ 
+.img-post { 
     width: 25%;
     margin-top: 3%;       
     height: 1.5rem;
@@ -135,7 +126,7 @@ button:hover,select:hover{
     margin-right: 0.5%;
     border: 1px solid rgba(0, 0, 0, 0.322);
 }
-#image-post:hover{
+#image-post:hover {
         box-shadow: 2px 4px 3px 3px rgba(16, 7, 36, 0.486); 
 }
 .textarea {
@@ -172,15 +163,14 @@ button:hover,select:hover{
     display: flex;
     padding: 2%;
     height: 4rem;
-    }
-
+}
 .img-post-prev{    
     /*height: 5rem;*/
     margin: 2%;
     width: 80%;
 }
 .progress{
-    width: 15%;
+  width: 15%;
   margin: 2%;
 }
 .margin-footer{
@@ -190,7 +180,6 @@ button:hover,select:hover{
 display: flex;
 padding: 2%;
 }
-/*gdgg*/
 .opacity{
     opacity: 0;
 }
@@ -218,12 +207,10 @@ color: rgba(49, 53, 53, 0.514)
     background:rgba(255, 255, 255, 0.692) ;
     /* height: 5rem; */
 }
-
 .conte-flex-perfil{    
     display: flex;
     flex-direction: row;   
 }
-
 .space-around {
     justify-content: space-around;
 }
@@ -290,16 +277,11 @@ color: rgba(49, 53, 53, 0.514)
     display: flex;
     flex-direction: row;
     margin-left: 60%;
-    /* justify-content: start; */
 }
-
  @media screen and (min-width: 320px)/*360px-20em*/ {
      .col-xs-12 { 
       width: 100% ;      
     }
-    /*img{
-        max-width: 30%;
-    }*/
     .style-border{
         width: 100%;
     }
@@ -345,18 +327,23 @@ color: rgba(49, 53, 53, 0.514)
     .container-options {
         display: flex;
         flex-direction: row;
-        margin-left: 35%
-    } 
-
+        margin-left: 50%
+    }
  }
 
- @media screen and (min-width: 1024px) /*1024px*/ {
+ @media screen and (min-width: 800px ) {
     
+    .container-options {
+        display: flex;
+        flex-direction: row;
+        margin-left: 60%;
+    }
+}
+ @media screen and (min-width: 1024px) /*1024px*/ {
     .col-lg-6 {
         float: left; 
         width: 50%; 
      } 
-     /* .col-12 { width: 100% ;} */
     img {
         max-width: 100%;
     }
@@ -368,7 +355,6 @@ color: rgba(49, 53, 53, 0.514)
         width: 70%;
     }
     .style-border{
-        /* width: 50%; */
         margin-top:3%;
         border-radius: 4%;
         padding: 4%;
@@ -392,49 +378,10 @@ color: rgba(49, 53, 53, 0.514)
         border-radius: 50%;  
         border: 2px solid rgba(25, 84, 107, 0.089);
     }    
+    .container-options {
+        display: flex;
+        flex-direction: row;
+        margin-left: 35%
+    } 
+    
  }
-
-
-
- /* .row{
-    position: relative;
-    margin: auto; 
-    width: 100%;
-    height: auto;
-} */
-/* .col-12 { width: 100% ;}
-.col-11{
-width: 91.6666666667%;
-}
-.col-10{
-width: 83.3333333333%;
-}
-.col-9{
-width: 75%;
-}
-.col-8{
-width: 66.6666666667%;
-}
-.col-7{
-    width: 58.3333333333%;
-}
-.col-6{    
-    width: 50%;  
-    }
-
- .col-5{
-    float: right;
-     width: 41.6666666667%;
- }
- .col-4{  
-    width: 33.3333333333%;   
- }
- .col-3 {
-    width: 25%;
- }
- .col-2{
-width: 16.6666666667%;
- }
- .col-1{
-width: 8.33333333333%;
- } */
