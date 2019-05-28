@@ -20,7 +20,7 @@
 
 .user-name {
     min-height: 200px;
-    margin: 3% 5% 5% 5%;
+    margin: 5%;
     outline: 2px solid gray;
 }
 
@@ -190,10 +190,6 @@
     cursor: pointer;
 }
 
-.cerrar {
-    margin-left: 55%;
-}
-
 .nombre-menu {
     display: none;
 }
@@ -212,7 +208,6 @@
 }
 
 p {
-    /*display: inline-block;*/
     width: 85%;
 }
 
@@ -221,17 +216,12 @@ p {
     height: 35px;
     cursor: pointer;
     width: 10%;
-    /*     margin: 8px 8px auto auto; */
 }
 
 .publicFor {
     float: left;
     width: 90%;
     height: 100%;
-}
-
-p {
-    text-align: left;
 }
 
 .privacity {
@@ -267,13 +257,6 @@ p {
     z-index: 10;
 }
 
-.inputfile2 {
-    position: relative;
-    width: 15px;
-    float: left;
-    z-index: 20;
-}
-
 .img-post {
     height: 70px;
     width: 70px;
@@ -294,7 +277,7 @@ p {
         margin-bottom: 5%;
     }
     .user-name {
-        width: 45%;
+        width: 38%;
         position: relative;
         float: left;
         margin: 0;
@@ -305,7 +288,7 @@ p {
         height: 50%;
     }
     .post-zone {
-        width: 54%;
+        width: 62%;
         position: relative;
         float: right;
     }

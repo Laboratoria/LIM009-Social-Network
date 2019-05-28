@@ -26,11 +26,11 @@ export default (user) => {
     <div class="element-photo2"><img id="user-image" class="image-photo-edit " src="${user.photo}" alt="default photo">
     <img src="./css/img/photo-camera.png" class="photograph" alt="Edit Image"></div>
     <div id="full-name" class="input2 width-all redondear">${user.name}</div>
-    <div id="user-age"   class="input2  width-all redondear">${user.age}</div>
-    <div id="user-sex"   class="input2 width-all redondear">${user.sex}</div>
-    <div id="user-birth-country"  class="input2 width-all redondear">${user.country}</div>
-    <button type="button" class="button-acceder redondear boton duo editar width-all" id="btn-edit-profile">Editar Datos</button>
-    <button type="button" class="button-acceder redondear boton duo guardar width-all" id="btn-save-profile">Guardar Datos</button>
+    <div id="user-age"   class="input2  width-all redondear" contentEditable=false data-text="Ingrese su edad">${user.age}</div>
+    <div id="user-sex"   class="input2 width-all redondear" contentEditable=false data-text="Sexo">${user.sex}</div>
+    <div id="user-birth-country"  class="input2 width-all redondear" contentEditable=false data-text="Pais">${user.country}</div>
+    <button type="button" class="button-acceder redondear boton duo editar" id="btn-edit-profile">Editar Datos</button>
+    <button type="button" class="button-acceder redondear boton duo guardar" id="btn-save-profile">Guardar Datos</button>
     </div>
     </main>
     </div>
