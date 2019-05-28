@@ -64,7 +64,7 @@ const postPrivad = {
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
-import { createPost, viewListPostPublic, dataBaseUser, getDataDoc, viewListPostPrivate, deletePost, editPost, createCommentPost, getComentPost, likesPost , editComment, deleteComment} from "../src/model/model.js";
+import { createPost, viewListPostPublic, dataBaseUser, getDataDoc, viewListPostPrivate, deletePost, editPost, createCommentPost, getComentPost, likesPost , editComment, deleteComment, updatePerfilUser} from "../src/model/model.js";
 
 describe('Funciones para gestionar usuarios firestore', () => {
   it('dataBaseUser deberia ser una funcion ', () => {
@@ -75,6 +75,11 @@ describe('Funciones para gestionar usuarios firestore', () => {
       getDataDoc(user.uid).then(result => {
         expect(result.data().name).toBe('nayruth');
       });
+    });
+  });
+  it('debería actualizar el nombre', () => {
+    return updatePerfilUser(user, 'carmencita').then(() => {
+      expect(result).toBe(true);
     });
   });
 });
@@ -108,7 +113,6 @@ describe('createPost', () => {
   it('deberia poder eliminar un post', () => {
     return deletePost('abc124').then(() => {
       viewListPostPublic().get().then(result => {
-        console.log("Document successfully deleted!");
         expect(result._data[0]._ref._firestore._data.__collection__.posts.__doc__.abc124.__isDeleted__).toBe(true);
       });
     }).catch((error) => {

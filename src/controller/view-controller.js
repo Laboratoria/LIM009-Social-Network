@@ -1,9 +1,10 @@
 import { signInWithEmail, signInWithGoogle, signInWithFacebook, createEmailAndPassword, signOut } from "../lib/lib-firebase.js";
 import { updatePerfilUser, updateEmailUser, dataBaseUser, getDataDoc, viewListPostPrivate, viewListPostPublic } from '../model/model.js'
 import viewPostList from '../view/view-pos-list.js';
+
 const changeHash = (hash) => {
   location.hash = hash;
-}
+};
 
 export const registerUser = () => {
   const emailRegister = document.querySelector('#email-register').value;
@@ -39,8 +40,8 @@ export const email = () => {
   const password = document.querySelector("#password-id").value;
   return signInWithEmail(valueEmail, password)
     .then((result) => {
-      dataBaseUser(result.user)
-      changeHash('/welcomeUser')
+      dataBaseUser(result.user);
+      changeHash('/welcomeUser');
     }
     ).catch(error => {
       // Handle Errors here.
@@ -78,12 +79,12 @@ export const google = () => {
         alert(errorMessage);
       }
     });
-}
+};
 
 export const facebook = () => {
   return signInWithFacebook().then((result) => {
     dataBaseUser(result.user);
-    changeHash('/welcomeUser')
+    changeHash('/welcomeUser');
   }
   ).catch(error => {
     let errorCode = error.code;
@@ -150,10 +151,10 @@ export const editPErfilUser = (idUser, name, email) => {
     alert('Nombre se actualizó correctamente');
     updateEmailUser(idUser, email).then(() => {
       // Update successful.
-      alert('Email se actualizó correctamente')
+      alert('Email se actualizó correctamente');
     }).catch((error) => {
       // An error happened.
-      alert(error + 'Actualización Ha ocurrido un error. en email..')
+      alert(error + 'Actualización Ha ocurrido un error. en email..');
     });
   }).catch((error) => {
     // An error happened.

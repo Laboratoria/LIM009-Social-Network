@@ -52,7 +52,6 @@ export default () => {
     fileButton.addEventListener('change', (e) => {
       let file = e.target.files[0];
       const getImage = (image) => {
-
         updatePhoto(idUser, image);
       };
       imageFirestore(file, uploader, getImage);

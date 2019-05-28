@@ -34,17 +34,18 @@ export default (doc, getUser, post, idUserAuth) => {
     </section>
     <footer class = 'style-cont-text-area' id = 'foo-View'>
       <article class ='conte-flex-perfil style-color-header space-around'>    
-        <div class ='display-flex'>        
+        <div class ='display-flexcenter'>
+          <span>${post.likes}</span>
           <img id='btn-image-post' src="./image/me-gusta.png" alt="imagen-post" class='img-btn-post'> 
           <button id ='btn-like-${doc.id}' class = 'border-white '>Me gusta</button>
         </div>
-        <div class = 'display-flex'>
+        <div class = 'display-flexcenter'>
           <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
           <option value="publico" select>Público</option>
           <option value="privado" select>Privado</option>
           </select>
         </div>
-        <div class ='display-flex'>        
+        <div class ='display-flexcenter'>        
           <img  src="./image/comentarios.png" alt="imagen-post" class='img-btn-post'>
           <button id ='btn-coment-${doc.id}' class = 'border-white btn-post'>Comentar</button>        
         </div>
@@ -86,7 +87,6 @@ export default (doc, getUser, post, idUserAuth) => {
   };
   btnLike.addEventListener('click', () => {
     listener();
-    btnLike.removeEventListener('click', listener);
   });
 
 

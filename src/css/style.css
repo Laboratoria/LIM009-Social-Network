@@ -239,7 +239,7 @@ color: rgba(49, 53, 53, 0.514)
    border: 0.2px solid rgba(159, 49, 49, 0.13)
 }
 .img-btn-post{
-    height: 2.4rem;
+    height: 2rem;
 }
 .size-btn-img{
     width: 33.3333333333%; 
@@ -252,7 +252,7 @@ color: rgba(49, 53, 53, 0.514)
     /*border:1px solid rgba(233, 210, 223, 0.452);*/
     background: rgba(231, 175, 175, 0.13);
     border: 0;
-    font-size: 12px;
+    font-size: 16px;
 }
 /* estilo btn file*/
 .btn-file{
@@ -385,4 +385,11 @@ color: rgba(49, 53, 53, 0.514)
         margin-left: 35%
     } 
     
+ }
+ @media screen and (min-width: 1300px) {
+    .container-options {
+        display: flex;
+        flex-direction: row;
+        margin-left: 43%
+    }   
  }
