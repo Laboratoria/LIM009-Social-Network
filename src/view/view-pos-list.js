@@ -4,15 +4,16 @@ import formComent from '../view/coment-post.js';
 import viewformComent from '../view/view-coment-post.js';
 
 
-export default (doc, getUser, post, idUserAuth) => {
+export default (doc, post, idUserAuth) => {
+  // console.log(idUserAuth);
   const article = document.createElement('article');
   const li = `
   <article id = 'content-post' class= 'flex-container margin-top'>               
     <header class='style-color-header flex-header-post'>
-      <img id='photo-post-user' src='${getUser.data().photo}' alt='feminismo' class='img-perfil-post'>  
-      <div class='cont-flex-column'>  
+      <img id='photo-post-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>  
+      <div class='cont-flex-column'> 
         <div>  
-          <label id='name-user-post' class=''>${getUser.data().name}</label> 
+          <label id='name-user-post' class=''>Anónimo</label> 
         </div>
         <div class = 'header-post'>
           <label id='fecha-post' class=''>${post.fechaPost}</label>
@@ -55,15 +56,7 @@ export default (doc, getUser, post, idUserAuth) => {
     <div id = 'comment-form-list-${doc.id}'></div>
   </article>  
     `;
-  // console.log(post.user);
-  // console.log(idUserAuth.uid);
-  /**
-   * 
-   * <select name="" id='estado-post-view-Post-${doc.id}' class = ''>       
-          <option value="publico" select>🌎Público</option>
-          <option value="privado" select>🔐Privado</option>
-          </select>
-   */
+ 
   article.innerHTML = li;
   const contImagePost = article.querySelector('#cont-imag-post')
   const btnStateFooter = article.querySelector('#btn-state-footer')
@@ -75,6 +68,7 @@ export default (doc, getUser, post, idUserAuth) => {
   <option value="privado" select>🔐</option>
   <option value="publico" select>🌎</option>
   </select>`;
+
   if (post.image !== null) {
     const image = `<img id='image-post-view' src='${post.image}' alt="imagen-post" class='img-post-prev'>`
     contImagePost.innerHTML = image;
@@ -86,7 +80,13 @@ export default (doc, getUser, post, idUserAuth) => {
     btnStateFooter.innerHTML = templateStatePrivado;
   }
 
+  const photoPost = article.querySelector('#photo-post-user');
+  const namePost = article.querySelector('#name-user-post');
 
+  getDataDoc(post.user).then(result => {
+   photoPost.src = result.data().photo;
+   namePost.innerHTML = result.data().name;
+  });
 
   if (post.user === idUserAuth.uid) {
     let btnDelete = article.querySelector(`#btn-delete-${doc.id}`);

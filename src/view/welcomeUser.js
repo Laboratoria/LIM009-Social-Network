@@ -1,6 +1,6 @@
 import { logOut } from '../controller/view-controller.js';
 import { imageFirestore } from '../lib/comple-firebase.js';
-import { createPost } from '../model/model.js';
+import { createPost, getDataDoc } from '../model/model.js';
 
 export default (user) => {
     const root = document.getElementById('root');
@@ -76,6 +76,7 @@ export default (user) => {
     const imagePostView = document.querySelector('#image-post-view');
     const fileButton = document.querySelector('#file-button');
     const viewPhoto = document.querySelector('#view-photo');
+
 
     fileButton.onchange = (e) => {
         let fr = new FileReader();

@@ -16,7 +16,7 @@ export const registerUser = () => {
       console.log(result.user)
       dataBaseUser(result.user).then(() => {
         const updateUSer = (user) => {
-          updatePerfilUser(user, 'Aninimo');
+          updatePerfilUser(user, 'Anónimo');
           updatePhoto(user, './image/icono-login-user.png')
         }
         getUserReady(updateUSer)
@@ -126,28 +126,28 @@ export const setUpPost = (idUserAuth) => {
   viewListPostPrivate(idUserAuth.uid).onSnapshot(data => {
     postListPrivad.innerHTML = '';
     data.forEach(doc => {
-      getDataDoc(doc.data().user).then((getUser) => {
-        // console.log(getUser.data().name)
-        if (getUser.exists) {
+      // getDataDoc(doc.data().user).then((getUser) => {
+      //   console.log(getUser.data().name)
+      //   if (getUser.exists) {
           const post = doc.data();
           // console.log(doc)
-          postListPrivad.appendChild(viewPostList(doc, getUser, post, idUserAuth));
-        }
-      });
+          postListPrivad.appendChild(viewPostList(doc, post, idUserAuth));
+      //   }
+      // });
     });
   });
 
   viewListPostPublic().onSnapshot(data => {
     postList.innerHTML = '';
     data.forEach(doc => {
-      getDataDoc(doc.data().user).then((getUser) => {
-        // console.log(getUser.data().name)
-        if (getUser.exists) {
+      // getDataDoc(doc.data().user).then((getUser) => {
+      //   console.log(getUser.data().name)
+      //   if (getUser.exists) {
           const post = doc.data();
           // console.log(doc)
-          postList.appendChild(viewPostList(doc, getUser, post, idUserAuth));
-        }
-      });
+          postList.appendChild(viewPostList(doc, post, idUserAuth));
+      //   }
+      // });
     });
   });
   return postListPrivad;
