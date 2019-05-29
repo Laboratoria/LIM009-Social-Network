@@ -43,11 +43,11 @@ export const getComentPost = (idPost) => {
 };
 export const viewListPostPrivate = (idUser) => {
   let db = firebase.firestore();
-  return db.collection('posts').where('state', '==', 'privado').where('user', '==', `${idUser}`).orderBy('fechaPost', 'desc');
+  return db.collection('posts').where('state', '==', 'privado').where('user', '==', `${idUser}`).orderBy('fechaPost', 'desc').orderBy('horaPost','desc');
 };
 export const viewListPostPublic = () => {
   let db = firebase.firestore();
-  return db.collection('posts').where('state', '==', 'publico').orderBy('fechaPost', 'desc');
+  return db.collection('posts').where('state', '==', 'publico').orderBy('fechaPost', 'desc').orderBy('horaPost','desc');
 };
 export const likesPost = (id, like) => {
   let db = firebase.firestore();
