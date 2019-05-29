@@ -11,7 +11,7 @@ export default (doc, post, idUserAuth) => {
   <article id = 'content-post' class= 'flex-container margin-top'>               
     <header class='style-color-header flex-header-post'>
       <img id='photo-post-user' src='./image/icono-login-user.png' alt='feminismo' class='img-perfil-post'>  
-      <div class='cont-flex-column'> 
+      <div class='cont-flex-column'>  
         <div>  
           <label id='name-user-post' class=''>Anónimo</label> 
         </div>
@@ -55,8 +55,7 @@ export default (doc, post, idUserAuth) => {
     <div id = 'cont-coment-${doc.id}'></div>
     <div id = 'comment-form-list-${doc.id}'></div>
   </article>  
-    `;
- 
+    `; 
   article.innerHTML = li;
   const contImagePost = article.querySelector('#cont-imag-post')
   const btnStateFooter = article.querySelector('#btn-state-footer')
