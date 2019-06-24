@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Aclonica&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans&display=swap');
+
 *{
     margin: 0px;
     padding: 0px;
@@ -7,7 +10,7 @@
     /* font-size: 16px; */
     text-align: center;
     box-sizing: border-box; /*borde y padding incluidos en el ancho de la caja*/    
-    font-family: 'PT Serif', serif;
+    font-family: 'Merriweather Sans', sans-serif;
    
 }
 html {
@@ -43,6 +46,26 @@ body {
     margin-bottom: 3%;
     border-radius: 6px;
 }
+
+.gray {
+    color: rgb(50, 50, 56);
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+.text-logo {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 40px;
+    margin: 3%;
+    color: rgba(12, 83, 98, 1);
+    /* background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    -webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+    color:#fff;*/
+}
+
+
  .border{
     border-radius: 5px;
     box-shadow: 2px 6px 5px 5px rgba(231, 175, 175, 0.13);
@@ -55,6 +78,11 @@ body {
     margin-bottom: 5%;
     width: 30%;
     border-radius: 7px;
+    background-image: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 52%, rgba(176,252,69,1) 100%);
+    color: white;
+}
+.img-login {
+    margin: 2%;
 }
 .btn-rss{
     margin-top: 2%;
@@ -65,12 +93,15 @@ body {
 .btn-post {   
     margin: 0% 4% 0% 2%;
 }
-button:hover,select:hover{
+/* button:hover,select:hover{
     color: rgb(7, 7, 7);
     background: rgba(231, 175, 175, 0.233);
-}
+} */
 .style-register{
     display: inline;
+    text-decoration: none;
+    font-weight: bolder;
+    color: #F74208;
 }
 .header-perfil{
     background: rgba(13, 93, 107, 0.226);
