@@ -15,13 +15,13 @@ export default () => {
     <input type="email" id="email-id" class='style-input center block border' placeholder ='Email'/>
     <input type="password" id="password-id" class='style-input center block border' placeholder ='Password'/>
     <button type="button" id="btn-sing-in" class='center style-btn-login' >Log in</button>
-    <p class = "gray font-size-14">De manera opcional ingresa con : </p>
+    <p class = "gray font-size-14">De manera opcional ingresa con :</p>
     <span class = 'center'>
       <img id="btn-google" class='btn-rss' alt="icono de google" src="./css/google-plus.png"/>
       <img id="btn-facebook" class='btn-rss' alt="icono de facebook"  src="https://2.bp.blogspot.com/-28mh2hZK3HE/XCrIxxSCW0I/AAAAAAAAH_M/XniFGT5c2lsaVNgf7UTbPufVmIkBPnWQQCLcBGAs/s1600/facebook.png"/>
     </span>
   </article>
-    <footer><span><p class = "gray font-size-14">Si eres usuario nuevo, </p> <a href='#/registerUser' class= 'style-register'>Regístrate</a></span></footer>
+    <footer><span><p class = "gray font-size-14">Si eres usuario nuevo, </p> <a href='#/registerUser' class= 'style-register font-size-14'>Regístrate</a></span></footer>
     </form>
   </div>
   `;
