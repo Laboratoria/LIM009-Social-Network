@@ -8,7 +8,7 @@ export default () => {
   <header><img src="./image/portada2.jpg" class = 'img-login' alt="educacion" class=''>
   </aside>
   <form class= 'col-lg-6 col-xs-12 '>
-  <h1 class = 'text-logo'>Besame mucho</h1> 
+  <h1 class = 'text-logo'>Bésame mucho</h1> 
   <h2 class='center font-size-16 gray'>"La infancia es fugaz. <br>
   Que nuestra obsesión por corregirla no nos impida disfrutarla."</h2></header>
   <article>

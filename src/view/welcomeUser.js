@@ -9,7 +9,7 @@ export default (user) => {
       <header>
           <ul class = 'header'>
               <li><a id = 'edit-perfil' href='#/edit-perfil' class = 'color-white'>${user.displayName}</a></li>
-              <li> < Crianza Respetuosa > </li>
+              <li>Bésame mucho</li>
               <li><a id='sign-out'>Cerrar Sesión</a></li>
           </ul>
       </header>
